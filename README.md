@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 # 주니어 개발자들을 위한 포트폴리오 제작 플랫폼
 
 > 주니어 개발자들을 위한 포트폴리오 제작 플랫폼
@@ -48,8 +56,8 @@
 | :----------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | **Profile**  | <img src = "https://user-images.githubusercontent.com/40309812/114838106-556f7d00-9e0f-11eb-9134-893efdff87e8.png" width="110px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838159-615b3f00-9e0f-11eb-94c0-2823fa3dca4e.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/70404643/112585083-7d854500-8e3c-11eb-8ed0-45f16d12b940.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838108-56081380-9e0f-11eb-8863-e77a78c6a442.png" width="110px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838115-57394080-9e0f-11eb-9497-4b590dcb4710.jpg" width="90px" height="120px"> |
 |   **R&R**    |                           **팀장**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |
-|   **Git**    |             [Github](https://github.com/mingddo)             |           [Github](https://github.com/glenn93516)            |             [Github](https://github.com/RGunny)              |                              깃                              |                              깃                              |
-| **Position** |                              FE                              |                              BE                              |                              BE                              |                            포지션                            |                            포지션                            |
+|   **Git**    |             [Github](https://github.com/mingddo)             |           [Github](https://github.com/glenn93516)            |             [Github](https://github.com/RGunny)              |                              깃                              |             [Github](https://github.com/jes5918)             |
+| **Position** |                              FE                              |                              BE                              |                              BE                              |                            포지션                            |                              FE                              |
 
 
 
@@ -98,4 +106,49 @@
 
     - Camel case (ex. camelCase) : 기타
 
-      
+
+
+
+####  🧩 Wireframe
+
+- AboutPage
+
+![image-20210415182838141](README.assets/image-20210415182838141.png)
+
+![image-20210415182847691](README.assets/image-20210415182847691.png)
+
+![image-20210415182905013](README.assets/image-20210415182905013.png)
+
+![image-20210415182924087](README.assets/image-20210415182924087.png)
+
+![image-20210415182931128](README.assets/image-20210415182931128.png)
+
+
+
+- 내 작업 문서 Page
+
+![image-20210415182940663](README.assets/image-20210415182940663.png)
+
+
+
+- 템플릿 페이지
+
+![image-20210415182947928](README.assets/image-20210415182947928.png)
+
+
+
+- 찜한 템플릿 페이지
+
+![image-20210415182958821](README.assets/image-20210415182958821.png)
+
+
+
+- 템플릿 미리보기 Modal
+
+![image-20210415183006156](README.assets/image-20210415183006156.png)
+
+
+
+- 포트폴리오 제작 페이지 (추후 업뎃 예정)
+
+![image-20210415183016185](README.assets/image-20210415183016185.png)
