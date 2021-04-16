@@ -5,7 +5,7 @@ import Home from './views/Home';
 function App() {
   return (
     <>
-      <div className='App'>안녕지누</div>
+      <div className="App">안녕지누</div>
       <Home />
     </>
   );
