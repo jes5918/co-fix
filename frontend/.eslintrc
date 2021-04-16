@@ -1,0 +1,38 @@
+{
+  "parser": "@typescript-eslint/parser", // @typescript-eslint/parser
+  "extends": [
+    "plugin:react/recommended", // eslint-plugin-react
+    "plugin:@typescript-eslint/recommended", // @typescript-eslint/eslint-plugin
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended" // eslint-plugin-prettier
+  ],
+  "plugins": [
+    "react", // eslint-plugin-react
+    "@typescript-eslint", // @typescript-eslint/eslint-plugin
+    "prettier"
+  ],
+  "parserOptions": {
+    // ESLint는 es6 이후의 문법을 알지 못하기 때문에 설정
+    // https://eslint.org/docs/user-guide/configuring#specifying-parser-options
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true // eslint-plugin-react
+    }
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "no-use-before-define": 0,
+    "no-shadow": "warn",
+    "@typescript-eslint/no-empty-interface": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-unused-vars": 0,
+    "@typescript-eslint/no-explicit-ans": 0,
+    "@typescript-eslint/no-explicit-any": 0
+  },
+  "ignorePatterns": ["*.config.js"] // 제외하려는 파일
+}
