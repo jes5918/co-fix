@@ -1,15 +1,22 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+
+import GoogleAuth from '../components/login/GoogleAuth';
 import Layer from '../containers/Layer';
 
-interface Props {}
+interface MatchParams {
+  id: string;
+}
 
-function Home(props: Props) {
-  // const {} = props;
-
+function Home({ match }: RouteComponentProps<MatchParams>) {
+  const { id } = match.params;
+  console.log(match);
   return (
     <>
       <div>여긴 홈</div>
+      <div>{id}</div>
       <Layer />
+      <GoogleAuth />
     </>
   );
 }
