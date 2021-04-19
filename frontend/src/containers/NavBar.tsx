@@ -12,6 +12,9 @@ function NavBar(props: Props) {
         <li>
           <Link to="/">홈</Link>
         </li>
+        <li>
+          <Link to="/card">Card</Link>
+        </li>
       </ul>
     </>
   );
