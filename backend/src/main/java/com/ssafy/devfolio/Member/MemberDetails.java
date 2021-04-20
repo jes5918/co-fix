@@ -15,11 +15,15 @@ public class MemberDetails implements UserDetails {
         this.member = member;
     }
 
+    private Collection<? extends GrantedAuthority> authorities;
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-        return roles;
+        return this.authorities;
     }
 
     @Override
