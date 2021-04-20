@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // container
 import NavBar from './containers/NavBar';
 import Card from './components/common/Card';
+import TestArea from './components/common/TestArea';
 
 // components
 import Home from './views/Home';
@@ -20,6 +21,7 @@ function App() {
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/card" component={Card} />
+          <Route path="/testArea" component={TestArea} />
         </Switch>
       </Router>
     </>
