@@ -7,10 +7,14 @@ import Card from './components/common/Card';
 
 // components
 import Home from './views/Home';
+import GlobalFonts from './assets/fonts/font';
 
+import GlobalStyles from './styles/GlobalStyle';
 function App() {
   return (
     <>
+      <GlobalFonts />
+      <GlobalStyles />
       <Router>
         <NavBar />
         <Switch>
