@@ -1,4 +1,4 @@
-package com.ssafy.devfolio.Member;
+package com.ssafy.devfolio.member.domain;
 
 import lombok.Getter;
 
