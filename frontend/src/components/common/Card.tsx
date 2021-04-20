@@ -12,6 +12,7 @@ const cardStyle = {
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
     &:hover > * {
       top: 0px;
+      opacity: 1;
     }
   `,
   imgFrame: styled.img`
@@ -27,7 +28,8 @@ const cardStyle = {
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.55);
     position: absolute;
-    top: 500px;
+    top: 200px;
+    opacity: 0;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     display: flex;
     flex-direction: column;
@@ -54,7 +56,8 @@ const cardStyle = {
     font-size: 17px;
     color: #262626;
     font-weight: bold;
-    text-align: center:
+    text-align: center;
+    font-family: 'NotoSans';
   `,
 };
 
