@@ -11,11 +11,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
-<<<<<<< HEAD
-    "@types/styled-components": "5.1.9",
-=======
     "@types/styled-components": "^5.1.9",
->>>>>>> a2589b7 ([feat/FE] : Modal component 기본 세팅)
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "randomstring": "^1.1.5",
