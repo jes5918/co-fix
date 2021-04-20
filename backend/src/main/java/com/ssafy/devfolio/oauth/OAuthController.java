@@ -9,6 +9,8 @@ import com.ssafy.devfolio.Member.Member;
 import com.ssafy.devfolio.Member.MemberDetails;
 import com.ssafy.devfolio.Member.MemberRepository;
 import com.ssafy.devfolio.Member.dto.MemberDto;
+import com.ssafy.devfolio.exception.BaseException;
+import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthResponse;
 import com.ssafy.devfolio.utils.JwtTokenProvider;
@@ -43,18 +45,18 @@ public class OAuthController {
     private String baseRedirectUrl;
 
 
+    @GetMapping("/test")
+    public void errorTest() {
+        throw new RuntimeException();
+    }
+
+    @GetMapping("/test2")
+    public void errorTest2() {
+        throw new BaseException(ErrorCode.DUPLICATED_EMAIL);
+    }
+
     @GetMapping("/google")
     public ResponseEntity googleAuth(@RequestParam("code") String authorizationCode) throws JsonProcessingException {
-
-        // Resource Server에게 Client 인증
-        GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest.builder()
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .code(authorizationCode)
-                .redirectUri(baseRedirectUrl + "/google")
-                .grantType("authorization_code")
-                .build();
-
         RestTemplate restTemplate = new RestTemplate();
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -62,7 +64,7 @@ public class OAuthController {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         // Access token 발급
-        GoogleOAuthResponse result = getGoogleAccessToken(googleOAuthRequestParam, objectMapper, restTemplate);
+        GoogleOAuthResponse result = getGoogleAccessToken(authorizationCode, objectMapper, restTemplate);
 
         // 유저 정보 획득
         Map<String,String> userInfo = getGoogleInfo(result.getIdToken(), objectMapper, restTemplate);
@@ -74,8 +76,16 @@ public class OAuthController {
         return ResponseEntity.status(HttpStatus.OK).body("Bearer " + token);
     }
 
-    private GoogleOAuthResponse getGoogleAccessToken(GoogleOAuthRequest googleOAuthRequest, ObjectMapper objectMapper, RestTemplate restTemplate) throws JsonProcessingException {
-        ResponseEntity<String> resultEntity = restTemplate.postForEntity(GOOGLE_TOKEN_BASE_URL, googleOAuthRequest, String.class);
+    private GoogleOAuthResponse getGoogleAccessToken(String authorizationCode, ObjectMapper objectMapper, RestTemplate restTemplate) throws JsonProcessingException {
+        GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest.builder()
+                .clientId(clientId)
+                .clientSecret(clientSecret)
+                .code(authorizationCode)
+                .redirectUri(baseRedirectUrl + "/google")
+                .grantType("authorization_code")
+                .build();
+
+        ResponseEntity<String> resultEntity = restTemplate.postForEntity(GOOGLE_TOKEN_BASE_URL, googleOAuthRequestParam, String.class);
 
         return objectMapper.readValue(resultEntity.getBody(), new TypeReference<GoogleOAuthResponse>() {});
     }
