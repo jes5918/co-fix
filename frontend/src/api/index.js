@@ -1,6 +1,6 @@
 import axios from 'axios';
 // API_KEY 받아오고
-const API_BASE_URL = 'https://j4b105.p.ssafy.io/api/';
+const API_BASE_URL = 'https://k4b104.p.ssafy.io/api/';
 
 // AuthHeader가 필요하지 않은 일반적인 Instance
 function createInstance() {
@@ -46,7 +46,7 @@ function AuthorizationInstance() {
       // 오류 요청을 보내기전 수행할 일
       // ...
       return Promise.reject(error);
-    }
+    },
   );
 
   return instance;
