@@ -15,6 +15,9 @@ function NavBar(props: Props) {
         <li>
           <Link to="/card">Card</Link>
         </li>
+        <li>
+          <Link to="/testArea">TestArea</Link>
+        </li>
       </ul>
     </>
   );
