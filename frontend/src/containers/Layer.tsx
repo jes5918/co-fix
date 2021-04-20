@@ -1,15 +1,22 @@
 import React from 'react';
-import Button from '../components/common/Button';
+import BasicButton from '../components/common/BasicButton';
 
 interface Props {}
 
 function Layer(props: Props) {
-  // const {} = props;
-
+  const basicButtonClickHandler = () => {
+    console.log(`버튼클릭`);
+  };
   return (
     <>
       <div>이건 레이어</div>
-      <Button>하이</Button>
+      <BasicButton
+        width={170}
+        height={45}
+        // backgroundColor="blue"
+        onClickHandler={basicButtonClickHandler}
+        text="하우"
+      />
     </>
   );
 }

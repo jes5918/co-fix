@@ -2,8 +2,12 @@ import { createInstance } from '../index.js';
 
 const instance = createInstance();
 
-function loginInstance(loginInfo, success, fail) {
-  instance.post('accounts/login/', loginInfo).then(success).catch(fail);
+function googleLoginInstance(loginInfo, success, fail) {
+  instance.post('google/login/', loginInfo).then(success).catch(fail);
 }
 
-export { loginInstance };
+function githubLoginInstance(loginInfo, success, fail) {
+  instance.post('github/login/', loginInfo).then(success).catch(fail);
+}
+
+export { googleLoginInstance, githubLoginInstance };
