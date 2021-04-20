@@ -1,5 +1,7 @@
 package com.ssafy.devfolio.utils;
 
+import com.ssafy.devfolio.member.domain.Member;
+import com.ssafy.devfolio.member.domain.MemberDetails;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -38,8 +40,13 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes()); // SecretKey Base64로 인코딩
     }
 
+    public String createToken(Member member) {
+        MemberDetails memberDetails = new MemberDetails(member);
+        return createToken(member.getId(), memberDetails.getAuthorities());
+    }
+
     // JWT 토큰 생성
-    public String createToken(Long memberId, Collection<? extends GrantedAuthority> roles) {
+    private String createToken(Long memberId, Collection<? extends GrantedAuthority> roles) {
         Claims claims = Jwts.claims().setSubject(Long.toString(memberId));
         claims.put("roles", roles);
         Date now = new Date();
