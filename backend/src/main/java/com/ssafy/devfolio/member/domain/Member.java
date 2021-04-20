@@ -1,27 +1,17 @@
-package com.ssafy.devfolio.Member;
+package com.ssafy.devfolio.member.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ssafy.devfolio.Member.dto.MemberDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.ssafy.devfolio.entity.BaseTimeEntity;
+import com.ssafy.devfolio.member.dto.MemberDto;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
-@Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Member {
+@Builder
+public class Member extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
