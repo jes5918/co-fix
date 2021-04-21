@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // container
 import NavBar from './containers/NavBar';
 import TestArea from './components/common/TestArea';
+import Toggle from './components/common/Toggle';
 
 // components
 import Home from './views/Home';
@@ -20,6 +21,7 @@ function App() {
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/testArea" component={TestArea} />
+          <Route path="/Toggle" component={Toggle} />
         </Switch>
       </Router>
     </>
