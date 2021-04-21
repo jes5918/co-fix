@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TiDelete } from 'react-icons/ti';
 
 const ModalLayer = styled.div`
   position: absolute;
@@ -22,24 +23,41 @@ const ModalCloseLayer = styled.div`
   z-index: 10010;
 `;
 
-interface ModalContentProps {
-  width?: string;
-  height?: string;
-}
-
 const ModalContent = styled.div<ModalContentProps>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 50px;
-  padding: 10px;
-  height: ${({ height }) => `${height}`};
-  width: ${({ width }) => `${width}`};
-  border-radius: 30px;
+  padding: 70px 50px;
+  width: fit-content;
+  height: fit-content;
+  /* height: ${({ height }) => `${height}`};
+  width: ${({ width }) => `${width}`}; */
+  border-radius: 15px;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
   background-color: rgb(255, 255, 255);
   z-index: 10020;
 `;
+
+const ExitIcon = styled(TiDelete)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  color: rgba(255, 0, 0, 0.9);
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+
+interface ModalContentProps {
+  width?: string;
+  height?: string;
+}
 
 interface Props extends ModalContentProps {
   children: React.ReactNode;
@@ -55,6 +73,7 @@ function Modal(props: Props) {
       <ModalLayer>
         <ModalCloseLayer onClick={ModalToggleHandler} />
         <ModalContent height={height} width={width}>
+          <ExitIcon onClick={ModalToggleHandler} />
           {children}
         </ModalContent>
       </ModalLayer>
