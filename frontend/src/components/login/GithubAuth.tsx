@@ -1,6 +1,7 @@
 import React from 'react';
 import GitHubLogin from 'react-github-login';
 import styled from 'styled-components';
+import { SiGithub } from 'react-icons/si';
 
 // api instance
 import { githubLoginInstance } from '../../api/accounts/login';
@@ -9,13 +10,32 @@ const GitHubLoginButton = styled(GitHubLogin)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  width: 250px;
   height: 50px;
-  margin: 20px auto;
-  border: 1px solid;
-  border-radius: 30px;
+  margin: 10px auto;
+  border: none;
+  box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   font-size: 18px;
-  background-color: #fff;
+  background-color: #444444;
+  color: #fff;
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  span {
+    font-weight: bold;
+  }
+`;
+
+const GithubLoginCustomIcon = styled(SiGithub)`
+  width: 27px;
+  height: 27px;
+  margin: auto 14px auto 5px;
+  color: #fff;
 `;
 
 interface Props {}
@@ -45,8 +65,10 @@ function GithubAuth(props: Props) {
         onSuccess={onSuccess}
         onFailure={onFailure}
         scope="user"
-        buttonText="Login with GitHub"
-      />
+      >
+        <GithubLoginCustomIcon />
+        Login with&nbsp;<span>GitHub</span>
+      </GitHubLoginButton>
     </>
   );
 }
