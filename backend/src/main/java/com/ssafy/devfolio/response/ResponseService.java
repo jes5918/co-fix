@@ -13,7 +13,7 @@ import java.util.List;
 public class ResponseService {
 
     public enum SuccessResponse {
-        SUCCESS("0", "성공");
+        SUCCESS("0000", "성공");
 
         String code;
         String message;
