@@ -19,16 +19,15 @@ const Button = styled.div<IButtonProps>`
   border: none;
   border-radius: 30px;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
-  font-size: ${({ fontSize }) => `${fontSize ? `${fontSize}px` : '24px'}`};
   background-color: ${({ backgroundColor }) =>
-    `${backgroundColor ? backgroundColor : '#ff9f1c'}`};
+    `${backgroundColor ? backgroundColor : '#ff9500'}`};
+  font-size: ${({ fontSize }) => `${fontSize ? `${fontSize}px` : '24px'}`};
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => `${width}px`};
   transition: all 0.2s ease-in;
 
   &:hover {
-    background-color: ${({ backgroundColor }) =>
-      `${backgroundColor ? backgroundColor : 'rgba(255, 81, 0, 0.883)'}`};
+    opacity: 0.7;
   }
 
   &:active {
