@@ -20,8 +20,10 @@ public enum ErrorCode {
 
 
     // 오류 처리
-    RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "002", "런타임 오류"),
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "003", "서버 오류");
+    RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "9902", "런타임 오류"),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "9903", "서버 오류"),
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "9904", "권한 없음"),
+    FORBIDDEN(HttpStatus.FORBIDDEN, "9905", "인증되지 않은 접근");
 
     private final HttpStatus status;
     private final String code;
