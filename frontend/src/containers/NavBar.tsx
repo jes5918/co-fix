@@ -13,10 +13,10 @@ function NavBar(props: Props) {
           <Link to="/">홈</Link>
         </li>
         <li>
-          <Link to="/card">Card</Link>
+          <Link to="/testArea">TestArea</Link>
         </li>
         <li>
-          <Link to="/testArea">TestArea</Link>
+          <Link to="/Toggle">Toggle</Link>
         </li>
       </ul>
     </>
