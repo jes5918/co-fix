@@ -10,6 +10,9 @@ import com.ssafy.devfolio.oauth.dto.GoogleOAuthResponse;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.SingleDataResponse;
 import com.ssafy.devfolio.utils.JwtTokenProvider;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
+@Api(value = "소셜 로그인 api")
 public class OAuthController {
 
     private final MemberService memberService;
@@ -28,8 +32,9 @@ public class OAuthController {
     private final OAuthService oAuthService;
 
 
+    @ApiOperation(value = "구글 로그인", notes = "회원가입 안되어 있으면 자동으로 회원가입")
     @GetMapping("/google")
-    public ResponseEntity googleAuth(@RequestParam String code) throws JsonProcessingException {
+    public ResponseEntity googleAuth(@ApiParam(value = "Authorization code", required = true) @RequestParam String code) throws JsonProcessingException {
         // Access token 발급
         GoogleOAuthResponse result = oAuthService.getGoogleAccessToken(code);
 
@@ -46,8 +51,9 @@ public class OAuthController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @ApiOperation(value = "깃허브 로그인", notes = "회원가입 안되어 있으면 자동으로 회원가입")
     @GetMapping("/github")
-    public ResponseEntity githubAuth(@RequestParam String code) throws JsonProcessingException {
+    public ResponseEntity githubAuth(@ApiParam(value = "Authorization code", required = true) @RequestParam String code) throws JsonProcessingException {
         // Access token 발급
         GithubOAuthResponse result = oAuthService.getGithubAccessToken(code);
 
