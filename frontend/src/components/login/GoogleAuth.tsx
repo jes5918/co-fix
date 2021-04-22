@@ -10,13 +10,14 @@ const GoogleLoginButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 50px;
-  margin: 10px auto;
+  cursor: pointer;
+  width: 200px;
+  height: 35px;
+  margin: 5px auto;
   border: none;
   box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  font-size: 18px;
+  border-radius: 10px;
+  font-size: 12px;
   background-color: #fff;
   transition: all 0.25s ease-in-out;
 
@@ -31,8 +32,8 @@ const GoogleLoginButton = styled.div`
 `;
 
 const GoolgeLoginCustomIcon = styled(FcGoogle)`
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: auto 10px auto 5px;
 `;
 
@@ -66,7 +67,7 @@ function GoogleAuth(props: Props) {
             Login with&nbsp;<span>Google</span>
           </GoogleLoginButton>
         )}
-        isSignedIn={true}
+        isSignedIn={false}
         responseType="code"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}

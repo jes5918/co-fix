@@ -10,13 +10,14 @@ const GitHubLoginButton = styled(GitHubLogin)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 50px;
+  cursor: pointer;
+  width: 200px;
+  height: 35px;
   margin: 10px auto;
   border: none;
   box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  font-size: 18px;
+  border-radius: 10px;
+  font-size: 12px;
   background-color: #444444;
   color: #fff;
   transition: all 0.25s ease-in-out;
@@ -32,8 +33,8 @@ const GitHubLoginButton = styled(GitHubLogin)`
 `;
 
 const GithubLoginCustomIcon = styled(SiGithub)`
-  width: 27px;
-  height: 27px;
+  width: 20px;
+  height: 20px;
   margin: auto 14px auto 5px;
   color: #fff;
 `;
