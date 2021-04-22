@@ -1,25 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
+
+// logo
+import Logo from '../assets/Logo.png';
 
 const NavbarMainWrapper = styled.div`
   position: sticky;
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 3%;
   width: 100%;
-  height: 50px;
+  height: 45px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
 `;
 
-const NavbarLogo = styled.div`
-  width: 100px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  background-color: #ff9500;
+const NavbarLogo = styled.img.attrs({ src: Logo })`
+  cursor: pointer;
+  height: 100%;
+  width: auto;
+  margin: 5px;
 `;
 
 const NavbarMenuWraper = styled.div`
@@ -30,13 +34,14 @@ const NavbarMenuWraper = styled.div`
 `;
 
 const NavbarItem = styled.div`
+  cursor: pointer;
   width: fit-content;
   height: fit-content;
   margin: auto 10px;
 
   a {
     padding: 2px;
-    font-size: 18px;
+    font-size: 12px;
     border-bottom: 3.5px solid transparent;
     transition: all 0.3s ease-in-out;
   }
@@ -51,13 +56,21 @@ interface Props {}
 
 function NavBar(props: Props) {
   const {} = props;
+  const history = useHistory();
 
+  const LogoClickHandler = () => {
+    if (location.pathname === '/') {
+      return null;
+    } else {
+      history.push('/');
+    }
+  };
   return (
     <NavbarMainWrapper>
-      <NavbarLogo>로고자리</NavbarLogo>
+      <NavbarLogo onClick={LogoClickHandler} />
       <NavbarMenuWraper>
         <NavbarItem>
-          <Link to="/">Social Login</Link>
+          <Link to="/">Login</Link>
         </NavbarItem>
         <NavbarItem>
           <Link to="/testArea">TestArea</Link>
