@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
 // logo
-import Logo from '../assets/Logo.png';
+import Logo from '../assets/logo.png';
 
 // containers
 import Modal from '../containers/Modal';
@@ -21,11 +21,12 @@ const ModalContentWrapper = styled.div`
   align-items: center;
 `;
 const LogoIcon = styled.img.attrs({ src: Logo })`
-  width: 60%;
-  margin: 10px auto 20px;
+  width: 70%;
+  margin: 10px auto 30px;
 `;
 const SocialLoginWrapper = styled.div`
   display: flex;
+  margin: 15px auto 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -33,17 +34,17 @@ const SocialLoginWrapper = styled.div`
 
 const BottomLine = styled.div`
   width: 90%;
-  height: 1.5px;
-  margin: 10px auto 5px;
+  height: 2px;
+  margin: 10px auto 10px;
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
 const FooterText = styled.div`
   width: 90%;
-  margin: 10px;
+  margin: 15px;
   text-align: center;
-  font-size: 4px;
-  color: rgba(0, 0, 0, 0.6);
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.7);
 
   span {
     font-weight: bold;
@@ -71,8 +72,8 @@ function Home({ match }: RouteComponentProps<MatchParams>) {
       <Modal
         ModalToggleHandler={ModalToggleHandler}
         isModalOpen={isModalOpen}
-        width="270px"
-        height="320px"
+        width="500px"
+        height="600px"
       >
         <ModalContentWrapper>
           <LogoIcon />

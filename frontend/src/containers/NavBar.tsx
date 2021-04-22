@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 // logo
-import Logo from '../assets/Logo.png';
+import Logo from '../assets/logo.png';
 
 const NavbarMainWrapper = styled.div`
   position: sticky;
@@ -14,15 +14,15 @@ const NavbarMainWrapper = styled.div`
   justify-content: space-between;
   padding: 0 3%;
   width: 100%;
-  height: 45px;
+  height: 6vh;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
 `;
 
 const NavbarLogo = styled.img.attrs({ src: Logo })`
   cursor: pointer;
-  height: 100%;
   width: auto;
+  height: 90%;
   margin: 5px;
 `;
 
@@ -30,7 +30,7 @@ const NavbarMenuWraper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-width: 20vw;
+  min-width: 10vw;
 `;
 
 const NavbarItem = styled.div`
@@ -41,14 +41,14 @@ const NavbarItem = styled.div`
 
   a {
     padding: 2px;
-    font-size: 12px;
-    border-bottom: 3.5px solid transparent;
+    font-size: 18px;
+    border-bottom: 4px solid transparent;
     transition: all 0.3s ease-in-out;
   }
 
   a:hover,
   a:focus {
-    border-bottom: 3.5px solid #ff9500;
+    border-bottom: 4px solid #ff9500;
   }
 `;
 
