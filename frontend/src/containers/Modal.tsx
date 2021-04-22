@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TiDelete } from 'react-icons/ti';
+import { BsX } from 'react-icons/bs';
 
 const ModalLayer = styled.div`
   position: absolute;
@@ -30,23 +30,24 @@ const ModalContent = styled.div<ModalContentProps>`
   justify-content: center;
   font-size: 50px;
   padding: 70px 50px;
-  width: fit-content;
-  height: fit-content;
-  /* height: ${({ height }) => `${height}`};
-  width: ${({ width }) => `${width}`}; */
+  /* width: fit-content;
+  height: fit-content; */
+  height: ${({ height }) => `${height}`};
+  width: ${({ width }) => `${width}`};
   border-radius: 15px;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
   background-color: rgb(255, 255, 255);
   z-index: 10020;
 `;
 
-const ExitIcon = styled(TiDelete)`
+const ExitIcon = styled(BsX)`
+  cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 50px;
-  height: 50px;
-  color: rgba(255, 0, 0, 0.9);
+  width: 20px;
+  height: 20px;
+  color: rgba(0, 0, 0, 0.9);
   transition: all 0.3s ease;
 
   &:hover {
