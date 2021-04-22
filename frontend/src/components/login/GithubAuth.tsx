@@ -11,20 +11,20 @@ const GitHubLoginButton = styled(GitHubLogin)`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 200px;
-  height: 35px;
-  margin: 10px auto;
+  width: 400px;
+  height: 55px;
+  margin: 10px auto 5px;
   border: none;
-  box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 18px;
   background-color: #444444;
   color: #fff;
   transition: all 0.25s ease-in-out;
 
   &:hover {
     opacity: 0.8;
-    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
   }
 
   span {
@@ -33,8 +33,8 @@ const GitHubLoginButton = styled(GitHubLogin)`
 `;
 
 const GithubLoginCustomIcon = styled(SiGithub)`
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin: auto 14px auto 5px;
   color: #fff;
 `;
@@ -44,10 +44,8 @@ interface Props {}
 function GithubAuth(props: Props) {
   const onSuccess = (response: any) => {
     console.log(response);
-    const formData = new FormData();
-    formData.append('code', response.code);
     githubLoginInstance(
-      formData,
+      response.code,
       (res: any) => {
         console.log(`res`, res);
       },
@@ -56,16 +54,18 @@ function GithubAuth(props: Props) {
       },
     );
   };
-  const onFailure = (response: any) =>
+  const onFailure = (response: any) => {
     console.error('Github Login Error', response);
+  };
 
   return (
     <>
       <GitHubLoginButton
         clientId="43ffc24363dcdbff3b83"
+        redirectUri=""
         onSuccess={onSuccess}
         onFailure={onFailure}
-        scope="user"
+        scope="user:email"
       >
         <GithubLoginCustomIcon />
         Login with&nbsp;<span>GitHub</span>
