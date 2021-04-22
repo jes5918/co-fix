@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { render } from 'react-dom';
-
 import EmailEditor from 'react-email-editor';
+
 interface Props {}
 
 function Editor(props: Props) {
