@@ -1,0 +1,12 @@
+# AWS S3
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAYL2LDM2UKQ66SDES
+      secretKey: 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
+    s3:
+      bucket: devfolio-s3
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
