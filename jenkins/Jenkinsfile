@@ -31,25 +31,27 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                try {
-                    mattermostSend (
-                        color: "#2A42EE", 
-                        message: "Deploy STARTED.. Don't push yet ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
-                    ) 
-                    sh 'docker-compose up -d'
-                } catch(e) {
-                    currentBuild.result = "FAILURE"
-                } finally {
-                    if(currentBuild.result != "FAILURE") {
+                script{
+                    try {
                         mattermostSend (
-                            color: "good", 
-                            message: "Deploy DONE: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
-                        )
-                    } else {
-                        mattermostSend (
-                            color: "danger", 
-                            message: "Deploy FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
-                        )
+                            color: "#2A42EE", 
+                            message: "Deploy STARTED.. Don't push yet ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        ) 
+                        sh 'docker-compose up -d'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result != "FAILURE") {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Deploy DONE: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Deploy FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }
                     }
                 }
             }
