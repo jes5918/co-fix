@@ -1,0 +1,42 @@
+## Server
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+## Spring
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+
+redirect-url: http://localhost:8080/api/auth
+
+
+## Logging
+logging:
+  level:
+    com.ssafy.devfolio: debug
+    org.hibernate.SQL: debug
+
+## JWT
+jwt:
+  header: Authorization
+  secret: ssafy-free-devfolio-backend-api-server-secreT1@#
+  token-validity-in-seconds: 3600000
+
+
+
