@@ -11,19 +11,19 @@ const GoogleLoginButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 200px;
-  height: 35px;
-  margin: 5px auto;
+  width: 400px;
+  height: 55px;
+  margin: 5px auto 10px;
   border: none;
-  box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.35);
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 18px;
   background-color: #fff;
   transition: all 0.25s ease-in-out;
 
   &:hover {
-    opacity: 0.6;
-    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+    opacity: 0.7;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.35);
   }
 
   span {
@@ -32,8 +32,8 @@ const GoogleLoginButton = styled.div`
 `;
 
 const GoolgeLoginCustomIcon = styled(FcGoogle)`
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin: auto 10px auto 5px;
 `;
 
@@ -44,15 +44,13 @@ function GoogleAuth(props: Props) {
 
   const responseGoogle = (response: any) => {
     console.log(response);
-    const formData = new FormData();
-    formData.append('code', response.code);
     googleLoginInstance(
-      formData,
+      response.code,
       (res: any) => {
         console.log(`res`, res);
       },
       (err: any) => {
-        console.error('err', err);
+        console.error('err', err.response.data);
       },
     );
   };

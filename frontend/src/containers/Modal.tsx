@@ -45,8 +45,8 @@ const ExitIcon = styled(BsX)`
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   color: rgba(0, 0, 0, 0.9);
   transition: all 0.3s ease;
 

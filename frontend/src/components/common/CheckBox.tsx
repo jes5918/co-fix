@@ -5,22 +5,23 @@ import { HiCheck } from 'react-icons/hi';
 const CheckboxContainer = styled.div`
   cursor: pointer;
   display: flex;
-  margin: 8px auto;
+  margin: 24px auto;
 `;
 
 const LabelText = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 8px;
-  font-size: 8px;
-  color: rgba(0, 0, 0, 0.6);
+  margin-left: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
 `;
 
 const Icon = styled(HiCheck)`
   position: absolute;
-  top: -17px;
+  top: -13px;
   left: 1px;
-  width: 15px;
+  width: 22px;
   color: rgba(255, 255, 255, 1);
 `;
 
@@ -31,20 +32,18 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   overflow: hidden;
   padding: 0;
   position: absolute;
-  white-space: nowrap;
 `;
 
 const StyledCheckbox = styled.div<{ checked: boolean }>`
-  display: inline-block;
   position: relative;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   background: ${(props) => (props.checked ? '#ff9500' : 'papayawhip')};
   border-radius: 3px;
   transition: all 200ms;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 2.5px pink;
+    box-shadow: 0 0 0 3.5px pink;
   }
 
   ${Icon} {
