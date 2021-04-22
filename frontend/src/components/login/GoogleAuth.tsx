@@ -65,7 +65,7 @@ function GoogleAuth(props: Props) {
             Login with&nbsp;<span>Google</span>
           </GoogleLoginButton>
         )}
-        isSignedIn={false}
+        // isSignedIn={false}
         responseType="code"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
