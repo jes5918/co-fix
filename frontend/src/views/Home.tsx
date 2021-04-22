@@ -25,7 +25,6 @@ function Home({ match }: RouteComponentProps<MatchParams>) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const ModalToggleHandler = () => {
-    console.log('modal toggle');
     setIsModalOpen(!isModalOpen);
   };
 
