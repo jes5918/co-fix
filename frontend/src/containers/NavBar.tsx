@@ -78,6 +78,9 @@ function NavBar(props: Props) {
         <NavbarItem>
           <Link to="/Toggle">Toggle</Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link to="/Editor">Editor</Link>
+        </NavbarItem>
       </NavbarMenuWraper>
     </NavbarMainWrapper>
   );
