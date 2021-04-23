@@ -59,6 +59,7 @@ function GoogleAuth(props: Props) {
     <>
       <GoogleLogin
         clientId="104208269073-aicolkevpqsuh5a57a22l3n5h3d00ori.apps.googleusercontent.com"
+        // clientId="104208269073-aicolkevpqsuh5a57a22l3n5h3d00ori.apps.googleusercontent.com"
         render={(renderProps) => (
           <GoogleLoginButton onClick={renderProps.onClick}>
             <GoolgeLoginCustomIcon />
@@ -66,6 +67,7 @@ function GoogleAuth(props: Props) {
           </GoogleLoginButton>
         )}
         // isSignedIn={false}
+        accessType="offline"
         responseType="code"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
