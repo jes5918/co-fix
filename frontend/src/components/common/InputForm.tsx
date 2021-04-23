@@ -35,7 +35,7 @@ const InputForm = ({ onSubmit, width, height }: FormProps) => {
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setSearchWord(value);
   };
 
