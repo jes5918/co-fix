@@ -19,6 +19,17 @@ const ModalContentWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  animation: modal-show 1s;
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      margin-top: -100px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
 `;
 const LogoIcon = styled.img.attrs({ src: Logo })`
   width: 70%;
