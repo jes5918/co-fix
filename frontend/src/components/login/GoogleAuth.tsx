@@ -46,7 +46,7 @@ function GoogleAuth({ ModalToggleHandler }: Props) {
     console.log('asdasdasdasd', response);
     googleLoginInstance(
       response.code,
-      (res: any) => {s
+      (res: any) => {
         console.log(`res`, res);
         ModalToggleHandler();
       },
