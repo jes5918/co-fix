@@ -90,7 +90,7 @@ function Home({ match }: RouteComponentProps<MatchParams>) {
           <LogoIcon />
           <SocialLoginWrapper>
             <GoogleAuth ModalToggleHandler={ModalToggleHandler} />
-            <GithubAuth />
+            <GithubAuth ModalToggleHandler={ModalToggleHandler} />
           </SocialLoginWrapper>
           <CheckBox
             onChange={AutoLoginToggleHandler}
