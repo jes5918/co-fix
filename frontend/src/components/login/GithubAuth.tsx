@@ -39,18 +39,15 @@ const GithubLoginCustomIcon = styled(SiGithub)`
   color: #fff;
 `;
 
-interface Props {
-  ModalToggleHandler: () => void;
-}
+interface Props {}
 
-function GithubAuth({ ModalToggleHandler }: Props) {
+function GithubAuth({}: Props) {
   const onSuccess = (response: any) => {
     console.log(response);
     githubLoginInstance(
       response.code,
       (res: any) => {
         console.log(`res`, res);
-        ModalToggleHandler();
       },
       (err: any) => {
         console.error('err', err);
@@ -65,7 +62,7 @@ function GithubAuth({ ModalToggleHandler }: Props) {
     <>
       <GitHubLoginButton
         clientId="43ffc24363dcdbff3b83"
-        // redirectUri=""
+        redirectUri=""
         onSuccess={onSuccess}
         onFailure={onFailure}
         scope="user:email"
