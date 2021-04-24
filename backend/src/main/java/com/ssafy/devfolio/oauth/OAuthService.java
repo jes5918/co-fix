@@ -28,7 +28,8 @@ public class OAuthService {
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
 
-    final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
+//    final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
+    final static String GOOGLE_TOKEN_BASE_URL = "https://accounts.google.com/o/oauth2/token";
     final static String GOOGLE_INFO_BASE_URL = "https://oauth2.googleapis.com/tokeninfo";
     final static String GITHUB_TOKEN_BASE_URL = "https://github.com/login/oauth/access_token";
     final static String GITHUB_INFO_BASE_URL = "https://api.github.com/user";
