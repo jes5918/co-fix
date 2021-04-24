@@ -37,17 +37,18 @@ const GoolgeLoginCustomIcon = styled(FcGoogle)`
   margin: auto 10px auto 5px;
 `;
 
-interface Props {}
+interface Props {
+  ModalToggleHandler: () => void;
+}
 
-function GoogleAuth(props: Props) {
-  const {} = props;
-
+function GoogleAuth({ ModalToggleHandler }: Props) {
   const responseGoogle = (response: any) => {
-    console.log(response);
+    console.log('asdasdasdasd', response);
     googleLoginInstance(
       response.code,
-      (res: any) => {
+      (res: any) => {s
         console.log(`res`, res);
+        ModalToggleHandler();
       },
       (err: any) => {
         console.error('err', err.response.data);
@@ -66,12 +67,9 @@ function GoogleAuth(props: Props) {
           </GoogleLoginButton>
         )}
         // isSignedIn={false}
-        // accessType="offline"
         responseType="code"
-        redirectUri="https://k4b104.p.ssafy.io/api/auth/google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
-        // cookiePolicy={'http://localhost:3000'}
       />
     </>
   );
