@@ -35,7 +35,7 @@ function AuthorizationInstance() {
   instance.interceptors.request.use(
     async function (config) {
       const accToken = await getToken();
-      const token = 'jwt ' + accToken;
+      const token = 'Bearer' + accToken;
 
       config.headers = {
         Authorization: token,
