@@ -18,6 +18,8 @@ public enum ErrorCode {
     MEMBER_DUPLICATED_EMAIL(HttpStatus.CONFLICT,"0101", "중복된 이메일"),
     MEMBER_NOT_EXIST(HttpStatus.NOT_FOUND, "0102", "존재하지 않는 유저"),
 
+    // 소셜 로그인
+    SOCIAL_REQUEST_ERROR(HttpStatus.BAD_REQUEST, "0201", "소셜 로그인 진행 중 오류 발생"),
 
     // 오류 처리
     RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "9902", "런타임 오류"),
