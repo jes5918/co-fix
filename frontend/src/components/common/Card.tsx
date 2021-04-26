@@ -11,7 +11,8 @@ interface cardProps extends styleCardProps {
     tags: Array<string>;
   };
   onHandleZZim: () => void;
-  onClickTag: () => void;
+  onClickTag: (tag: string) => void;
+  onClickImage: () => void;
 }
 
 interface styleCardProps {
@@ -26,6 +27,7 @@ const cardStyle = {
     overflow: hidden;
     position: relative;
     border-radius: 30px;
+    margin: 30px auto;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
     &:hover > * {
@@ -80,7 +82,7 @@ const cardStyle = {
   `,
   zzimedIcon: styled(AiFillStar)`
     position: absolute;
-    bottom: 5%;
+    bottom: 28%;
     right: 5%;
     cursor: pointer;
     color: rgb(215 164 4);
@@ -88,7 +90,7 @@ const cardStyle = {
   `,
   zzimIcon: styled(AiOutlineStar)`
     position: absolute;
-    bottom: 5%;
+    bottom: 28%;
     right: 5%;
     cursor: pointer;
     color: rgb(215 164 4);
@@ -134,6 +136,7 @@ function Card(props: cardProps) {
     card,
     onHandleZZim,
     onClickTag,
+    onClickImage,
   } = props;
 
   return (
@@ -141,19 +144,19 @@ function Card(props: cardProps) {
       <cardStyle.imgFrame src={thumbnailURL} alt="" />
       <cardStyle.hoverContainer>
         {/* hover */}
-        <cardStyle.infoBox>
+        <cardStyle.infoBox onClick={() => onClickImage()}>
           <cardStyle.madeby propsFontSize={propsFontSize}>
             {card && card.madeby}님의 템플릿
           </cardStyle.madeby>
           <cardStyle.madeby propsFontSize={propsFontSize}>
             {card && card.createdAt}
           </cardStyle.madeby>
-          {card && card.zzim ? (
-            <cardStyle.zzimedIcon onClick={() => onHandleZZim()} />
-          ) : (
-            <cardStyle.zzimIcon onClick={() => onHandleZZim()} />
-          )}
         </cardStyle.infoBox>
+        {card && card.zzim ? (
+          <cardStyle.zzimedIcon onClick={() => onHandleZZim()} />
+        ) : (
+          <cardStyle.zzimIcon onClick={() => onHandleZZim()} />
+        )}
         <cardStyle.tagBox>
           <cardStyle.tags>
             {card &&
@@ -162,10 +165,10 @@ function Card(props: cardProps) {
                   return (
                     <cardStyle.tag
                       key={i}
-                      onClick={() => onClickTag()}
+                      onClick={() => onClickTag(tag)}
                       propsFontSize={propsFontSize}
                     >
-                      {tag}
+                      #{tag}
                     </cardStyle.tag>
                   );
                 },

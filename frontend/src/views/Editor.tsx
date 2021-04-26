@@ -27,7 +27,6 @@ function Editor(props: Props) {
       <div>
         <button>Export HTML</button>
       </div>
-
       <EmailEditor ref={emailEditorRef} onLoad={onLoad} />
     </div>
   );
