@@ -3,6 +3,9 @@ package com.ssafy.devfolio.oauth;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import com.ssafy.devfolio.exception.BaseException;
+import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
 import com.ssafy.devfolio.oauth.dto.GithubOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GithubOAuthResponse;
@@ -86,9 +89,12 @@ public class OAuthService {
 
         ResponseEntity<String> resultEntity = restTemplate.exchange(GITHUB_TOKEN_BASE_URL, HttpMethod.POST, httpEntity, String.class);
 
-        System.out.println("resultEntity.getBody() = " + resultEntity.getBody());
-        
-        return objectMapper.readValue(resultEntity.getBody(), new TypeReference<GithubOAuthResponse>() {});
+        try {
+            return objectMapper.readValue(resultEntity.getBody(), new TypeReference<GithubOAuthResponse>() {});
+        } catch (UnrecognizedPropertyException e) {
+            // 토큰 요청 결과가 GithubOAuthResponse와 형식이 다른 경우
+            throw new BaseException(ErrorCode.SOCIAL_REQUEST_ERROR);
+        }
     }
 
     /**
@@ -105,9 +111,11 @@ public class OAuthService {
 
         String resultJson = restTemplate.exchange(requestUrl, HttpMethod.GET, entity, String.class).getBody();
 
-        System.out.println(resultJson);
-        return objectMapper.readValue(resultJson, new TypeReference<Map<String, String>>() {});
+        try {
+            return objectMapper.readValue(resultJson, new TypeReference<Map<String, String>>() {});
+        } catch (UnrecognizedPropertyException e) {
+            throw new BaseException(ErrorCode.SOCIAL_REQUEST_ERROR);
+        }
     }
-
 
 }
