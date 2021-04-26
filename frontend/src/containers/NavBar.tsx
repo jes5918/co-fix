@@ -8,6 +8,7 @@ import Logo from '../assets/logo.png';
 
 const NavbarMainWrapper = styled.div`
   position: sticky;
+  background-color: #fff;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -73,13 +74,19 @@ function NavBar(props: Props) {
           <Link to="/">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/testArea">TestArea</Link>
+          <Link to="/testarea">TestArea</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/Toggle">Toggle</Link>
+          <Link to="/toggle">Toggle</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/Editor">Editor</Link>
+          <Link to="/editor">Editor</Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link to="/template">Template</Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link to="/mytemplate">My Template</Link>
         </NavbarItem>
       </NavbarMenuWraper>
     </NavbarMainWrapper>
