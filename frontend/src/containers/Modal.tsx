@@ -3,29 +3,24 @@ import styled from 'styled-components';
 import { BsX } from 'react-icons/bs';
 
 const ModalLayer = styled.div<ModalLayerProps>`
-  position: absolute;
+  position: fixed;
   display: ${({ isModalOpen }) => (isModalOpen ? 'flex' : 'none')};
   align-items: center;
   justify-content: center;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  animation: modal-bg-show 0.7s;
-
-  @keyframes modal-bg-show {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  z-index: 10000;
 `;
 
 const ModalCloseLayer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -52,7 +47,7 @@ const ModalContent = styled.div<ModalContentProps>`
   @keyframes modal-show {
     from {
       opacity: 0;
-      margin-top: -1500px;
+      margin-top: -200px;
     }
     to {
       opacity: 1;
