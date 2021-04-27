@@ -57,10 +57,10 @@ function GoogleAuth({ ModalToggleHandler }: Props) {
       response.code,
       (res: any) => {
         console.log(`res`, res.data.data);
-        dispatch(googleLoginAction);
-        // dispatch({ type: CLEAR_ERRORS });
+        dispatch(googleLoginAction(res.data.data));
         ModalToggleHandler();
         history.push('/');
+        // dispatch({ type: CLEAR_ERRORS });
       },
       (err: any) => {
         // dispatch({
