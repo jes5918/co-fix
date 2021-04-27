@@ -17,8 +17,6 @@ import TestArea from './components/common/TestArea';
 import Toggle from './components/common/Toggle';
 
 // redux stuff
-import { Provider } from 'react-redux';
-import store from './modules/store';
 import useLoginUser from 'hook/useLoginUser';
 
 function App() {
@@ -32,7 +30,7 @@ function App() {
   }, [user]);
 
   return (
-    <Provider store={store}>
+    <>
       <GlobalFonts />
       <GlobalStyles />
       <Router>
@@ -46,7 +44,7 @@ function App() {
           <Route path="/mytemplate" component={MyTemplatePage} />
         </Switch>
       </Router>
-    </Provider>
+    </>
   );
 }
 
