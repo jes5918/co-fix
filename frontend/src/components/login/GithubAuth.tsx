@@ -1,10 +1,15 @@
 import React from 'react';
 import GitHubLogin from 'react-github-login';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { SiGithub } from 'react-icons/si';
 
 // api instance
 import { githubLoginInstance } from '../../api/accounts/login';
+
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { LoginAction } from 'modules/actions/userActions';
 
 const GitHubLoginButton = styled(GitHubLogin)`
   display: flex;
@@ -44,13 +49,18 @@ interface Props {
 }
 
 function GithubAuth({ ModalToggleHandler }: Props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const onSuccess = (response: any) => {
     console.log(response);
     githubLoginInstance(
       response.code,
       (res: any) => {
-        console.log(`res`, res);
+        console.log(`res`, res.data.data);
+        dispatch(LoginAction(res.data.data));
         ModalToggleHandler();
+        history.push('/editor');
       },
       (err: any) => {
         console.error('err', err);

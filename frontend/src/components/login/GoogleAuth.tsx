@@ -6,10 +6,10 @@ import { FcGoogle } from 'react-icons/fc';
 
 // api instance
 import { googleLoginInstance } from '../../api/accounts/login';
+
+//redux
 import { useSelector, useDispatch } from 'react-redux';
-import { LOADING_UI } from 'modules/types';
-import { googleLoginAction } from 'modules/actions/userActions';
-import { History } from 'history';
+import { LoginAction } from 'modules/actions/userActions';
 
 interface Props {
   ModalToggleHandler: () => void;
@@ -57,9 +57,9 @@ function GoogleAuth({ ModalToggleHandler }: Props) {
       response.code,
       (res: any) => {
         console.log(`res`, res.data.data);
-        dispatch(googleLoginAction(res.data.data));
+        dispatch(LoginAction(res.data.data));
         ModalToggleHandler();
-        history.push('/');
+        history.push('/editor');
         // dispatch({ type: CLEAR_ERRORS });
       },
       (err: any) => {
