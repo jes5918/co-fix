@@ -118,7 +118,12 @@ function Home({ match }: RouteComponentProps<MatchParams>) {
         onClickHandler={ModalToggleHandler}
         text="Login with Social"
       />
-      <div>{user}</div>
+      {user && (
+        <>
+          <div>{user.member.social_type}</div>
+          <div>{user.member.name}</div>
+        </>
+      )}
     </>
   );
 }

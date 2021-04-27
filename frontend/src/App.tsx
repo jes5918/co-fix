@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // pages
@@ -24,9 +24,9 @@ import { CheckAuthentication } from './utils/checkAuthentication';
 import { history } from './utils/history';
 
 function App() {
-  // localstorage 에서 user가 있는지 확인하는 함수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    CheckAuthentication();
+    setIsLoggedIn(CheckAuthentication());
   }, []);
 
   return (
@@ -34,7 +34,7 @@ function App() {
       <GlobalFonts />
       <GlobalStyles />
       <Router>
-        <NavBar />
+        <NavBar isLoggedIn={isLoggedIn} />
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/testarea" component={TestArea} />
