@@ -1,7 +1,7 @@
 import { SET_USER, SET_UNAUTHENTICATED } from '../types';
 // import axios from 'axios';
 
-export const googleLoginAction = (userData: any) => (dispatch: any) => {
+export const LoginAction = (userData: any) => (dispatch: any) => {
   console.log('success google login action', userData);
   localStorage.setItem('user', JSON.stringify(userData)); //setting token to local storage
   dispatch({
