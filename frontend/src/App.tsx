@@ -21,13 +21,11 @@ import { Provider } from 'react-redux';
 import store from './modules/store';
 import { CheckAuthentication } from './utils/checkAuthentication';
 
-import { history } from './utils/history';
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     setIsLoggedIn(CheckAuthentication());
-  }, []);
+  }, [localStorage.getItem('user')]);
 
   return (
     <Provider store={store}>

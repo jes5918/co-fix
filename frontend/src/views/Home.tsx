@@ -14,7 +14,7 @@ import GithubAuth from '../components/login/GithubAuth';
 import GoogleAuth from '../components/login/GoogleAuth';
 import CheckBox from '../components/common/CheckBox';
 
-import useGoogleLoginUser from 'hook/useGoogleLoginUser';
+import useGoogleLoginUser from 'hook/useLoginUser';
 
 const ModalContentWrapper = styled.div`
   display: flex;
