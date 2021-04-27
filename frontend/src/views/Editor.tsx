@@ -27,7 +27,7 @@ function Editor(props: Props) {
       <div>
         <button>Export HTML</button>
       </div>
-      <EmailEditor ref={emailEditorRef} onLoad={onLoad} />
+      <EmailEditor ref={emailEditorRef} onLoad={onLoad} minHeight={800} />
     </div>
   );
 }
