@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
-// logo
-import Logo from '../assets/logo.png';
-
 const NavbarMainWrapper = styled.div`
   position: sticky;
   background-color: #fff;
@@ -20,7 +17,7 @@ const NavbarMainWrapper = styled.div`
   /* margin-bottom: 30px; */
 `;
 
-const NavbarLogo = styled.img.attrs({ src: Logo })`
+const NavbarLogo = styled.img.attrs({ src: '/logo.png' })`
   cursor: pointer;
   width: auto;
   height: 90%;

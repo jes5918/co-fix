@@ -1,10 +1,25 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 import styled from 'styled-components';
 import { FcGoogle } from 'react-icons/fc';
 
 // api instance
 import { googleLoginInstance } from '../../api/accounts/login';
+import { useSelector, useDispatch } from 'react-redux';
+import { LOADING_UI } from 'modules/types';
+import { googleLoginAction } from 'modules/actions/userActions';
+import { History } from 'history';
+
+interface Props {
+  ModalToggleHandler: () => void;
+}
+
+const GoolgeLoginCustomIcon = styled(FcGoogle)`
+  width: 30px;
+  height: 30px;
+  margin: auto 10px auto 5px;
+`;
 
 const GoogleLoginButton = styled.div`
   display: flex;
@@ -31,26 +46,27 @@ const GoogleLoginButton = styled.div`
   }
 `;
 
-const GoolgeLoginCustomIcon = styled(FcGoogle)`
-  width: 30px;
-  height: 30px;
-  margin: auto 10px auto 5px;
-`;
-
-interface Props {
-  ModalToggleHandler: () => void;
-}
-
 function GoogleAuth({ ModalToggleHandler }: Props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const responseGoogle = (response: any) => {
     console.log('asdasdasdasd', response);
+    // dispatch({ type: LOADING_UI });
     googleLoginInstance(
       response.code,
       (res: any) => {
-        console.log(`res`, res);
+        console.log(`res`, res.data.data);
+        dispatch(googleLoginAction);
+        // dispatch({ type: CLEAR_ERRORS });
         ModalToggleHandler();
+        history.push('/');
       },
       (err: any) => {
+        // dispatch({
+        //   type: SET_ERRORS,
+        //   payload: err.response.data,
+        // });
         console.error('err', err.response.data);
       },
     );
