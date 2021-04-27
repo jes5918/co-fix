@@ -15,19 +15,14 @@ import GlobalFonts from './assets/fonts/font';
 import GlobalStyles from './styles/GlobalStyle';
 import TestArea from './components/common/TestArea';
 import Toggle from './components/common/Toggle';
-
-// redux stuff
-import useLoginUser from 'hook/useLoginUser';
+import { CheckAuthentication } from 'utils/checkAuthentication';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { user } = useLoginUser();
 
   useEffect(() => {
-    if (user) {
-      setIsLoggedIn(user.authenticated);
-    }
-  }, [user]);
+    setIsLoggedIn(CheckAuthentication());
+  }, [CheckAuthentication()]);
 
   return (
     <>
