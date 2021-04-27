@@ -28,6 +28,7 @@ const cardStyle = {
     position: relative;
     border-radius: 30px;
     margin: 30px auto;
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
     &:hover > * {
@@ -35,7 +36,8 @@ const cardStyle = {
       opacity: 1;
     }
     &:hover {
-      box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 60px;
+      transform: scale(1.1);
     }
   `,
   imgFrame: styled.img`

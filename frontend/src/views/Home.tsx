@@ -14,6 +14,8 @@ import GithubAuth from '../components/login/GithubAuth';
 import GoogleAuth from '../components/login/GoogleAuth';
 import CheckBox from '../components/common/CheckBox';
 
+import useGoogleLoginUser from 'hook/useGoogleLoginUser';
+
 const ModalContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -69,12 +71,13 @@ interface MatchParams {
 function Home({ match }: RouteComponentProps<MatchParams>) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAutoLoginChecked, setIsAutoLoginChecked] = useState<boolean>(false);
-
+  const { user } = useGoogleLoginUser();
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   const AutoLoginToggleHandler = () => {
+    console.log('지워야함 이콘솔 테스트용', user);
     setIsAutoLoginChecked(!isAutoLoginChecked);
   };
 
@@ -111,6 +114,7 @@ function Home({ match }: RouteComponentProps<MatchParams>) {
         onClickHandler={ModalToggleHandler}
         text="Login with Social"
       />
+      <div>{user}</div>
     </>
   );
 }
