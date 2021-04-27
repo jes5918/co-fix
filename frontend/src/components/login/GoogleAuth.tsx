@@ -59,7 +59,7 @@ function GoogleAuth({ ModalToggleHandler }: Props) {
         console.log(`res`, res.data.data);
         dispatch(LoginAction(res.data.data));
         ModalToggleHandler();
-        history.push('/editor');
+        history.push('/template');
         // dispatch({ type: CLEAR_ERRORS });
       },
       (err: any) => {
