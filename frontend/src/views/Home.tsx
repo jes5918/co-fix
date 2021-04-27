@@ -14,7 +14,7 @@ import GithubAuth from '../components/login/GithubAuth';
 import GoogleAuth from '../components/login/GoogleAuth';
 import CheckBox from '../components/common/CheckBox';
 
-import useGoogleLoginUser from 'hook/useLoginUser';
+import useLoginUser from 'hook/useLoginUser';
 
 const ModalContentWrapper = styled.div`
   display: flex;
@@ -71,7 +71,7 @@ interface MatchParams {
 function Home({ match }: RouteComponentProps<MatchParams>) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAutoLoginChecked, setIsAutoLoginChecked] = useState<boolean>(false);
-  const { user } = useGoogleLoginUser();
+  const { user } = useLoginUser();
 
   useEffect(() => {
     console.log('@@@@', user);

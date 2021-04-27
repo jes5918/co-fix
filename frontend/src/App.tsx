@@ -19,13 +19,17 @@ import Toggle from './components/common/Toggle';
 // redux stuff
 import { Provider } from 'react-redux';
 import store from './modules/store';
-import { CheckAuthentication } from './utils/checkAuthentication';
+import useLoginUser from 'hook/useLoginUser';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useLoginUser();
+
   useEffect(() => {
-    setIsLoggedIn(CheckAuthentication());
-  }, [localStorage.getItem('user')]);
+    if (user) {
+      setIsLoggedIn(user.authenticated);
+    }
+  }, [user]);
 
   return (
     <Provider store={store}>
