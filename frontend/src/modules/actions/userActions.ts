@@ -8,18 +8,15 @@ import {
 } from '../types';
 import axios from 'axios';
 
-export const googleLoginAction = (userData: any, history: any) => (
-  dispatch: any,
-) => {
+export const googleLoginAction = (userData: any) => (dispatch: any) => {
   console.log('success google login action', userData);
   dispatch({
     type: SET_USER,
-    payload: userData.data,
+    payload: userData,
   });
   // const token = `Bearer ${res.data.token}`;
   // localStorage.setItem('token', `Bearer ${res.data.token}`); //setting token to local storage
   // axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
-  //redirecting to index page after login success
 };
 
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
