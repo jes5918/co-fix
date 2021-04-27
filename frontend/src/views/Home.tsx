@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -72,12 +72,16 @@ function Home({ match }: RouteComponentProps<MatchParams>) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAutoLoginChecked, setIsAutoLoginChecked] = useState<boolean>(false);
   const { user } = useGoogleLoginUser();
+
+  useEffect(() => {
+    console.log('@@@@', user);
+  }, [user]);
+
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   const AutoLoginToggleHandler = () => {
-    console.log('지워야함 이콘솔 테스트용', user);
     setIsAutoLoginChecked(!isAutoLoginChecked);
   };
 
