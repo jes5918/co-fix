@@ -71,14 +71,12 @@ const Carousel = ({ children, show }: Props) => {
   const [length, setLength] = useState<number>(React.Children.count(children));
 
   const next = (e: React.MouseEvent<HTMLElement, MouseEvent>): void => {
-    console.log('currentIndex : ', currentIndex * (100 / show));
-    if (currentIndex < length - 1) {
+    if (currentIndex < length - show) {
       setCurrentIndex((prevState) => prevState + 1);
     }
   };
 
   const prev = (e: React.MouseEvent<HTMLElement, MouseEvent>): void => {
-    console.log('currentIndex : ', currentIndex * (100 / show));
     if (currentIndex > 0) {
       setCurrentIndex((prevState) => prevState - 1);
     }
@@ -92,7 +90,7 @@ const Carousel = ({ children, show }: Props) => {
       <Styled.Wrapper>
         {currentIndex > 0 && (
           <Styled.Arrow onClick={prev} left={24}>
-            <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faArrowLeft} />
           </Styled.Arrow>
         )}
         <Styled.ContentWrapper>
@@ -103,9 +101,9 @@ const Carousel = ({ children, show }: Props) => {
             {children}
           </Styled.Content>
         </Styled.ContentWrapper>
-        {currentIndex < length - 1 && (
+        {currentIndex < length - show && (
           <Styled.Arrow onClick={next} right={24}>
-            <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faArrowRight} />
           </Styled.Arrow>
         )}
       </Styled.Wrapper>
