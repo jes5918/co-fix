@@ -19,7 +19,7 @@ const TempCard = {
 };
 
 function TemplateBody() {
-  const [isModalOpen, setIsModalOpen] = useState < boolean > false;
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const onZZimToggleHandler = () => {
     console.log("찜클릭");
   };
