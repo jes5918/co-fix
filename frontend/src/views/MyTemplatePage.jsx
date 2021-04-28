@@ -1,0 +1,32 @@
+import TemplateBody from "../containers/template/TemplateBody";
+import TemplateHeader from "../containers/template/TemplateHeader";
+import React, { useEffect } from "react";
+import styled from "styled-components";
+
+const MyTemplatePageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+`;
+
+function MyTemplatePage() {
+  useEffect(() => {
+    const pageHTML = document.documentElement.innerHTML;
+    console.log(pageHTML);
+  }, []);
+  return (
+    <>
+      <MyTemplatePageWrapper>
+        <TemplateHeader>
+          방금 죽은 개복치 님이
+          <tr /> 찜한 템플릿 목록입니다.
+        </TemplateHeader>
+        <TemplateBody />
+      </MyTemplatePageWrapper>
+    </>
+  );
+}
+
+export default MyTemplatePage;
