@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import styled from 'styled-components';
 
 // logo
-import Logo from "../assets/logo.png";
+import Logo from '../assets/logo.png';
 
 // containers
-import Modal from "../containers/Modal";
+import Modal from '../containers/Modal';
 
 // components
-import BasicButton from "../components/common/BasicButton";
-import GithubAuth from "../components/login/GithubAuth";
-import GoogleAuth from "../components/login/GoogleAuth";
-import CheckBox from "../components/common/CheckBox";
+import BasicButton from '../components/common/BasicButton';
+import GithubAuth from '../components/login/GithubAuth';
+import GoogleAuth from '../components/login/GoogleAuth';
+import CheckBox from '../components/common/CheckBox';
 
-import useLoginUser from "../hook/useLoginUser";
+import useLoginUser from '../hook/useLoginUser';
 
 const ModalContentWrapper = styled.div`
   display: flex;
@@ -67,10 +67,10 @@ const FooterText = styled.div`
 function Home({ match }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
-  const { user } = useLoginUser();
+  const user = useLoginUser();
 
   useEffect(() => {
-    console.log("@@@@", user);
+    console.log('@@@@', user);
   }, [user]);
 
   const ModalToggleHandler = () => {
@@ -116,8 +116,8 @@ function Home({ match }) {
       />
       {user && (
         <>
-          <div>{user.member.social_type}</div>
-          <div>{user.member.name}</div>
+          <div>{user.credentials}</div>
+          <div>{user.authenticated}</div>
         </>
       )}
     </>
