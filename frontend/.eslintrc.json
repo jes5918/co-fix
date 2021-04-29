@@ -2,6 +2,10 @@
   "plugins": ["prettier"],
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
   "rules": {
     "prettier/prettier": 0,
     "indent": 0,
@@ -22,5 +26,12 @@
     "no-new": 0,
     "no-confusing-arrow": 0,
     "operator-linebreak": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "."]
+      }
+    }
   }
 }
