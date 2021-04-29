@@ -1,8 +1,8 @@
-import TemplateBody from "../containers/template/TemplateBody";
-import TemplateHeader from "../containers/template/TemplateHeader";
-import TemplateSearch from "../containers/template/TemplateSearch";
-import React from "react";
-import styled from "styled-components";
+import TemplateBody from '../containers/template/TemplateBody';
+import TemplateHeader from '../containers/template/TemplateHeader';
+import TemplateSearch from '../containers/template/TemplateSearch';
+import React from 'react';
+import styled from 'styled-components';
 
 const TemplatePageWrapper = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ function TemplatePage() {
     <TemplatePageWrapper>
       <TemplateHeader>
         <HeaderSpan>마음에 드는 템플릿을 검색하세요.</HeaderSpan>
-        <TemplateSearch />
+        <TemplateSearch width={700} height={50} />
       </TemplateHeader>
       <TemplateBody />
     </TemplatePageWrapper>

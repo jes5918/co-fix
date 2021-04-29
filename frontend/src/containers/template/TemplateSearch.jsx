@@ -1,12 +1,16 @@
-import InputForm from "../../components/common/InputForm";
-import React from "react";
+import InputForm from '../../components/common/InputForm';
+import React from 'react';
 
-function TemplateSearch() {
+function TemplateSearch({ width, height }) {
   const SearchRefSubmitHandler = (keyword) => {
-    console.log("SearchRefSubmitHandler = ", keyword);
+    console.log('SearchRefSubmitHandler = ', keyword);
   };
   return (
-    <InputForm width={600} height={50} onSubmit={SearchRefSubmitHandler} />
+    <InputForm
+      width={width}
+      height={height}
+      onSubmit={SearchRefSubmitHandler}
+    />
   );
 }
 

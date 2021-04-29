@@ -1,7 +1,7 @@
-import TemplateBody from "../containers/template/TemplateBody";
-import TemplateHeader from "../containers/template/TemplateHeader";
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import TemplateBody from '../containers/template/TemplateBody';
+import TemplateHeader from '../containers/template/TemplateHeader';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
 
 const MyTemplatePageWrapper = styled.div`
   display: flex;

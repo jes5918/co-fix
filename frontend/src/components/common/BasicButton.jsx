@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Button = styled.div`
   display: flex;
@@ -13,8 +13,8 @@ const Button = styled.div`
   border-radius: 30px;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
   background-color: ${({ backgroundColor }) =>
-    `${backgroundColor ? backgroundColor : "#ff9500"}`};
-  font-size: ${({ fontSize }) => `${fontSize ? `${fontSize}px` : "24px"}`};
+    `${backgroundColor ? backgroundColor : '#ff9500'}`};
+  font-size: ${({ fontSize }) => `${fontSize ? `${fontSize}px` : '24px'}`};
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => `${width}px`};
   transition: all 0.2s ease-in;

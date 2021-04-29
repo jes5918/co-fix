@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -62,7 +62,7 @@ function NavBar({ isLoggedIn }) {
   const history = useHistory();
 
   const LogoClickHandler = () => {
-    if (location.pathname === '/') {
+    if (history.location.pathname === '/') {
       return null;
     } else {
       history.push('/');
