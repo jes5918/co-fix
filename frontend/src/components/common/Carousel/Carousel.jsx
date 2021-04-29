@@ -51,6 +51,17 @@ const Styled = {
   `,
 };
 
+// item 예시
+{
+  /* <div style={{ padding: 8, boxSizing: "border-box" }}>
+  <img
+    src="/images/1.jpg"
+    style={{ maxWidth: 300 }}
+    alt="placeholder"
+  />
+</div> */
+}
+
 const Carousel = ({ children, show }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(React.Children.count(children));
