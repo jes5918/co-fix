@@ -12,8 +12,10 @@ import com.ssafy.devfolio.oauth.dto.GithubOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GithubOAuthResponse;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthResponse;
+import com.ssafy.devfolio.utils.RestTemplateResponseErrorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -47,8 +49,10 @@ public class OAuthService {
     private String githubClientSecret;
 
     @Autowired
-    public OAuthService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public OAuthService() {
+        this.restTemplate = new RestTemplateBuilder()
+                .errorHandler(new RestTemplateResponseErrorHandler())
+                .build();
         this.objectMapper = new ObjectMapper();
 
         this.objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
