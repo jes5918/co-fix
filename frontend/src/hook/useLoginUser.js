@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../modules/store";
+import { useSelector } from 'react-redux';
 
 export default function useLoginUser() {
   const LoginUser = useSelector((state) => state.user);
