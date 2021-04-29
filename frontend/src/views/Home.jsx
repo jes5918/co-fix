@@ -92,6 +92,7 @@ function Home({ match }) {
   const AutoLoginToggleHandler = () => {
     setIsAutoLoginChecked(!isAutoLoginChecked);
   };
+
   const [cursorXY, setCursorXY] = useState({ x: -100, y: -100 });
   useEffect(() => {
     const moveCursor = (e) => {
