@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSpring } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion, useMotionValue } from 'framer-motion';
 
 // logo
 import Logo from '../assets/logo.png';
@@ -63,6 +64,17 @@ const FooterText = styled.div`
     font-weight: bold;
   }
 `;
+const Cursor = styled.div`
+  position: fixed;
+  left: -10px;
+  top: -10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(255, 149, 0, 0.4);
+  transition: all 0.01s ease-in;
+  z-index: -1;
+`;
 
 function Home({ match }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,9 +92,28 @@ function Home({ match }) {
   const AutoLoginToggleHandler = () => {
     setIsAutoLoginChecked(!isAutoLoginChecked);
   };
+  const [cursorXY, setCursorXY] = useState({ x: -100, y: -100 });
+  useEffect(() => {
+    const moveCursor = (e) => {
+      const x = e.clientX - 20;
+      const y = e.clientY - 20;
+      setCursorXY({ x, y });
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+
+    return () => {
+      window.removeEventListener('mousemove', moveCursor);
+    };
+  }, []);
 
   return (
     <>
+      <Cursor
+        style={{
+          transform: `translate3d(${cursorXY.x}px, ${cursorXY.y}px, 0)`,
+        }}
+      />
       <Modal
         ModalToggleHandler={ModalToggleHandler}
         isModalOpen={isModalOpen}

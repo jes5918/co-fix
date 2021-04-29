@@ -14,7 +14,7 @@ import {
 
 const MenuStyle = {
   leftMenuContainer: styled.div`
-    width: auto;
+    width: 75px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@ const MenuStyle = {
     align-items: center;
     /* padding-top: 6vh; */
     /* box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2); */
-    border-right: solid 1.5px gray;
+    border-right: solid 1.5px #afafaf;
     top: 0;
   `,
   IconContainer: styled.div`
