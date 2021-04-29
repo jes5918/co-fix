@@ -1,17 +1,18 @@
 package com.ssafy.devfolio.oauth;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
-import com.ssafy.devfolio.member.MemberRepository;
 import com.ssafy.devfolio.oauth.dto.GithubOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GithubOAuthResponse;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthResponse;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,18 +25,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class OAuthService {
 
-    private final RestTemplate restTemplate;
-    private final ObjectMapper objectMapper;
-    private final MemberRepository memberRepository;
+    private RestTemplate restTemplate;
+    private ObjectMapper objectMapper;
 
     final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
     final static String GOOGLE_INFO_BASE_URL = "https://oauth2.googleapis.com/tokeninfo";
     final static String GITHUB_TOKEN_BASE_URL = "https://github.com/login/oauth/access_token";
     final static String GITHUB_INFO_BASE_URL = "https://api.github.com/user";
-
 
     @Value("${redirect-url}")
     private String baseRedirectUrl;
@@ -47,6 +45,16 @@ public class OAuthService {
     private String githubClientId;
     @Value("${spring.security.oauth2.client.registration.github.client-secret}")
     private String githubClientSecret;
+
+    @Autowired
+    public OAuthService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+        this.objectMapper = new ObjectMapper();
+
+        this.objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        this.objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    }
+
 
     public GoogleOAuthResponse getGoogleAccessToken(String authorizationCode) throws JsonProcessingException {
         GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest.builder()
