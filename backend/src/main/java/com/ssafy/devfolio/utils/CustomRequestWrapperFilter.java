@@ -7,6 +7,7 @@ import net.minidev.json.parser.JSONParser;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.entity.ContentType;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @WebFilter(urlPatterns = "/*")
+@Component
 public class CustomRequestWrapperFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
@@ -46,22 +48,24 @@ public class CustomRequestWrapperFilter implements Filter {
 
         public CustomRequestWrapper(HttpServletRequest request) {
             super(request);
-            this.params.putAll(request.getParameterMap()); // 원래의 파라미터를 저장
+            this.params.putAll(request.getParameterMap()); // 파라미터 저장
 
             String charEncoding = request.getCharacterEncoding(); // 인코딩 설정
             this.encoding = StringUtils.isBlank(charEncoding) ? StandardCharsets.UTF_8 : Charset.forName(charEncoding);
 
             try {
-                InputStream is = request.getInputStream();
+                InputStream is = request.getInputStream(); // body 들어있는 input stream
                 this.rawData = IOUtils.toByteArray(is); // InputStream 을 별도로 저장한 다음 getReader() 에서 새 스트림으로 생성
 
                 // body 파싱
-                String collect = this.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-                if (StringUtils.isEmpty(collect)) { // body 가 없을경우 로깅 제외
+                String collect = this.getReader()
+                        .lines()
+                        .collect(Collectors.joining(System.lineSeparator()));
+                if (StringUtils.isEmpty(collect)) { // body 없는 경우 제외
                     return;
                 }
                 if (request.getContentType() != null && request.getContentType().contains(
-                        ContentType.MULTIPART_FORM_DATA.getMimeType())) { // 파일 업로드시 로깅제외
+                        ContentType.MULTIPART_FORM_DATA.getMimeType())) { // 파일 업로드 제외
                     return;
                 }
                 JSONParser jsonParser = new JSONParser();
@@ -74,7 +78,7 @@ public class CustomRequestWrapperFilter implements Filter {
                     Iterator iterator = jsonObject.keySet().iterator();
                     while (iterator.hasNext()) {
                         String key = (String)iterator.next();
-                        setParameter(key, jsonObject.get(key).toString().replace("\"", "\\\""));
+                        setParameter(key, String.valueOf(jsonObject.get(key)).replace("\"", "\\\""));
                     }
                 }
             } catch (Exception e) {

@@ -42,7 +42,6 @@ public class LoggingAspect {
     public void loggingRequest() {
         HttpServletRequest request = this.getCurrentRequest();
 
-
         Map<String, Object> data = new HashMap<>();
 
         data.put("requestURI", request.getRequestURI());
@@ -66,12 +65,9 @@ public class LoggingAspect {
         data.put("status code", res.getStatusCodeValue());
         data.put("code", ((BaseResponse)res.getBody()).getCode());
 
-        JSONObject message = this.toJson(data);
-
-        log.error("message: {}", message.toJSONString());
+        log.error("message: {}", data);
 
         return result;
-
     }
 
     private HttpServletRequest getCurrentRequest() {
@@ -80,10 +76,6 @@ public class LoggingAspect {
 
     private Exception getCurrentException(ProceedingJoinPoint proceedingJoinPoint) {
         return (Exception) proceedingJoinPoint.getArgs()[0];
-    }
-
-    private JSONObject toJson(Map<String, Object> data) {
-        return new JSONObject(data);
     }
 
     private JSONObject getParams(HttpServletRequest request) {
