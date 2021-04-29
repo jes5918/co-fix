@@ -11,7 +11,6 @@ public class PortfolioService {
 
     private final PortfolioRepository portfolioRepository;
 
-
     public PortfolioResponse createPortfolio(PortfolioRequest request) {
 
         Portfolio portfolio = Portfolio.builder()

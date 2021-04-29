@@ -4,16 +4,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.ssafy.devfolio.oauth.dto.GithubOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GithubOAuthResponse;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthRequest;
 import com.ssafy.devfolio.oauth.dto.GoogleOAuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -56,13 +55,6 @@ public class OAuthService {
         this.objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
-    @Qualifier("authObjectMapper")
-    public ObjectMapper camelToSnake() {
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
-        return objectMapper;
-    }
 
     public GoogleOAuthResponse getGoogleAccessToken(String authorizationCode) throws JsonProcessingException {
         GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest.builder()
@@ -117,7 +109,6 @@ public class OAuthService {
      * Github 유저 정보 획득
      */
     public Map<String, String> getGithubInfo(String idToken) throws JsonProcessingException {
-        System.out.println(idToken);
         String requestUrl = UriComponentsBuilder
                 .fromHttpUrl(GITHUB_INFO_BASE_URL)
                 .queryParam("id_token", idToken).encode().toUriString();

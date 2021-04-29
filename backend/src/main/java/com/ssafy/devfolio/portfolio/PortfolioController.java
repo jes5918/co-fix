@@ -28,7 +28,7 @@ public class PortfolioController {
 
         PortfolioResponse data = portfolioService.createPortfolio(request);
 
-        SingleDataResponse<PortfolioResponse> response = responseService.getSingleDataResponse(data, HttpStatus.OK);
+        SingleDataResponse<PortfolioResponse> response = responseService.getSingleDataResponse(data, HttpStatus.CREATED);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
