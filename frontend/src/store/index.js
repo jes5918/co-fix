@@ -6,13 +6,13 @@ import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
-  key: 'reducer',
+  key: 'root',
   storage,
-  whitelist: ['reducer'],
 };
 
+const presistedReducer = persistReducer(persistConfig, rootReducer);
+
 export default function configureStore() {
-  const presistedReducer = persistReducer(persistConfig, rootReducer);
   const store = createStore(
     presistedReducer,
     composeWithDevTools(applyMiddleware(thunk)),
