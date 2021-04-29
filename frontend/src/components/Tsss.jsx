@@ -26,7 +26,6 @@ export default function Tsss() {
   }));
   return (
     <Card
-      class="card"
       onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
       onMouseLeave={() => set({ xys: [0, 0, 1] })}
       style={{ transform: props.xys.interpolate(trans) }}
