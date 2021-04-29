@@ -83,7 +83,6 @@ public class LoggingAspect {
         Enumeration<String> params = request.getParameterNames();
         while (params.hasMoreElements()) {
             String param = params.nextElement();
-            System.out.println("param = " + param);
             String replaceParam = param.replaceAll("\\.", "-");
             jsonObject.put(replaceParam, request.getParameter(param));
         }
