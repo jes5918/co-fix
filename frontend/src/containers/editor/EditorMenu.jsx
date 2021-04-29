@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import {
   BiImageAdd,
   BiPalette,
@@ -10,12 +10,12 @@ import {
   BiLayout,
   BiMinus,
   BiHeartCircle,
-} from "react-icons/bi";
+} from 'react-icons/bi';
 
 const MenuStyle = {
   leftMenuContainer: styled.div`
     width: 75px;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -41,7 +41,7 @@ const MenuStyle = {
   MenuText: styled.div`
     font-size: 12px;
     /* font-weight: bold; */
-    font-family: "Roboto";
+    font-family: 'Roboto';
     text-align: center;
     display: flex;
     justify-content: center;
@@ -53,39 +53,39 @@ function EditorMenu() {
   return (
     <MenuStyle.leftMenuContainer>
       <MenuStyle.IconContainer>
-        <BiImageAdd style={{ fontSize: "28px" }} />
+        <BiImageAdd style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>사진</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiPalette style={{ fontSize: "28px" }} />
+        <BiPalette style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>테마</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiText style={{ fontSize: "28px" }} />
+        <BiText style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>텍스트</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiCodeAlt style={{ fontSize: "28px" }} />
+        <BiCodeAlt style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>코드박스</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiWindowAlt style={{ fontSize: "28px" }} />
+        <BiWindowAlt style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>코드실행</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiGridAlt style={{ fontSize: "28px" }} />
+        <BiGridAlt style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>도형</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiLayout style={{ fontSize: "28px" }} />
+        <BiLayout style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>프레임</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiMinus style={{ fontSize: "28px" }} />
+        <BiMinus style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>구분선</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
       <MenuStyle.IconContainer>
-        <BiHeartCircle style={{ fontSize: "28px" }} />
+        <BiHeartCircle style={{ fontSize: '28px' }} />
         <MenuStyle.MenuText>아이콘</MenuStyle.MenuText>
       </MenuStyle.IconContainer>
     </MenuStyle.leftMenuContainer>
