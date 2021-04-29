@@ -16,7 +16,6 @@ public class DevfolioApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DevfolioApplication.class, args);
-        System.out.println("LocalDateTime.now() = " + LocalDateTime.now());
     }
 
     @PostConstruct
