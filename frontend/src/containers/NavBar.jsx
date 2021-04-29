@@ -77,38 +77,38 @@ function NavBar({ isLoggedIn }) {
     <NavbarMainWrapper>
       <NavbarLogo onClick={LogoClickHandler} />
       <NavbarMenuWraper>
-        {isLoggedIn ? (
+        {!isLoggedIn ? (
           <>
             <NavbarItem>
-              <Link to='/testarea'>TestArea</Link>
+              <Link to="/testarea">TestArea</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to='/toggle'>Toggle</Link>
+              <Link to="/toggle">Toggle</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to='/editor'>Editor</Link>
+              <Link to="/editor">Editor</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to='/template'>Template</Link>
+              <Link to="/template">Template</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to='/mytemplate'>My Template</Link>
+              <Link to="/mytemplate">My Template</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to='/editortest'>Editor Test</Link>
+              <Link to="/editortest">Editor Test</Link>
             </NavbarItem>
             <BasicButton
               onClickHandler={LogoutHandler}
               width={100}
               height={33}
               fontSize={15}
-              backgroundColor='red'
-              text='로그아웃'
+              backgroundColor="red"
+              text="로그아웃"
             />
           </>
         ) : (
           <NavbarItem>
-            <Link to='/'>Login</Link>
+            <Link to="/">Login</Link>
           </NavbarItem>
         )}
       </NavbarMenuWraper>
