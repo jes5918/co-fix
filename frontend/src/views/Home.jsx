@@ -116,8 +116,8 @@ function Home({ match }) {
       />
       {user && (
         <>
-          <div>{user.credentials}</div>
-          <div>{user.authenticated}</div>
+          <div>{JSON.stringify(user.authenticated)}</div>
+          <div>{JSON.stringify(user.credentials)}</div>
         </>
       )}
     </>
