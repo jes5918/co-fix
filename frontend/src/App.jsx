@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // pages
-import Home from "./views/Home";
-import Editor from "./views/Editor";
-import TemplatePage from "./views/TemplatePage";
-import MyTemplatePage from "./views/MyTemplatePage";
+import Home from './views/Home';
+import Editor from './views/Editor';
+import TemplatePage from './views/TemplatePage';
+import MyTemplatePage from './views/MyTemplatePage';
 
 // container
-import NavBar from "./containers/NavBar";
+import NavBar from './containers/NavBar';
+import EditorTest from './containers/EditorTest';
 
 // components
-import GlobalFonts from "./assets/fonts/font";
-import GlobalStyles from "./styles/GlobalStyle";
-import TestArea from "./components/common/TestArea";
-import Toggle from "./components/common/Toggle";
-import { CheckAuthentication } from "./utils/checkAuthentication";
+import GlobalFonts from './assets/fonts/font';
+import GlobalStyles from './styles/GlobalStyle';
+import TestArea from './components/common/TestArea';
+import Toggle from './components/common/Toggle';
+import { CheckAuthentication } from './utils/checkAuthentication';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    console.log(`AuthCheckTriger isLoggedIn = `, isLoggedIn);
     setIsLoggedIn(CheckAuthentication());
   }, [CheckAuthentication()]);
 
@@ -37,6 +39,7 @@ function App() {
           <Route path="/editor" component={Editor} />
           <Route path="/template" component={TemplatePage} />
           <Route path="/mytemplate" component={MyTemplatePage} />
+          <Route path="/editortest" component={EditorTest} />
         </Switch>
       </Router>
     </>

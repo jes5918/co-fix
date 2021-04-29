@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
-import styled from "styled-components";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
 // redux
-import { useDispatch } from "react-redux";
-import { logoutUserAction } from "../modules/actions/userActions";
+import { useDispatch } from 'react-redux';
+import { logoutUserAction } from '../modules/actions/userActions';
 
 // components
-import BasicButton from "../components/common/BasicButton";
+import BasicButton from '../components/common/BasicButton';
 
 const NavbarMainWrapper = styled.div`
   position: sticky;
@@ -24,7 +24,7 @@ const NavbarMainWrapper = styled.div`
   /* margin-bottom: 30px; */
 `;
 
-const NavbarLogo = styled.img.attrs({ src: "/logo.png" })`
+const NavbarLogo = styled.img.attrs({ src: '/logo.png' })`
   cursor: pointer;
   width: auto;
   height: 90%;
@@ -62,10 +62,10 @@ function NavBar({ isLoggedIn }) {
   const history = useHistory();
 
   const LogoClickHandler = () => {
-    if (location.pathname === "/") {
+    if (location.pathname === '/') {
       return null;
     } else {
-      history.push("/");
+      history.push('/');
     }
   };
 
@@ -80,32 +80,35 @@ function NavBar({ isLoggedIn }) {
         {isLoggedIn ? (
           <>
             <NavbarItem>
-              <Link to="/testarea">TestArea</Link>
+              <Link to='/testarea'>TestArea</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to="/toggle">Toggle</Link>
+              <Link to='/toggle'>Toggle</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to="/editor">Editor</Link>
+              <Link to='/editor'>Editor</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to="/template">Template</Link>
+              <Link to='/template'>Template</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to="/mytemplate">My Template</Link>
+              <Link to='/mytemplate'>My Template</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link to='/editortest'>Editor Test</Link>
             </NavbarItem>
             <BasicButton
               onClickHandler={LogoutHandler}
               width={100}
               height={33}
               fontSize={15}
-              backgroundColor="red"
-              text="로그아웃"
+              backgroundColor='red'
+              text='로그아웃'
             />
           </>
         ) : (
           <NavbarItem>
-            <Link to="/">Login</Link>
+            <Link to='/'>Login</Link>
           </NavbarItem>
         )}
       </NavbarMenuWraper>
