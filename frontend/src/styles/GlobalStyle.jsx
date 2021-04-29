@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { reset } from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
-    ${reset}
     *{
         box-sizing:border-box;
     }
@@ -11,6 +9,8 @@ const GlobalStyles = createGlobalStyle`
         height: 100%;
     }
     body{
+        margin:0;
+    
         font-size:14px;
         font-family: 'NotoSans';
     }
