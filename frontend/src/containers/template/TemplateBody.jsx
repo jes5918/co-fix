@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Card from "../../components/common/Card";
-import Modal from "../../containers/Modal";
-import ModalContent from "../../components/template/ModalContent";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Card from '../../components/common/Card';
+import Modal from '../../containers/Modal';
+import ModalContent from '../../components/template/ModalContent';
 
 const CardWrapper = styled.div`
   width: 90%;
@@ -13,19 +13,19 @@ const CardWrapper = styled.div`
 const TempCard = {
   zzim: false,
   pk: 1,
-  madeby: "의수",
-  createdAt: "2020. 04. 26",
-  tags: ["React", "Redux", "Frontend"],
+  madeby: '의수',
+  createdAt: '2020. 04. 26',
+  tags: ['React', 'Redux', 'Frontend'],
 };
 
 function TemplateBody() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onZZimToggleHandler = () => {
-    console.log("찜클릭");
+    console.log('찜클릭');
   };
 
   const onTagClickHandler = (tag) => {
-    console.log(`${tag}`, "태그클릭");
+    console.log(`${tag}`, '태그클릭');
   };
 
   const ModalToggleHandler = () => {

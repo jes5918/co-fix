@@ -1,0 +1,11 @@
+#middle {
+  border: 1px solid blue;
+}
+
+#testbox div {
+  margin: 10px auto !important;
+}
+
+.textup {
+  font-size: 30px;
+}
