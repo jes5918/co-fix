@@ -1,5 +1,6 @@
 package com.ssafy.devfolio.image;
 
+import com.ssafy.devfolio.entity.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Image {
+public class Image extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
