@@ -19,7 +19,7 @@ const NavbarMainWrapper = styled.div`
   justify-content: space-between;
   padding: 0 3%;
   width: 100%;
-  height: 6vh;
+  height: 86px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
   /* margin-bottom: 30px; */
 `;
@@ -27,7 +27,7 @@ const NavbarMainWrapper = styled.div`
 const NavbarLogo = styled.img.attrs({ src: '/logo.png' })`
   cursor: pointer;
   width: auto;
-  height: 90%;
+  height: 50%;
   margin: 5px;
 `;
 
