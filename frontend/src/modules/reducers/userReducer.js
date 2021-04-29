@@ -3,7 +3,7 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER,
-} from "../types";
+} from '../types';
 
 const initialState = {
   authenticated: false,
