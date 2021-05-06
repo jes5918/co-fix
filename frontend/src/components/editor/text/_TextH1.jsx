@@ -49,11 +49,7 @@ export default function _TextH1({
     onHandleDebounce(e.target.value);
   };
   const onHandleEdit = () => {
-    if (edit) {
-      setEdit(!edit);
-    } else {
-      setEdit(!edit);
-    }
+    setEdit(!edit);
   };
   return (
     <div>

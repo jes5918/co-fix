@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from '../../components/common/Card';
-import Modal from '../../containers/Modal';
+import Modal from '../Modal';
 import ModalContent from '../../components/template/ModalContent';
 
 const CardWrapper = styled.div`
