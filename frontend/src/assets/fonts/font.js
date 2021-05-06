@@ -1,6 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import NotoSans from "./noto-sans-kr-v13-latin_korean-regular.woff";
-import Roboto from "./roboto-v27-latin-regular.woff";
+import { createGlobalStyle } from 'styled-components';
+import NotoSans from './noto-sans-kr-v13-latin_korean-regular.woff';
+import Roboto from './roboto-v27-latin-regular.woff';
+import Samlip from './SDSamliphopangcheBasic.otf';
 export default createGlobalStyle`
   @font-face {
     font-family: 'NotoSans';	
@@ -14,6 +15,14 @@ export default createGlobalStyle`
     font-family: 'Roboto';	
     src: local('Roboto'),
     url(${Roboto}) format('woff');
+    font-weight: 300; 	
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Samlip';	
+    src: local('Samlip'),
+    url(${Samlip}) format('otf');
     font-weight: 300; 	
     font-style: normal;
   }

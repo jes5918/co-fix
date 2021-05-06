@@ -11,8 +11,10 @@ import { logoutUserAction } from '../modules/actions/userActions';
 import BasicButton from '../components/common/BasicButton';
 
 const NavbarMainWrapper = styled.div`
-  position: sticky;
-  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -20,15 +22,16 @@ const NavbarMainWrapper = styled.div`
   padding: 0 3%;
   width: 100%;
   height: 86px;
-  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2); */
   /* margin-bottom: 30px; */
 `;
 
 const NavbarLogo = styled.img.attrs({ src: '/logo.png' })`
   cursor: pointer;
   width: auto;
-  height: 50%;
-  margin: 5px;
+  height: 100%;
+  /* margin: 5px; */
+  box-sizing: border-box;
 `;
 
 const NavbarMenuWraper = styled.div`
@@ -87,6 +90,9 @@ function NavBar({ isLoggedIn }) {
             </NavbarItem>
             <NavbarItem>
               <Link to="/mypage">MyPage</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link to="/create">Create</Link>
             </NavbarItem>
             <BasicButton
               onClickHandler={LogoutHandler}
