@@ -6,11 +6,13 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: black;
   cursor: pointer;
-  margin: 10px;
+  margin: ${({ margin }) => `${margin ? `${margin}px` : '10px'}`};
   border: none;
-  border-radius: 30px;
+  font-family: 'Samlip';
+  font-weight: bold;
+  border-radius: 15px;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
   background-color: ${({ backgroundColor }) =>
     `${backgroundColor ? backgroundColor : '#ff9500'}`};
@@ -30,6 +32,7 @@ const Button = styled.div`
 
 function BasicButton({
   text,
+  margin,
   onClickHandler,
   width,
   height,
@@ -38,6 +41,7 @@ function BasicButton({
 }) {
   return (
     <Button
+      margin={margin}
       height={height}
       width={width}
       fontSize={fontSize}
