@@ -1,9 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const RightPanel = styled.div``;
 
 function MyPageRight() {
   return (
     <>
-      <div>오른쪽패널</div>
+      <RightPanel>오른쪽패널</RightPanel>
     </>
   );
 }

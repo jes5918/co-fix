@@ -11,7 +11,7 @@ import GlobalStyles from './styles/GlobalStyle';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './store';
-
+import './index.css';
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
