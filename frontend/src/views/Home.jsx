@@ -16,6 +16,7 @@ import GoogleAuth from '../components/login/GoogleAuth';
 import CheckBox from '../components/common/CheckBox';
 
 import useLoginUser from '../hook/useLoginUser';
+import Footer from '../containers/home/Footer';
 
 const ModalContentWrapper = styled.div`
   display: flex;
@@ -152,6 +153,7 @@ function Home({ match }) {
           <div>{JSON.stringify(user.credentials)}</div>
         </>
       )}
+      <Footer />
     </>
   );
 }

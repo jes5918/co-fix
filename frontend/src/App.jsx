@@ -5,6 +5,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './views/Home';
 import MyPage from './views/MyPage';
 import MyPageList from './views/MyPageList';
+import CreatePjt from './views/CreatePjt';
 
 // container
 import NavBar from './containers/NavBar';
@@ -19,10 +20,6 @@ function App() {
 
   // router의 위치가 변화면 실행
   // eslint-disable-next-line
-  useEffect(() => {
-    setIsLocationEditor(location.pathname === '/editor' ? true : false);
-    console.log('현재위치는', location.pathname);
-  });
 
   // 로그인 상태 알기
   const CheckAuthentication = () => {
@@ -37,12 +34,13 @@ function App() {
 
   return (
     <>
-      {!isLocationEditor && <NavBar isLoggedIn={isLoggedIn} />}
+      <NavBar isLoggedIn={isLoggedIn} />
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/testarea" component={TestArea} />
         <Route path="/mypagelist" component={MyPageList} />
         <Route path="/mypage" component={MyPage} />
+        <Route path="/create" component={CreatePjt} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>
