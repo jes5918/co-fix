@@ -35,6 +35,10 @@ const ModalContentWrapper = styled.div`
     }
   }
 `;
+const HomeWrapper = styled.div`
+  margin-top: 86px;
+  width: 100%;
+`;
 const LogoIcon = styled.img.attrs({ src: Logo })`
   width: 70%;
   margin: 10px auto 30px;
@@ -110,7 +114,7 @@ function Home({ match }) {
   }, []);
 
   return (
-    <>
+    <HomeWrapper>
       <Cursor
         style={{
           transform: `translate3d(${cursorXY.x}px, ${cursorXY.y}px, 0)`,
@@ -154,7 +158,7 @@ function Home({ match }) {
         </>
       )}
       <Footer />
-    </>
+    </HomeWrapper>
   );
 }
 
