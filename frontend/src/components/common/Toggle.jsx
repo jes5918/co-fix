@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const toggleStyle = {
   toggleSwitch: styled.label`
-    position: absolute;
+    position: relative;
     display: inline-block;
     width: 80px;
     height: 34px;
@@ -34,7 +34,7 @@ const toggleStyle = {
     transition: 0.4s;
     &::before {
       position: absolute;
-      content: "";
+      content: '';
       height: 26px;
       width: 26px;
       left: 4px;
@@ -46,12 +46,18 @@ const toggleStyle = {
   `,
 };
 
-function Toggle() {
+function Toggle({ isToggled, setIsToggled }) {
+  const onChangeHandler = () => {
+    setIsToggled(!isToggled);
+  };
+
   return (
-    <toggleStyle.toggleSwitch>
-      <toggleStyle.toggleInput type="checkbox" />
-      <toggleStyle.slider />
-    </toggleStyle.toggleSwitch>
+    <>
+      <toggleStyle.toggleSwitch>
+        <toggleStyle.toggleInput type="checkbox" onChange={onChangeHandler} />
+        <toggleStyle.slider />
+      </toggleStyle.toggleSwitch>
+    </>
   );
 }
 
