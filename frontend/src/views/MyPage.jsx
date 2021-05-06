@@ -5,13 +5,15 @@ import Toggle from '../components/common/Toggle';
 import MypageLeft from '../containers/mypage/MyPageLeft';
 import MyPageRight from '../containers/mypage/MyPageRight';
 import Participant from '../containers/mypage/Participant';
+import Scrollbar from 'react-scrollbars-custom';
+import JSONData from '../demo/demo.json';
 
 const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
-  height: 80%;
-  margin: 30px auto;
+  width: 90%;
+  height: 85%;
+  margin: 100px auto 0px;
 `;
 
 const MyPageHeader = styled.div`
@@ -19,18 +21,17 @@ const MyPageHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 `;
 
 const SplitPanel = {
   container: styled.div`
     width: 100%;
     height: 100%;
-    margin: 20px auto;
-    border: 1px solid;
-
     /* 라이브러리에 Position absolute로 설정되어 있어서 다시설정  */
     .SplitPane {
       position: relative !important;
+      padding: 10px;
     }
 
     .Resizer {
@@ -39,6 +40,7 @@ const SplitPanel = {
       box-sizing: border-box;
       background: #000;
       opacity: 0.3;
+      margin: 10px;
       z-index: 1;
       -moz-background-clip: padding;
       -webkit-background-clip: padding;
@@ -47,7 +49,6 @@ const SplitPanel = {
 
     .Resizer.vertical {
       width: 11px;
-      margin: 0 -5px;
       border-left: 5px solid rgba(255, 255, 255, 0);
       border-right: 5px solid rgba(255, 255, 255, 0);
       cursor: col-resize;
@@ -61,7 +62,6 @@ const SplitPanel = {
     .Resizer.horizontal {
       height: 11px;
       width: 100%;
-      margin: -5px 0;
       border-top: 5px solid rgba(255, 255, 255, 0);
       border-bottom: 5px solid rgba(255, 255, 255, 0);
       cursor: row-resize;
@@ -80,6 +80,12 @@ const SplitPanel = {
       border-color: transparent;
     }
   `,
+};
+
+const paneStyle = {
+  boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
+  borderRadius: '20px',
+  padding: '25px 0px 10px 25px',
 };
 
 export default function MyPage() {
@@ -106,15 +112,22 @@ export default function MyPage() {
             <SplitPane
               split={windowSize >= 1000 ? 'vertical' : 'horizontal'}
               minSize={
-                windowSize >= 1000 ? windowSize * 0.35 : windowSize * 0.2
+                windowSize >= 1000
+                  ? windowSize * 0.35
+                  : window.innerHeight * 0.2
               }
-              maxSize={windowSize >= 1000 ? windowSize * 0.5 : windowSize * 0.5}
+              maxSize={
+                windowSize >= 1000 ? windowSize * 0.6 : window.innerHeight * 0.5
+              }
               defaultSize={parseInt(localStorage.getItem('myPageSplitPos'), 10)}
               onChange={(size) => {
                 localStorage.setItem('myPageSplitPos', size);
               }}
+              paneStyle={paneStyle}
             >
-              <MypageLeft />
+              <Scrollbar style={{ width: '100%', height: '100%' }}>
+                <MypageLeft JSONData={JSONData} />
+              </Scrollbar>
               <MyPageRight />
             </SplitPane>
           </SplitPanel.container>
