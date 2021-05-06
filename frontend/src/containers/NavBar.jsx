@@ -83,19 +83,10 @@ function NavBar({ isLoggedIn }) {
               <Link to="/testarea">TestArea</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to="/toggle">Toggle</Link>
+              <Link to="/mypagelist">MyPageList</Link>
             </NavbarItem>
             <NavbarItem>
-              <Link to="/editor">Editor</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link to="/template">Template</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link to="/mytemplate">My Template</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link to="/editortest">Editor Test</Link>
+              <Link to="/mypage">MyPage</Link>
             </NavbarItem>
             <BasicButton
               onClickHandler={LogoutHandler}

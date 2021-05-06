@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { useHistory } from 'react-router';
 
 // pages
 import Home from './views/Home';
-import Editor from './views/Editor';
-import TemplatePage from './views/TemplatePage';
-import MyTemplatePage from './views/MyTemplatePage';
+import MyPage from './views/MyPage';
+import MyPageList from './views/MyPageList';
 
 // container
 import NavBar from './containers/NavBar';
-import EditorTest from './containers/EditorTest';
 
 // components
-
 import TestArea from './components/common/TestArea';
-import Toggle from './components/common/Toggle';
 // import { PrivateRoute } from './utils/PrivateRoute';
 
 function App() {
@@ -46,11 +41,8 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/testarea" component={TestArea} />
-        <Route path="/toggle" component={Toggle} />
-        <Route path="/editor" component={Editor} />
-        <Route path="/template" component={TemplatePage} />
-        <Route path="/mytemplate" component={MyTemplatePage} />
-        <Route path="/editortest" component={EditorTest} />
+        <Route path="/mypagelist" component={MyPageList} />
+        <Route path="/mypage" component={MyPage} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>
