@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { BsX } from "react-icons/bs";
+import React from 'react';
+import styled from 'styled-components';
+import { BsX } from 'react-icons/bs';
 
 const ModalLayer = styled.div`
   position: fixed;
-  display: ${({ isModalOpen }) => (isModalOpen ? "flex" : "none")};
+  display: ${({ isModalOpen }) => (isModalOpen ? 'flex' : 'none')};
   align-items: center;
   justify-content: center;
   top: 0;
@@ -35,8 +35,6 @@ const ModalContent = styled.div`
   justify-content: center;
   font-size: 50px;
   padding: 70px 50px;
-  /* width: fit-content;
-  height: fit-content; */
   height: ${({ height }) => `${height}`};
   width: ${({ width }) => `${width}`};
   border-radius: 15px;

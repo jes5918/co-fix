@@ -6,7 +6,7 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: black;
+  color: ${({ color }) => `${color ? `${color}` : 'black'}`};
   cursor: pointer;
   margin: ${({ margin }) => `${margin ? `${margin}px` : '10px'}`};
   border: none;
@@ -34,6 +34,7 @@ function BasicButton({
   text,
   margin,
   onClickHandler,
+  color,
   width,
   height,
   fontSize,
@@ -44,6 +45,7 @@ function BasicButton({
       margin={margin}
       height={height}
       width={width}
+      color={color}
       fontSize={fontSize}
       backgroundColor={backgroundColor}
       onClick={onClickHandler}
