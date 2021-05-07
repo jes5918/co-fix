@@ -8,3 +8,8 @@ export const LOADING_USER = 'LOADING_USER';
 export const SET_ERRORS = 'SET_ERRORS';
 export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+// document Container
+export const MODIFY_DOCUMENT_TEXT = 'MODIFY_DOCUMENT_TEXT';
+export const SELECT_DOCUMENT_TEXT = 'SELECT_DOCUMENT_TEXT';
+export const SET_COMMENT_TEXT = 'SET_COMMENT_TEXT';

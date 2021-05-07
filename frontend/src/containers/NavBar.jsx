@@ -93,12 +93,13 @@ function NavBar({ isLoggedIn }) {
             </NavbarItem>
             <NavbarItem>
               <Link to="/create">Create</Link>
-            </NavbarItem>
+          </NavbarItem>
             <BasicButton
               onClickHandler={LogoutHandler}
               width={100}
               height={33}
-              fontSize={15}
+              fontSize={16}
+              color="white"
               backgroundColor="red"
               text="로그아웃"
             />
