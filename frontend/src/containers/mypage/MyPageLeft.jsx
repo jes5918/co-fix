@@ -9,17 +9,19 @@ const LeftPanel = styled.div`
   word-break: keep-all;
 `;
 
-function MypageLeft({ JSONData }) {
+function MypageLeft({ datas }) {
+  console.log(`datas`, datas);
   return (
     <>
       <LeftPanel>
-        {JSONData.statements.map((data, idx) => {
-          return (
-            <>
-              <CommentBlock key={idx} data={data} />
-            </>
-          );
-        })}
+        {datas &&
+          datas.map((data, idx) => {
+            return (
+              <>
+                <CommentBlock key={idx} data={data} />
+              </>
+            );
+          })}
       </LeftPanel>
     </>
   );

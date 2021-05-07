@@ -7,14 +7,13 @@ const InputBlock = {
     margin: 0px;
   `,
   input: styled.div`
-    margin: 5px;
-    padding: 10px 30px;
+    margin: 3px 20px;
+    padding: 3px 10px;
     width: fit-content;
     max-width: 80%;
     border-radius: 20px;
-    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
     background-color: ${({ isComment }) =>
-      `${isComment ? 'rgba(123, 42, 4, 0.4)' : 'rgba(0, 0, 0, 0.15)'}`};
+      `${isComment ? 'rgba(200, 223, 1, 0.15)' : 'rgba(255, 255, 255, 1)'}`};
   `,
   commentWrapper: styled.div`
     display: flex;
