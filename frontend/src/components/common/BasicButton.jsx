@@ -20,6 +20,7 @@ const Button = styled.div`
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => `${width}px`};
   transition: all 0.2s ease-in;
+  z-index: 5;
 
   &:hover {
     opacity: 0.7;
