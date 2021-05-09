@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   height: fit-content;
   z-index: 99;
   transition: all 0.2s ease-in-out;
-  transform: translateY(20px);
+  transform: translateY(15px);
   &:hover {
     transform: translateY(0px);
   }
@@ -58,7 +58,7 @@ const PersonListButton = styled.div`
   border-radius: 15px 15px 0px 0px;
   box-shadow: 4px 4px 8px 4px #cec2f8;
   transition: all 0.2s ease-in-out;
-  background-color: #d49dc3;
+  background-color: #d196bf;
   &:hover {
     background-color: #e6c4db;
   }
@@ -85,7 +85,7 @@ const PersonListWrapper = styled.div`
   flex-wrap: wrap;
   bottom: 40px;
   left: calc(50vw - 450px);
-  z-index: 999;
+  z-index: 99;
   width: 900px;
   height: auto;
 `;

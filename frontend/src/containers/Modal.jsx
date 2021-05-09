@@ -13,7 +13,7 @@ const ModalLayer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10000;
+  z-index: 900;
 `;
 
 const ModalCloseLayer = styled.div`
@@ -25,7 +25,7 @@ const ModalCloseLayer = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 10010;
+  z-index: 910;
 `;
 
 const ModalContent = styled.div`
@@ -40,7 +40,7 @@ const ModalContent = styled.div`
   border-radius: 15px;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
   background-color: rgb(255, 255, 255);
-  z-index: 10020;
+  z-index: 920;
   animation: modal-show 0.5s;
   @keyframes modal-show {
     from {

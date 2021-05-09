@@ -47,7 +47,7 @@ export default function ScreenSlideDivider({ children }) {
 const paneStyle = {
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '20px',
-  padding: '25px 0px 10px 25px',
+  padding: '25px 25px 25px 25px',
 };
 
 const SplitPanel = {
