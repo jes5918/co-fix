@@ -52,7 +52,7 @@ export default function MaxParticipant({ onHandleNext }) {
           width={400}
           height={70}
           type={'number'}
-          step="10"
+          step="1"
           min="1"
           max="20"
         ></InputForm>
