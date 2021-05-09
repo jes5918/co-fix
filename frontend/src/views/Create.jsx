@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   justify-content: space-around;
 `;
-export default function CreatePJT() {
+export default function Create() {
   const [current, setCurrent] = useState(0);
   const history = useHistory();
   const [title, setTitle] = useState('');
