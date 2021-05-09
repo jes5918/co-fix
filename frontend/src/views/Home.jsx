@@ -33,7 +33,7 @@ const Cursor = styled.div`
   border-radius: 50%;
   background-color: rgba(210, 153, 194, 0.2);
   transition: all 0.01s ease-in;
-  z-index: 1;
+  z-index: 0;
 `;
 
 function Home() {
