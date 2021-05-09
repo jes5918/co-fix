@@ -12,7 +12,7 @@ const GlobalStyles = createGlobalStyle`
         margin:0;
     
         font-size:14px;
-        font-family: 'NotoSans';
+        font-family: 'Roboto';
     }
     a{
         text-decoration:none;
