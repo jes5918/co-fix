@@ -3,7 +3,7 @@ import MyPageListHeader from '../containers/mypagelist/MyPageListHeaderer';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-function MyPageList() {
+export default function MyPageList() {
   return (
     <>
       <MyPageListWrapper>
@@ -14,7 +14,6 @@ function MyPageList() {
   );
 }
 
-export default MyPageList;
 const MyPageListWrapper = styled.div`
   display: flex;
   justify-content: center;

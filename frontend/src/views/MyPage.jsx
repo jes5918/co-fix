@@ -46,7 +46,7 @@ export default function MyPage() {
               <MypageLeft datas={datas} />
             </Scrollbar>
             <Scrollbar style={{ width: '100%', height: '100%' }}>
-              <MyPageRight />
+              <MyPageRight datas={datas} />
             </Scrollbar>
           </ScreenSlideDivider>
         )}
