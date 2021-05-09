@@ -6,6 +6,7 @@ const Section = {
     width: 100%;
     height: 80vh;
     background-color: white;
+    z-index: -1;
   `,
 };
 export default function Section_1() {
