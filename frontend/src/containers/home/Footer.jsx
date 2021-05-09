@@ -8,6 +8,7 @@ const StyledFooter = {
     background-color: #fff7f7;
     color: #090e36;
     font-family: 'Samlip';
+    z-index: -1;
   `,
   rowBox: styled.div`
     display: flex;
