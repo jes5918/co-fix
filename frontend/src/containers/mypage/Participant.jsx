@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   align-items: center;
   text-align: center;
   height: fit-content;
-  z-index: 999;
+  z-index: 99;
   transition: all 0.2s ease-in-out;
   transform: translateY(20px);
   &:hover {
@@ -52,12 +52,15 @@ const Wrapper = styled.div`
 const PersonListButton = styled.div`
   width: 300px;
   padding: 10px;
-  background-color: #bda5fc;
+  font-family: 'Samlip';
+  font-size: 16px;
+  font-weight: bold;
   border-radius: 15px 15px 0px 0px;
   box-shadow: 4px 4px 8px 4px #cec2f8;
   transition: all 0.2s ease-in-out;
+  background-color: #d49dc3;
   &:hover {
-    background-color: #9b77fb;
+    background-color: #e6c4db;
   }
   animation-duration: 1s;
   animation-name: fadeInUp;

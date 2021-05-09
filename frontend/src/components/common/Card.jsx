@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
-import styled from "styled-components";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import React, { ReactElement } from 'react';
+import styled from 'styled-components';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 const cardStyle = {
   mainFrame: styled.div`
@@ -68,7 +68,6 @@ const cardStyle = {
     position: absolute;
     bottom: 28%;
     right: 5%;
-    cursor: pointer;
     color: rgb(215 164 4);
     font-size: 30px;
   `,
@@ -76,7 +75,6 @@ const cardStyle = {
     position: absolute;
     bottom: 28%;
     right: 5%;
-    cursor: pointer;
     color: rgb(215 164 4);
     font-size: 30px;
   `,
@@ -104,7 +102,7 @@ const cardStyle = {
     color: #262626;
     font-weight: bold;
     text-align: center;
-    font-family: "NotoSans";
+    font-family: 'NotoSans';
     line-height: 20px;
     word-break: keep-all;
     margin-right: 5px;

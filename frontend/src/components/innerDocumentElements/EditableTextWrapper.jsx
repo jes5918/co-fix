@@ -84,7 +84,7 @@ const TextContainer = styled.div`
   word-break: keep-all;
   margin: 15px 30px 0px 10px;
   &:hover {
-    background-color: #ffff66;
+    background-color: #ffffbb;
   }
 `;
 
