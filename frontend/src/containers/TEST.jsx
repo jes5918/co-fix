@@ -24,7 +24,6 @@ export default function TEST() {
               <div key={comment.id}>
                 댓글번호 {comment.id} : {comment.content}
               </div>
-              <hr />
             </>
           );
         })

@@ -64,6 +64,7 @@ export default function EditableTextWrapper({ data }) {
             <UpDownIconWrapper>
               <PositiveButton />
               <NegativeButton />
+              <Heart />
             </UpDownIconWrapper>
           ) : null}
         </TextContainer>
@@ -97,4 +98,52 @@ const StyledThumbsUp = styled(GoThumbsup)`
 `;
 const StyledThumbsDown = styled(GoThumbsdown)`
   margin: 0px 0px 0px 10px;
+`;
+
+const Heart = styled.div`
+  left: 55%;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  transform: scale(0.8);
+  opacity: 0.8;
+  -webkit-animation: moveclouds 20s linear infinite,
+    sideWays 4s ease-in-out infinite alternate;
+  -moz-animation: moveclouds 20s linear infinite,
+    sideWays 4s ease-in-out infinite alternate;
+
+  @-webkit-keyframes moveclouds {
+    0% {
+      top: 500px;
+    }
+    100% {
+      top: -500px;
+    }
+  }
+
+  @keyframes moveclouds {
+    0% {
+      top: 500px;
+    }
+    100% {
+      top: -500px;
+    }
+  }
+
+  @-webkit-keyframes sideWays {
+    0% {
+      margin-left: 0px;
+    }
+    100% {
+      margin-left: 50px;
+    }
+  }
+
+  @keyframes sideWays {
+    0% {
+      margin-left: 0px;
+    }
+    100% {
+      margin-left: 50px;
+    }
+  }
 `;

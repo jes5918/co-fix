@@ -10,7 +10,6 @@ const LeftPanel = styled.div`
 `;
 
 function MypageLeft({ datas }) {
-  console.log(`datas`, datas);
   return (
     <>
       <LeftPanel>

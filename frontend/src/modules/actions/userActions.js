@@ -14,7 +14,6 @@ export const LoginAction = (userData) => (dispatch) => {
 };
 
 export const logoutUserAction = (dispatch) => {
-  console.log(`로그아웃 액션`);
   localStorage.removeItem('user');
   dispatch({
     type: SET_UNAUTHENTICATED,
