@@ -17,7 +17,6 @@ const GlobalStyles = createGlobalStyle`
     a{
         text-decoration:none;
         color:inherit;
-        cursor: pointer;
     }
     ol, ul, li {
         list-style: none;

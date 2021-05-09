@@ -55,7 +55,6 @@ const ModalContent = styled.div`
 `;
 
 const ExitIcon = styled(BsX)`
-  cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;

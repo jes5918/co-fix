@@ -24,41 +24,11 @@ const HomeWrapper = styled.div`
   width: 100%;
 `;
 
-const Cursor = styled.div`
-  position: fixed;
-  left: -10px;
-  top: -10px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background-color: rgba(210, 153, 194, 0.2);
-  transition: all 0.01s ease-in;
-  z-index: 0;
-`;
+
 
 function Home() {
-  const [cursorXY, setCursorXY] = useState({ x: -100, y: -100 });
-  useEffect(() => {
-    const moveCursor = (e) => {
-      const x = e.clientX - 20;
-      const y = e.clientY - 20;
-      setCursorXY({ x, y });
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-
-    return () => {
-      window.removeEventListener('mousemove', moveCursor);
-    };
-  }, []);
-
   return (
     <HomeWrapper>
-      <Cursor
-        style={{
-          transform: `translate3d(${cursorXY.x}px, ${cursorXY.y}px, 0)`,
-        }}
-      />
       <Section_1 />
       <Section_2 />
       <Section_1 />

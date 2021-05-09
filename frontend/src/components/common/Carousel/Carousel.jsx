@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Styled = {
   Container: styled.div`
     width: 100%;
-    height: "auto";
+    height: 'auto';
     display: flex;
     flex-direction: column;
     background-color: lightgray;
@@ -43,7 +43,6 @@ const Styled = {
     border: 1px solid #ddd;
     left: ${(props) => `${props.left}px`};
     right: ${(props) => `${props.right}px`};
-    cursor: pointer;
     opacity: 0.6;
     &:hover {
       opacity: 0.8;
