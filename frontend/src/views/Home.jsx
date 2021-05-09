@@ -17,58 +17,13 @@ import CheckBox from '../components/common/CheckBox';
 
 import useLoginUser from '../hook/useLoginUser';
 import Footer from '../containers/home/Footer';
-
-const ModalContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  animation: modal-show 1s;
-  @keyframes modal-show {
-    from {
-      opacity: 0;
-      margin-top: -100px;
-    }
-    to {
-      opacity: 1;
-      margin-top: 0;
-    }
-  }
-`;
+import Section_1 from '../containers/home/Section_1';
+import Section_2 from '../containers/home/Section_2';
 const HomeWrapper = styled.div`
   margin-top: 86px;
   width: 100%;
 `;
-const LogoIcon = styled.img.attrs({ src: Logo })`
-  width: 70%;
-  margin: 10px auto 30px;
-`;
-const SocialLoginWrapper = styled.div`
-  display: flex;
-  margin: 15px auto 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
-const BottomLine = styled.div`
-  width: 90%;
-  height: 2px;
-  margin: 10px auto 10px;
-  background-color: rgba(0, 0, 0, 0.2);
-`;
-
-const FooterText = styled.div`
-  width: 90%;
-  margin: 15px;
-  text-align: center;
-  font-size: 17px;
-  color: rgba(0, 0, 0, 0.7);
-
-  span {
-    font-weight: bold;
-  }
-`;
 const Cursor = styled.div`
   position: fixed;
   left: -10px;
@@ -76,28 +31,12 @@ const Cursor = styled.div`
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: rgba(255, 149, 0, 0.4);
+  background-color: rgba(210, 153, 194, 0.2);
   transition: all 0.01s ease-in;
   z-index: -1;
 `;
 
-function Home({ match }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
-  const user = useLoginUser();
-
-  useEffect(() => {
-    console.log('@@@@', user);
-  }, [user]);
-
-  const ModalToggleHandler = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const AutoLoginToggleHandler = () => {
-    setIsAutoLoginChecked(!isAutoLoginChecked);
-  };
-
+function Home() {
   const [cursorXY, setCursorXY] = useState({ x: -100, y: -100 });
   useEffect(() => {
     const moveCursor = (e) => {
@@ -120,43 +59,9 @@ function Home({ match }) {
           transform: `translate3d(${cursorXY.x}px, ${cursorXY.y}px, 0)`,
         }}
       />
-      <Modal
-        ModalToggleHandler={ModalToggleHandler}
-        isModalOpen={isModalOpen}
-        width="500px"
-        height="600px"
-      >
-        <ModalContentWrapper>
-          <LogoIcon />
-          <SocialLoginWrapper>
-            <GoogleAuth ModalToggleHandler={ModalToggleHandler} />
-            <GithubAuth ModalToggleHandler={ModalToggleHandler} />
-          </SocialLoginWrapper>
-          <CheckBox
-            onChange={AutoLoginToggleHandler}
-            checked={isAutoLoginChecked}
-          >
-            로그인 상태 유지할래요.
-          </CheckBox>
-          <BottomLine />
-          <FooterText>
-            간편 로그인으로 <span>Devfolio</span>와 함께하세요.
-          </FooterText>
-        </ModalContentWrapper>
-      </Modal>
-      <BasicButton
-        width={300}
-        height={50}
-        fontSize={24}
-        onClickHandler={ModalToggleHandler}
-        text="Login with Social"
-      />
-      {user && (
-        <>
-          <div>{JSON.stringify(user.authenticated)}</div>
-          <div>{JSON.stringify(user.credentials)}</div>
-        </>
-      )}
+      <Section_1 />
+      <Section_2 />
+      <Section_1 />
       <Footer />
     </HomeWrapper>
   );

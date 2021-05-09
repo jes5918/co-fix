@@ -1,3 +1,4 @@
+import { Max } from '@styled-icons/simple-icons';
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
@@ -9,11 +10,13 @@ const Input = styled.input`
   height: ${({ height }) => `${height}px`};
   padding-left: 18px;
   padding-right: 18px;
-  font-family: 'NotoSans';
-  font-size: 1rem;
+  font-family: 'Samlip';
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
 `;
 
-const InputForm = ({ onSubmit, width, height }) => {
+const InputForm = ({ onSubmit, width, height, type, step, minNum, maxNum }) => {
   const [searchWord, setSearchWord] = useState('');
   const inputRef = useRef(null);
 
@@ -37,7 +40,11 @@ const InputForm = ({ onSubmit, width, height }) => {
         onChange={onChange}
         width={width}
         height={height}
-        autocomplete="off"
+        autoFocus={true}
+        type={type ? type : 'text'}
+        step={step}
+        min={minNum}
+        max={maxNum}
       />
     </form>
   );
