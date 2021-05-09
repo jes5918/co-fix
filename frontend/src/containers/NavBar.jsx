@@ -41,6 +41,7 @@ const NavbarLogo = styled.img.attrs({ src: '/logo.png' })`
   height: 100%;
   /* margin: 5px; */
   box-sizing: border-box;
+  z-index: 10;
 `;
 
 const NavbarMenuWraper = styled.div`
@@ -55,6 +56,7 @@ const NavbarItem = styled.div`
   width: fit-content;
   height: fit-content;
   margin: auto 10px;
+  z-index: 10;
 
   a {
     padding: 2px;

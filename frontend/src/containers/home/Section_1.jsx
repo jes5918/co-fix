@@ -5,8 +5,8 @@ const Section = {
   wrapper: styled.div`
     width: 100%;
     height: 80vh;
-    background-color: white;
-    z-index: -1;
+    background-color: transparent;
+    z-index: 0;
   `,
 };
 export default function Section_1() {
