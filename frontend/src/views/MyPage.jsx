@@ -29,7 +29,6 @@ export default function MyPage() {
       <MyPageContainer>
         <MyPageHeader>
           <Toggle setIsToggled={setIsToggled} isToggled={isToggled} />
-          <Participant />
         </MyPageHeader>
         {isToggled ? (
           <ScreenSlideDivider>
@@ -52,6 +51,7 @@ export default function MyPage() {
           </ScreenSlideDivider>
         )}
       </MyPageContainer>
+      <Participant />
     </>
   );
 }
@@ -59,13 +59,12 @@ export default function MyPage() {
 const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 85%;
+  width: 95%;
+  height: 100%;
   margin: 100px auto 0px;
 `;
 
 const MyPageHeader = styled.div`
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;

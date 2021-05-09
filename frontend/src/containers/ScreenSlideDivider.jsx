@@ -29,7 +29,10 @@ export default function ScreenSlideDivider({ children }) {
             ? windowWidthSize * 0.6
             : windowHeightSize * 0.5
         }
-        defaultSize={parseInt(localStorage.getItem('myPageSplitPos'), 10)}
+        defaultSize={
+          parseInt(localStorage.getItem('myPageSplitPos'), 10) ||
+          windowWidthSize / 2
+        }
         onChange={(size) => {
           localStorage.setItem('myPageSplitPos', size);
         }}

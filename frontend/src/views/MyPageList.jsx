@@ -3,19 +3,7 @@ import MyPageListHeader from '../containers/mypagelist/MyPageListHeaderer';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-const MyPageListWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 50px;
-`;
-
 function MyPageList() {
-  useEffect(() => {
-    // const pageHTML = document.documentElement.outerHTML;
-    // console.log(pageHTML);
-  }, []);
   return (
     <>
       <MyPageListWrapper>
@@ -27,3 +15,10 @@ function MyPageList() {
 }
 
 export default MyPageList;
+const MyPageListWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+`;
