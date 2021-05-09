@@ -36,7 +36,6 @@ const NavbarMainWrapper = styled.div`
 `;
 
 const NavbarLogo = styled.img.attrs({ src: '/logo.png' })`
-  cursor: pointer;
   width: auto;
   height: 100%;
   /* margin: 5px; */
@@ -52,7 +51,6 @@ const NavbarMenuWraper = styled.div`
 `;
 
 const NavbarItem = styled.div`
-  cursor: pointer;
   width: fit-content;
   height: fit-content;
   margin: auto 10px;
@@ -153,11 +151,8 @@ function NavBar({ isLoggedIn }) {
       <NavbarMainWrapper>
         <NavbarLogo onClick={LogoClickHandler} />
         <NavbarMenuWraper>
-          {isLoggedIn ? (
+          {!isLoggedIn ? (
             <>
-              <NavbarItem>
-                <Link to="/testarea">TestArea</Link>
-              </NavbarItem>
               <NavbarItem>
                 <Link to="/mypagelist">MyPageList</Link>
               </NavbarItem>
@@ -169,10 +164,10 @@ function NavBar({ isLoggedIn }) {
               </NavbarItem>
               <BasicButton
                 onClickHandler={LogoutHandler}
-                width={100}
-                height={33}
-                fontSize={15}
-                backgroundColor="red"
+                width={150}
+                height={40}
+                fontSize={17}
+                backgroundColor="transparent"
                 text="로그아웃"
               />
             </>

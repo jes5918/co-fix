@@ -24,7 +24,6 @@ const toggleStyle = {
   `,
   slider: styled.span`
     position: absolute;
-    cursor: pointer;
     top: 0;
     left: 0;
     right: 0;

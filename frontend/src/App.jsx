@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import styled from 'styled-components';
+import AnimatedCursor from 'react-animated-cursor';
 
 // pages
 import Home from './views/Home';
@@ -11,15 +13,10 @@ import Create from './views/Create';
 import NavBar from './containers/NavBar';
 
 // components
-import TestArea from './components/common/TestArea';
 // import { PrivateRoute } from './utils/PrivateRoute';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLocationEditor, setIsLocationEditor] = useState(false);
-
-  // router의 위치가 변화면 실행
-  // eslint-disable-next-line
 
   // 로그인 상태 알기
   const CheckAuthentication = () => {
@@ -35,9 +32,16 @@ function App() {
   return (
     <>
       <NavBar isLoggedIn={isLoggedIn} />
+      <AnimatedCursor
+        innerSize={20}
+        outerSize={20}
+        color="220, 110, 90"
+        outerAlpha={0.1}
+        innerScale={0.8}
+        outerScale={4}
+      />
       <Switch>
         <Route path="/" component={Home} exact />
-        <Route path="/testarea" component={TestArea} />
         <Route path="/mypagelist" component={MyPageList} />
         <Route path="/mypage" component={MyPage} />
         <Route path="/create" component={Create} />

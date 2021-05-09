@@ -1,6 +1,6 @@
-import BasicButton from "../common/BasicButton";
-import React from "react";
-import styled from "styled-components";
+import BasicButton from '../common/BasicButton';
+import React from 'react';
+import styled from 'styled-components';
 
 const TemplateDetailModalContentWrapper = styled.div`
   width: 1000px;
@@ -44,11 +44,10 @@ const ModalDetailFrame = {
     word-break: keep-all;
   `,
   tag: styled.span`
-    cursor: pointer;
     font-size: 18px;
     color: #262626;
     text-align: center;
-    font-family: "NotoSans";
+    font-family: 'NotoSans';
     line-height: 20px;
     word-break: keep-all;
     margin-right: 15px;
@@ -61,7 +60,7 @@ const ModalDetailFrame = {
 
 function ModalContent({ thumbnailURL, card, onClickTag }) {
   const UseTemplateHandler = () => {
-    console.log("템플릿 사용하기");
+    console.log('템플릿 사용하기');
   };
 
   return (
