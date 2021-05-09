@@ -7,13 +7,12 @@ const Button = styled.div`
   align-items: center;
   text-align: center;
   color: ${({ color }) => `${color ? `${color}` : 'black'}`};
-  cursor: pointer;
   margin: ${({ margin }) => `${margin ? `${margin}px` : '10px'}`};
   border: none;
   font-family: 'Samlip';
   font-weight: bold;
   border-radius: 15px;
-  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
   background-color: ${({ backgroundColor }) =>
     `${backgroundColor ? backgroundColor : '#ff9500'}`};
   font-size: ${({ fontSize }) => `${fontSize ? `${fontSize}px` : '24px'}`};

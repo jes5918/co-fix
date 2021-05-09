@@ -1,9 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { HiCheck } from "react-icons/hi";
+import React from 'react';
+import styled from 'styled-components';
+import { HiCheck } from 'react-icons/hi';
 
 const CheckboxContainer = styled.div`
-  cursor: pointer;
   display: flex;
   margin: 24px auto;
 `;
@@ -25,7 +24,7 @@ const Icon = styled(HiCheck)`
   color: rgba(255, 255, 255, 1);
 `;
 
-const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   height: 1px;
   width: 1px;
@@ -38,7 +37,7 @@ const StyledCheckbox = styled.div`
   position: relative;
   width: 24px;
   height: 24px;
-  background: ${(props) => (props.checked ? "#ff9500" : "papayawhip")};
+  background: ${(props) => (props.checked ? '#ff9500' : 'papayawhip')};
   border-radius: 3px;
   transition: all 200ms;
 
@@ -47,7 +46,7 @@ const StyledCheckbox = styled.div`
   }
 
   ${Icon} {
-    visibility: ${(props) => (props.checked ? "visible" : "hidden")};
+    visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }
 `;
 
