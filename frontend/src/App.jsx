@@ -5,7 +5,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './views/Home';
 import MyPage from './views/MyPage';
 import MyPageList from './views/MyPageList';
-import CreatePjt from './views/CreatePjt';
+import CreatePJT from './views/CreatePJT';
 
 // container
 import NavBar from './containers/NavBar';
@@ -40,7 +40,7 @@ function App() {
         <Route path="/testarea" component={TestArea} />
         <Route path="/mypagelist" component={MyPageList} />
         <Route path="/mypage" component={MyPage} />
-        <Route path="/create" component={CreatePjt} />
+        <Route path="/create" component={CreatePJT} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>
