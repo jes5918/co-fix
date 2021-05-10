@@ -1,9 +1,31 @@
 // Roll : Comment 컨테이너에서 컬러 or 이미지 아바타 UI
 
 import React from 'react';
+import styled from 'styled-components';
 
-function UserAvatar(props) {
-  return <div></div>;
+const S = {
+  UserAvatarWrapper: styled.div`
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+  `,
+  UserAvatar: styled.span`
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: lightskyblue;
+  `,
+};
+
+function UserAvatar({ avatar }) {
+  return (
+    <S.UserAvatarWrapper>
+      <S.UserAvatar avatar={avatar} />
+    </S.UserAvatarWrapper>
+  );
 }
 
 export default UserAvatar;
