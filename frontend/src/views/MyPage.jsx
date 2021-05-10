@@ -37,6 +37,7 @@ const testData = [
   },
 ];
 
+// 커스터마이징 탭
 const CustomTab = ({ children }) => (
   <Tab
     style={{
@@ -45,15 +46,16 @@ const CustomTab = ({ children }) => (
       alignItems: 'center',
       margin: '0px 15px 0px 0px',
       padding: '10px',
-      backgroundColor: 'white',
       borderRadius: '50%',
       width: '45px',
       height: '45px',
       boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
       fontWeight: 'bold',
       fontSize: '20px',
+      transition: 'all 0.6s cubic-bezier(0, 0, 0, 1)',
     }}
-    onMouseOver={(e) => console.log(e)}
+    onMouseEnter={(e) => (e.target.style.backgroundColor = '#d3d3d3')}
+    onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
   >
     <div>{children}</div>
   </Tab>
@@ -62,17 +64,28 @@ const CustomTab = ({ children }) => (
 CustomTab.tabsRole = 'Tab';
 
 export default function MyPage() {
+  const [tabIndex, setTabIndex] = useState(0);
   const datas = useSelector((state) => {
     return state.document;
   });
 
   return (
     <BackGround>
-      <StyledTabs>
+      <StyledTabs
+        selectedIndex={tabIndex}
+        onSelect={(index) => setTabIndex(index)}
+      >
         <TabList style={TabListStyle}>
           <CustomTab>1</CustomTab>
           <CustomTab>2</CustomTab>
           <CustomTab>3</CustomTab>
+          {tabIndex === 0 ? (
+            <TagName>자소서 / 첨삭 결과 </TagName>
+          ) : tabIndex === 1 ? (
+            <TagName>첨삭 결과 / Export 편집 모드</TagName>
+          ) : (
+            <TagName>원본 자소서 / 수정 자소서</TagName>
+          )}
         </TabList>
         <MyPageContainer>
           <MyPageHeader>
@@ -97,9 +110,10 @@ export default function MyPage() {
               <Scrollbar style={{ width: '100%', height: '100%' }}>
                 <MypageLeft datas={datas.statements} />
               </Scrollbar>
-              <Scrollbar style={{ width: '100%', height: '100%' }}>
+              <>
                 <MyPageRight datas={datas.statements} />
-              </Scrollbar>
+                <CalcContentLength datas={datas.statements} />
+              </>
             </ScreenSlideDivider>
           </TabPanel>
           <TabPanel>
@@ -122,6 +136,15 @@ export default function MyPage() {
   );
 }
 
+// 백그라운드
+const BackGround = styled.div`
+  width: 100vw;
+  height: 100vh;
+  padding-top: 100px;
+  background-color: #f9f5f4;
+`;
+
+// 왼쪽 위에 탭 스타일
 const TabListStyle = {
   position: 'absolute',
   display: 'flex',
@@ -131,11 +154,11 @@ const TabListStyle = {
   border: 'none',
   zIndex: 300,
 };
-const BackGround = styled.div`
-  width: 100vw;
-  height: 100vh;
-  padding-top: 100px;
-  background-color: #f9f5f4;
+
+const TagName = styled.div`
+  font-weight: bold;
+  font-size: 22px;
+  transition: all 0.5s ease-in-out;
 `;
 
 const StyledTabs = styled(Tabs)`
@@ -153,11 +176,13 @@ const StyledTabs = styled(Tabs)`
     }
   }
 `;
+
+// 안쪽 컨텐츠 컨테이너
 const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 83vh;
+  height: 87vh;
   margin: 0px auto;
   font-family: 'Roboto';
   font-size: 18px;
@@ -166,6 +191,7 @@ const MyPageContainer = styled.div`
   border-radius: 20px;
 `;
 
+// 제목
 const MyPageHeader = styled.div`
   display: flex;
   position: relative;

@@ -78,7 +78,7 @@ const pane2StyleCol = {
 const SplitPanel = {
   container: styled.div`
     width: 100%;
-    height: 75vh;
+    height: 79vh;
 
     .SplitPane {
       position: relative !important;
