@@ -1,45 +1,58 @@
-# 주니어 개발자들을 위한 포트폴리오 제작 플랫폼
+![logo](README.assets/logo.png)
 
-> 주니어 개발자들을 위한 포트폴리오 제작 플랫폼
->
-> 참고 : 미리캔버스, Wix
+> 실시간 온라인 공동 첨삭 플랫폼
+
+
 
 #### 🔨Built With
 
-⭐ **Front-end** : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/Font Awesome-339AF0?style=flat-square&logo=Font Awesome&logoColor=white"/><img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>
+⭐ **Front-end** : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/Font Awesome-339AF0?style=flat-square&logo=Font Awesome&logoColor=white"/>
 
 ⭐ **Back-end** : <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/><img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=Redis&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/><img src="https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=black"/>
 
 ⭐ **CI / CD** : <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/GitLab-FCA121?style=flat-square&logo=GitLab&logoColor=black"/><img src="https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=Jenkins&logoColor=black"/> <img src="https://img.shields.io/badge/NGINX-269539?style=flat-square&logo=NGINX&logoColor=black"/><img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=Jira&logoColor=white"/>
 
-<img src="README.assets/system_arch.png" alt="system_arch" style="zoom: 45%;" />
+
 
 #### 🧩 주요 기능
 
 **SignIn**
 
 - github, google을 통한 간편 로그인 (회원가입)
-- 관리자 계정(후순위)
 
-**Profile**
+**Co-Fix**
 
-- 닉네임, 프로필 이미지 등 (회원 정보 조회 및 수정 기능)
+- 실시간 글에 대한 comment
+- Comment에 대한 agree 기능
+- 문장에 대한 평가 기능 ( Fix 고쳐야할 부분 )
+- 문장 직접 수정 기능
+- Pin-Code 복사 기능
+- 음성 통화기능 ( 후순위 )
+- 복사 (ctrl + c 및 html ) 방지
 
-**Portfolio Editor**
+**Create Co-Fix**
 
-- 포트폴리오 편집 툴 기능
-- 포트폴리오 pdf 추출 기능
-- 포트폴리오 웹 페이지 구성 및 제작 기능
+- 제목 입력
+- 인원 설정
+- 첨삭 텍스트 입력
 
-**Portfolio Page**
+**Join Co-Fix**
 
-- url 기반으 웹 포트폴리오 페이지 조회 기능
+- 저작권 및 서비스 이용 안내
+- Pincode 입력
 
-**Portfolio Template**
+**History**
 
-- 기술 스택 별 포트폴리오 템플릿 필터링 기능
-- 포트폴리오 찜 기능
-- 찜한 포트폴리오 조회 기능
+- 이제까지 첨삭한 pjt 목록 조회
+- 상세 결과 페이지로 이동
+
+**History Detail**
+
+- co-fix 결과 화면
+- 첨삭이 필요한 문장 표시
+- 고쳐야 하는 문장 표시
+- 원본, 수정본 비교기능
+- 각 문장 마다 comment 모아서 한 번에 볼 수 있는 기능
 
 #### 👨‍👩‍👧‍👧 팀원 소개
 
@@ -65,11 +78,9 @@
 
 - Frontend
   - components 제작
-  - Typescript 도입
-  - Editor Tool 초기세팅
   - 소셜로그인 완성 및 백엔드 통신
   - Redux 셋팅
-
+  
 - Backend
   - 소셜로그인 완성 (월요일)
   - 에러 코드 정하기(월요일)
@@ -90,10 +101,8 @@
 **3주차 4.26 ~ 4.30**
 
 - Frontend
-  - component set을 활용하여 Page 제작
-  - Editor 제작
-  - About Page, Template Page 제작
-
+  - 기획
+  
 - Backend
   - 해시태그 등 기타 기능 (1)
   - 포트폴리오, 템플릿
@@ -102,23 +111,21 @@
 **4주차 5.3 ~ 5.7**
 
 - Frontend
-  - 포트폴리오, 템플릿 기능 제작 완료
-  - 페이지 최종 연결
+  - 컴포넌트 제작
 
 - Backend
-  - 포트폴리오, 템플릿
+  - ERD
 
 - common
 
   - 1차 코드작성 완료
 
-  - 중간발표 준비(PPT)
 
 **5주차 5.10 ~ 5.14**
 
 - Frontend
-  - 리팩토링
-  - 세부 점검사항 QA Test
+  - 기본 페이지 Frame 
+  - api 기본 통신 세팅
 
 - Backend
   - 리팩토링
@@ -258,34 +265,25 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
 
 #### 🧩 Wireframe
 
-- AboutPage
+- Home
 
-![image-20210415182838141](README.assets/image-20210415182838141.png)
+  ![웹 1920 – 11](README.assets/웹 1920 – 11.png)
 
-![image-20210415182847691](README.assets/image-20210415182847691.png)
+![웹 1920 – 12](README.assets/웹 1920 – 12.png)
 
-![image-20210415182905013](README.assets/image-20210415182905013.png)
+![웹 1920 – 14](README.assets/웹 1920 – 14-1620616547490.png)
 
-![image-20210415182924087](README.assets/image-20210415182924087.png)
+- Co-Fix 만들기
 
-![image-20210415182931128](README.assets/image-20210415182931128.png)
+![웹 1920 – 5](README.assets/웹 1920 – 5.png)
 
-- 내 작업 문서 Page
+![웹 1920 – 8](README.assets/웹 1920 – 8.png)
 
-![image-20210415182940663](README.assets/image-20210415182940663.png)
+![웹 1920 – 9](README.assets/웹 1920 – 9.png)
 
-- 템플릿 페이지
+- Co-Fix 참여하기
 
-![image-20210415182947928](README.assets/image-20210415182947928.png)
+![웹 1920 – 15](README.assets/웹 1920 – 15.png)
 
-- 찜한 템플릿 페이지
+![웹 1920 – 10](README.assets/웹 1920 – 10.png)
 
-![image-20210415182958821](README.assets/image-20210415182958821.png)
-
-- 템플릿 미리보기 Modal
-
-![image-20210415183006156](README.assets/image-20210415183006156.png)
-
-- 포트폴리오 제작 페이지 (추후 업뎃 예정)
-
-![image-20210415183016185](README.assets/image-20210415183016185.png)
