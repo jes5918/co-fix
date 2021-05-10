@@ -19,19 +19,17 @@ import useLoginUser from '../hook/useLoginUser';
 import Footer from '../containers/home/Footer';
 import Section_1 from '../containers/home/Section_1';
 import Section_2 from '../containers/home/Section_2';
+import Section_3 from '../containers/home/Section_3';
 const HomeWrapper = styled.div`
-  margin-top: 86px;
   width: 100%;
 `;
-
-
 
 function Home() {
   return (
     <HomeWrapper>
       <Section_1 />
       <Section_2 />
-      <Section_1 />
+      <Section_3 />
       <Footer />
     </HomeWrapper>
   );
