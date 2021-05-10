@@ -7,7 +7,7 @@ const InputBlock = {
     margin: 0px;
   `,
   input: styled.div`
-    margin: 3px 20px;
+    margin: 3px 10px;
     padding: 3px 10px;
     width: fit-content;
     max-width: 80%;
@@ -24,8 +24,8 @@ const InputBlock = {
   comment: styled.div`
     width: fit-content;
     max-width: 80%;
-    margin: 5px;
-    padding: 10px 30px;
+    margin: 10px;
+    padding: 10px 20px;
     border-radius: 20px;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
     &:hover {

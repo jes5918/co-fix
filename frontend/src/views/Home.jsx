@@ -25,6 +25,19 @@ import Section_2 from '../containers/home/Section_2';
 import Section_3 from '../containers/home/Section_3';
 const HomeWrapper = styled.div`
   width: 100%;
+  animation-duration: 1s;
+  animation-name: fadeInUp;
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 50px, 0);
+      opacity: 0;
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
 `;
 
 const ModalContentWrapper = styled.div`

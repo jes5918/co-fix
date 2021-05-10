@@ -28,6 +28,7 @@
     "react-scrollbars-custom": "^4.0.25",
     "react-split-pane": "^0.1.92",
     "react-spring": "9.1.2",
+    "react-tabs": "^3.2.2",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
