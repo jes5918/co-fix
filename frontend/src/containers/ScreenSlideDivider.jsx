@@ -18,25 +18,34 @@ export default function ScreenSlideDivider({ children }) {
   return (
     <SplitPanel.container>
       <SplitPane
-        split={windowWidthSize >= 1000 ? 'vertical' : 'horizontal'}
+        split={
+          windowWidthSize >= screen.width / 1.85 ? 'vertical' : 'horizontal'
+        }
         minSize={
-          windowWidthSize >= 1000
-            ? windowWidthSize * 0.35
-            : windowHeightSize * 0.2
+          windowWidthSize >= screen.width / 1.85
+            ? windowWidthSize * 0.25
+            : windowHeightSize * 0.05
         }
         maxSize={
-          windowWidthSize >= 1000
-            ? windowWidthSize * 0.6
-            : windowHeightSize * 0.5
+          windowWidthSize >= screen.width / 1.85
+            ? windowWidthSize * 0.7
+            : windowHeightSize * 0.6
         }
         defaultSize={
-          parseInt(localStorage.getItem('myPageSplitPos'), 10) ||
-          windowWidthSize / 2
+          windowWidthSize >= screen.width / 1.85
+            ? parseInt(localStorage.getItem('myPageSplitPosX'), 10) ||
+              window.innerWidth / 2
+            : parseInt(localStorage.getItem('myPageSplitPosY'), 10) ||
+              window.innerHeight / 2
         }
         onChange={(size) => {
-          localStorage.setItem('myPageSplitPos', size);
+          windowWidthSize >= screen.width / 1.85
+            ? localStorage.setItem('myPageSplitPosX', size)
+            : localStorage.setItem('myPageSplitPosY', size);
         }}
-        paneStyle={paneStyle}
+        paneStyle={
+          windowWidthSize >= screen.width / 1.85 ? paneStyle : paneStyle2
+        }
       >
         {children}
       </SplitPane>
@@ -45,9 +54,13 @@ export default function ScreenSlideDivider({ children }) {
 }
 
 const paneStyle = {
-  boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
-  borderRadius: '20px',
-  padding: '25px 25px 25px 25px',
+  padding: '25px 25px 35px 25px',
+  flexDirection: 'column',
+};
+
+const paneStyle2 = {
+  padding: '10px 10px 10px 10px',
+  flexDirection: 'column',
 };
 
 const SplitPanel = {
@@ -66,7 +79,8 @@ const SplitPanel = {
       box-sizing: border-box;
       background: #000;
       opacity: 0.3;
-      margin: 10px;
+      margin: auto 10px;
+      height: 85%;
       z-index: 1;
       -moz-background-clip: padding;
       -webkit-background-clip: padding;
@@ -86,10 +100,10 @@ const SplitPanel = {
 
     .Resizer.horizontal {
       height: 13px;
-      width: 100%;
+      width: 90%;
+      margin: 0px auto;
       border-top: 5px solid rgba(255, 255, 255, 0);
       border-bottom: 5px solid rgba(255, 255, 255, 0);
-      width: 100%;
     }
 
     .Resizer.horizontal:hover {
