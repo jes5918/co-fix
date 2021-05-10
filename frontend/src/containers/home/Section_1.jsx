@@ -53,8 +53,15 @@ const Section = {
     align-items: center;
   `,
 };
-export default function Section_1() {
+export default function Section_1({ ModalToggleHandler }) {
   const history = useHistory();
+  const onClickStartHandler = () => {
+    if (localStorage.getItem('user')) {
+      history.push('/create');
+    } else {
+      ModalToggleHandler();
+    }
+  };
   return (
     <Section.wrapper>
       <Section.circle></Section.circle>
@@ -71,9 +78,7 @@ export default function Section_1() {
             width={200}
             height={50}
             fontSize={17}
-            onClickHandler={() => {
-              history.push('/create');
-            }}
+            onClickHandler={() => onClickStartHandler()}
           />
           <BasicButton
             text={'Pin Code'}
