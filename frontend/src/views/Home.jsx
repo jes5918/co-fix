@@ -1,28 +1,91 @@
 import React, { useState, useEffect, useSpring } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
+
+// redux
+import { useDispatch } from 'react-redux';
+
+// library
 import { motion, useMotionValue } from 'framer-motion';
 
 // logo
 import Logo from '../assets/logo.png';
 
+// userHook
+import useLoginUser from '../hook/useLoginUser';
+
 // containers
 import Modal from '../containers/Modal';
 
-import { useDispatch } from 'react-redux';
-import { logoutUserAction } from '../modules/actions/userActions';
-
 // components
-import BasicButton from '../components/common/BasicButton';
 import GithubAuth from '../components/login/GithubAuth';
 import GoogleAuth from '../components/login/GoogleAuth';
 import CheckBox from '../components/common/CheckBox';
 
-import useLoginUser from '../hook/useLoginUser';
 import Footer from '../containers/home/Footer';
 import Section_1 from '../containers/home/Section_1';
 import Section_2 from '../containers/home/Section_2';
 import Section_3 from '../containers/home/Section_3';
+
+export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const user = useLoginUser();
+
+  const ModalToggleHandler = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const AutoLoginToggleHandler = () => {
+    setIsAutoLoginChecked(!isAutoLoginChecked);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY + window.innerHeight - 200);
+      console.log('현재 스크롤 위치 : ', window.scrollY);
+      console.log('계산값 : ', window.scrollY + window.innerHeight - 200);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <>
+      <HomeWrapper>
+        <Section_1 className={'test'} ModalToggleHandler={ModalToggleHandler} />
+        <Section_2 className="test" />
+        <Section_3 className="test" />
+        <Footer />
+      </HomeWrapper>
+      <Modal
+        ModalToggleHandler={ModalToggleHandler}
+        isModalOpen={isModalOpen}
+        width="500px"
+        height="600px"
+      >
+        <ModalContentWrapper>
+          <LogoIcon />
+          <SocialLoginWrapper>
+            <GoogleAuth ModalToggleHandler={ModalToggleHandler} />
+            <GithubAuth ModalToggleHandler={ModalToggleHandler} />
+          </SocialLoginWrapper>
+          <CheckBox
+            onChange={AutoLoginToggleHandler}
+            checked={isAutoLoginChecked}
+          >
+            로그인 상태 유지할래요.
+          </CheckBox>
+          <BottomLine />
+          <FooterText>
+            간편 로그인으로 <span>Devfolio</span>와 함께하세요.
+          </FooterText>
+        </ModalContentWrapper>
+      </Modal>
+    </>
+  );
+}
+
 const HomeWrapper = styled.div`
   width: 100%;
   animation-duration: 1s;
@@ -88,53 +151,3 @@ const FooterText = styled.div`
     font-weight: bold;
   }
 `;
-
-function Home() {
-  const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
-  const user = useLoginUser();
-  const ModalToggleHandler = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const AutoLoginToggleHandler = () => {
-    setIsAutoLoginChecked(!isAutoLoginChecked);
-  };
-  return (
-    <>
-      <HomeWrapper>
-        <Section_1 ModalToggleHandler={ModalToggleHandler} />
-        <Section_2 />
-        <Section_3 />
-        <Footer />
-      </HomeWrapper>
-      <Modal
-        ModalToggleHandler={ModalToggleHandler}
-        isModalOpen={isModalOpen}
-        width="500px"
-        height="600px"
-      >
-        <ModalContentWrapper>
-          <LogoIcon />
-          <SocialLoginWrapper>
-            <GoogleAuth ModalToggleHandler={ModalToggleHandler} />
-            <GithubAuth ModalToggleHandler={ModalToggleHandler} />
-          </SocialLoginWrapper>
-          <CheckBox
-            onChange={AutoLoginToggleHandler}
-            checked={isAutoLoginChecked}
-          >
-            로그인 상태 유지할래요.
-          </CheckBox>
-          <BottomLine />
-          <FooterText>
-            간편 로그인으로 <span>Devfolio</span>와 함께하세요.
-          </FooterText>
-        </ModalContentWrapper>
-      </Modal>
-    </>
-  );
-}
-
-export default Home;
