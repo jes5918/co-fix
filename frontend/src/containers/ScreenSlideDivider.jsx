@@ -43,8 +43,11 @@ export default function ScreenSlideDivider({ children }) {
             ? localStorage.setItem('myPageSplitPosX', size)
             : localStorage.setItem('myPageSplitPosY', size);
         }}
-        paneStyle={
-          windowWidthSize >= screen.width / 1.85 ? paneStyle : paneStyle2
+        pane1Style={
+          windowWidthSize >= screen.width / 1.85 ? pane1StyleRow : pane1StyleCol
+        }
+        pane2Style={
+          windowWidthSize >= screen.width / 1.85 ? pane2StyleRow : pane2StyleCol
         }
       >
         {children}
@@ -53,20 +56,29 @@ export default function ScreenSlideDivider({ children }) {
   );
 }
 
-const paneStyle = {
-  padding: '25px 25px 35px 25px',
+const pane1StyleRow = {
+  padding: '5px 5px 35px 25px',
   flexDirection: 'column',
 };
 
-const paneStyle2 = {
-  padding: '10px 10px 10px 10px',
+const pane1StyleCol = {
+  padding: '5px 10px 10px 10px',
+  flexDirection: 'column',
+};
+const pane2StyleRow = {
+  padding: '5px 5px 35px 15px',
+  flexDirection: 'column',
+};
+
+const pane2StyleCol = {
+  padding: '5px 10px 10px 10px',
   flexDirection: 'column',
 };
 
 const SplitPanel = {
   container: styled.div`
     width: 100%;
-    height: 100%;
+    height: 75vh;
 
     .SplitPane {
       position: relative !important;

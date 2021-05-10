@@ -65,7 +65,7 @@ const MicWraaper = styled.div`
   padding: 5px;
   transition: all 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
     background-color: #d5d5d5;
   }
   &:active {
@@ -89,7 +89,7 @@ const CamWraaper = styled.div`
   padding: 5px;
   transition: all 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
     background-color: #d5d5d5;
   }
   &:active {
