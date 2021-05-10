@@ -2,13 +2,13 @@ import { SET_USER, SET_UNAUTHENTICATED } from '../types';
 // import axios from 'axios';
 
 export const LoginAction = (userData) => (dispatch) => {
-  console.log('success google login action', userData);
+  console.log('success login action', userData);
   localStorage.setItem('user', JSON.stringify(userData)); //setting token to local storage
   dispatch({
     type: SET_USER,
     payload: userData,
   });
-  window.location.href = '/template';
+  window.location.href = '/';
   // const token = `Bearer ${res.data.token}`;
   // axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
 };

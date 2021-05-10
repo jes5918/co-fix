@@ -20,9 +20,7 @@ function PrivateRoute({ component: Component, roles, ...rest }) {
       render={(props) => {
         if (!localStorage.getItem('user')) {
           return (
-            <Redirect
-              to={{ pathname: '/login', state: { from: props.location } }}
-            />
+            <Redirect to={{ pathname: '/', state: { from: props.location } }} />
           );
         }
         return <Component {...props} />;
