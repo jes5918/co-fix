@@ -4,11 +4,11 @@ import Collapse from '@kunukn/react-collapse';
 
 const InputBlock = {
   wrapper: styled.div`
-    margin: 0px;
+    margin: 5px 0px 0px;
   `,
   input: styled.div`
     margin: 3px 10px;
-    padding: 3px 10px;
+    padding: 3px 5px;
     width: fit-content;
     max-width: 80%;
     border-radius: 20px;
