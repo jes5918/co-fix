@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Section = {
   wrapper: styled.div`
     width: 100%;
-    height: 50vh;
+    height: 100vh;
     background-color: #fcf7ef;
     z-index: 0;
   `,
