@@ -9,6 +9,7 @@ import MyPage from './views/MyPage';
 import MyPageList from './views/MyPageList';
 import Create from './views/Create';
 import Join from './views/Join';
+import TestArea from './views/TestArea';
 
 // container
 import NavBar from './containers/NavBar';
@@ -33,20 +34,21 @@ function App() {
   return (
     <>
       <NavBar isLoggedIn={isLoggedIn} />
-      <AnimatedCursor
+      {/* <AnimatedCursor
         innerSize={20}
         outerSize={20}
         color="220, 110, 90"
         outerAlpha={0.1}
         innerScale={0.8}
         outerScale={4}
-      />
+      /> */}
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/mypagelist" component={MyPageList} />
         <Route path="/mypage" component={MyPage} />
         <Route path="/create" component={Create} />
         <Route path="/join" component={Join} />
+        <Route path="/testArea" component={TestArea} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>
