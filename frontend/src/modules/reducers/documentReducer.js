@@ -1,6 +1,7 @@
 import { MODIFY_DOCUMENT_TEXT, SELECT_DOCUMENT_TEXT } from '../types';
 const initialState = {
   selectNum: 0,
+  title: '21년 상반기 삼성 자기소개서',
   statements: [
     {
       id: 0,

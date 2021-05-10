@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ParticipantBlock from '../../components/ParticipantBlock';
+import ParticipantBlock from '../../components/mypage/ParticipantBlock';
 const participants = [
   { id: 1, name: 'Euisu', status: false },
   { id: 2, name: 'Dogyun', status: true },
   { id: 3, name: 'Jinwoo', status: true },
   { id: 4, name: 'Minhyuk', status: false },
-  { id: 5, name: 'GunHee', status: true },
+  { id: 5, name: 'GunHaaaaeeaaaaaa', status: true },
 ];
 export default function Participant() {
   const [isClicked, setIsClicked] = useState(false);
@@ -19,7 +19,7 @@ export default function Participant() {
     <>
       <Wrapper>
         <PersonListButton onClick={onClickHandler}>
-          참가자 명단
+          {participants.length ? participants.length + '명' : null}
         </PersonListButton>
         {isClicked && (
           <PersonListWrapper>
@@ -34,39 +34,42 @@ export default function Participant() {
 }
 
 const Wrapper = styled.div`
-  position: sticky;
-  bottom: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: fit-content;
+  position: absolute;
+  bottom: 40px;
+  right: 0;
   z-index: 99;
   transition: all 0.2s ease-in-out;
-  transform: translateY(15px);
+  transform: translateY(0px);
   &:hover {
-    transform: translateY(0px);
+    transform: translateY(-10px);
   }
 `;
 
 const PersonListButton = styled.div`
-  width: 300px;
-  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  margin-right: 75px;
+  padding: 20px;
   font-family: 'Samlip';
   font-size: 16px;
   font-weight: bold;
-  border-radius: 15px 15px 0px 0px;
-  box-shadow: 4px 4px 8px 4px #cec2f8;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px 2px #bbbbbb;
   transition: all 0.2s ease-in-out;
-  background-color: #d196bf;
+  background-color: #ffa87d;
   &:hover {
-    background-color: #e6c4db;
+    background-color: #ff8144;
   }
   animation-duration: 1s;
   animation-name: fadeInUp;
   @keyframes fadeInUp {
     from {
-      transform: translate3d(0, 15px, 0);
+      transform: translate3d(0, 50px, 0);
       opacity: 0;
     }
 
@@ -80,12 +83,13 @@ const PersonListButton = styled.div`
 const PersonListWrapper = styled.div`
   position: absolute;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  bottom: 40px;
-  left: calc(50vw - 450px);
+  bottom: 75px;
+  right: 5px;
   z-index: 99;
-  width: 900px;
+  width: fit-content;
   height: auto;
 `;

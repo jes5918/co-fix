@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const TextArea = styled.textarea`
-  background: url(http://i.stack.imgur.com/ynxjD.png) repeat-y;
   width: 100%;
   height: 900px;
-  font: normal 14px verdana;
-  line-height: 25px;
-  padding: 2px 10px;
-  border: solid 1px #ddd;
+  font-size: 18px;
+  font-family: 'Roboto';
+  line-height: 30px;
+  padding: 30px 20px;
+  border: solid 2px #ddd;
   outline: none;
+  resize: none;
 `;
 
 function MyPageRight({ datas }) {
