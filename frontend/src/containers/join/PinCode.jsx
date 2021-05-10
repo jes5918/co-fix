@@ -9,6 +9,19 @@ const ContainerFrame = styled.div`
   padding-top: 86px;
   /* justify-content: center;
   align-items: center; */
+  animation-duration: 1s;
+  animation-name: fadeInUp;
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 50px, 0);
+      opacity: 0;
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
 `;
 const InputLabel = styled.div`
   font-size: 55px;
