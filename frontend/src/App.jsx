@@ -8,6 +8,7 @@ import Home from './views/Home';
 import MyPage from './views/MyPage';
 import MyPageList from './views/MyPageList';
 import Create from './views/Create';
+import Join from './views/Join';
 
 // container
 import NavBar from './containers/NavBar';
@@ -45,6 +46,7 @@ function App() {
         <Route path="/mypagelist" component={MyPageList} />
         <Route path="/mypage" component={MyPage} />
         <Route path="/create" component={Create} />
+        <Route path="/join" component={Join} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>
