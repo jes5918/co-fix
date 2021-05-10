@@ -48,5 +48,7 @@ const StyleH1Input = styled.textarea`
   word-break: keep-all;
   outline: none !important;
   border: none !important;
+  font-size: 18px;
+  font-family: 'Roboto';
   box-shadow: 2px 2px 4px 2px #c8c1c4;
 `;
