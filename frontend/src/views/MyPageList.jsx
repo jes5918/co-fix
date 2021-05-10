@@ -6,7 +6,7 @@ import useLoginUser from '../hook/useLoginUser';
 export default function MyPageList() {
   const user = useLoginUser();
   return (
-    <>
+    <Background>
       <MyPageListWrapper>
         {user.authenticated ? (
           <MyPageListHeader>{user.credentials}</MyPageListHeader>
@@ -15,10 +15,15 @@ export default function MyPageList() {
         )}
         <MyPageListBody />
       </MyPageListWrapper>
-    </>
+    </Background>
   );
 }
 
+const Background = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: #f9f5f4;
+`;
 const MyPageListWrapper = styled.div`
   width: 100vw;
   height: 100vh;

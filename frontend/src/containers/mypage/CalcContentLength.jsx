@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 function CalcContentLength({ datas }) {
   const [contentLength, setContentLength] = useState(0);
+
   useEffect(() => {
     let contentLength = 0;
     datas.forEach((data) => {
@@ -10,21 +11,18 @@ function CalcContentLength({ datas }) {
     });
     setContentLength(contentLength);
   }, [datas]);
-  return (
-    <Container>
-      <Wrapper> 글자수 : {contentLength} 자</Wrapper>
-    </Container>
-  );
+
+  return <Container>글자수 : {contentLength} 자</Container>;
 }
 
 export default CalcContentLength;
 
 const Container = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   font-size: 18px;
   font-weight: bold;
-  padding: 10px 5px 10px;
+  margin: 20px 5px;
 `;
 
 const Wrapper = styled.div``;
