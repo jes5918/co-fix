@@ -5,9 +5,14 @@ import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
 import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,11 +34,18 @@ public class SentenceController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 Bearer token", required = true, dataType = "String", paramType = "header")
+    })
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/{documentId}/sentences/{sentenceId}")
     public ResponseEntity fixSentence(@PathVariable String documentId,
                                       @PathVariable String sentenceId,
                                       @RequestBody SentenceFixRequest request) throws JsonProcessingException {
-        sentenceService.fixSentence(3l, documentId, sentenceId, request);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        long memberId = Long.parseLong(authentication.getName());
+
+        sentenceService.fixSentence(memberId, documentId, sentenceId, request);
 
         BaseResponse response = responseService.getSuccessResponse();
 
