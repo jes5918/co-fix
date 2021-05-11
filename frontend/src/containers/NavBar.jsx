@@ -165,6 +165,9 @@ function NavBar({ isLoggedIn }) {
               <NavbarItem>
                 <Link to="/testArea">EditTogether</Link>
               </NavbarItem>
+              <NavbarItem>
+                <Link to="/room">Room</Link>
+              </NavbarItem>
               <BasicButton
                 onClickHandler={LogoutHandler}
                 width={150}
