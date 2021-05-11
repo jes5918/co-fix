@@ -1,4 +1,4 @@
-package com.ssafy.devfolio.commentroom;
+package com.ssafy.devfolio.commentroom.dto;
 
 import lombok.*;
 

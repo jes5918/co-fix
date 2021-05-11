@@ -32,4 +32,9 @@ public class Sentence {
 
         return sentence;
     }
+
+    public void fix(String modifiedContent) {
+        this.modifiedContent = modifiedContent;
+        this.lastModifiedDate = LocalDateTime.now();
+    }
 }
