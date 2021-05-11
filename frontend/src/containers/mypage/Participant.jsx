@@ -19,7 +19,7 @@ export default function Participant() {
     <>
       <Wrapper>
         <PersonListButton onClick={onClickHandler}>
-          {participants.length ? participants.length + '명' : null}
+          {participants.length ? participants.length : null}
         </PersonListButton>
         {isClicked && (
           <PersonListWrapper>
@@ -61,10 +61,10 @@ const PersonListButton = styled.div`
   border-radius: 50%;
   box-shadow: 2px 2px 4px 2px #bbbbbb;
   transition: all 0.2s ease-in-out;
-  background-color: #ffa87d;
-  &:hover {
+  background-color: #ffffff;
+  /* &:hover {
     background-color: #ff8144;
-  }
+  } */
   animation-duration: 1s;
   animation-name: fadeInUp;
   @keyframes fadeInUp {

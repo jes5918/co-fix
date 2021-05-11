@@ -78,11 +78,8 @@ export default function MyPage() {
         <TabList style={TabListStyle}>
           <CustomTab>1</CustomTab>
           <CustomTab>2</CustomTab>
-          <CustomTab>3</CustomTab>
           {tabIndex === 0 ? (
             <TagName>자소서 / 첨삭 결과 </TagName>
-          ) : tabIndex === 1 ? (
-            <TagName>첨삭 결과 / Export 편집 모드</TagName>
           ) : (
             <TagName>원본 자소서 / 수정 자소서</TagName>
           )}
@@ -103,17 +100,6 @@ export default function MyPage() {
                 <TEST />
                 {/* <CommentContainer /> */}
               </Scrollbar>
-            </ScreenSlideDivider>
-          </TabPanel>
-          <TabPanel>
-            <ScreenSlideDivider>
-              <Scrollbar style={{ width: '100%', height: '100%' }}>
-                <MypageLeft datas={datas.statements} />
-              </Scrollbar>
-              <>
-                <MyPageRight datas={datas.statements} />
-                <CalcContentLength datas={datas.statements} />
-              </>
             </ScreenSlideDivider>
           </TabPanel>
           <TabPanel>

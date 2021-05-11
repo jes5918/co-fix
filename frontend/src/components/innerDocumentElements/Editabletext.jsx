@@ -52,8 +52,4 @@ const StyleH1Input = styled.textarea`
   font-size: 18px;
   font-family: 'Roboto';
   box-shadow: 2px 2px 4px 2px #c8c1c4;
-  transition: all 0.3s ease-in-out;
-  &:focus {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
 `;
