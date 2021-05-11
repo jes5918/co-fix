@@ -48,4 +48,14 @@ public class CommentRoom implements Serializable {
         this.status = RoomStatus.CLOSED;
         this.lastModifiedDate = LocalDateTime.now();
     }
+
+    public void fixRoomTitle(String roomTitle) {
+        this.roomTitle = roomTitle;
+        this.lastModifiedDate = LocalDateTime.now();
+    }
+
+    public void fixMemberLimit(int memberLimit) {
+        this.memberLimit = memberLimit;
+        this.lastModifiedDate = LocalDateTime.now();
+    }
 }
