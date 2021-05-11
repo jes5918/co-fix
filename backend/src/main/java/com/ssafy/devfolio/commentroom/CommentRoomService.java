@@ -95,6 +95,14 @@ public class CommentRoomService {
         return objectMapper.readValue(valueOperations.get(COMMENT_ROOM_PREFIX + commentRoomId), CommentRoom.class);
     }
 
+    public CommentRoom getCommentRoomById(String commentRoomId) throws JsonProcessingException {
+        if (!redisTemplate.hasKey(COMMENT_ROOM_PREFIX + commentRoomId)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_NOT_EXIST);
+        }
+
+        return objectMapper.readValue(valueOperations.get(COMMENT_ROOM_PREFIX + commentRoomId), CommentRoom.class);
+    }
+
     private String createPinNumber(int digits) {
         Random random = new Random();
         StringBuilder pinNumber;
@@ -128,5 +136,33 @@ public class CommentRoomService {
         Collections.addAll(sentences, content.split("[.!?]+"));
 
         return sentences;
+    }
+
+    public void fixRoomtitle(String commentRoomId, String roomTitle, Long memberId) throws JsonProcessingException {
+        CommentRoom commentRoom = getCommentRoomById(commentRoomId);
+
+        if (!commentRoom.getMemberId().equals(memberId)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_ONLY_FIXED_BY_OWNER_EXCEPTION);
+        }
+
+        commentRoom.fixRoomTitle(roomTitle);
+
+        valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoomId, objectMapper.writeValueAsString(commentRoom));
+    }
+
+    public void fixMemberLimit(String commentRoomId, int memberLimit, Long memberId) throws JsonProcessingException {
+        if (memberLimit <= 0) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_INVALID_MEMBER_LIMIT);
+        }
+
+        CommentRoom commentRoom = getCommentRoomById(commentRoomId);
+
+        if (!commentRoom.getMemberId().equals(memberId)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_ONLY_FIXED_BY_OWNER_EXCEPTION);
+        }
+
+        commentRoom.fixMemberLimit(memberLimit);
+
+        valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoomId, objectMapper.writeValueAsString(commentRoom));
     }
 }
