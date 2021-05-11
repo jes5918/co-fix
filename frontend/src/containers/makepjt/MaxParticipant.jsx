@@ -53,7 +53,7 @@ const RightFrame = styled.div`
   padding-top: 30px;
   padding-bottom: 100px;
 `;
-export default function MaxParticipant({ onHandleNext }) {
+export default function MaxParticipant({ onHandleNext, value, onHandleValue }) {
   return (
     <ContainerFrame>
       <LeftFrame>
@@ -68,6 +68,8 @@ export default function MaxParticipant({ onHandleNext }) {
           step="1"
           min="1"
           max="20"
+          value={value}
+          onValueHandler={onHandleValue}
         ></InputForm>
         <BasicButton
           text={'다음'}

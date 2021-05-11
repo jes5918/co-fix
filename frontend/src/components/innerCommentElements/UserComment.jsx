@@ -7,7 +7,7 @@ const S = {
   CommentWrapper: styled.div`
     width: 90%;
     height: 70%;
-    background-color: lightgreen;
+    background-color: #d3f8da;
     padding: 10px 10px;
     border-radius: 10px;
     font-family: 'Samlip';

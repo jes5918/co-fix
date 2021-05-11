@@ -33,11 +33,11 @@ const S = {
   `,
   AgreeButton: styled.button`
     outline: none;
-    border: 3px solid #56f356;
+    border: 3px solid #14880c;
     border-radius: 20px;
     text-align: center;
     padding: 4px 20px;
-    color: #56f356;
+    color: #14880c;
     font-family: 'Samlip';
     font-size: 14px;
     font-weight: bold;
