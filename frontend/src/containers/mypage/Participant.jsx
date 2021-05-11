@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import onair from '../../assets/on-air.png';
 import ParticipantBlock from '../../components/mypage/ParticipantBlock';
 const participants = [
   { id: 1, name: 'Euisu', status: false },
@@ -19,7 +20,7 @@ export default function Participant() {
     <>
       <Wrapper>
         <PersonListButton onClick={onClickHandler}>
-          {participants.length ? '+' + participants.length : null}
+          <PersonListButtonImg src={onair} alt="" />
         </PersonListButton>
         {isClicked && (
           <PersonListWrapper>
@@ -54,13 +55,14 @@ const PersonListButton = styled.div`
   width: 60px;
   height: 60px;
   margin-right: 75px;
-  padding: 20px;
+  /* padding: 20px; */
   font-family: 'Samlip';
   font-size: 20px;
   color: #020236;
   font-weight: bold;
   border-radius: 50%;
   box-shadow: 2px 2px 4px 2px #bebebe;
+  overflow: hidden;
   transition: all 0.2s ease-in-out;
   background: linear-gradient(to bottom, #fef9d7, #d299c2);
   &:hover {
@@ -80,7 +82,10 @@ const PersonListButton = styled.div`
     }
   }
 `;
-
+const PersonListButtonImg = styled.img`
+  height: 60%;
+  object-fit: contain;
+`;
 const PersonListWrapper = styled.div`
   position: absolute;
   display: flex;

@@ -11,30 +11,50 @@ const ProgressBar = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Point = styled.div`
+const Point1 = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
   border: none;
-  background-color: ${({ backgroundColor }) =>
-    `${backgroundColor ? '#ca385d' : '#fff'}`};
+  background-color: ${({ step }) => `${step >= 0 ? '#ca385d' : '#fff'}`};
   z-index: 3;
 `;
-const Line = styled.div`
+const Point2 = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${({ step }) => `${step >= 1 ? '#ca385d' : '#fff'}`};
+  z-index: 3;
+`;
+const Point3 = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${({ step }) => `${step >= 2 ? '#ca385d' : '#fff'}`};
+  z-index: 3;
+`;
+const Line1 = styled.div`
   width: 20%;
   height: 5px;
   z-index: 2;
-  background-color: ${({ backgroundColor }) =>
-    `${backgroundColor ? '#ca385d' : '#fff'}`};
+  background-color: ${({ step }) => `${step >= 1 ? '#ca385d' : '#fff'}`};
 `;
-export default function Progress() {
+const Line2 = styled.div`
+  width: 20%;
+  height: 5px;
+  z-index: 2;
+  background-color: ${({ step }) => `${step >= 2 ? '#ca385d' : '#fff'}`};
+`;
+export default function Progress({ step, onHandleCurrent }) {
   return (
     <ProgressBar>
-      <Point></Point>
-      <Line></Line>
-      <Point></Point>
-      <Line></Line>
-      <Point></Point>
+      <Point1 step={step} onClick={() => onHandleCurrent(0)} />
+      <Line1 step={step}></Line1>
+      <Point2 step={step} onClick={() => onHandleCurrent(1)}></Point2>
+      <Line2 step={step}></Line2>
+      <Point3 step={step} onClick={() => onHandleCurrent(2)}></Point3>
     </ProgressBar>
   );
 }

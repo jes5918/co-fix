@@ -9,6 +9,9 @@ const StyledFooter = {
     color: #090e36;
     font-family: 'Samlip';
     z-index: -5;
+    @media only screen and (max-width: 480px) {
+      padding: 2.25rem 0;
+    }
   `,
   rowBox: styled.div`
     display: flex;
@@ -20,10 +23,16 @@ const FooterLogo = styled.img.attrs({ src: '/logo.png' })`
   width: 50%;
   object-fit: cover;
   margin: 0;
+  @media only screen and (max-width: 768px) {
+    width: 80%;
+  }
 `;
 const FooterLeft = {
   container: styled.div`
     width: 25%;
+    @media only screen and (max-width: 768px) {
+      width: 45%;
+    }
   `,
   info: styled.div`
     font-size: 17px;
@@ -32,12 +41,21 @@ const FooterLeft = {
     width: fit-content;
     margin: 10px;
     color: black;
+    @media only screen and (max-width: 768px) {
+      font-size: 0.8rem;
+    }
+    @media only screen and (max-width: 480px) {
+      font-size: 10px;
+    }
   `,
 };
 
 const FooterNav = {
   container: styled.div`
     width: 25%;
+    @media only screen and (max-width: 768px) {
+      width: 45%;
+    }
   `,
   menu: styled.div`
     font-size: 1.5rem;
@@ -47,6 +65,12 @@ const FooterNav = {
     margin-top: 10px;
     margin-bottom: 10px;
     color: black;
+    @media only screen and (max-width: 768px) {
+      font-size: 1.25rem;
+    }
+    @media only screen and (max-width: 480px) {
+      font-size: 15px;
+    }
   `,
 };
 export default function Footer() {
