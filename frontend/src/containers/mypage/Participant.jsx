@@ -19,7 +19,7 @@ export default function Participant() {
     <>
       <Wrapper>
         <PersonListButton onClick={onClickHandler}>
-          {participants.length ? participants.length : null}
+          {participants.length ? '+' + participants.length : null}
         </PersonListButton>
         {isClicked && (
           <PersonListWrapper>
@@ -51,20 +51,21 @@ const PersonListButton = styled.div`
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   margin-right: 75px;
   padding: 20px;
   font-family: 'Samlip';
-  font-size: 16px;
+  font-size: 20px;
+  color: #020236;
   font-weight: bold;
   border-radius: 50%;
-  box-shadow: 2px 2px 4px 2px #bbbbbb;
+  box-shadow: 2px 2px 4px 2px #bebebe;
   transition: all 0.2s ease-in-out;
-  background-color: #ffffff;
-  /* &:hover {
-    background-color: #ff8144;
-  } */
+  background: linear-gradient(to bottom, #fef9d7, #d299c2);
+  &:hover {
+    background-color: #ffffff;
+  }
   animation-duration: 1s;
   animation-name: fadeInUp;
   @keyframes fadeInUp {

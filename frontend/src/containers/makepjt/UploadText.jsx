@@ -40,7 +40,8 @@ const LeftFrame = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 100px;
+  padding-bottom: 30px;
 `;
 
 const RightFrame = styled.div`
@@ -67,7 +68,7 @@ const TextArea = styled.textarea`
     outline: none;
   }
 `;
-export default function UploadText({ onHandleSubmit }) {
+export default function UploadText({ onHandleSubmit, value, onValueChange }) {
   return (
     <ContainerFrame>
       <LeftFrame>
@@ -75,7 +76,15 @@ export default function UploadText({ onHandleSubmit }) {
         <InputLabel>입력해주세요.</InputLabel>
       </LeftFrame>
       <RightFrame>
-        <TextArea autoCapitalize={'none'} autoFocus={'off'} required={true} />
+        <TextArea
+          value={value}
+          onChange={(e) => {
+            onValueChange(e);
+          }}
+          autoCapitalize={'none'}
+          autoFocus={'off'}
+          required={true}
+        />
         <BasicButton
           text={'시작하기'}
           width={400}

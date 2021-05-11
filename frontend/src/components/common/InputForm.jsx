@@ -16,7 +16,17 @@ const Input = styled.input`
   text-align: center;
 `;
 
-const InputForm = ({ onSubmit, width, height, type, step, minNum, maxNum }) => {
+const InputForm = ({
+  onSubmit,
+  width,
+  height,
+  type,
+  step,
+  minNum,
+  maxNum,
+  value,
+  onValueHandler,
+}) => {
   const [searchWord, setSearchWord] = useState('');
   const inputRef = useRef(null);
 
@@ -36,8 +46,10 @@ const InputForm = ({ onSubmit, width, height, type, step, minNum, maxNum }) => {
       <Input
         name="searchWord"
         ref={inputRef}
-        value={searchWord}
-        onChange={onChange}
+        value={value}
+        onChange={(e) => {
+          onValueHandler(e);
+        }}
         width={width}
         height={height}
         autoFocus={true}

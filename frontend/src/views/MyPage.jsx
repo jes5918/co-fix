@@ -47,17 +47,19 @@ const CustomTab = ({ children }) => (
       margin: '0px 15px 0px 0px',
       padding: '10px',
       borderRadius: '50%',
+      border: '0',
+      bottom: '0',
       width: '45px',
       height: '45px',
       boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
       fontWeight: 'bold',
       fontSize: '20px',
-      transition: 'all 0.6s cubic-bezier(0, 0, 0, 1)',
+      background: 'linear-gradient(to top, #fef9d7, #d299c2)',
     }}
-    onMouseEnter={(e) => (e.target.style.backgroundColor = '#d3d3d3')}
-    onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+    // onMouseEnter={(e) => (e.target.style.backgroundColor = '#d3d3d3')}
+    // onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
   >
-    <div>{children}</div>
+    {children}
   </Tab>
 );
 
@@ -127,7 +129,7 @@ const BackGround = styled.div`
   width: 100vw;
   height: 100vh;
   padding-top: 100px;
-  background-color: #f9f5f4;
+  background-color: #ffffff;
 `;
 
 // 왼쪽 위에 탭 스타일
@@ -139,12 +141,12 @@ const TabListStyle = {
   margin: '20px 7vw',
   border: 'none',
   zIndex: 300,
+  padding: '0px',
 };
 
 const TagName = styled.div`
   font-weight: bold;
-  font-size: 22px;
-  transition: all 0.5s ease-in-out;
+  font-size: 20px;
 `;
 
 const StyledTabs = styled(Tabs)`
@@ -168,11 +170,11 @@ const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 87vh;
+  height: 90vh;
   margin: 0px auto;
   font-family: 'Roboto';
   font-size: 18px;
-  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3); */
   background-color: #fff;
   border-radius: 20px;
 `;
@@ -183,15 +185,15 @@ const MyPageHeader = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
+  margin: 0px auto 30px;
 `;
 
 const MyPageTitle = styled.div`
-  margin: -25px auto 45px;
-  background-color: white;
+  margin-top: 20px;
+  background-color: transparent;
   padding: 8px 20px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  transition: all 1s ease;
   border-radius: 255px 15px 255px 15px/15px 255px 15px 255px;
-  box-shadow: 0px 0px 8px 1px hsla(0, 0%, 0%, 0.3);
+  /* box-shadow: 0px 0px 8px 1px hsla(0, 0%, 0%, 0.3); */
 `;
