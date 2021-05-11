@@ -1,6 +1,7 @@
 package com.ssafy.devfolio.commentroom;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.SingleDataResponse;

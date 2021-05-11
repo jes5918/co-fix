@@ -2,12 +2,11 @@ package com.ssafy.devfolio.commentroom;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
-import com.ssafy.devfolio.member.domain.Member;
 import com.ssafy.devfolio.sentence.Sentence;
-import com.ssafy.devfolio.utils.FunctionExceptionWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
@@ -17,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
-
-import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 
 @Service
 @RequiredArgsConstructor
