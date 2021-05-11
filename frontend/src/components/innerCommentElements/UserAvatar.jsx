@@ -5,18 +5,18 @@ import styled from 'styled-components';
 
 const S = {
   UserAvatarWrapper: styled.div`
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 10px;
   `,
   UserAvatar: styled.span`
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: lightskyblue;
+    background-color: #d3f8da;
   `,
 };
 

@@ -133,7 +133,7 @@ const PlusCard = {
     position: relative;
     border-radius: 30px;
     margin: 30px auto;
-    background-color: white;
+    background: linear-gradient(to bottom, #fef9d7, #d299c2);
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -147,10 +147,10 @@ const PlusCard = {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 220px;
-    height: 290px;
-    border: 3px dotted #949494;
+    width: 100%;
+    height: 100%;
     border-radius: 27px;
+    background-color: white;
   `,
   Icon: styled(CgMathPlus)`
     width: 100px;

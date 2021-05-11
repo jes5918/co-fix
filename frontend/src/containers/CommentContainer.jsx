@@ -14,11 +14,10 @@ const S = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 450px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     margin-top: 100px;
-    border: 2px solid #a5a5a5;
-    border-radius: 20px;
+    border-radius: 15px;
   `,
   TopBox: styled.div`
     display: flex;
@@ -51,8 +50,15 @@ function CommentContainer({ data }) {
   return (
     <S.CommentContainer>
       <S.TopBox>
-        <S.FixButton>!Fix</S.FixButton>
-        <span style={{ color: 'red', fontWeight: 'bold' }}>
+        <S.FixButton>Fix</S.FixButton>
+        <span
+          style={{
+            color: 'black',
+            fontWeight: 'bold',
+            fontSize: '15px',
+            fontFamily: 'Samlip',
+          }}
+        >
           고칠 필요가 있다고 생각하면 눌러주세요!
         </span>
       </S.TopBox>
