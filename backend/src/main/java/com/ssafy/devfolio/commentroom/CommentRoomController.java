@@ -2,6 +2,8 @@ package com.ssafy.devfolio.commentroom;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
+import com.ssafy.devfolio.exception.BaseException;
+import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.SingleDataResponse;
@@ -20,6 +22,10 @@ public class CommentRoomController {
 
     @PostMapping
     public ResponseEntity createCommentRoom(@RequestBody CreateCommentRoomRequest request) throws JsonProcessingException {
+        if (request.getMemberLimit() <= 0) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_INVALID_MEMBER_LIMIT);
+        }
+
         CommentRoom commentRoom = commentRoomService.createCommentRoom(request, 3l);
 
         SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.CREATED);
@@ -41,6 +47,22 @@ public class CommentRoomController {
         CommentRoom commentRoom = commentRoomService.getCommentRoom(pinNumber);
 
         SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.OK);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @PutMapping("/{commentRoomId}")
+    public ResponseEntity fixCommentRoomInfo(@PathVariable String commentRoomId,
+                                             @RequestParam(value = "roomTitle", required = false) String roomTitle,
+                                             @RequestParam(value = "memberLimit", required = false, defaultValue = "0") int memberLimit) throws JsonProcessingException {
+        if (roomTitle != null) {
+            commentRoomService.fixRoomtitle(commentRoomId, roomTitle, 3l);
+        }
+        if (memberLimit != 0) {
+            commentRoomService.fixMemberLimit(commentRoomId, memberLimit, 3l);
+        }
+
+        BaseResponse response = responseService.getSuccessResponse();
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
