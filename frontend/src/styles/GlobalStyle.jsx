@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
         margin:0;
     
         font-size:14px;
-        font-family: 'Roboto';
+        font-family: 'NotoSans';
     }
     a{
         text-decoration:none;
