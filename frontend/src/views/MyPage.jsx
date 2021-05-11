@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 // library
 import styled from 'styled-components';
-import Scrollbar from 'react-scrollbars-custom';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -66,6 +66,10 @@ const CustomTab = ({ children }) => (
 CustomTab.tabsRole = 'Tab';
 export default function MyPage() {
   const [tabIndex, setTabIndex] = useState(0);
+  const [splitPosX, setSplitPosX] = useState(() => {
+    const SavedSplitX = localStorage.getItem('myPageSplitPosX');
+    return SavedSplitX ? parseInt(SavedSplitX, 10) : 600;
+  });
   const [windowWidthSize, setWindowWidthSize] = useState(window.innerWidth);
   const isHalfScreen = windowWidthSize > screen.width / 1.85;
   const isMobileScreen = windowWidthSize > screen.width / 3;
@@ -81,6 +85,7 @@ export default function MyPage() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   return (
     <BackGround>
       <StyledTabs
@@ -110,30 +115,38 @@ export default function MyPage() {
           </MyPageHeader>
 
           <TabPanel>
-            <ScreenSlideDivider>
+            <ScreenSlideDivider setSplitPosX={setSplitPosX}>
               <>
-                <CalcContentLength datas={datas.statements} />
-                <Scrollbar style={{ width: '100%', height: '100%' }}>
+                <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <DocumentContainer />
-                </Scrollbar>
+                </Scrollbars>
+                <CalcContentLength
+                  datas={datas.statements}
+                  splitPosX={splitPosX}
+                  windowWidthSize={windowWidthSize}
+                />
               </>
-              <Scrollbar style={{ width: '100%', height: '100%' }}>
+              <Scrollbars style={{ width: '100%', height: '100%' }}>
                 <TEST />
                 {/* <CommentContainer /> */}
-              </Scrollbar>
+              </Scrollbars>
             </ScreenSlideDivider>
           </TabPanel>
           <TabPanel>
-            <ScreenSlideDivider>
+            <ScreenSlideDivider setSplitPosX={setSplitPosX}>
               <>
-                <CalcContentLength datas={datas.statements} />
-                <Scrollbar style={{ width: '100%', height: '100%' }}>
+                <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <DocumentContainer />
-                </Scrollbar>
+                </Scrollbars>
+                <CalcContentLength
+                  datas={datas.statements}
+                  splitPosX={splitPosX}
+                  windowWidthSize={windowWidthSize}
+                />
               </>
-              <Scrollbar style={{ width: '100%', height: '100%' }}>
+              <Scrollbars style={{ width: '100%', height: '100%' }}>
                 <CommentContainer data={testData} />
-              </Scrollbar>
+              </Scrollbars>
             </ScreenSlideDivider>
           </TabPanel>
         </MyPageContainer>
