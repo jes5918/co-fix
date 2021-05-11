@@ -5,16 +5,16 @@ import styled from 'styled-components';
 
 const S = {
   UserAvatarWrapper: styled.div`
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 10px;
   `,
   UserAvatar: styled.span`
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: #d3f8da;
   `,

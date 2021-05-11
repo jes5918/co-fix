@@ -1,9 +1,6 @@
 // Roll : 편집 화면에서 우측 Comment 작성 및 보이는 부분의 상태를 관리함.
 
-// 데이터 형식
-//
-
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import CommentForm from '../components/innerCommentElements/CommentForm';
@@ -15,71 +12,44 @@ const S = {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
-    margin-top: 100px;
-    border-radius: 15px;
-  `,
-  TopBox: styled.div`
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    flex-basis: 10%;
-  `,
-  MiddleBox: styled.div`
-    flex-basis: 70%;
-  `,
-  BottomBox: styled.div`
-    flex-basis: 20%;
-  `,
-  FixButton: styled.button`
-    border: 2px solid red;
-    border-radius: 10px;
-    padding: 4px 8px;
-    margin-right: 10px;
-    font-weight: bold;
-    color: red;
-    cursor: pointer;
-    &:hover {
-      background-color: red;
-      color: white;
-    }
+    min-height: 100%;
+    padding: 20px 10px;
   `,
 };
 
-function CommentContainer({ data }) {
+export default function CommentContainer({ data }) {
+  const [isToggle, setIsToggle] = useState(false);
+  const onHandleSubmit = () => {
+    // 1. 이벤트 props로 내려주고,
+    // 2. 이벤트 발생 -> 기존 데이터에 새로운 데이터 추가.
+    // 3. 컴포넌트 unMount 되면 백에 통신 보내고 종료..?(쓸때마다 보내면 비효율적이려나...? 적어서 괜찮을 것 같기도)
+  };
+  const onHandleClick = (e) => {
+    // comment Agree 로직 처리
+
+    // toggle 처리
+    if (e.target.nodeName === 'BUTTON') {
+      console.log(e.target.dataset.userId);
+      setIsToggle(!isToggle);
+    }
+  };
+
   return (
-    <S.CommentContainer>
-      <S.TopBox>
-        <S.FixButton>Fix</S.FixButton>
-        <span
-          style={{
-            color: 'black',
-            fontWeight: 'bold',
-            fontSize: '15px',
-            fontFamily: 'Samlip',
-          }}
-        >
-          고칠 필요가 있다고 생각하면 눌러주세요!
-        </span>
-      </S.TopBox>
-      <S.MiddleBox>
-        {data &&
-          data.map((item) => {
-            return (
-              <CommentWrapper
-                key={item.id}
-                avatar={item.avatar}
-                comment={item.comment}
-                nickname={item.nickname}
-              />
-            );
-          })}
-      </S.MiddleBox>
-      <S.BottomBox>
-        <CommentForm></CommentForm>
-      </S.BottomBox>
+    <S.CommentContainer onClick={(e) => onHandleClick(e)}>
+      {data &&
+        data.map((item) => {
+          return (
+            <CommentWrapper
+              key={item.id}
+              userId={item.id}
+              avatar={item.avatar}
+              comment={item.comment}
+              nickName={item.nickName}
+              isToggle={isToggle}
+            />
+          );
+        })}
+      <CommentForm />
     </S.CommentContainer>
   );
 }
-
-export default CommentContainer;
