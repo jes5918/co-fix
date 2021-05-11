@@ -10,6 +10,7 @@ import MyPageList from './views/MyPageList';
 import Create from './views/Create';
 import Join from './views/Join';
 import TestArea from './views/TestArea';
+import Room from './views/Room';
 
 // container
 import NavBar from './containers/NavBar';
@@ -49,6 +50,7 @@ function App() {
         <Route path="/create" component={Create} />
         <Route path="/join" component={Join} />
         <Route path="/testArea" component={TestArea} />
+        <Route path="/room" component={Room} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>

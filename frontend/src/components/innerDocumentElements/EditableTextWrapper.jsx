@@ -23,23 +23,13 @@ export default function EditableTextWrapper({ data }) {
   const { content } = data;
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isButtonTriggerd, setIsButtonTriggerd] = useState(false);
 
   const editorModeToggleHandler = () => {
     setIsEditMode(!isEditMode);
-    setIsButtonTriggerd(false);
   };
 
   const selectDocumentHandler = () => {
     dispatch(documentSelectAction(data.id));
-  };
-
-  const buttonEnterTriggerHandler = () => {
-    setIsButtonTriggerd(true);
-  };
-
-  const buttonLeaveTriggerHandler = () => {
-    setIsButtonTriggerd(false);
   };
 
   const setNewValue = (newValue) => {
@@ -55,19 +45,10 @@ export default function EditableTextWrapper({ data }) {
     <>
       {!isEditMode ? (
         <TextContainer
-          onMouseEnter={buttonEnterTriggerHandler}
-          onMouseLeave={buttonLeaveTriggerHandler}
           onDoubleClick={editorModeToggleHandler}
           onClick={selectDocumentHandler}
         >
           {content}
-          {/* {isButtonTriggerd ? (
-            <UpDownIconWrapper>
-              <PositiveButton />
-              <NegativeButton />
-              <Heart />
-            </UpDownIconWrapper>
-          ) : null} */}
         </TextContainer>
       ) : (
         <Editabletext
