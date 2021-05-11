@@ -25,10 +25,13 @@ public enum ErrorCode {
     COMMENT_ROOM_NOT_EXIST(HttpStatus.BAD_REQUEST, "0301", "존재하지 않는 첨삭방"),
     COMMENT_ROOM_ONLY_CLOSED_BY_OWNER_EXCEPTION(HttpStatus.BAD_REQUEST, "0302", "첨삭방 만든 유저만 방 닫을 수 있음"),
 
-
     // 감정 표현
     FEELING_MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "0401", "감정표현 누른 사람만 취소 가능"),
     FEELING_CANCEL_FAIL_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "0402", "감정표현 개수는 0보다 작을 수 없음"),
+
+    // 첨삭방 내부 문장 관련
+    SENTENCE_NOT_EXIST(HttpStatus.BAD_REQUEST, "0501", "존재하지 않는 문장입니다"),
+    SENTENCE_ONLY_FIXED_BY_OWNER_EXCEPTION(HttpStatus.BAD_REQUEST, "0502", "방을 만든 사람만 문장 수정 가능"),
 
     // 기타 오류 처리
     RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "9902", "런타임 오류"),

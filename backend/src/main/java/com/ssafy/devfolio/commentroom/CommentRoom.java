@@ -1,6 +1,6 @@
 package com.ssafy.devfolio.commentroom;
 
-import lombok.Builder;
+import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
