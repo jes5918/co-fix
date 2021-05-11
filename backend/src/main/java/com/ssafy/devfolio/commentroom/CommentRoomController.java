@@ -34,4 +34,13 @@ public class CommentRoomController {
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+    @GetMapping("/{pinNumber}")
+    public ResponseEntity getCommentRoom(@PathVariable String pinNumber) throws JsonProcessingException {
+        CommentRoom commentRoom = commentRoomService.getCommentRoom(pinNumber);
+
+        SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.OK);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 }
