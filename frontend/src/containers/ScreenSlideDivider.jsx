@@ -59,20 +59,28 @@ export default function ScreenSlideDivider({ children }) {
 const pane1StyleRow = {
   padding: '5px 5px 35px 25px',
   flexDirection: 'column',
+  boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
+  borderRadius: '15px',
 };
 
 const pane1StyleCol = {
   padding: '5px 10px 10px 10px',
   flexDirection: 'column',
+  boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
+  borderRadius: '15px',
 };
 const pane2StyleRow = {
   padding: '5px 5px 35px 15px',
   flexDirection: 'column',
+  boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
+  borderRadius: '15px',
 };
 
 const pane2StyleCol = {
   padding: '5px 10px 10px 10px',
   flexDirection: 'column',
+  boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
+  borderRadius: '15px',
 };
 
 const SplitPanel = {

@@ -54,7 +54,7 @@ const RightFrame = styled.div`
   padding-bottom: 100px;
 `;
 
-export default function Title({ onHandleNext }) {
+export default function Title({ onHandleNext, value, onHandleValue }) {
   return (
     <ContainerFrame>
       <LeftFrame>
@@ -62,7 +62,12 @@ export default function Title({ onHandleNext }) {
         <InputLabel>제목을 입력해주세요.</InputLabel>
       </LeftFrame>
       <RightFrame>
-        <InputForm width={400} height={70}></InputForm>
+        <InputForm
+          width={400}
+          height={70}
+          value={value}
+          onValueHandler={onHandleValue}
+        ></InputForm>
         <BasicButton
           text={'다음'}
           width={400}

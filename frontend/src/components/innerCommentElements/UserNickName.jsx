@@ -6,6 +6,8 @@ import styled from 'styled-components';
 const S = {
   UserNickName: styled.span`
     font-weight: bold;
+    font-size: 15px;
+    font-family: 'Samlip';
   `,
 };
 
