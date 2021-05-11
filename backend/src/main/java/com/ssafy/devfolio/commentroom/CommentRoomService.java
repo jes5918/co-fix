@@ -73,6 +73,31 @@ public class CommentRoomService {
         return commentRoom;
     }
 
+    public void closeCommentRoom(String commentRoomId, Long memberId) throws JsonProcessingException {
+        if (!redisTemplate.hasKey(COMMENT_ROOM_PREFIX + commentRoomId)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_NOT_EXIST);
+        }
+
+        CommentRoom commentRoom = objectMapper.readValue(
+                valueOperations.get(COMMENT_ROOM_PREFIX + commentRoomId), CommentRoom.class);
+
+        if (!memberId.equals(commentRoom.getMemberId())) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_ONLY_CLOSED_BY_OWNER_EXCEPTION);
+        }
+        commentRoom.closeCommentRoom();
+        valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoomId, objectMapper.writeValueAsString(commentRoom));
+    }
+
+    public CommentRoom getCommentRoom(String pinNumber) throws JsonProcessingException {
+        if (!redisTemplate.hasKey(PIN_CHECK_PREFIX + pinNumber)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_NOT_EXIST);
+        }
+
+        String commentRoomId = valueOperations.get(PIN_CHECK_PREFIX + pinNumber);
+
+        return objectMapper.readValue(valueOperations.get(COMMENT_ROOM_PREFIX + commentRoomId), CommentRoom.class);
+    }
+
     private String createPinNumber(int digits) {
         Random random = new Random();
         StringBuilder pinNumber;
