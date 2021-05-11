@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 const S = {
   CommentWrapper: styled.div`
-    width: 90%;
-    height: 70%;
+    width: 100%;
+    height: fit-content;
     background-color: #d3f8da;
     padding: 10px 10px;
     border-radius: 10px;

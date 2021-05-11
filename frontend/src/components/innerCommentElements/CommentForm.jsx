@@ -8,7 +8,7 @@ const S = {
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 150px;
+    height: 130px;
     padding: 0 20px;
   `,
   FormLabelBox: styled.div`
@@ -44,7 +44,7 @@ const S = {
     height: 80%;
     font-family: 'Samlip';
     overflow: hidden;
-    font-size: 16px;
+    font-size: 14px;
   `,
 };
 
@@ -57,7 +57,7 @@ function CommentForm({ onSubmit }) {
       <S.FormLabelBox>
         {/* 새로운 아이콘을 주시오. */}
         <span style={{ color: '#aaaaaa' }}>🗨</span>
-        <S.FormLabel>의견을 남겨주세요.</S.FormLabel>
+        <S.FormLabel>Comment</S.FormLabel>
       </S.FormLabelBox>
       <S.FormInputBox>
         <S.FormInput ref={inputRef} />
