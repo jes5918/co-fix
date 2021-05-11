@@ -6,6 +6,8 @@ import UploadText from '../containers/makepjt/UploadText';
 import Progress from '../containers/makepjt/Progress';
 import { FaAngleLeft } from 'react-icons/fa';
 import { useHistory } from 'react-router';
+//api
+import { createRoom } from '../api/createRoom';
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
@@ -25,7 +27,7 @@ export default function Create() {
   const [current, setCurrent] = useState(0);
   const history = useHistory();
   const [title, setTitle] = useState('');
-  const [maxcnt, setMaxcnt] = useState('1');
+  const [maxcnt, setMaxcnt] = useState(1);
   const [text, setText] = useState('');
   const changePage = () => {
     setCurrent(current + 1);
@@ -40,22 +42,43 @@ export default function Create() {
     }
   };
   const submitForm = () => {
-    alert('제출😀');
-    history.push('/');
+    if (title && maxcnt && text) {
+      const info = {
+        contents: text,
+        memberLimit: maxcnt,
+        roomTitle: title,
+      };
+      createRoom(
+        info,
+        (res) => {
+          console.log(`res`, res.data.data);
+        },
+        (err) => {
+          console.error('err', err.response.data);
+        },
+      );
+    } else {
+      alert('빈칸인게 있음!!');
+    }
   };
   const titleValueSave = (e) => {
     setTitle(e.target.value);
   };
   const maxCntValueSave = (e) => {
-    setMaxcnt(e.target.value);
+    setMaxcnt(Number(e.target.value));
   };
   const textValueSave = (e) => {
     setText(e.target.value);
   };
+  const changeCurrent = (e) => {
+    if (current !== e) {
+      setCurrent(e);
+    }
+  };
 
   return (
     <Wrapper>
-      <Progress />
+      <Progress step={current} onHandleCurrent={changeCurrent} />
       <Prev onClick={gotoBack} />
       {current === 0 ? (
         <Title
