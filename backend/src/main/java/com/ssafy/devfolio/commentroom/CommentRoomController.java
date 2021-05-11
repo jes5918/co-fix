@@ -2,6 +2,7 @@ package com.ssafy.devfolio.commentroom;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.response.ResponseService;
+import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.SingleDataResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,4 +26,12 @@ public class CommentRoomController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @PatchMapping("/{commentRoomId}")
+    public ResponseEntity closeCommentRoom(@PathVariable String commentRoomId) throws JsonProcessingException {
+        commentRoomService.closeCommentRoom(commentRoomId, 3l);
+
+        BaseResponse response = responseService.getSuccessResponse();
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 }
