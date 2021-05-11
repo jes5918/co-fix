@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 // library
 import styled from 'styled-components';
-// import Scrollbar from 'react-scrollbars-custom';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 
 // containers
