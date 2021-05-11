@@ -21,7 +21,11 @@ public enum ErrorCode {
     // 소셜 로그인
     SOCIAL_REQUEST_ERROR(HttpStatus.BAD_REQUEST, "0201", "소셜 로그인 진행 중 오류 발생"),
 
-    // 오류 처리
+    // 감정 표현
+    FEELING_MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "0301", "감정표현 누른 사람만 취소 가능"),
+    FEELING_CANCEL_FAIL_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "0302", "감정표현 개수는 0보다 작을 수 없음"),
+
+    // 기타 오류 처리
     RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "9902", "런타임 오류"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "9903", "서버 오류"),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "9904", "권한 없음"),
