@@ -15,6 +15,9 @@ const Section = {
     justify-content: flex-end;
     padding-top: 86px;
     overflow: hidden;
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+    }
   `,
   leftFrame: styled.div`
     width: 50%;
@@ -23,34 +26,82 @@ const Section = {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
+  `,
+  imageFrame: styled.div`
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
   `,
   image_1: styled.img`
-    width: 50%;
+    width: 100%;
     object-fit: contain;
+    @media only screen and (max-width: 1024px) {
+    }
+    @media only screen and (max-width: 768px) {
+      width: 70%;
+    }
+    @media only screen and (max-width: 480px) {
+      width: 90%;
+    }
   `,
   circle: styled.div`
     position: absolute;
     bottom: -50px;
     right: -50px;
     border-radius: 50%;
-    width: 900px;
-    height: 900px;
+    width: 800px;
+    height: 800px;
     z-index: -1;
     background: linear-gradient(to bottom, #fef9d7, #d299c2);
+    @media only screen and (max-width: 1024px) {
+      width: 780px;
+      height: 780px;
+    }
+    @media only screen and (max-width: 768px) {
+      width: 600px;
+      height: 600px;
+    }
   `,
   title: styled.div`
     font-weight: bold;
     font-family: 'Samlip';
     font-size: 45px;
+    @media only screen and (max-width: 1024px) {
+      font-size: 35px;
+    }
+    @media only screen and (max-width: 768px) {
+      /* font-size: 25px; */
+    }
   `,
   titleBox: styled.div`
     margin: 100px auto;
+    @media only screen and (max-width: 768px) {
+      margin: 50px auto;
+    }
+    @media only screen and (max-width: 480px) {
+      margin: 30px auto;
+    }
   `,
   buttonBox: styled.div`
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    @media only screen and (max-width: 768px) {
+      width: 70%;
+    }
+    @media only screen and (max-width: 480px) {
+      flex-direction: column;
+    }
   `,
 };
 export default function Section_1({ ModalToggleHandler }) {
@@ -92,7 +143,9 @@ export default function Section_1({ ModalToggleHandler }) {
           />
         </Section.buttonBox>
       </Section.leftFrame>
-      <Section.image_1 src={homeimage} alt="" />
+      <Section.imageFrame>
+        <Section.image_1 src={homeimage} alt="" />
+      </Section.imageFrame>
     </Section.wrapper>
   );
 }
