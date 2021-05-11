@@ -8,16 +8,6 @@ import {
 } from '../../modules/actions/documentActions';
 import styled from 'styled-components';
 import Editabletext from './Editabletext';
-import { GoThumbsup } from 'react-icons/go';
-import { GoThumbsdown } from 'react-icons/go';
-
-const PositiveButton = () => {
-  return <StyledThumbsUp />;
-};
-
-const NegativeButton = () => {
-  return <StyledThumbsDown />;
-};
 
 export default function EditableTextWrapper({ data }) {
   const { content } = data;
@@ -64,20 +54,11 @@ export default function EditableTextWrapper({ data }) {
 const TextContainer = styled.div`
   position: relative;
   word-break: keep-all;
-  margin: 15px 30px 0px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Samlip';
+  margin: 0px 0px 12px 0px;
   &:hover {
     background-color: #feffbc;
   }
-`;
-
-const UpDownIconWrapper = styled.span`
-  position: absolute;
-  display: inline-block;
-`;
-
-const StyledThumbsUp = styled(GoThumbsup)`
-  margin: 0px 0px 0px 10px;
-`;
-const StyledThumbsDown = styled(GoThumbsdown)`
-  margin: 0px 0px 0px 10px;
 `;

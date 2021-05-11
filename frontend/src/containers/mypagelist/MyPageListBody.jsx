@@ -7,6 +7,7 @@ import { CgMathPlus } from 'react-icons/cg';
 import Card from '../../components/common/Card';
 import Modal from '../Modal';
 import ModalContent from '../../components/template/ModalContent';
+import AlertModal from '../../components/modal/AlertModal';
 
 const TempCard = {
   zzim: false,
@@ -18,6 +19,7 @@ const TempCard = {
 
 export default function TemplateBody() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const history = useHistory();
   const onZZimToggleHandler = () => {
     console.log('찜클릭');
@@ -29,6 +31,9 @@ export default function TemplateBody() {
 
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
+  };
+  const AlertModalToggleHandler = () => {
+    setIsAlertModalOpen(!isAlertModalOpen);
   };
 
   const onPlusCardClickHandler = () => {
@@ -44,6 +49,16 @@ export default function TemplateBody() {
           onClickTag={onTagClickHandler}
         />
       </Modal>
+      <Modal
+        isModalOpen={isAlertModalOpen}
+        ModalToggleHandler={AlertModalToggleHandler}
+      >
+        <AlertModal
+          PropsText="새 프로젝트를 만드시겠습니까?"
+          PropsComfirmHandler={() => onPlusCardClickHandler()}
+          PropsRejectHandler={() => AlertModalToggleHandler()}
+        />
+      </Modal>
       <CardWrapper>
         <Card
           thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
@@ -51,7 +66,7 @@ export default function TemplateBody() {
           onHandleZZim={onZZimToggleHandler}
           onClickTag={onTagClickHandler}
           propsWidth={280}
-          propsHeight={350}
+          propsHeight={330}
           propsFontSize={18}
           onClickImage={ModalToggleHandler}
         />
@@ -61,7 +76,7 @@ export default function TemplateBody() {
           onHandleZZim={onZZimToggleHandler}
           onClickTag={onTagClickHandler}
           propsWidth={280}
-          propsHeight={350}
+          propsHeight={330}
           propsFontSize={18}
           onClickImage={ModalToggleHandler}
         />
@@ -71,7 +86,7 @@ export default function TemplateBody() {
           onHandleZZim={onZZimToggleHandler}
           onClickTag={onTagClickHandler}
           propsWidth={280}
-          propsHeight={350}
+          propsHeight={330}
           propsFontSize={18}
           onClickImage={ModalToggleHandler}
         />
@@ -81,31 +96,12 @@ export default function TemplateBody() {
           onHandleZZim={onZZimToggleHandler}
           onClickTag={onTagClickHandler}
           propsWidth={280}
-          propsHeight={350}
+          propsHeight={330}
           propsFontSize={18}
           onClickImage={ModalToggleHandler}
         />
-        <Card
-          thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-          card={TempCard}
-          onHandleZZim={onZZimToggleHandler}
-          onClickTag={onTagClickHandler}
-          propsWidth={280}
-          propsHeight={350}
-          propsFontSize={18}
-          onClickImage={ModalToggleHandler}
-        />
-        <Card
-          thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-          card={TempCard}
-          onHandleZZim={onZZimToggleHandler}
-          onClickTag={onTagClickHandler}
-          propsWidth={280}
-          propsHeight={350}
-          propsFontSize={18}
-          onClickImage={ModalToggleHandler}
-        />
-        <PlusCard.Wrapper onClick={onPlusCardClickHandler}>
+
+        <PlusCard.Wrapper onClick={AlertModalToggleHandler}>
           <PlusCard.InnerContainer>
             <PlusCard.Icon />
           </PlusCard.InnerContainer>
@@ -116,10 +112,14 @@ export default function TemplateBody() {
 }
 
 const CardWrapper = styled.div`
-  width: 90%;
+  width: 87%;
   height: 90%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
 `;
 
 const PlusCard = {
@@ -128,11 +128,11 @@ const PlusCard = {
     justify-content: center;
     align-items: center;
     width: 280px;
-    height: 350px;
+    height: 330px;
     overflow: hidden;
     position: relative;
     border-radius: 30px;
-    margin: 30px auto;
+    margin: 10px 25px;
     background: linear-gradient(to bottom, #fef9d7, #d299c2);
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
@@ -156,5 +156,6 @@ const PlusCard = {
     width: 100px;
     height: 100px;
     color: #949494;
+    background-color: linear-gradient(to bottom, #fef9d7, #d299c2);
   `,
 };

@@ -14,7 +14,6 @@ export default function ScreenSlideDivider({ children }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   return (
     <SplitPanel.container>
       <SplitPane
@@ -57,27 +56,27 @@ export default function ScreenSlideDivider({ children }) {
 }
 
 const pane1StyleRow = {
-  padding: '5px 5px 35px 25px',
+  padding: '20px 35px 75px 45px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
 };
 
 const pane1StyleCol = {
-  padding: '5px 10px 10px 10px',
+  padding: '0px 20px 25px 25px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
 };
 const pane2StyleRow = {
-  padding: '5px 5px 35px 15px',
+  padding: '20px 35px 75px 45px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
 };
 
 const pane2StyleCol = {
-  padding: '5px 10px 10px 10px',
+  padding: '0px 20px 25px 25px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
@@ -86,11 +85,11 @@ const pane2StyleCol = {
 const SplitPanel = {
   container: styled.div`
     width: 100%;
-    height: 79vh;
+    height: 83vh;
 
     .SplitPane {
       position: relative !important;
-      padding: 10px;
+      padding: 5px;
     }
 
     .Resizer {
@@ -121,7 +120,7 @@ const SplitPanel = {
     .Resizer.horizontal {
       height: 13px;
       width: 90%;
-      margin: 0px auto;
+      margin: 5px auto;
       border-top: 5px solid rgba(255, 255, 255, 0);
       border-bottom: 5px solid rgba(255, 255, 255, 0);
     }

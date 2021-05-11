@@ -22,8 +22,8 @@ const InputForm = ({
   height,
   type,
   step,
-  minNum,
-  maxNum,
+  min,
+  max,
   value,
   onValueHandler,
 }) => {
@@ -55,8 +55,8 @@ const InputForm = ({
         autoFocus={true}
         type={type ? type : 'text'}
         step={step}
-        min={minNum}
-        max={maxNum}
+        min={min}
+        max={max}
       />
     </form>
   );
