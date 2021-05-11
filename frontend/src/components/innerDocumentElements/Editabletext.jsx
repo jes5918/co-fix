@@ -39,17 +39,18 @@ export default function Editabletext({
 }
 
 const StyleH1Input = styled.textarea`
-  width: 95%;
+  width: 98%;
   min-height: 30px;
   resize: none;
   overflow: hidden;
-  margin: 12px 6px -6px 12px;
-  padding: 7px;
+  margin: -2px -3px 0px 2px;
+  padding: 3px;
   font-size: 14px;
   word-break: keep-all;
   outline: none !important;
   border: none !important;
   font-size: 18px;
-  font-family: 'Roboto';
+  font-weight: bold;
+  font-family: 'Samlip';
   box-shadow: 2px 2px 4px 2px #c8c1c4;
 `;

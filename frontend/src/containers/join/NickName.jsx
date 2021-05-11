@@ -54,7 +54,7 @@ const RightFrame = styled.div`
   padding-bottom: 100px;
 `;
 
-export default function NickName({ onHandleSubmit }) {
+export default function NickName({ onHandleSubmit, onHandleValue, value }) {
   return (
     <ContainerFrame>
       <LeftFrame>
@@ -62,7 +62,12 @@ export default function NickName({ onHandleSubmit }) {
         <InputLabel>입력해주세요.</InputLabel>
       </LeftFrame>
       <RightFrame>
-        <InputForm width={400} height={70}></InputForm>
+        <InputForm
+          width={400}
+          height={70}
+          onValueHandler={onHandleValue}
+          value={value}
+        ></InputForm>
         <BasicButton
           text={'다음'}
           width={400}

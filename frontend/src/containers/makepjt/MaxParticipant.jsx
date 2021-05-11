@@ -64,10 +64,10 @@ export default function MaxParticipant({ onHandleNext, value, onHandleValue }) {
         <InputForm
           width={400}
           height={70}
-          type={'number'}
           step="1"
+          type="number"
           min="1"
-          max="20"
+          max="10"
           value={value}
           onValueHandler={onHandleValue}
         ></InputForm>
