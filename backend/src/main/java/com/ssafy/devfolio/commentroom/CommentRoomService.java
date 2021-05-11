@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +22,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +43,7 @@ public class CommentRoomService {
     private final HashOperations<String, String, String> hashOperations;
     private final ListOperations<String, String> listOperations;
 
+    private final ChannelTopic channelTopic;
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
 
@@ -222,5 +228,13 @@ public class CommentRoomService {
         return commentRoomIds.stream()
                 .map(wrapper(this::getCommentRoomById))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 소켓
+     * 첨삭방 전체 리턴하는 메서드
+     */
+    public void sendCommentRoom(CommentRoom commentRoom) {
+        redisTemplate.convertAndSend(channelTopic.getTopic(), commentRoom);
     }
 }
