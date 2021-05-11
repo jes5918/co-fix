@@ -46,5 +46,6 @@ public class CommentRoom implements Serializable {
 
     public void closeCommentRoom() {
         this.status = RoomStatus.CLOSED;
+        this.lastModifiedDate = LocalDateTime.now();
     }
 }
