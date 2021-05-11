@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 // library
@@ -54,7 +54,7 @@ const CustomTab = ({ children }) => (
       boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
       fontWeight: 'bold',
       fontSize: '20px',
-      background: 'linear-gradient(to top, #fef9d7, #d299c2)',
+      background: 'linear-gradient(to bottom, #fef9d7, #d299c2)',
     }}
     // onMouseEnter={(e) => (e.target.style.backgroundColor = '#d3d3d3')}
     // onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
@@ -64,13 +64,23 @@ const CustomTab = ({ children }) => (
 );
 
 CustomTab.tabsRole = 'Tab';
-
 export default function MyPage() {
   const [tabIndex, setTabIndex] = useState(0);
+  const [windowWidthSize, setWindowWidthSize] = useState(window.innerWidth);
+  const isHalfScreen = windowWidthSize > screen.width / 1.85;
+  const isMobileScreen = windowWidthSize > screen.width / 3;
+
   const datas = useSelector((state) => {
     return state.document;
   });
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidthSize(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <BackGround>
       <StyledTabs
@@ -79,24 +89,33 @@ export default function MyPage() {
       >
         <TabList style={TabListStyle}>
           <CustomTab>1</CustomTab>
-          <CustomTab>2</CustomTab>
-          {tabIndex === 0 ? (
-            <TagName>자소서 / 첨삭 결과 </TagName>
-          ) : (
-            <TagName>원본 자소서 / 수정 자소서</TagName>
-          )}
+          <CustomTab>2</CustomTab>{' '}
+          {isHalfScreen ? (
+            <>
+              {windowWidthSize && tabIndex === 0 ? (
+                <TagName>자소서 / 첨삭 결과 </TagName>
+              ) : (
+                <TagName>원본 자소서 / 수정 자소서</TagName>
+              )}
+            </>
+          ) : null}
         </TabList>
         <MyPageContainer>
           <MyPageHeader>
-            {datas && <MyPageTitle>{datas.title}</MyPageTitle>}
+            {isMobileScreen ? (
+              <>{datas && <MyPageTitle>{datas.title}</MyPageTitle>}</>
+            ) : (
+              <MyPageTitle></MyPageTitle>
+            )}
           </MyPageHeader>
+
           <TabPanel>
             <ScreenSlideDivider>
               <>
+                <CalcContentLength datas={datas.statements} />
                 <Scrollbar style={{ width: '100%', height: '100%' }}>
                   <DocumentContainer />
                 </Scrollbar>
-                <CalcContentLength datas={datas.statements} />
               </>
               <Scrollbar style={{ width: '100%', height: '100%' }}>
                 <TEST />
@@ -107,10 +126,10 @@ export default function MyPage() {
           <TabPanel>
             <ScreenSlideDivider>
               <>
+                <CalcContentLength datas={datas.statements} />
                 <Scrollbar style={{ width: '100%', height: '100%' }}>
                   <DocumentContainer />
                 </Scrollbar>
-                <CalcContentLength datas={datas.statements} />
               </>
               <Scrollbar style={{ width: '100%', height: '100%' }}>
                 <CommentContainer data={testData} />
@@ -128,7 +147,7 @@ export default function MyPage() {
 const BackGround = styled.div`
   width: 100vw;
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 86px;
   background-color: #ffffff;
 `;
 
@@ -138,15 +157,16 @@ const TabListStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  margin: '20px 7vw',
+  margin: '-4px 9vw',
   border: 'none',
   zIndex: 300,
   padding: '0px',
 };
 
+// 탭 태그 네임
 const TagName = styled.div`
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 `;
 
 const StyledTabs = styled(Tabs)`
@@ -169,8 +189,8 @@ const StyledTabs = styled(Tabs)`
 const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 90vh;
+  width: 85%;
+  height: 80vh;
   margin: 0px auto;
   font-family: 'Roboto';
   font-size: 18px;
@@ -185,15 +205,13 @@ const MyPageHeader = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
-  margin: 0px auto 30px;
 `;
 
 const MyPageTitle = styled.div`
-  margin-top: 20px;
-  background-color: transparent;
-  padding: 8px 20px;
-  font-size: 20px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  height: 50px;
+  font-size: 21px;
   font-weight: bold;
-  border-radius: 255px 15px 255px 15px/15px 255px 15px 255px;
-  /* box-shadow: 0px 0px 8px 1px hsla(0, 0%, 0%, 0.3); */
 `;

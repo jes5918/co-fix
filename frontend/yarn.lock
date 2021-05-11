@@ -1526,6 +1526,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@ramonak/react-progress-bar@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@ramonak/react-progress-bar/-/react-progress-bar-3.1.0.tgz#da5fefd0668b064a4bb9dead639eb0edf644e757"
+  integrity sha512-jTijspNx6dLwHBZbPZ5n0ZcXn14UrE8TWq6U86iwhIDzU746FK4QtKVCucHAC0QIBah7UBffolY2Lux4U9KtRQ==
+
 "@react-spring/animated@~9.1.2":
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/@react-spring/animated/-/animated-9.1.2.tgz#e43b122160f8f4cbb0caac8a7f57acd76dd12369"

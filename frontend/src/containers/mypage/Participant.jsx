@@ -36,7 +36,7 @@ export default function Participant() {
 
 const Wrapper = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 3vh;
   right: 0;
   z-index: 99;
   transition: all 0.2s ease-in-out;
@@ -54,7 +54,7 @@ const PersonListButton = styled.div`
   align-items: center;
   width: 60px;
   height: 60px;
-  margin-right: 75px;
+  margin-right: 4vw;
   /* padding: 20px; */
   font-family: 'Samlip';
   font-size: 20px;
