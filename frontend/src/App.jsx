@@ -9,8 +9,7 @@ import MyPage from './views/MyPage';
 import MyPageList from './views/MyPageList';
 import Create from './views/Create';
 import Join from './views/Join';
-import TestArea from './views/TestArea';
-import Room from './views/Room';
+import CommonWorkPage from './views/CommonWorkPage';
 
 // container
 import NavBar from './containers/NavBar';
@@ -41,7 +40,7 @@ function App() {
         color="220, 110, 90"
         outerAlpha={0.1}
         innerScale={0.8}
-        outerScale={4}
+        outerScale={4} 
       /> */}
       <Switch>
         <Route path="/" component={Home} exact />
@@ -49,8 +48,7 @@ function App() {
         <Route path="/mypage" component={MyPage} />
         <Route path="/create" component={Create} />
         <Route path="/join" component={Join} />
-        <Route path="/testArea" component={TestArea} />
-        <Route path="/room" component={Room} />
+        <Route path="/commonWorkPage" component={CommonWorkPage} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>

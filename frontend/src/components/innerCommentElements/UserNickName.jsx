@@ -6,13 +6,13 @@ import styled from 'styled-components';
 const S = {
   UserNickName: styled.span`
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
     font-family: 'Samlip';
   `,
 };
 
-function UserNickName({ nickname }) {
-  return <S.UserNickName>{nickname}</S.UserNickName>;
+function UserNickName({ nickName }) {
+  return <S.UserNickName>{nickName}</S.UserNickName>;
 }
 
 export default UserNickName;
