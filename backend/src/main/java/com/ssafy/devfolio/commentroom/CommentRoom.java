@@ -1,6 +1,6 @@
 package com.ssafy.devfolio.commentroom;
 
-import lombok.Builder;
+import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -46,5 +46,6 @@ public class CommentRoom implements Serializable {
 
     public void closeCommentRoom() {
         this.status = RoomStatus.CLOSED;
+        this.lastModifiedDate = LocalDateTime.now();
     }
 }
