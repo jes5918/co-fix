@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SplitPane from 'react-split-pane';
 
-export default function ScreenSlideDivider({ children }) {
+export default function ScreenSlideDivider({ children, setSplitPosX }) {
   const [windowWidthSize, setWindowWidthSize] = useState(window.innerWidth);
   const [windowHeightSize, setWindowHeightSize] = useState(window.innerHeight);
 
@@ -38,6 +38,7 @@ export default function ScreenSlideDivider({ children }) {
               window.innerHeight / 2
         }
         onChange={(size) => {
+          setSplitPosX(size);
           windowWidthSize >= screen.width / 1.85
             ? localStorage.setItem('myPageSplitPosX', size)
             : localStorage.setItem('myPageSplitPosY', size);
@@ -56,7 +57,7 @@ export default function ScreenSlideDivider({ children }) {
 }
 
 const pane1StyleRow = {
-  padding: '20px 35px 75px 45px',
+  padding: '35px 35px 75px 45px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
