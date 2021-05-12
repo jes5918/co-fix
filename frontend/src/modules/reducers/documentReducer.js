@@ -4,6 +4,7 @@ import {
   SELECT_DOCUMENT_TEXT,
   SET_DOCUMENT_TITLE,
 } from '../types';
+
 const initialState = {
   selectNum: 0,
   title: '',
@@ -30,6 +31,6 @@ export default function (state = initialState, action) {
       return { ...state, selectNum: action.payload };
     }
     default:
-      return { ...state };
+      return state;
   }
 }

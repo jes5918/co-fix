@@ -30,7 +30,9 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const user = useLoginUser();
+  const user = useLoginUser((s) => {
+    return s;
+  });
 
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
