@@ -48,7 +48,7 @@ function App() {
         <Route path="/mypage" component={MyPage} />
         <Route path="/create" component={Create} />
         <Route path="/join" component={Join} />
-        <Route path="/commonWorkPage" component={CommonWorkPage} />
+        <Route path="/co-fix/:id" component={CommonWorkPage} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>

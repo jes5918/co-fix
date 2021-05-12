@@ -10,6 +10,12 @@ export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 // document Container
+export const SET_DOCUMENT = 'SET_DOCUMENT';
 export const MODIFY_DOCUMENT_TEXT = 'MODIFY_DOCUMENT_TEXT';
 export const SELECT_DOCUMENT_TEXT = 'SELECT_DOCUMENT_TEXT';
 export const SET_COMMENT_TEXT = 'SET_COMMENT_TEXT';
+
+export const SET_DOCUMENT_TITLE = 'SET_DOCUMENT_TITLE';
+
+export const SET_ROOM_INFO = 'SET_ROOM_INFO';
+export const RESET_ROOM_INFO = 'RESET_ROOM_INFO';

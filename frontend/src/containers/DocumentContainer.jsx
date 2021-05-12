@@ -6,7 +6,7 @@ import EditableTextWrapper from '../components/innerDocumentElements/EditableTex
 
 function DocumentContainer(props) {
   const datas = useSelector((state) => {
-    return state.document.statements;
+    return state.document.data;
   });
 
   return (
