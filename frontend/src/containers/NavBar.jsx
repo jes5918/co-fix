@@ -90,7 +90,7 @@ export default function NavBar({ isLoggedIn }) {
                   <Link to="/create">Create</Link>
                 </NavbarItem>
                 <NavbarItem>
-                  <Link to="/commonWorkPage">commonWorkPage</Link>
+                  <Link to="/co-fix/fasdf">Co-Fix</Link>
                 </NavbarItem>
                 <BasicButton
                   onClickHandler={LogoutHandler}
