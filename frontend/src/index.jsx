@@ -15,16 +15,16 @@ import './index.css';
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <GlobalFonts />
-        <GlobalStyles />
-        <Router>
-          <App />
-        </Router>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <GlobalFonts />
+      <GlobalStyles />
+      <Router>
+        <App />
+      </Router>
+    </PersistGate>
+  </Provider>,
+  // </React.StrictMode>,
   document.getElementById('root'),
 );

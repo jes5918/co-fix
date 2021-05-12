@@ -75,7 +75,8 @@ export default function MyPage() {
   const isMobileScreen = windowWidthSize > screen.width / 3;
 
   const datas = useSelector((state) => {
-    return state.document;
+    console.log(`state.document.data`, state.document.data);
+    return state.document.data;
   });
 
   useEffect(() => {
@@ -120,14 +121,16 @@ export default function MyPage() {
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <DocumentContainer />
                 </Scrollbars>
-                <CalcContentLength
-                  datas={datas.statements}
-                  splitPosX={splitPosX}
-                  windowWidthSize={windowWidthSize}
-                />
+                {datas && (
+                  <CalcContentLength
+                    datas={datas}
+                    splitPosX={splitPosX}
+                    windowWidthSize={windowWidthSize}
+                  />
+                )}
               </>
               <Scrollbars style={{ width: '100%', height: '100%' }}>
-                <TEST />
+                {/* <TEST /> */}
                 {/* <CommentContainer /> */}
               </Scrollbars>
             </ScreenSlideDivider>
@@ -138,11 +141,13 @@ export default function MyPage() {
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <DocumentContainer />
                 </Scrollbars>
-                <CalcContentLength
-                  datas={datas.statements}
-                  splitPosX={splitPosX}
-                  windowWidthSize={windowWidthSize}
-                />
+                {datas && (
+                  <CalcContentLength
+                    datas={datas}
+                    splitPosX={splitPosX}
+                    windowWidthSize={windowWidthSize}
+                  />
+                )}
               </>
               <Scrollbars style={{ width: '100%', height: '100%' }}>
                 <CommentContainer data={testData} />
