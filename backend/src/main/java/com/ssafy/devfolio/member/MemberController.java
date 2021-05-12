@@ -2,7 +2,6 @@ package com.ssafy.devfolio.member;
 
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.CommentRoomService;
-import com.ssafy.devfolio.member.domain.MemberDetails;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
 import com.ssafy.devfolio.utils.Utility;
@@ -14,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,8 +39,7 @@ public class MemberController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/commentRooms")
     public ResponseEntity getMemberRooms() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long memberId = ((MemberDetails) authentication.getPrincipal()).getMemberId();
+        Long memberId = getMemberIdFromAuthentication();
 
         List<CommentRoom> commentRooms = commentRoomService.getMemberRooms(memberId);
 
