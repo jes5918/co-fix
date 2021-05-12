@@ -53,4 +53,9 @@ public class MemberService implements UserDetailsService {
         return memberRepository.save(member);
     }
 
+    public Member getTestMember() {
+        return memberRepository
+                .findByEmail("kminheuk@gmail.com")
+                .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
+    }
 } 
