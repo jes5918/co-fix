@@ -13,11 +13,11 @@ function CalcContentLength({ datas, splitPosX, windowWidthSize }) {
   };
 
   useEffect(() => {
-    let contentLength = 0;
+    let contentLengthTemp = 0;
     datas.forEach((data) => {
-      contentLength += data.content.length;
+      contentLengthTemp += data.modifiedContent.length;
     });
-    setContentLength(contentLength);
+    setContentLength(contentLengthTemp);
   }, [datas]);
 
   // progress bar percent 계산

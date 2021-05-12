@@ -37,7 +37,7 @@ function AuthorizationInstance() {
       const accToken = await getToken();
       // const token = 'Bearer' + accToken;
       const temp =
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImlhdCI6MTYyMDc5MTYxMSwiZXhwIjoxNjIwNzk1MjExfQ.brBu0n4LGQlU33NhIemon4oykrAFmw_klGJAdNaTwlI';
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjIwNzk5MTE2LCJleHAiOjE2MjA4MDI3MTZ9.hp54Z_4XLw_7NKuddQbtQmmzYb0nET03uwEXmn_Nzj8';
       const token = 'Bearer ' + temp;
 
       config.headers = {
