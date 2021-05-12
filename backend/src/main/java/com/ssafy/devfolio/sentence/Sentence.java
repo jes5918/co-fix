@@ -35,7 +35,7 @@ public class Sentence {
 
         sentence.sentenceId = UUID.randomUUID().toString();
         sentence.originalContent = originalContent;
-        sentence.modifiedContent = "";
+        sentence.modifiedContent = originalContent;
         sentence.positive = Feeling.create();
         sentence.negative = Feeling.create();
         sentence.hasComment = false;
