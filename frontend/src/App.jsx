@@ -10,6 +10,7 @@ import MyPageList from './views/MyPageList';
 import Create from './views/Create';
 import Join from './views/Join';
 import CommonWorkPage from './views/CommonWorkPage';
+import OpenviduTest from './views/OpenviduTest';
 
 // container
 import NavBar from './containers/NavBar';
@@ -49,6 +50,7 @@ function App() {
         <Route path="/create" component={Create} />
         <Route path="/join" component={Join} />
         <Route path="/co-fix/:id" component={CommonWorkPage} />
+        <Route path="/openvidutest" component={OpenviduTest} />
         {/* <PrivateRoute /> */}
       </Switch>
     </>
