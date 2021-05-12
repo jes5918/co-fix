@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
+import com.ssafy.devfolio.sentence.dto.FeelingRequest;
+import com.ssafy.devfolio.sentence.dto.FeelingType;
 import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
@@ -79,5 +81,29 @@ public class SentenceService {
         }
 
         return objectMapper.readValue(hashOperations.get(DOCUMENT_PREFIX + documentId, sentenceId), Sentence.class);
+    }
+
+    public void pressFeeling(String documentId, String sentenceId, FeelingRequest request) throws JsonProcessingException {
+        String nickname = request.getNickname();
+        FeelingType feelingType = request.getFeelingType();
+        Sentence sentence = getSentence(documentId, sentenceId);
+
+        if (feelingType.equals(FeelingType.POSITIVE)) {
+            Feeling positive = sentence.getPositive();
+            if (positive.getMembers().contains(nickname)) {
+                positive.cancelFeeling(nickname);
+            } else {
+                positive.pressFeeling(nickname);
+            }
+        } else if (feelingType.equals(FeelingType.NEGATIVE)) {
+            Feeling negative = sentence.getNegative();
+            if (negative.getMembers().contains(nickname)) {
+                negative.cancelFeeling(nickname);
+            } else {
+                negative.pressFeeling(nickname);
+            }
+        }
+
+        hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
     }
 }
