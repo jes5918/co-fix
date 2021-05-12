@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
+import { documentGetAction } from '../modules/actions/documentActions';
 
 // container
 import Title from '../containers/makepjt/Title';
@@ -12,15 +15,17 @@ import { FaAngleLeft } from 'react-icons/fa';
 import { useHistory } from 'react-router';
 
 //api
-import { createRoom } from '../api/createRoom';
+import { createRoom, getRoomInfo, closeRoom } from '../api/co-fix';
+import { getDocuments } from '../api/documents';
 
 // modal component
 import Modal from '../containers/Modal';
 import AlertModal from '../components/modal/AlertModal';
 
 export default function Create() {
-  const [current, setCurrent] = useState(0);
   const history = useHistory();
+  const dispatch = useDispatch();
+  const [current, setCurrent] = useState(0);
   const [title, setTitle] = useState('');
   const [maxcnt, setMaxcnt] = useState(1);
   const [text, setText] = useState('');
@@ -49,6 +54,19 @@ export default function Create() {
         info,
         (res) => {
           console.log(`res`, res.data.data);
+          dispatch(saveRoomInfo(res.data.data));
+          // documentId로 조회
+          getDocuments(
+            res.data.data.documentId,
+            (response) => {
+              console.log(`response`, response);
+              dispatch(documentGetAction(response.data.data));
+              history.push(`/co-fix/${res.data.data.roomId}`);
+            },
+            (error) => {
+              console.log(`error`, error);
+            },
+          );
         },
         (err) => {
           console.error('err', err.response.data);

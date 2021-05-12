@@ -1,6 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
+import { getRoomInfo, closeRoom } from '../api/co-fix';
 // library
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars-2';
@@ -13,8 +14,16 @@ import CommentContainer from '../containers/CommentContainer';
 // components
 import CalcContentLength from '../containers/mypage/CalcContentLength';
 
+import useRoomInfo from '../hook/useRoomInfo';
+
 export default function CommonWorkPage() {
+  const dispatch = useDispatch();
+  const room = useRoomInfo();
   // redux에 저장되어있는 documentReducer 가져오기
+  useEffect(() => {
+    console.log('room', room);
+    console.log('pincode', room.pinNumber);
+  }, [room]);
 
   return (
     <S.CommonWorkPage>

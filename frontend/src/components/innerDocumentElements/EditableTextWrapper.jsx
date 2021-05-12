@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import Editabletext from './Editabletext';
 
 export default function EditableTextWrapper({ data }) {
-  const { content } = data;
+  const { modifiedContent } = data;
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -24,11 +24,12 @@ export default function EditableTextWrapper({ data }) {
 
   const setNewValue = (newValue) => {
     const updateData = {
-      id: data.id,
-      content: newValue,
-      comments: data.comments,
+      ...data,
+      sentenceId: data.sentenceId,
+      modifiedContent: newValue,
     };
     dispatch(documentModifyAction(updateData));
+    // backend 로 수정하는거 보내야 하는 자리 (츄츄가)
   };
 
   return (
@@ -38,13 +39,13 @@ export default function EditableTextWrapper({ data }) {
           onDoubleClick={editorModeToggleHandler}
           onClick={selectDocumentHandler}
         >
-          {content}
+          {modifiedContent}
         </TextContainer>
       ) : (
         <Editabletext
           editorModeToggleHandler={editorModeToggleHandler}
           setNewValue={setNewValue}
-          content={content}
+          content={modifiedContent}
         />
       )}
     </>
