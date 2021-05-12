@@ -8,6 +8,7 @@ import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
 import com.ssafy.devfolio.member.domain.Member;
 import com.ssafy.devfolio.sentence.Sentence;
+import com.ssafy.devfolio.utils.FunctionExceptionWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 
 @Service
 @RequiredArgsConstructor
@@ -215,5 +219,15 @@ public class CommentRoomService {
         }
 
         return commentRoom;
+    }
+
+    public List<CommentRoom> getMemberRooms(Long memberId) {
+        Long size = listOperations.size(MEMBER_ROOM_PREFIX + memberId);
+
+        List<String> commentRoomIds = listOperations.range(MEMBER_ROOM_PREFIX + memberId, 0, size - 1);
+
+        return commentRoomIds.stream()
+                .map(wrapper(this::getCommentRoomById))
+                .collect(Collectors.toList());
     }
 }

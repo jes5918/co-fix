@@ -1,7 +1,6 @@
 package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ssafy.devfolio.member.domain.MemberDetails;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
@@ -12,11 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,8 +45,7 @@ public class SentenceController {
     public ResponseEntity fixSentence(@ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
                                       @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                       @ApiParam(value = "문장 수정 정보", required = true) @RequestBody SentenceFixRequest request) throws JsonProcessingException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long memberId = ((MemberDetails) authentication.getPrincipal()).getMemberId();
+        Long memberId = getMemberIdFromAuthentication();
 
         sentenceService.fixSentence(memberId, documentId, sentenceId, request);
 
