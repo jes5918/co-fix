@@ -200,6 +200,10 @@ public class CommentRoomService {
     public CommentRoom enterCommentRoom(String pinNumber, String nickname) throws JsonProcessingException {
         CommentRoom commentRoom = getCommentRoom(pinNumber);
 
+        if (commentRoom.getStatus().equals(RoomStatus.CLOSED)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_CLOSED_EXCEPTION);
+        }
+
         int enterResult = commentRoom.enterCommentRoom(nickname);
 
         // 첨삭방 정보 저장
