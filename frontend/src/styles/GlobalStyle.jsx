@@ -11,9 +11,9 @@ const GlobalStyles = createGlobalStyle`
     }
     body{
         margin:0;
-    
         font-size:14px;
         font-family: 'NotoSans';
+        overflow-x: hidden;
     }
     a{
         text-decoration:none;
