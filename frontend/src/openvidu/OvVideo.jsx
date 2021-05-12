@@ -28,7 +28,8 @@ const V = {
   Video: styled.video`
     width: 100%;
     height: auto;
-    float: left;
-    cursor: pointer;
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
   `,
 };
