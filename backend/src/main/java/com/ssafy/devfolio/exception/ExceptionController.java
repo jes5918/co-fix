@@ -1,5 +1,7 @@
 package com.ssafy.devfolio.exception;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +14,6 @@ public class ExceptionController {
 
     @GetMapping("/authentication")
     public void authenticationException() {
-        throw new BaseException(ErrorCode.UNAUTHORIZED);
-    }
-
-    @GetMapping("/accessdenied")
-    public void accessDeniedException() {
-        throw new BaseException(ErrorCode.FORBIDDEN);
+        throw new CustomAuthenticationEntryException(ErrorCode.UNAUTHORIZED);
     }
 }

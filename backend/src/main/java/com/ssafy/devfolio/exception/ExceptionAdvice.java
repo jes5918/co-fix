@@ -4,6 +4,7 @@ import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -14,7 +15,7 @@ public class ExceptionAdvice {
     private final ResponseService responseService;
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<BaseResponse> defaultException(Exception e) {
+    protected ResponseEntity<BaseResponse> defaultException(Exception e) {
         BaseResponse failResponse = responseService.getFailResponse(ErrorCode.INTERNAL_SERVER_ERROR);
 
         return ResponseEntity
@@ -23,7 +24,7 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<BaseResponse> runtimeException(RuntimeException e) {
+    protected ResponseEntity<BaseResponse> runtimeException(RuntimeException e) {
         BaseResponse failResponse = responseService.getFailResponse(ErrorCode.RUNTIME_EXCEPTION);
 
         return ResponseEntity
@@ -32,7 +33,7 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler(BaseException.class)
-    public ResponseEntity<BaseResponse> baseException(BaseException e) {
+    protected ResponseEntity<BaseResponse> baseException(BaseException e) {
         BaseResponse failResponse = responseService.getFailResponse(e.getErrorCode());
 
         return ResponseEntity
@@ -40,4 +41,21 @@ public class ExceptionAdvice {
                 .body(failResponse);
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    protected ResponseEntity<BaseResponse> accessDeniedException(AccessDeniedException e) {
+        BaseResponse failResponse = responseService.getFailResponse(ErrorCode.FORBIDDEN);
+
+        return ResponseEntity
+                .status(failResponse.getStatus())
+                .body(failResponse);
+    }
+
+    @ExceptionHandler(CustomAuthenticationEntryException.class)
+    protected ResponseEntity<BaseResponse> customAuthenticationEntryException(CustomAuthenticationEntryException e) {
+        BaseResponse failResponse = responseService.getFailResponse(e.getErrorCode());
+
+        return ResponseEntity
+                .status(failResponse.getStatus())
+                .body(failResponse);
+    }
 }
