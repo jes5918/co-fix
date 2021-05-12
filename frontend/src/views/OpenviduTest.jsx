@@ -6,26 +6,19 @@ import OpenViduMain from '../openvidu/OpenViduMain';
 export default function OpenviduTest() {
   return (
     <O.Container>
-      <O.Wrapper>
-        <OpenViduMain />
-      </O.Wrapper>
+      <OpenViduMain />
     </O.Container>
   );
 }
 
 const O = {
   Container: styled.div`
+    display: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    padding-top: 100px;
-  `,
-  Wrapper: styled.div`
-    width: 80vw;
-    height: 80vh;
-    padding-top: 100px;
-    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
+    padding-top: 86px;
   `,
 };

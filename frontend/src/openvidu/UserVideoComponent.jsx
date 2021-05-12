@@ -8,31 +8,47 @@ export default function UserVideoComponent({ streamManager }) {
   };
 
   return (
-    <U.Wrapper>
+    <>
       {streamManager !== undefined ? (
         <U.Streamcomponent>
           <OpenViduVideoComponent streamManager={streamManager} />
-          <div>
+          <U.PtagWrraper>
             <U.Ptag>{getNicknameTag()}</U.Ptag>
-          </div>
+          </U.PtagWrraper>
         </U.Streamcomponent>
       ) : null}
-    </U.Wrapper>
+    </>
   );
 }
 
 const U = {
-  Wrapper: styled.div``,
   Streamcomponent: styled.div`
+    position: relative;
+    width: 100%;
+    height: auto;
+  `,
+  PtagWrraper: styled.div`
     position: absolute;
-    background: #f8f8f8;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #777777;
-    font-weight: bold;
-    border-bottom-right-radius: 4px;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px;
+    align-items: center;
   `,
   Ptag: styled.p`
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 22px;
+    margin-top: 5px;
+    padding: 0px 7px;
+    background: #dcdcda;
+    color: #777777;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'NotoSans';
+    border-radius: 10px;
   `,
 };
