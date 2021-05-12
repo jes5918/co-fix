@@ -1,6 +1,7 @@
 package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.devfolio.member.domain.MemberDetails;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
@@ -45,7 +46,7 @@ public class SentenceController {
                                       @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                       @ApiParam(value = "문장 수정 정보", required = true) @RequestBody SentenceFixRequest request) throws JsonProcessingException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        long memberId = Long.parseLong(authentication.getName());
+        Long memberId = ((MemberDetails) authentication.getPrincipal()).getMemberId();
 
         sentenceService.fixSentence(memberId, documentId, sentenceId, request);
 

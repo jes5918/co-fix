@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
+import com.ssafy.devfolio.member.domain.MemberDetails;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.SingleDataResponse;
@@ -34,7 +35,7 @@ public class CommentRoomController {
     public ResponseEntity createCommentRoom(@ApiParam(value = "첨삭방 생성 정보", required = true) @RequestBody CreateCommentRoomRequest request) throws JsonProcessingException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        long memberId = Long.parseLong(authentication.getName());
+        Long memberId = ((MemberDetails) authentication.getPrincipal()).getMemberId();
 
         if (request.getMemberLimit() <= 0) {
             throw new BaseException(ErrorCode.COMMENT_ROOM_INVALID_MEMBER_LIMIT);
@@ -55,7 +56,7 @@ public class CommentRoomController {
     @PatchMapping("/{commentRoomId}")
     public ResponseEntity closeCommentRoom(@ApiParam(value = "첨삭방 id", required = true) @PathVariable String commentRoomId) throws JsonProcessingException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        long memberId = Long.parseLong(authentication.getName());
+        Long memberId = ((MemberDetails) authentication.getPrincipal()).getMemberId();
 
         commentRoomService.closeCommentRoom(commentRoomId, memberId);
 
@@ -85,7 +86,7 @@ public class CommentRoomController {
                                              @ApiParam(value = "수정할 인원 제한(1 이상 정수)", required = false) @RequestParam(value = "memberLimit", required = false, defaultValue = "0") int memberLimit) throws JsonProcessingException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        long memberId = Long.parseLong(authentication.getName());
+        Long memberId = ((MemberDetails) authentication.getPrincipal()).getMemberId();
 
         if (roomTitle != null) {
             commentRoomService.fixRoomtitle(commentRoomId, roomTitle, memberId);

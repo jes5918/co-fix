@@ -70,4 +70,15 @@ public class OAuthController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @ApiOperation(value = "테스트용 로그인", notes = "테스트 종료후 삭제 예정")
+    @GetMapping("/test")
+    public ResponseEntity test() {
+        Member testMember = memberService.getTestMember();
+        String token = jwtTokenProvider.createToken(testMember);
+        LoginSuccess data = LoginSuccess.loginSuccess(testMember, token);
+
+        SingleDataResponse<LoginSuccess> response = responseService.getSingleDataResponse(data, HttpStatus.OK);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 }

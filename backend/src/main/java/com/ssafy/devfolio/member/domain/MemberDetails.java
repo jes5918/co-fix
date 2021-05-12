@@ -18,6 +18,8 @@ public class MemberDetails implements UserDetails {
         this.authorities = authorities;
     }
 
+    public Long getMemberId() { return this.member.getId(); }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
