@@ -7,3 +7,5 @@ function createRoom(info, success, fail) {
 }
 
 export { createRoom };
+
+//임시로 만들어놓은 페이지입니다 없어질꺼에요.

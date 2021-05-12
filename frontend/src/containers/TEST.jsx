@@ -5,25 +5,23 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 export default function TEST() {
-  const { id, content, comments } = useSelector((state) => {
+  const { sentenceId, content, comments } = useSelector((state) => {
     const selectNum = state.document.selectNum;
-    return state.document.statements.filter((content) => {
-      return content.id === selectNum;
+    return state.document.data.filter((content) => {
+      return content.sentenceId === selectNum;
     })[0];
   });
 
   return (
     <Wrapper>
-      <h3>글번호 : {id}</h3>
+      <h3>글번호 : {sentenceId}</h3>
       <h3>글내용 : {content}</h3>
       <hr />
       {comments.length ? (
-        comments.map((comment) => {
+        comments.map((comment, idx) => {
           return (
             <>
-              <div key={comment.id}>
-                댓글번호 {comment.id} : {comment.content}
-              </div>
+              <div key={idx}>댓글 : {comment.content}</div>
             </>
           );
         })
