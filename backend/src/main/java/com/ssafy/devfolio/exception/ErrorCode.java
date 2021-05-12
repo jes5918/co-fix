@@ -26,6 +26,7 @@ public enum ErrorCode {
     COMMENT_ROOM_ONLY_CLOSED_BY_OWNER_EXCEPTION(HttpStatus.BAD_REQUEST, "0302", "첨삭방 만든 유저만 방 닫을 수 있음"),
     COMMENT_ROOM_ONLY_FIXED_BY_OWNER_EXCEPTION(HttpStatus.BAD_REQUEST, "0303", "첨삭방 만든 사람만 방 정보 수정 가능"),
     COMMENT_ROOM_INVALID_MEMBER_LIMIT(HttpStatus.BAD_REQUEST, "0304", "첨삭방 인원 제한은 0보다 큰 정수만 가능"),
+    COMMENT_ROOM_INVALID_NICKNAME(HttpStatus.BAD_REQUEST, "0305", "잘못된 닉네임"),
 
     // 감정 표현
     FEELING_MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "0401", "감정표현 누른 사람만 취소 가능"),
