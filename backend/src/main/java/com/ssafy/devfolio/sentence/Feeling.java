@@ -38,11 +38,7 @@ public class Feeling {
         if (this.count <= 0) {
             throw new BaseException(ErrorCode.FEELING_CANCEL_FAIL_EXCEPTION);
         }
-
-        if (!this.members.contains(nickname)) {
-            throw new BaseException(ErrorCode.FEELING_MEMBER_NOT_EXIST);
-        }
-
+        this.count -= 1;
         this.members.remove(nickname);
     }
 }
