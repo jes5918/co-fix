@@ -6,6 +6,7 @@ import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
+import com.ssafy.devfolio.member.domain.Member;
 import com.ssafy.devfolio.sentence.Sentence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
@@ -44,6 +45,8 @@ public class CommentRoomService {
     }
 
     public CommentRoom createCommentRoom(CreateCommentRoomRequest request, Long memberId) throws JsonProcessingException {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
         CommentRoom commentRoom = CommentRoom.createCommentRoom(request, memberId);
 
         // 주어진 문서 문장으로 쪼개서 저장
@@ -51,6 +54,9 @@ public class CommentRoomService {
 
         // 핀번호 생성
         commentRoom.setPinNumber(createPinNumber(PIN_NUMBER_DIGITS));
+
+        //참가자 정보 저장
+        commentRoom.enterCommentRoom(member.getName());
 
         // redis에 첨삭방 저장
         String commentRoomToString = objectMapper.writeValueAsString(commentRoom);
@@ -63,9 +69,7 @@ public class CommentRoomService {
         valueOperations.set(PIN_CHECK_PREFIX + commentRoom.getPinNumber(), commentRoom.getRoomId());
 
         // 참가자 정보 저장
-        memberRepository.findById(memberId)
-                .map(m -> listOperations.rightPush(PARTICIPANT_PREFIX + commentRoom.getRoomId(), m.getName()))
-                .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
+        listOperations.rightPush(PARTICIPANT_PREFIX + commentRoom.getRoomId(), member.getName());
 
         return commentRoom;
     }
@@ -138,7 +142,7 @@ public class CommentRoomService {
         return sentences;
     }
 
-    public void fixRoomtitle(String commentRoomId, String roomTitle, Long memberId) throws JsonProcessingException {
+    public void fixRoomTitle(String commentRoomId, String roomTitle, Long memberId) throws JsonProcessingException {
         CommentRoom commentRoom = getCommentRoomById(commentRoomId);
 
         if (!commentRoom.getMemberId().equals(memberId)) {
@@ -164,5 +168,21 @@ public class CommentRoomService {
         commentRoom.fixMemberLimit(memberLimit);
 
         valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoomId, objectMapper.writeValueAsString(commentRoom));
+    }
+
+    public CommentRoom enterCommentRoom(String pinNumber, String nickname) throws JsonProcessingException {
+        CommentRoom commentRoom = getCommentRoom(pinNumber);
+
+        int enterResult = commentRoom.enterCommentRoom(nickname);
+
+        // 첨삭방 정보 저장
+        valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoom.getRoomId(), objectMapper.writeValueAsString(commentRoom));
+
+        // 신규 유저인 경우 참가자 정보 저장
+        if (enterResult == 1) {
+            listOperations.rightPush(PARTICIPANT_PREFIX + commentRoom.getRoomId(), nickname);
+        }
+
+        return commentRoom;
     }
 }
