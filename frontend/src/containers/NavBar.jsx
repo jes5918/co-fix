@@ -92,6 +92,9 @@ export default function NavBar({ isLoggedIn }) {
                 <NavbarItem>
                   <Link to="/co-fix/fasdf">Co-Fix</Link>
                 </NavbarItem>
+                <NavbarItem>
+                  <Link to="/openvidutest">OpenviduTest</Link>
+                </NavbarItem>
                 <BasicButton
                   onClickHandler={LogoutHandler}
                   width={150}
