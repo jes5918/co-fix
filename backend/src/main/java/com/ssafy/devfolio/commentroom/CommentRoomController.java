@@ -75,6 +75,20 @@ public class CommentRoomController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @ApiOperation(value = "첨삭방 입장", notes = "사용자 닉네임 입력해야함")
+    @GetMapping("/enter/{pinNumber}")
+    public ResponseEntity enterCommentRoom(@ApiParam(value = "핀번호", required = true) @PathVariable String pinNumber,
+                                           @ApiParam(value = "닉네임", required = true, defaultValue = "") @RequestParam String nickname) throws JsonProcessingException {
+        if (nickname.equals("") || nickname == null) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_INVALID_NICKNAME);
+        }
+        CommentRoom commentRoom = commentRoomService.enterCommentRoom(pinNumber, nickname);
+
+        SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.OK);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 Bearer token", required = true, dataType = "String", paramType = "header")
     })
@@ -89,7 +103,7 @@ public class CommentRoomController {
         Long memberId = ((MemberDetails) authentication.getPrincipal()).getMemberId();
 
         if (roomTitle != null) {
-            commentRoomService.fixRoomtitle(commentRoomId, roomTitle, memberId);
+            commentRoomService.fixRoomTitle(commentRoomId, roomTitle, memberId);
         }
         if (memberLimit != 0) {
             commentRoomService.fixMemberLimit(commentRoomId, memberLimit, memberId);
