@@ -1,10 +1,9 @@
 package com.ssafy.devfolio.member;
 
 import com.ssafy.devfolio.commentroom.CommentRoom;
-import com.ssafy.devfolio.commentroom.CommentRoomService;
+import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
-import com.ssafy.devfolio.utils.Utility;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.ssafy.devfolio.utils.Utility.*;
+import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 
 @RestController
 @RequiredArgsConstructor

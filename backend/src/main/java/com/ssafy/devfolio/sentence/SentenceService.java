@@ -2,7 +2,6 @@ package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.sentence.dto.FeelingRequest;
@@ -51,7 +50,7 @@ public class SentenceService {
      * @param sentenceId
      * @param request
      */
-    public void fixSentence(Long memberId, String documentId, String sentenceId, SentenceFixRequest request) throws JsonProcessingException {
+    public Sentence fixSentence(Long memberId, String documentId, String sentenceId, SentenceFixRequest request) throws JsonProcessingException {
         if (listOperations.indexOf(MEMBER_ROOM_PREFIX + memberId, request.getRoomId()) == null) {
             throw new BaseException(ErrorCode.SENTENCE_ONLY_FIXED_BY_OWNER_EXCEPTION);
         }
@@ -60,6 +59,8 @@ public class SentenceService {
         sentence.fix(request.getModifiedContent());
 
         hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
+
+        return sentence;
     }
 
     public Sentence getSentence(String documentId, String sentenceId) throws JsonProcessingException {
@@ -70,7 +71,7 @@ public class SentenceService {
         return objectMapper.readValue(hashOperations.get(DOCUMENT_PREFIX + documentId, sentenceId), Sentence.class);
     }
 
-    public void pressFeeling(String documentId, String sentenceId, FeelingRequest request) throws JsonProcessingException {
+    public Sentence pressFeeling(String documentId, String sentenceId, FeelingRequest request) throws JsonProcessingException {
         String nickname = request.getNickname();
         FeelingType feelingType = request.getFeelingType();
         Sentence sentence = getSentence(documentId, sentenceId);
@@ -92,6 +93,8 @@ public class SentenceService {
         }
 
         hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
+
+        return sentence;
     }
 
     public void updateNewComment(String documentId, String sentenceId) throws JsonProcessingException {
