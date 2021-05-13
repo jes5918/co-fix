@@ -76,87 +76,46 @@ export default function NavBar({ isLoggedIn }) {
     <>
       <NavbarMainWrapper>
         <NavbarLogo onClick={LogoClickHandler} />
-        {isHalfScreen ? (
-          <NavbarMenuWraper>
-            {!isLoggedIn ? (
-              <>
-                <NavbarItem>
-                  <Link to="/mypagelist">MyPageList</Link>
-                </NavbarItem>
-                <NavbarItem>
-                  <Link to="/mypage">MyPage</Link>
-                </NavbarItem>
-                <NavbarItem>
-                  <Link to="/create">Create</Link>
-                </NavbarItem>
-                <NavbarItem>
-                  <Link to="/co-fix/fasdf">Co-Fix</Link>
-                </NavbarItem>
-                <NavbarItem>
-                  <Link to="/openvidutest">OpenviduTest</Link>
-                </NavbarItem>
-                <BasicButton
-                  onClickHandler={LogoutHandler}
-                  width={150}
-                  height={40}
-                  fontSize={17}
-                  backgroundColor="transparent"
-                  text="로그아웃"
-                />
-              </>
-            ) : (
-              <BasicButton
-                width={150}
-                height={40}
-                fontSize={17}
-                onClickHandler={ModalToggleHandler}
-                text="Login"
-                backgroundColor={'transparent'}
-              />
-            )}
-          </NavbarMenuWraper>
-        ) : (
-          <HamburgerMenu.Container>
-            <HamburgerMenu.Icon onClick={HamburgerMenuToggleHandler} />
-            {isHamburgerMenuOpen ? (
-              <HamburgerMenu.Wrapper>
-                {!isLoggedIn ? (
-                  <>
-                    <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                      <Link to="/mypagelist">MyPageList</Link>
-                    </NavbarItem>
-                    <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                      <Link to="/mypage">MyPage</Link>
-                    </NavbarItem>
-                    <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                      <Link to="/create">Create</Link>
-                    </NavbarItem>
-                    <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                      <Link to="/commonWorkPage">Room</Link>
-                    </NavbarItem>
-                    <BasicButton
-                      onClickHandler={LogoutHandler}
-                      width={150}
-                      height={40}
-                      fontSize={17}
-                      backgroundColor="transparent"
-                      text="로그아웃"
-                    />
-                  </>
-                ) : (
+        <HamburgerMenu.Container>
+          {!isLoggedIn ? (
+            <>
+              <HamburgerMenu.Icon onClick={HamburgerMenuToggleHandler} />
+              {isHamburgerMenuOpen ? (
+                <HamburgerMenu.Wrapper>
+                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
+                    <Link to="/mypagelist">MyPageList</Link>
+                  </NavbarItem>
+                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
+                    <Link to="/mypage">MyPage</Link>
+                  </NavbarItem>
+                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
+                    <Link to="/create">Create</Link>
+                  </NavbarItem>
+                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
+                    <Link to="/commonWorkPage">Room</Link>
+                  </NavbarItem>
                   <BasicButton
+                    onClickHandler={LogoutHandler}
                     width={150}
                     height={40}
                     fontSize={17}
-                    onClickHandler={ModalToggleHandler}
-                    text="Login"
-                    backgroundColor={'transparent'}
+                    backgroundColor="transparent"
+                    text="로그아웃"
                   />
-                )}
-              </HamburgerMenu.Wrapper>
-            ) : null}
-          </HamburgerMenu.Container>
-        )}
+                </HamburgerMenu.Wrapper>
+              ) : null}
+            </>
+          ) : (
+            <BasicButton
+              width={150}
+              height={40}
+              fontSize={17}
+              onClickHandler={ModalToggleHandler}
+              text="Login"
+              backgroundColor={'transparent'}
+            />
+          )}
+        </HamburgerMenu.Container>
       </NavbarMainWrapper>
       <Modal
         ModalToggleHandler={ModalToggleHandler}
@@ -288,20 +247,22 @@ const HamburgerMenu = {
     position: relative;
     z-index: 10;
   `,
-  Icon: styled(GiHamburgerMenu)`
-    width: 35px;
-    height: 35px;
+  Icon: styled.div`
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
     cursor: pointer;
-    color: #2f2f2f;
+    background-color: #fadfa6;
     transition: all 0.1s ease-in-out;
+    box-shadow: rgba(48, 48, 47, 0.2) 0px 7px 5px 0px;
     &:hover {
-      color: #898989;
+      background-color: #fa9696;
     }
   `,
   Wrapper: styled.div`
     position: absolute;
-    right: 10px;
-    top: 40px;
+    right: 2%;
+    top: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -310,7 +271,7 @@ const HamburgerMenu = {
     width: 200px;
     height: fit-content;
     background-color: white;
-    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: rgba(48, 48, 47, 0.548) 0px 5px 10px 0px;
     border-radius: 10px;
     animation: modal-show 1s;
     @keyframes modal-show {
