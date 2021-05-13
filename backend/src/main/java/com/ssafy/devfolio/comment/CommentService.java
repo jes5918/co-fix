@@ -3,6 +3,8 @@ package com.ssafy.devfolio.comment;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.devfolio.comment.dto.CommentRequest;
+import com.ssafy.devfolio.exception.BaseException;
+import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.sentence.Sentence;
 import com.ssafy.devfolio.sentence.SentenceService;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +53,22 @@ public class CommentService {
         return hashOperations.values(SENTENCE_PREFIX + sentenceId).stream()
                 .map(wrapper(commentString -> objectMapper.readValue(commentString, Comment.class)))
                 .collect(Collectors.toList());
+    }
+
+    public Comment getComment(String sentenceId, String commentId) throws JsonProcessingException {
+        if (!hashOperations.hasKey(SENTENCE_PREFIX + sentenceId, commentId)) {
+            throw new BaseException(ErrorCode.COMMENT_NOT_EXIST);
+        }
+
+        return objectMapper.readValue(hashOperations.get(SENTENCE_PREFIX + sentenceId, commentId), Comment.class);
+    }
+
+    public void pressAgree(String sentenceId, String commentId, String nickname) throws JsonProcessingException {
+        Comment comment = getComment(sentenceId, commentId);
+
+        comment.pressAgree(nickname);
+        String commentToString = objectMapper.writeValueAsString(comment);
+
+        hashOperations.put(SENTENCE_PREFIX + sentenceId, comment.getCommentId(), commentToString);
     }
 }
