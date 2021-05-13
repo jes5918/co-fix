@@ -11,11 +11,8 @@ import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,23 +23,13 @@ import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 @RequiredArgsConstructor
 public class SentenceService {
 
-    private final String COMMENT_ROOM_PREFIX = "room:";
     private final String DOCUMENT_PREFIX = "document:";
     private final String MEMBER_ROOM_PREFIX = "member-room:";
 
-    private final RedisTemplate<String, String> redisTemplate;
-    private HashOperations<String, String, String> hashOperations;
-    private ValueOperations<String, String> valueOperations;
-    private ListOperations<String, String> listOperations;
+    private final HashOperations<String, String, String> hashOperations;
+    private final ListOperations<String, String> listOperations;
 
     private final ObjectMapper objectMapper;
-
-    @PostConstruct
-    public void init() {
-        hashOperations = redisTemplate.opsForHash();
-        valueOperations = redisTemplate.opsForValue();
-        listOperations = redisTemplate.opsForList();
-    }
 
     /**
      *
