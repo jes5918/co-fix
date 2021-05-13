@@ -29,7 +29,12 @@ const V = {
   Video: styled.video`
     width: 100%;
     height: auto;
-    border: ${(props) => (props.isSpeak ? '6px solid #56acf3' : 'None')};
+    border: ${(props) =>
+      props.isSpeak === 'Main'
+        ? '7px solid #ff006a'
+        : props.isSpeak === true
+        ? '7px solid #56acf3'
+        : 'none'};
     border-radius: 15px;
     margin: 0;
     padding: 0;

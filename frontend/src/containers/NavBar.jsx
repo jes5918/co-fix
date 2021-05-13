@@ -92,7 +92,10 @@ export default function NavBar({ isLoggedIn }) {
                     <Link to="/create">Create</Link>
                   </NavbarItem>
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/commonWorkPage">Room</Link>
+                    <Link to="/commonWorkPage">commonWorkPage</Link>
+                  </NavbarItem>
+                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
+                    <Link to="/openvidutest">openvidutest</Link>
                   </NavbarItem>
                   <BasicButton
                     onClickHandler={LogoutHandler}
