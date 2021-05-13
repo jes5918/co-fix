@@ -47,6 +47,9 @@ const Line1 = styled.div`
     `${step >= 1 ? 'inset 200px 0 0 0 #ca385d' : 'inset 0 0 0 0 #ca385d'}`};
   background-color: ${({ step }) => `${step >= 2 ? '#ca385d' : '#fff'}`};
   transition: all 0.5s ease-in-out;
+  @media only screen and (max-width: 768px) {
+    width: 100px;
+  }
 `;
 const Line2 = styled.div`
   width: 200px;
@@ -56,6 +59,9 @@ const Line2 = styled.div`
     `${step >= 2 ? 'inset 200px 0 0 0 #ca385d' : 'inset 0 0 0 0 #ca385d'}`};
   background-color: ${({ step }) => `${step >= 2 ? '#ca385d' : '#fff'}`};
   transition: all 0.5s ease-in-out;
+  @media only screen and (max-width: 768px) {
+    width: 100px;
+  }
 `;
 export default function Progress({ step, onHandleCurrent }) {
   return (

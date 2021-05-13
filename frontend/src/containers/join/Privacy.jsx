@@ -23,9 +23,14 @@ const ContainerFrame = styled.div`
       opacity: 1;
     }
   }
+  @media only screen and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15px;
+  }
 `;
 const InputLabel = styled.div`
-  font-size: 55px;
+  font-size: 45px;
   font-weight: bold;
   font-family: 'Samlip';
   color: black;
@@ -41,6 +46,11 @@ const LeftFrame = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding-top: 50px;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+  }
 `;
 
 const RightFrame = styled.div`
@@ -51,6 +61,10 @@ const RightFrame = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding-top: 50px;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    height: 70%;
+  }
 `;
 const Info = styled.div`
   border: none;
