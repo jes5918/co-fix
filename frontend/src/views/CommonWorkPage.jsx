@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
 import { getRoomInfo, closeRoom } from '../api/co-fix';
+import { getDocuments } from '../api/documents';
+import { documentGetAction } from '../modules/actions/documentActions';
 // library
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars-2';
@@ -21,9 +23,17 @@ export default function CommonWorkPage() {
   const room = useRoomInfo();
   // redux에 저장되어있는 documentReducer 가져오기
   useEffect(() => {
-    console.log('room', room);
-    console.log('pincode', room.pinNumber);
-  }, [room]);
+    getDocuments(
+      room.roomId,
+      room.documentId,
+      (response) => {
+        dispatch(documentGetAction(response.data.data));
+      },
+      (error) => {
+        console.log(`error`, error);
+      },
+    );
+  }, []);
 
   return (
     <S.CommonWorkPage>
