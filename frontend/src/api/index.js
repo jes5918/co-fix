@@ -34,10 +34,10 @@ function AuthorizationInstance() {
   instance.defaults.headers.post['Content-Type'] = 'multipart/form-data';
   instance.interceptors.request.use(
     async function (config) {
-      const accToken = await getToken();
+      // const accToken = await getToken();
       // const token = 'Bearer' + accToken;
       const temp =
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjIwNzk5MTE2LCJleHAiOjE2MjA4MDI3MTZ9.hp54Z_4XLw_7NKuddQbtQmmzYb0nET03uwEXmn_Nzj8';
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImlhdCI6MTYyMDgxMTQ0OCwiZXhwIjoxNjIwODE1MDQ4fQ.48aDd9slmfWS-JYnSo6RepHtWM_rwwv7Zp71tTrzydU';
       const token = 'Bearer ' + temp;
 
       config.headers = {

@@ -26,6 +26,8 @@ const Point2 = styled.div`
   border: none;
   background-color: ${({ step }) => `${step >= 1 ? '#ca385d' : '#fff'}`};
   z-index: 3;
+  transition: all 0.5s ease-in-out;
+  transition-delay: 0.15s;
 `;
 const Point3 = styled.div`
   width: 20px;
@@ -34,18 +36,26 @@ const Point3 = styled.div`
   border: none;
   background-color: ${({ step }) => `${step >= 2 ? '#ca385d' : '#fff'}`};
   z-index: 3;
+  transition: all 0.5s ease-in-out;
+  transition-delay: 0.15s;
 `;
 const Line1 = styled.div`
-  width: 20%;
-  height: 5px;
+  width: 200px;
+  height: 4px;
   z-index: 2;
-  background-color: ${({ step }) => `${step >= 1 ? '#ca385d' : '#fff'}`};
+  box-shadow: ${({ step }) =>
+    `${step >= 1 ? 'inset 200px 0 0 0 #ca385d' : 'inset 0 0 0 0 #ca385d'}`};
+  background-color: ${({ step }) => `${step >= 2 ? '#ca385d' : '#fff'}`};
+  transition: all 0.5s ease-in-out;
 `;
 const Line2 = styled.div`
-  width: 20%;
-  height: 5px;
+  width: 200px;
+  height: 4px;
   z-index: 2;
+  box-shadow: ${({ step }) =>
+    `${step >= 2 ? 'inset 200px 0 0 0 #ca385d' : 'inset 0 0 0 0 #ca385d'}`};
   background-color: ${({ step }) => `${step >= 2 ? '#ca385d' : '#fff'}`};
+  transition: all 0.5s ease-in-out;
 `;
 export default function Progress({ step, onHandleCurrent }) {
   return (
