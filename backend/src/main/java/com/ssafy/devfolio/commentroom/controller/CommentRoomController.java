@@ -1,7 +1,9 @@
-package com.ssafy.devfolio.commentroom;
+package com.ssafy.devfolio.commentroom.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
+import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.domain.MemberDetails;
@@ -16,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.*;
 
 import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
@@ -116,13 +117,4 @@ public class CommentRoomController {
 
     }
 
-    /**
-     * websocket "/pub/commentRooms/message"
-     * <p>
-     * 첨삭방(CommentRoom)에 대한 전체 메세징 처리
-     */
-    @MessageMapping("/message")
-    public void message(CommentRoom commentRoom) {
-        commentRoomService.sendCommentRoom(commentRoom);
-    }
 }

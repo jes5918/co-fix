@@ -1,31 +1,33 @@
-package com.ssafy.devfolio.commentroom;
+package com.ssafy.devfolio.commentroom.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.devfolio.commentroom.CommentRoom;
+import com.ssafy.devfolio.commentroom.RoomStatus;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
+import com.ssafy.devfolio.commentroom.pubsub.RedisSubscriber;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
 import com.ssafy.devfolio.member.domain.Member;
 import com.ssafy.devfolio.sentence.Sentence;
-import com.ssafy.devfolio.utils.FunctionExceptionWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +45,8 @@ public class CommentRoomService {
     private final HashOperations<String, String, String> hashOperations;
     private final ListOperations<String, String> listOperations;
 
+    private final RedisMessageListenerContainer redisMessageListener;
+    private final RedisSubscriber redisSubscriber;
     private final ChannelTopic channelTopic;
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
@@ -234,7 +238,20 @@ public class CommentRoomService {
      * 소켓
      * 첨삭방 전체 리턴하는 메서드
      */
-    public void sendCommentRoom(CommentRoom commentRoom) {
-        redisTemplate.convertAndSend(channelTopic.getTopic(), commentRoom);
+    public void sendCommentRoom(CommentRoom commentRoom) throws JsonProcessingException {
+
+        redisMessageListener.addMessageListener(redisSubscriber, channelTopic);
+
+        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(commentRoom));
+    }
+
+    /**
+     * 소켓
+     *  첨삭방 - 문장 감정표현 변화
+     */
+    public void sendCommentRoomFeeling(Sentence sentence) throws JsonProcessingException {
+        redisMessageListener.addMessageListener(redisSubscriber, channelTopic);
+
+        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(sentence));
     }
 }

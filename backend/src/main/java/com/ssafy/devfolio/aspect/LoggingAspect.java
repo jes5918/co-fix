@@ -1,17 +1,18 @@
 package com.ssafy.devfolio.aspect;
 
-import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -27,6 +28,11 @@ public class LoggingAspect {
     public void loggingPointcut() {
     }
 
+    // TODO: SocketController는 예외
+    @Pointcut("execution(* com.ssafy.devfolio..*SocketController.*(..))")
+    public void socketControllerPointcut() {
+    }
+
     // exceptionController는 제외
     @Pointcut("execution(* com.ssafy.devfolio.exception.ExceptionController.*(..))")
     public void exceptionControllerPointcut() {
@@ -38,7 +44,7 @@ public class LoggingAspect {
     }
 
     // 서버에 요청 들어온 경우
-    @Before("loggingPointcut() && !exceptionControllerPointcut()")
+    @Before("loggingPointcut() && !(exceptionControllerPointcut() || socketControllerPointcut())")
     public void loggingRequest() {
         HttpServletRequest request = this.getCurrentRequest();
 
