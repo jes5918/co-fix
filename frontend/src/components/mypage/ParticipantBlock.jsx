@@ -13,6 +13,7 @@ export default function ParticipantBlock({ participant }) {
   const onCamToggleHandler = () => {
     setIsCam(!isCam);
   };
+
   return (
     <BlockWrapper>
       <Name>{participant.name}</Name>
