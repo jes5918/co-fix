@@ -106,4 +106,11 @@ public class SentenceService {
 
         hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
     }
+
+    public void updateNewComment(String documentId, String sentenceId) throws JsonProcessingException {
+        Sentence sentence = getSentence(documentId, sentenceId);
+        sentence.updateNewComment();
+
+        hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
+    }
 }

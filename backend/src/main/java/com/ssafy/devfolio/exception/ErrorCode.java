@@ -37,6 +37,9 @@ public enum ErrorCode {
     SENTENCE_NOT_EXIST(HttpStatus.BAD_REQUEST, "0501", "존재하지 않는 문장입니다"),
     SENTENCE_ONLY_FIXED_BY_OWNER_EXCEPTION(HttpStatus.BAD_REQUEST, "0502", "방을 만든 사람만 문장 수정 가능"),
 
+    // 코멘트 관련
+    COMMENT_DISAGREE_FAIL_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "0601", "agree 개수는 0보다 작을 수 없음"),
+
     // 기타 오류 처리
     RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "9902", "런타임 오류"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "9903", "서버 오류"),
