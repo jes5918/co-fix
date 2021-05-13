@@ -80,7 +80,7 @@ export default function Home() {
           </CheckBox>
           <BottomLine />
           <FooterText>
-            간편 로그인으로 <span>Devfolio</span>와 함께하세요.
+            간편 로그인으로 <span>Co-Fix</span>와 함께하세요.
           </FooterText>
         </ModalContentWrapper>
       </Modal>
