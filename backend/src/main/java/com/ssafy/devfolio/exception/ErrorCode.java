@@ -39,6 +39,8 @@ public enum ErrorCode {
 
     // 코멘트 관련
     COMMENT_DISAGREE_FAIL_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "0601", "agree 개수는 0보다 작을 수 없음"),
+    COMMENT_INVALID_NICKNAME_EXCEPTION(HttpStatus.BAD_REQUEST, "0602", "잘못된 닉네임"),
+    COMMENT_NOT_EXIST(HttpStatus.BAD_REQUEST, "0603", "존재하지 않는 코멘트"),
 
     // 기타 오류 처리
     RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "9902", "런타임 오류"),

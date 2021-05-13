@@ -38,4 +38,12 @@ public class Comment {
 
         return comment;
     }
+
+    public void pressAgree(String nickname) {
+        if (this.agree.getMembers().contains(nickname)) {
+            this.agree.disagree(nickname);
+        } else {
+            this.agree.agree(nickname);
+        }
+    }
 }
