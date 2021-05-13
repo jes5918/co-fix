@@ -55,7 +55,7 @@ public class SentenceController {
     }
 
     @ApiOperation(value = "문장 감정표현 - 테스트용 (소켓 연결 후 제거 예정)", notes = "이미 감정표현 한 사람이 또 하면 취소")
-    @PostMapping("/{documentId}/sentences/{sentenceId}")
+    @PostMapping("/{documentId}/sentences/{sentenceId}/feelings")
     public ResponseEntity pressFeeling(@ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
                                        @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                        @ApiParam(value = "감정표현 정보", required = true) @RequestBody FeelingRequest request) throws JsonProcessingException {
