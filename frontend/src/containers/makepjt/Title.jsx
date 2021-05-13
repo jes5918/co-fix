@@ -22,9 +22,13 @@ const ContainerFrame = styled.div`
       opacity: 1;
     }
   }
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const InputLabel = styled.div`
-  font-size: 55px;
+  font-size: 45px;
   font-weight: bold;
   font-family: 'Samlip';
   color: black;
@@ -41,6 +45,11 @@ const LeftFrame = styled.div`
   align-items: center;
   padding-top: 100px;
   padding-bottom: 30px;
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+  }
 `;
 
 const RightFrame = styled.div`
@@ -52,6 +61,10 @@ const RightFrame = styled.div`
   align-items: center;
   padding-top: 30px;
   padding-bottom: 100px;
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 export default function Title({ onHandleNext, value, onHandleValue }) {
