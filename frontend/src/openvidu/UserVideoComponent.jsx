@@ -97,8 +97,8 @@ const U = {
     justify-content: center;
     align-items: center;
     width: fit-content;
-    margin-top: 2%;
-    margin-left: 2%;
+    margin-top: 3%;
+    margin-left: 3%;
     padding: 1% 2%;
     background: white;
     color: #000000;
