@@ -18,7 +18,6 @@ import MyPageRight from '../containers/mypage/MyPageRight';
 
 // components
 import CalcContentLength from '../containers/mypage/CalcContentLength';
-
 const testData = [
   {
     id: 0,

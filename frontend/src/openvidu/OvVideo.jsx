@@ -20,7 +20,8 @@ export default class OpenViduVideoComponent extends Component {
   }
 
   render() {
-    return <V.Video autoPlay={true} ref={this.videoRef} />;
+    const isSpeak = this.props.isSpeak;
+    return <V.Video autoPlay={true} ref={this.videoRef} isSpeak={isSpeak} />;
   }
 }
 
@@ -28,7 +29,8 @@ const V = {
   Video: styled.video`
     width: 100%;
     height: auto;
-    border-radius: 20px;
+    border: ${(props) => (props.isSpeak ? '6px solid #56acf3' : 'None')};
+    border-radius: 15px;
     margin: 0;
     padding: 0;
   `,
