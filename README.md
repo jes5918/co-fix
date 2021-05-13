@@ -27,7 +27,7 @@
 - 문장에 대한 평가 기능 ( Fix 고쳐야할 부분 )
 - 문장 직접 수정 기능
 - Pin-Code 복사 기능
-- 음성 통화기능 ( 후순위 )
+- 음성 및 화상 통화기능 
 - 복사 (ctrl + c 및 html ) 방지
 
 **Create Co-Fix**
@@ -62,6 +62,26 @@
 |   **R&R**    |                           **팀장**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |
 |   **Git**    |             [Github](https://github.com/mingddo)             |           [Github](https://github.com/glenn93516)            |             [Github](https://github.com/RGunny)              |           [Github](https://github.com/phoenix9373)           |             [Github](https://github.com/jes5918)             |
 | **Position** |                              FE                              |                              BE                              |                              BE                              |                              FE                              |                              FE                              |
+
+
+
+#### 🙌포트번호
+
+`https://k4b104.p.ssafy.io`도메인 - FE, BE 총괄
+
+```
+80 & 443 : 웹서비스 접속
+9090 : 젠킨스
+5601: kibana
+```
+
+
+
+`https://k4b1041.p.ssafy.io`도메인 - OpenVidu backend server (실시간 화상)
+
+```
+4443 : OpenVidu Server
+```
 
 
 
@@ -260,7 +280,7 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
     │     ├─ application.yml    : 설정 파일
     │     └─ ...
     └─ test                     : 테스트 폴더
-
+  
   ```
 
 #### 🧩 Wireframe
