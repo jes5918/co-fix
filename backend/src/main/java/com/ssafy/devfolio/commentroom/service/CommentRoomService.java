@@ -176,7 +176,7 @@ public class CommentRoomService {
         return sentences;
     }
 
-    public void fixRoomTitle(String commentRoomId, String roomTitle, Long memberId) throws JsonProcessingException {
+    public CommentRoom fixRoomTitle(String commentRoomId, String roomTitle, Long memberId) throws JsonProcessingException {
         CommentRoom commentRoom = getCommentRoomById(commentRoomId);
 
         if (!commentRoom.getMemberId().equals(memberId)) {
@@ -186,9 +186,11 @@ public class CommentRoomService {
         commentRoom.fixRoomTitle(roomTitle);
 
         valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoomId, objectMapper.writeValueAsString(commentRoom));
+
+        return commentRoom;
     }
 
-    public void fixMemberLimit(String commentRoomId, int memberLimit, Long memberId) throws JsonProcessingException {
+    public CommentRoom fixMemberLimit(String commentRoomId, int memberLimit, Long memberId) throws JsonProcessingException {
         if (memberLimit <= 0) {
             throw new BaseException(ErrorCode.COMMENT_ROOM_INVALID_MEMBER_LIMIT);
         }
@@ -202,6 +204,8 @@ public class CommentRoomService {
         commentRoom.fixMemberLimit(memberLimit);
 
         valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoomId, objectMapper.writeValueAsString(commentRoom));
+
+        return commentRoom;
     }
 
     public CommentRoom enterCommentRoom(String pinNumber, String nickname) throws JsonProcessingException {
