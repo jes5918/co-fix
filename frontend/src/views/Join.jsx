@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
+import { createRoom, getRoomInfo, closeRoom, modifyRoom } from '../api/co-fix';
 
 // container
 import Privacy from '../containers/join/Privacy';
@@ -18,6 +19,13 @@ export default function Join() {
   const [pinCode, setPinCode] = useState('');
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isPinCodeAlertModalOpen, setIsPinCodeAlertModalOpen] = useState(false);
+  const [isNickNameAlertModalOpen, setisNickNameAlertModalOpen] = useState(
+    false,
+  );
+  const [
+    isValidPincodeAlertModalOpen,
+    setisValidPincodeAlertModalOpen,
+  ] = useState(false);
 
   const changePage = () => {
     setCurrent(current + 1);
@@ -41,6 +49,57 @@ export default function Join() {
   const PinCodeAlertModalToggleHandler = () => {
     setIsPinCodeAlertModalOpen(!isPinCodeAlertModalOpen);
   };
+  const ValidPincodeAlertModalToggleHandler = () => {
+    setisValidPincodeAlertModalOpen(!isValidPincodeAlertModalOpen);
+  };
+  const NickNameAlertModalToggleHandler = () => {
+    setisNickNameAlertModalOpen(!isNickNameAlertModalOpen);
+  };
+
+  const validRoom = () => {
+    getRoomInfo(
+      pinCode,
+      (res) => {
+        console.log(res.data);
+        setCurrent(current + 1);
+      },
+      (err) => {
+        if (err.response.data.message === '존재하지 않는 첨삭방') {
+          console.error(err.response.data);
+          ValidPincodeAlertModalToggleHandler();
+        }
+      },
+    );
+  };
+  const duplicatedNickName = (data) => {
+    const dupli = data.members.map((member) => {
+      if (member.nickname === nickName && member.online) {
+        NickNameAlertModalToggleHandler();
+        return;
+      } else {
+        //join api작성.
+        localStorage.setItem('nickName', nickName);
+        history.push(`/co-fix/${data.roomId}`);
+        return;
+      }
+    });
+  };
+  const validNickName = () => {
+    getRoomInfo(
+      pinCode,
+      (res) => {
+        console.log(res.data);
+        duplicatedNickName(res.data.data);
+      },
+      (err) => {
+        if (err.response.data.message === '존재하지 않는 첨삭방') {
+          console.error(err.response.data);
+          ValidPincodeAlertModalToggleHandler();
+        }
+      },
+    );
+  };
+
   return (
     <>
       <Modal
@@ -61,6 +120,24 @@ export default function Join() {
           PropsComfirmHandler={() => PinCodeAlertModalToggleHandler()}
         />
       </Modal>
+      <Modal
+        isModalOpen={isValidPincodeAlertModalOpen}
+        ModalToggleHandler={ValidPincodeAlertModalToggleHandler}
+      >
+        <AlertModal
+          PropsText="유효한 Pin Code가 아닙니다."
+          PropsComfirmHandler={() => ValidPincodeAlertModalToggleHandler()}
+        />
+      </Modal>
+      <Modal
+        isModalOpen={isNickNameAlertModalOpen}
+        ModalToggleHandler={NickNameAlertModalToggleHandler}
+      >
+        <AlertModal
+          PropsText="이미 존재하는 닉네임입니다."
+          PropsComfirmHandler={() => NickNameAlertModalToggleHandler()}
+        />
+      </Modal>
       <Wrapper>
         {current === 0 ? (
           <Privacy
@@ -74,7 +151,7 @@ export default function Join() {
             onHandleValue={pinCodeValueSave}
             onHandleNext={() => {
               if (pinCode.length === 8) {
-                changePage();
+                validRoom();
               } else {
                 PinCodeAlertModalToggleHandler();
               }
@@ -86,7 +163,7 @@ export default function Join() {
             onHandleValue={nickNameValueSave}
             onHandleSubmit={() => {
               if (nickName) {
-                submitForm();
+                validNickName();
               } else {
                 AlertModalToggleHandler();
               }
