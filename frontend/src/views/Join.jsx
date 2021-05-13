@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
 import { createRoom, getRoomInfo, closeRoom, modifyRoom } from '../api/co-fix';
 
 // container
@@ -15,6 +17,7 @@ import AlertModal from '../components/modal/AlertModal';
 export default function Join() {
   const [current, setCurrent] = useState(0);
   const history = useHistory();
+  const dispatch = useDispatch();
   const [nickName, setNickName] = useState('');
   const [pinCode, setPinCode] = useState('');
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
@@ -29,10 +32,6 @@ export default function Join() {
 
   const changePage = () => {
     setCurrent(current + 1);
-  };
-  const submitForm = () => {
-    alert('제출😀');
-    history.push('/');
   };
 
   const nickNameValueSave = (e) => {
@@ -89,6 +88,7 @@ export default function Join() {
       pinCode,
       (res) => {
         console.log(res.data);
+        dispatch(saveRoomInfo(res.data.data));
         duplicatedNickName(res.data.data);
       },
       (err) => {
