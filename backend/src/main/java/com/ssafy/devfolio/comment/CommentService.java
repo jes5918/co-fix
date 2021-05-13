@@ -13,6 +13,10 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +45,11 @@ public class CommentService {
         sentenceService.updateNewComment(documentId, sentenceId);
 
         return comment;
+    }
+
+    public List<Comment> getComments(String sentenceId) {
+        return hashOperations.values(SENTENCE_PREFIX + sentenceId).stream()
+                .map(wrapper(commentString -> objectMapper.readValue(commentString, Comment.class)))
+                .collect(Collectors.toList());
     }
 }
