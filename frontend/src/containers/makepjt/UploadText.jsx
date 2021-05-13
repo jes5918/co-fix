@@ -23,9 +23,14 @@ const ContainerFrame = styled.div`
       opacity: 1;
     }
   }
+  @media only screen and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15px;
+  }
 `;
 const InputLabel = styled.div`
-  font-size: 55px;
+  font-size: 45px;
   font-weight: bold;
   font-family: 'Samlip';
   color: black;
@@ -42,16 +47,25 @@ const LeftFrame = styled.div`
   align-items: center;
   padding-top: 100px;
   padding-bottom: 30px;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+  }
 `;
 
 const RightFrame = styled.div`
-  width: 50%;
+  width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   padding-top: 50px;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    height: 70%;
+  }
 `;
 const TextArea = styled.textarea`
   border: none;
@@ -66,6 +80,9 @@ const TextArea = styled.textarea`
   resize: none;
   &:focus {
     outline: none;
+  }
+  @media only screen and (max-width: 1024px) {
+    height: 90%;
   }
 `;
 export default function UploadText({ onHandleSubmit, value, onValueChange }) {
