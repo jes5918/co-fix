@@ -80,7 +80,7 @@ public class CommentRoomController {
     @GetMapping("/enter/{pinNumber}")
     public ResponseEntity enterCommentRoom(@ApiParam(value = "핀번호", required = true) @PathVariable String pinNumber,
                                            @ApiParam(value = "닉네임", required = true, defaultValue = "") @RequestParam String nickname) throws JsonProcessingException {
-        if (nickname.equals("") || nickname == null) {
+        if ( nickname == null || nickname.equals("") ) {
             throw new BaseException(ErrorCode.COMMENT_ROOM_INVALID_NICKNAME);
         }
         CommentRoom commentRoom = commentRoomService.enterCommentRoom(pinNumber, nickname);
