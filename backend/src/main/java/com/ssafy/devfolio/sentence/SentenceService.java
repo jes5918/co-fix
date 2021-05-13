@@ -10,9 +10,6 @@ import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -31,7 +28,6 @@ public class SentenceService {
     private final HashOperations<String, String, String> hashOperations;
     private final ListOperations<String, String> listOperations;
 
-    private final ChannelTopic channelTopic;
     private final ObjectMapper objectMapper;
 
     /**
@@ -54,7 +50,7 @@ public class SentenceService {
      * @param sentenceId
      * @param request
      */
-    public void fixSentence(Long memberId, String documentId, String sentenceId, SentenceFixRequest request) throws JsonProcessingException {
+    public Sentence fixSentence(Long memberId, String documentId, String sentenceId, SentenceFixRequest request) throws JsonProcessingException {
         if (listOperations.indexOf(MEMBER_ROOM_PREFIX + memberId, request.getRoomId()) == null) {
             throw new BaseException(ErrorCode.SENTENCE_ONLY_FIXED_BY_OWNER_EXCEPTION);
         }
@@ -63,6 +59,8 @@ public class SentenceService {
         sentence.fix(request.getModifiedContent());
 
         hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
+
+        return sentence;
     }
 
     public Sentence getSentence(String documentId, String sentenceId) throws JsonProcessingException {

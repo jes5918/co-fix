@@ -1,7 +1,9 @@
 package com.ssafy.devfolio.commentroom.pubsub;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.devfolio.commentroom.dto.CommentRoomSocket;
+import com.ssafy.devfolio.commentroom.CommentRoom;
+import com.ssafy.devfolio.commentroom.dto.CommentRoomSub;
 import com.ssafy.devfolio.sentence.Sentence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
@@ -9,7 +11,10 @@ import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor
@@ -27,23 +32,39 @@ public class RedisSenderService {
     private final ChannelTopic channelTopic;
     private final ObjectMapper objectMapper;
 
-    public void sendSentenceUpdateService(String roomId, Sentence sentence) {
-        // roomId로 방 정보 얻어오고
-        valueOperations.get(COMMENT_ROOM_PREFIX + roomId);
+    @PostConstruct
+    public void init() {
+        valueOperations = redisTemplate.opsForValue();
+        hashOperations = redisTemplate.opsForHash();
+        listOperations = redisTemplate.opsForList();
+    }
+    private final SimpMessageSendingOperations messageTemplate;
 
+    public void sendRoomUpdateService(CommentRoom room) throws JsonProcessingException {
+        CommentRoomSub commentRoomSub = CommentRoomSub.builder()
+                .roomId(room.getRoomId())
+                .roomTitle(room.getRoomTitle())
+                .memberLimit(room.getMemberLimit())
+                .status(room.getStatus())
+                .members(room.getMembers())
+                .lastModifiedDate(room.getLastModifiedDate())
+                .build();
 
-        CommentRoomSocket(방정보, sentence);
-        redisTemplate.convertAndSend(channel, 위에 소켓객체);
+        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
+        messageTemplate.convertAndSend("/room/" + commentRoomSub.getRoomId(), commentRoomSub);
 
-        // 받은 곳
-//        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString());
+    }
 
+    public void sendSentenceUpdateService(String roomId, Sentence sentence) throws JsonProcessingException {
+        CommentRoom commentRoom = objectMapper.readValue(valueOperations.get(COMMENT_ROOM_PREFIX + roomId), CommentRoom.class);
 
-//        CommentRoomSocket.builder()
-//                .roomId()
-//                .sentence(sentence)
-//                .
+        CommentRoomSub commentRoomSub = CommentRoomSub.builder()
+                .roomId(roomId)
+                .sentence(sentence)
+                .lastModifiedDate(commentRoom.getLastModifiedDate())
+                .build();
 
-        redisTemplate.convertAndSend(channelTopic.getTopic(), hashOperations.get(DOCUMENT_PREFIX + documentId, sentenceId));
+        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
+        messageTemplate.convertAndSend("/room/" + commentRoomSub.getRoomId(), commentRoomSub);
     }
 }
