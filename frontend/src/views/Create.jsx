@@ -56,17 +56,7 @@ export default function Create() {
           console.log(`res`, res.data.data);
           dispatch(saveRoomInfo(res.data.data));
           // documentId로 조회
-          getDocuments(
-            res.data.data.documentId,
-            (response) => {
-              console.log(`response`, response);
-              dispatch(documentGetAction(response.data.data));
-              history.push(`/co-fix/${res.data.data.roomId}`);
-            },
-            (error) => {
-              console.log(`error`, error);
-            },
-          );
+          history.push(`/co-fix/${res.data.data.roomId}`);
         },
         (err) => {
           console.error('err', err.response.data);
