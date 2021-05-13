@@ -117,8 +117,11 @@ const U = {
     align-items: center;
   `,
   MicWraaper: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
-    padding: 3px 5px;
+    padding: 5px 5px;
     transition: all 0.3s ease-in-out;
     background-color: #d5d5d5;
     &:hover {
@@ -130,9 +133,12 @@ const U = {
     }
   `,
   CamWraaper: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 10px;
     border-radius: 50%;
-    padding: 3px 5px;
+    padding: 5px 5px;
     transition: all 0.3s ease-in-out;
     background-color: #d5d5d5;
     &:hover {
@@ -147,8 +153,8 @@ const U = {
 
 const MicON = styled(FaMicrophone)`
   color: #04ae55;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 `;
 const MicOFF = styled(FaMicrophoneSlash)`
   color: #8f8e8e;
@@ -158,11 +164,13 @@ const MicOFF = styled(FaMicrophoneSlash)`
 
 const CamON = styled(MdVideocam)`
   color: #04ae55;
-  width: 22px;
-  height: 22px;
+  width: 23px;
+  height: 23px;
 `;
 const CamOFF = styled(MdVideocamOff)`
   color: #8f8e8e;
-  width: 22px;
-  height: 22px;
+  width: 23px;
+  height: 23px;
+  /* width: 22px;
+  height: 22px; */
 `;
