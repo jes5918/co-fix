@@ -34,19 +34,12 @@ public class CommentRoomService {
     private final int PIN_NUMBER_DIGITS = 8;
 
     private final RedisTemplate<String, String> redisTemplate;
-    private ValueOperations<String, String> valueOperations;
-    private HashOperations<String, String, String> hashOperations;
-    private ListOperations<String, String> listOperations;
+    private final ValueOperations<String, String> valueOperations;
+    private final HashOperations<String, String, String> hashOperations;
+    private final ListOperations<String, String> listOperations;
 
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
-
-    @PostConstruct
-    public void init() {
-        valueOperations = redisTemplate.opsForValue();
-        hashOperations = redisTemplate.opsForHash();
-        listOperations = redisTemplate.opsForList();
-    }
 
     public CommentRoom createCommentRoom(CreateCommentRoomRequest request, Long memberId) throws JsonProcessingException {
         Member member = memberRepository.findById(memberId)
