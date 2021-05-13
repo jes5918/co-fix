@@ -1,5 +1,5 @@
 import { SET_USER, SET_UNAUTHENTICATED } from '../types';
-// import axios from 'axios';
+import axios from 'axios';
 
 export const LoginAction = (userData) => (dispatch) => {
   console.log('success login action', userData);
@@ -9,9 +9,9 @@ export const LoginAction = (userData) => (dispatch) => {
     type: SET_USER,
     payload: userData,
   });
+  const token = `Bearer ${userData.token}`;
+  axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
   window.location.href = '/';
-  // const token = `Bearer ${res.data.token}`;
-  // axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
 };
 
 export const logoutUserAction = (dispatch) => {
@@ -20,6 +20,6 @@ export const logoutUserAction = (dispatch) => {
   dispatch({
     type: SET_UNAUTHENTICATED,
   });
-  window.location.href = '/'; //redirect to login page
-  // delete axios.defaults.headers.common['Authorization'];
+  delete axios.defaults.headers.common['Authorization'];
+  window.location.href = '/';
 };
