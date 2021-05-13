@@ -2,7 +2,6 @@ package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.sentence.dto.FeelingRequest;
@@ -11,6 +10,9 @@ import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -29,6 +31,7 @@ public class SentenceService {
     private final HashOperations<String, String, String> hashOperations;
     private final ListOperations<String, String> listOperations;
 
+    private final ChannelTopic channelTopic;
     private final ObjectMapper objectMapper;
 
     /**
@@ -70,7 +73,7 @@ public class SentenceService {
         return objectMapper.readValue(hashOperations.get(DOCUMENT_PREFIX + documentId, sentenceId), Sentence.class);
     }
 
-    public void pressFeeling(String documentId, String sentenceId, FeelingRequest request) throws JsonProcessingException {
+    public Sentence pressFeeling(String documentId, String sentenceId, FeelingRequest request) throws JsonProcessingException {
         String nickname = request.getNickname();
         FeelingType feelingType = request.getFeelingType();
         Sentence sentence = getSentence(documentId, sentenceId);
@@ -92,6 +95,8 @@ public class SentenceService {
         }
 
         hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
+
+        return sentence;
     }
 
     public void updateNewComment(String documentId, String sentenceId) throws JsonProcessingException {

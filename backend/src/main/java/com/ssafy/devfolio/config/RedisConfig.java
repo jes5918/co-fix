@@ -1,6 +1,5 @@
 package com.ssafy.devfolio.config;
 
-import com.ssafy.devfolio.commentroom.pubsub.RedisSubscriber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
-import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -44,28 +42,12 @@ public class RedisConfig {
      * Redis에 발행(publish)된 메세지 처리를 위한 리스너 설정
      */
     @Bean
-    public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory redisConnectionFactory,
-                                                                       MessageListenerAdapter messageListenerAdapter,
-                                                                       ChannelTopic channelTopic) {
+    public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory redisConnectionFactory) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory);
-        container.addMessageListener(messageListenerAdapter, channelTopic); // 채널
 
         return container;
     }
-
-    /**
-     * 실제 메세지를 처리하는 subscriber 설정
-     * -> 첨삭룸 / 첨삭 메세지 구분해야 하는 지 고민
-     */
-    @Bean
-    public MessageListenerAdapter listenerAdapter(RedisSubscriber subscriber) {
-        return new MessageListenerAdapter(subscriber, "sendRoomMessage");
-    }
-//    @Bean
-//    public MessageListenerAdapter listenerAdapter() {
-//        return new MessageListenerAdapter();
-//    }
 
     /**
      * 애플리케이션에 사용할 redisTemplate 설정
@@ -76,7 +58,7 @@ public class RedisConfig {
 
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(String.class)); //  GenericJackson2JsonRedisSerializer() ??
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(String.class));
 
         return redisTemplate;
     }

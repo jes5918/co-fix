@@ -1,4 +1,4 @@
-package com.ssafy.devfolio.commentroom;
+package com.ssafy.devfolio.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -12,13 +12,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*")
+        registry.addEndpoint("/wss").setAllowedOriginPatterns("*")
                 .withSockJS();
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/room", "/comment"); // topic 구분 ex) commentroom, comment
+        registry.enableSimpleBroker("/room"); // topic 구분 ex) commentroom, comment
         registry.setApplicationDestinationPrefixes("/pub");
     }
 }

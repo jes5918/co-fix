@@ -1,6 +1,7 @@
 package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
@@ -24,6 +25,7 @@ import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 public class SentenceController {
 
     private final SentenceService sentenceService;
+    private final RedisSenderService redisSenderService;
     private final ResponseService responseService;
 
     @ApiOperation(value = "문서 조회", notes = "문서 id를 이용해 문서 내부 문장 전체 조회")
@@ -62,7 +64,10 @@ public class SentenceController {
                                        @ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
                                        @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                        @ApiParam(value = "감정표현 정보", required = true) @RequestBody FeelingRequest request) throws JsonProcessingException {
-        sentenceService.pressFeeling(documentId, sentenceId, request);
+        Sentence sentence = sentenceService.pressFeeling(documentId, sentenceId, request);
+
+        redisSenderService.sendSentenceUpdateService(roomId, sentence);
+
 
         BaseResponse response = responseService.getSuccessResponse();
 
