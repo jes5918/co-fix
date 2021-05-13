@@ -49,4 +49,9 @@ public class Sentence {
         this.modifiedContent = modifiedContent;
         this.lastModifiedDate = LocalDateTime.now();
     }
+
+    public void updateNewComment() {
+        this.hasComment = true;
+        this.lastModifiedDate = LocalDateTime.now();
+    }
 }
