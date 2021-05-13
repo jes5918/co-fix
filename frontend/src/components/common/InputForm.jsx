@@ -17,7 +17,6 @@ const Input = styled.input`
 `;
 
 const InputForm = ({
-  onSubmit,
   width,
   height,
   type,
@@ -27,38 +26,21 @@ const InputForm = ({
   value,
   onValueHandler,
 }) => {
-  const [searchWord, setSearchWord] = useState('');
-  const inputRef = useRef(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(searchWord);
-    setSearchWord('');
-  };
-
-  const onChange = (e) => {
-    const { value } = e.target;
-    setSearchWord(value);
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        name="searchWord"
-        ref={inputRef}
-        value={value}
-        onChange={(e) => {
-          onValueHandler(e);
-        }}
-        width={width}
-        height={height}
-        autoFocus={true}
-        type={type ? type : 'text'}
-        step={step}
-        min={min}
-        max={max}
-      />
-    </form>
+    <Input
+      name="searchWord"
+      value={value}
+      onChange={(e) => {
+        onValueHandler(e);
+      }}
+      width={width}
+      height={height}
+      autoFocus={true}
+      type={type ? type : 'text'}
+      step={step}
+      min={min}
+      max={max}
+    />
   );
 };
 
