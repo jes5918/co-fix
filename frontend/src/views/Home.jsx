@@ -25,6 +25,8 @@ import Footer from '../containers/home/Footer';
 import Section_1 from '../containers/home/Section_1';
 import Section_2 from '../containers/home/Section_2';
 import Section_3 from '../containers/home/Section_3';
+import Section_4 from '../containers/home/Section_4';
+import Section_5 from '../containers/home/Section_5';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,15 +42,15 @@ export default function Home() {
     setIsAutoLoginChecked(!isAutoLoginChecked);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY + window.innerHeight - 200);
-      console.log('현재 스크롤 위치 : ', window.scrollY);
-      console.log('계산값 : ', window.scrollY + window.innerHeight - 200);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollY(window.scrollY + window.innerHeight - 200);
+  //     console.log('현재 스크롤 위치 : ', window.scrollY);
+  //     console.log('계산값 : ', window.scrollY + window.innerHeight - 200);
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
 
   return (
     <>
@@ -56,6 +58,8 @@ export default function Home() {
         <Section_1 className={'test'} ModalToggleHandler={ModalToggleHandler} />
         <Section_2 className="test" />
         <Section_3 className="test" />
+        <Section_4 className="test" />
+        <Section_5 className="test" />
         <Footer />
       </HomeWrapper>
       <Modal
