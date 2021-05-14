@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.RoomStatus;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
-import com.ssafy.devfolio.commentroom.pubsub.RedisSubscriber;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
@@ -17,8 +16,6 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.listener.ChannelTopic;
-import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -48,9 +45,6 @@ public class CommentRoomService {
     private final HashOperations<String, String, String> hashOperations;
     private final ListOperations<String, String> listOperations;
 
-    private final RedisMessageListenerContainer redisMessageListener;
-    private final RedisSubscriber redisSubscriber;
-    private final ChannelTopic channelTopic;
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
 
@@ -250,24 +244,4 @@ public class CommentRoomService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * 소켓
-     * 첨삭방 전체 리턴하는 메서드
-     */
-    public void sendCommentRoom(CommentRoom commentRoom) throws JsonProcessingException {
-
-        redisMessageListener.addMessageListener(redisSubscriber, channelTopic);
-
-        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(commentRoom));
-    }
-
-    /**
-     * 소켓
-     *  첨삭방 - 문장 감정표현 변화
-     */
-    public void sendCommentRoomFeeling(Sentence sentence) throws JsonProcessingException {
-        redisMessageListener.addMessageListener(redisSubscriber, channelTopic);
-
-        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(sentence));
-    }
 }

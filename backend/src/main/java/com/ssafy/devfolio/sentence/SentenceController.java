@@ -2,6 +2,7 @@ package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
+import com.ssafy.devfolio.commentroom.pubsub.RedisRoomSubscriber;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
@@ -9,12 +10,15 @@ import com.ssafy.devfolio.sentence.dto.FeelingRequest;
 import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 
@@ -27,6 +31,11 @@ public class SentenceController {
     private final SentenceService sentenceService;
     private final RedisSenderService redisSenderService;
     private final ResponseService responseService;
+
+    private final RedisMessageListenerContainer redisMessageListener;
+    private final RedisRoomSubscriber redisRoomSubscriber;
+    private final Map<String, ChannelTopic> channels;
+
 
     @ApiOperation(value = "문서 조회", notes = "문서 id를 이용해 문서 내부 문장 전체 조회")
     @GetMapping("/{documentId}")
@@ -53,7 +62,10 @@ public class SentenceController {
 
         Sentence sentence = sentenceService.fixSentence(memberId, commentRoomId, documentId, sentenceId, request.getModifiedContent());
 
-        redisSenderService.sendSentenceUpdateService(commentRoomId, sentence);
+        ChannelTopic channel = channels.get(commentRoomId);
+        channels.put(commentRoomId, channel);
+
+        redisSenderService.sendSentenceUpdateService(channel, commentRoomId, sentence);
 
         BaseResponse response = responseService.getSuccessResponse();
 
@@ -67,8 +79,11 @@ public class SentenceController {
                                        @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                        @ApiParam(value = "감정표현 정보", required = true) @RequestBody FeelingRequest request) throws JsonProcessingException {
         Sentence sentence = sentenceService.pressFeeling(documentId, sentenceId, request);
+    
+        ChannelTopic channel = channels.get(commentRoomId);
+        channels.put(commentRoomId, channel);
 
-        redisSenderService.sendSentenceUpdateService(commentRoomId, sentence);
+        redisSenderService.sendSentenceUpdateService(channel, commentRoomId, sentence);
 
         BaseResponse response = responseService.getSuccessResponse();
 

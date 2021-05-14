@@ -60,12 +60,14 @@ public class CommentService {
         return objectMapper.readValue(hashOperations.get(SENTENCE_PREFIX + sentenceId, commentId), Comment.class);
     }
 
-    public void pressAgree(String sentenceId, String commentId, String nickname) throws JsonProcessingException {
+    public Comment pressAgree(String sentenceId, String commentId, String nickname) throws JsonProcessingException {
         Comment comment = getComment(sentenceId, commentId);
 
         comment.pressAgree(nickname);
         String commentToString = objectMapper.writeValueAsString(comment);
 
         hashOperations.put(SENTENCE_PREFIX + sentenceId, comment.getCommentId(), commentToString);
+
+        return comment;
     }
 }
