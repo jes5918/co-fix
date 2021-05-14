@@ -14,7 +14,7 @@ function createInstance() {
 const getToken = async () => {
   try {
     await localStorage.getItem('user').then((user) => {
-      return user.token ? user.token : null;
+      return user.token;
     });
   } catch (e) {
     console.error(e);
@@ -32,6 +32,11 @@ function AuthorizationInstance() {
     async function (config) {
       const accToken = await getToken();
       const token = 'Bearer ' + accToken;
+      if (accToken) {
+        console.log(accToken, token);
+      } else {
+        console.log(`모야`, token);
+      }
       // const temp =
       //   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImlhdCI6MTYyMDkxMTYyNywiZXhwIjoxNjIwOTE1MjI3fQ.vaU1kX0az5wIclwJNBuMjA7P1ZoHDPU9Unm9DO7rEjE';
       // const token = 'Bearer ' + temp;
