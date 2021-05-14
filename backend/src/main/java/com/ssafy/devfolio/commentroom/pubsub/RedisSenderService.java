@@ -59,9 +59,6 @@ public class RedisSenderService {
                 .lastModifiedDate(commentRoom.getLastModifiedDate())
                 .build();
 
-        System.out.println("channelTopic = " + channelTopic);
-        System.out.println("channelTopic.getTopic() = " + channelTopic.getTopic());
-
         redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
 //        messageTemplate.convertAndSend("/room/" + commentRoomSub.getRoomId(), commentRoomSub);
     }
