@@ -9,10 +9,6 @@ export const LoginAction = (userData) => (dispatch) => {
     type: SET_USER,
     payload: userData,
   });
-
-  const token = `Bearer ${userData.token}`;
-  console.log('로그인 token', token);
-  axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
   // window.location.href = '/';
 };
 
@@ -23,6 +19,5 @@ export const logoutUserAction = (dispatch) => {
   dispatch({
     type: SET_UNAUTHENTICATED,
   });
-  delete axios.defaults.headers.common['Authorization'];
   window.location.href = '/';
 };
