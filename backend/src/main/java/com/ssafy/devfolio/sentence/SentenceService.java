@@ -65,17 +65,17 @@ public class SentenceService {
      * 해당 문장 내용 수정
      * @param documentId
      * @param sentenceId
-     * @param request
+     * @param modifiedContent
      */
-    public Sentence fixSentence(Long memberId, String documentId, String sentenceId, SentenceFixRequest request) throws JsonProcessingException {
-        CommentRoom commentRoom = commentRoomService.getCommentRoomById(request.getRoomId());
+    public Sentence fixSentence(Long memberId, String commentRoomId, String documentId, String sentenceId, String modifiedContent) throws JsonProcessingException {
+        CommentRoom commentRoom = commentRoomService.getCommentRoomById(commentRoomId);
 
         if (!commentRoom.getMemberId().equals(memberId)) {
             throw new BaseException(ErrorCode.SENTENCE_ONLY_FIXED_BY_OWNER_EXCEPTION);
         }
 
         Sentence sentence = getSentence(documentId, sentenceId);
-        sentence.fix(request.getModifiedContent());
+        sentence.fix(modifiedContent);
 
         hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
 
