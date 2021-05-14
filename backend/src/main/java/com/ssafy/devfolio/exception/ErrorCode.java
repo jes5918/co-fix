@@ -29,6 +29,7 @@ public enum ErrorCode {
     COMMENT_ROOM_INVALID_NICKNAME(HttpStatus.BAD_REQUEST, "0305", "잘못된 닉네임"),
     COMMENT_ROOM_CLOSED_EXCEPTION(HttpStatus.BAD_REQUEST, "0306", "닫힌 첨삭방은 입장 불가능"),
     COMMENT_ROOM_FULL_EXCEPTION(HttpStatus.CONFLICT, "0307", "현재 방이 가득 참"),
+    COMMENT_ROOM_FIX_MEMBER_LIMIT_EXCEPTION(HttpStatus.CONFLICT, "0308", "현재 참가자 인원보다 작은 수로는 변경할 수 없음"),
 
     // 감정 표현
     FEELING_MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "0401", "감정표현 누른 사람만 취소 가능"),

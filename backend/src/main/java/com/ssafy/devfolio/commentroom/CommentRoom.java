@@ -75,6 +75,14 @@ public class CommentRoom implements Serializable {
     }
 
     public void fixMemberLimit(int memberLimit) {
+        // 현재 참가자 인원보다 작은 수로는 바꿀 수 없음
+        long onlineMemberCount = this.members.stream()
+                .filter(member -> member.isOnline())
+                .count();
+        if (onlineMemberCount > memberLimit) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_FIX_MEMBER_LIMIT_EXCEPTION);
+        }
+
         this.memberLimit = memberLimit;
         this.lastModifiedDate = LocalDateTime.now();
     }
