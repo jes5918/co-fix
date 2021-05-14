@@ -2,6 +2,93 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
+// 이런 형태로 내려옴
+const test = {
+  roomId: '101181c0-0517-40a8-8931-8df5da61623b',
+  memberId: 5,
+  roomTitle: '한국가스공사',
+  memberLimit: 3,
+  documentId: 'a39beabe-19cf-49bf-baad-6d383a164716',
+  pinNumber: '21423333',
+  status: 'OPEN',
+  members: [
+    {
+      nickname: 'J Euisss',
+      online: true,
+    },
+    {
+      nickname: 'J Euisss',
+      online: true,
+    },
+    {
+      nickname: 'J Euisss',
+      online: true,
+    },
+    {
+      nickname: 'J Euisss',
+      online: true,
+    },
+  ],
+  createdDate: '2021-05-14T15:06:59.246958',
+  lastModifiedDate: '2021-05-14T15:06:59.246958',
+};
+
+function Card({
+  propsWidth,
+  propsHeight,
+  propsFontSize,
+  card,
+  onHandleZZim,
+  onClickTag,
+  onClickImage,
+}) {
+  return (
+    <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
+      <cardStyle.imgFrame>한</cardStyle.imgFrame>
+      <cardStyle.hoverContainer>
+        {/* hover */}
+        <cardStyle.infoBox onClick={() => onClickImage()}>
+          <cardStyle.madeby propsFontSize={propsFontSize}>
+            {test && test.roomTitle}
+          </cardStyle.madeby>
+          <cardStyle.madeby propsFontSize={propsFontSize}>
+            Created :{' '}
+            {test && test.createdDate.substring(0, 10).replaceAll('-', '.')}
+            <br />
+            Modified :{' '}
+            {test &&
+              test.lastModifiedDate.substring(0, 10).replaceAll('-', '.')}
+            <br />
+            PIN : {test && test.pinNumber}
+          </cardStyle.madeby>
+        </cardStyle.infoBox>
+        {/* {test && test.zzim ? (
+          <cardStyle.zzimedIcon onClick={() => onHandleZZim()} />
+        ) : (
+          <cardStyle.zzimIcon onClick={() => onHandleZZim()} />
+        )} */}
+        <cardStyle.tagBox>
+          <cardStyle.tags>
+            {test &&
+              test.members.map((member, i) => {
+                return (
+                  <cardStyle.tag
+                    key={i}
+                    onClick={() => onClickTag(member.nickname)}
+                    propsFontSize={propsFontSize}
+                  >
+                    {member.nickname}
+                  </cardStyle.tag>
+                );
+              })}
+          </cardStyle.tags>
+        </cardStyle.tagBox>
+      </cardStyle.hoverContainer>
+    </cardStyle.mainFrame>
+  );
+}
+export default Card;
+
 const cardStyle = {
   mainFrame: styled.div`
     width: ${({ propsWidth }) => `${propsWidth ? propsWidth : 300}px`};
@@ -13,7 +100,7 @@ const cardStyle = {
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    &:hover > * {
+    &:hover * {
       top: 0px;
       opacity: 1;
     }
@@ -22,20 +109,25 @@ const cardStyle = {
       transform: scale(1.1);
     }
   `,
-  imgFrame: styled.img`
+  imgFrame: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: 'Samlip'
     width: 100%;
     height: 100%;
-    object-fit: cover;
     z-index: 1;
     border-radius: 30px;
   `,
   hoverContainer: styled.div`
     width: 100%;
     height: 100%;
-    z-index: 3;
     background-color: rgba(0, 0, 0, 0.55);
     position: absolute;
     top: 20%;
+    z-index: 1;
     opacity: 0;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     display: flex;
@@ -46,6 +138,8 @@ const cardStyle = {
     width: 100%;
     height: 75%;
     margin: 0;
+    z-index: 1;
+    opacity: 1;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -55,6 +149,8 @@ const cardStyle = {
   `,
   madeby: styled.div`
     color: white;
+    z-index: 1;
+    opacity: 1;
     font-weight: bold;
     font-size: ${({ propsFontSize }) =>
       `${propsFontSize ? propsFontSize : 17}px`};
@@ -62,7 +158,7 @@ const cardStyle = {
     text-align: center;
     word-break: keep-all;
     line-height: ${({ propsFontSize }) =>
-      `${propsFontSize ? propsFontSize + 10 : 27}px`};
+      `${propsFontSize ? propsFontSize + 20 : 27}px`};
   `,
   zzimedIcon: styled(AiFillStar)`
     position: absolute;
@@ -80,7 +176,7 @@ const cardStyle = {
   `,
   tagBox: styled.div`
     width: 100%;
-    height: 25%;
+    height: 40%;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -108,53 +204,3 @@ const cardStyle = {
     margin-right: 5px;
   `,
 };
-
-function Card({
-  thumbnailURL,
-  propsWidth,
-  propsHeight,
-  propsFontSize,
-  card,
-  onHandleZZim,
-  onClickTag,
-  onClickImage,
-}) {
-  return (
-    <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
-      <cardStyle.imgFrame src={thumbnailURL} alt="" />
-      <cardStyle.hoverContainer>
-        {/* hover */}
-        <cardStyle.infoBox onClick={() => onClickImage()}>
-          <cardStyle.madeby propsFontSize={propsFontSize}>
-            {card && card.madeby}님의 템플릿
-          </cardStyle.madeby>
-          <cardStyle.madeby propsFontSize={propsFontSize}>
-            {card && card.createdAt}
-          </cardStyle.madeby>
-        </cardStyle.infoBox>
-        {card && card.zzim ? (
-          <cardStyle.zzimedIcon onClick={() => onHandleZZim()} />
-        ) : (
-          <cardStyle.zzimIcon onClick={() => onHandleZZim()} />
-        )}
-        <cardStyle.tagBox>
-          <cardStyle.tags>
-            {card &&
-              card.tags.map((tag, i) => {
-                return (
-                  <cardStyle.tag
-                    key={i}
-                    onClick={() => onClickTag(tag)}
-                    propsFontSize={propsFontSize}
-                  >
-                    #{tag}
-                  </cardStyle.tag>
-                );
-              })}
-          </cardStyle.tags>
-        </cardStyle.tagBox>
-      </cardStyle.hoverContainer>
-    </cardStyle.mainFrame>
-  );
-}
-export default Card;

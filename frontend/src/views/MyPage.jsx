@@ -7,8 +7,11 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+// apis
+import { getDocuments } from '../api/documents';
+import { getAllComments } from '../api/comments';
+
 // containers
-import OpenViduMain from '../openvidu/OpenViduMain';
 import ScreenSlideDivider from '../containers/ScreenSlideDivider';
 import Participant from '../containers/mypage/Participant';
 import DocumentContainer from '../containers/DocumentContainer';
@@ -19,23 +22,6 @@ import MyPageRight from '../containers/mypage/MyPageRight';
 
 // components
 import CalcContentLength from '../containers/mypage/CalcContentLength';
-const testData = [
-  {
-    id: 0,
-    avatar:
-      'https://www.pikpng.com/pngl/m/357-3577415_free-png-download-cat-cute-png-images-background.png',
-    nickname: '비와 당신',
-    comment: '지금 이 순간, 마법처럼 날 묶어왔던 사슬을 벗어던진다.',
-  },
-  {
-    id: 1,
-    avatar:
-      'https://www.pikpng.com/pngl/m/357-3577415_free-png-download-cat-cute-png-images-background.png',
-    nickname: '비와 당신',
-    comment:
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque , e.',
-  },
-];
 
 // 커스터마이징 탭
 const CustomTab = ({ children }) => (
@@ -66,6 +52,13 @@ const CustomTab = ({ children }) => (
 CustomTab.tabsRole = 'Tab';
 export default function MyPage() {
   const [tabIndex, setTabIndex] = useState(0);
+  const [documentInfo, setDocumentInfo] = useState([]);
+  const [originalContent, setOriginalContent] = useState([]);
+  const [modifiedContent, setModifiedContent] = useState([]);
+  const [commentInfo, setCommentInfo] = useState([]);
+  const [onFocusedSentence, setOnFocusedSentence] = useState();
+
+  // 중간 divderbar
   const [splitPosX, setSplitPosX] = useState(() => {
     const SavedSplitX = localStorage.getItem('myPageSplitPosX');
     return SavedSplitX ? parseInt(SavedSplitX, 10) : 600;
@@ -74,10 +67,53 @@ export default function MyPage() {
   const isHalfScreen = windowWidthSize > screen.width / 1.85;
   const isMobileScreen = windowWidthSize > screen.width / 3;
 
-  const datas = useSelector((state) => {
-    console.log(`state.document.data`, state.document.data);
+  const sentences = useSelector((state) => {
     return state.document.data;
   });
+
+  // sentence 클릭 -> comment 조회
+  const onHandleClickSentence = (sentenceId) => {
+    console.log(`sentenceId`, sentenceId);
+    setOnFocusedSentence(sentenceId);
+    getAllComments(
+      '101181c0-0517-40a8-8931-8df5da61623b',
+      'a39beabe-19cf-49bf-baad-6d383a164716',
+      sentenceId,
+      (res) => {
+        setCommentInfo(res.data.data);
+      },
+      (err) => {
+        console.log(`err`, err);
+      },
+    );
+  };
+
+  const onHandleSubmitComment = () => {};
+  const onHandleClickAgree = () => {};
+  const testRequest = () => {};
+
+  useEffect(() => {
+    getDocuments(
+      '101181c0-0517-40a8-8931-8df5da61623b',
+      'a39beabe-19cf-49bf-baad-6d383a164716',
+      (res) => {
+        setDocumentInfo(res.data.data);
+        let tempOrigin = '';
+        let tempModify = '';
+        res.data.data.forEach((d) => {
+          tempOrigin += d.originalContent;
+          tempOrigin += '\n';
+          tempModify += d.modifiedContent;
+          tempModify += '\n';
+        });
+        setOriginalContent(tempOrigin);
+        setModifiedContent(tempModify);
+      },
+      (err) => {
+        console.log(`err`, err);
+      },
+    );
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -109,7 +145,7 @@ export default function MyPage() {
         <MyPageContainer>
           <MyPageHeader>
             {isMobileScreen ? (
-              <>{datas && <MyPageTitle>{datas.title}</MyPageTitle>}</>
+              <>{sentences && <MyPageTitle>{sentences.title}</MyPageTitle>}</>
             ) : (
               <MyPageTitle></MyPageTitle>
             )}
@@ -119,11 +155,15 @@ export default function MyPage() {
             <ScreenSlideDivider setSplitPosX={setSplitPosX}>
               <>
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
-                  <DocumentContainer />
+                  <DocumentContainer
+                    sentences={documentInfo}
+                    testRequest={testRequest}
+                    onHandleClickSentence={onHandleClickSentence}
+                  />
                 </Scrollbars>
-                {datas && (
+                {sentences && (
                   <CalcContentLength
-                    datas={datas}
+                    datas={documentInfo}
                     splitPosX={splitPosX}
                     windowWidthSize={windowWidthSize}
                   />
@@ -131,7 +171,12 @@ export default function MyPage() {
               </>
               <Scrollbars style={{ width: '100%', height: '100%' }}>
                 {/* <TEST /> */}
-                {/* <CommentContainer /> */}
+                <CommentContainer
+                  comments={commentInfo}
+                  sentenceId={onFocusedSentence}
+                  onHandleClickAgree={onHandleClickAgree}
+                  onHandleSubmitComment={onHandleSubmitComment}
+                />
               </Scrollbars>
             </ScreenSlideDivider>
           </TabPanel>
@@ -139,25 +184,29 @@ export default function MyPage() {
             <ScreenSlideDivider setSplitPosX={setSplitPosX}>
               <>
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
-                  <DocumentContainer />
+                  <MypageLeft content={originalContent} />
                 </Scrollbars>
-                {datas && (
-                  <CalcContentLength
-                    datas={datas}
-                    splitPosX={splitPosX}
-                    windowWidthSize={windowWidthSize}
-                  />
-                )}
+                <CalcContentLength
+                  sentences={originalContent}
+                  splitPosX={splitPosX}
+                  windowWidthSize={windowWidthSize}
+                />
               </>
-              <Scrollbars style={{ width: '100%', height: '100%' }}>
-                <CommentContainer data={testData} />
-              </Scrollbars>
+              <>
+                <Scrollbars style={{ width: '100%', height: '100%' }}>
+                  <MypageLeft content={modifiedContent} />
+                </Scrollbars>
+                {/* <CalcContentLength
+                  sentences={modifiedContent}
+                  splitPosX={splitPosX}
+                  windowWidthSize={windowWidthSize}
+                /> */}
+              </>
             </ScreenSlideDivider>
           </TabPanel>
         </MyPageContainer>
       </StyledTabs>
       {/* <Participant /> */}
-      <OpenViduMain />
     </BackGround>
   );
 }

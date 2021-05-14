@@ -25,7 +25,6 @@ import DocumentContainer from '../containers/DocumentContainer';
 import CommentContainer from '../containers/CommentContainer';
 
 // components
-import CalcContentLength from '../containers/mypage/CalcContentLength';
 import OpenViduMain from '../openvidu/OpenViduMain';
 
 import useRoomInfo from '../hook/useRoomInfo';
@@ -146,7 +145,7 @@ export default function CommonWorkPage() {
   }, []);
 
   return (
-    <S.CommonWorkPage>
+    <S.CommonWorkPage oncopy="return false" oncut="return false">
       <S.UsableSpace>
         <S.LeftSide>
           <Scrollbars style={{ width: '100%', height: '100%' }}>

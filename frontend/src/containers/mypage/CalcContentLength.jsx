@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProgressBar from '@ramonak/react-progress-bar';
 
-function CalcContentLength({ datas, splitPosX, windowWidthSize }) {
+function CalcContentLength({ datas, sentences, splitPosX, windowWidthSize }) {
   const [contentLength, setContentLength] = useState(0);
   const [maxLength, setMaxLength] = useState(1500);
   const [percent, setPercent] = useState(0);
@@ -13,12 +13,20 @@ function CalcContentLength({ datas, splitPosX, windowWidthSize }) {
   };
 
   useEffect(() => {
-    let contentLengthTemp = 0;
-    datas.forEach((data) => {
-      contentLengthTemp += data.modifiedContent.length;
-    });
-    setContentLength(contentLengthTemp);
+    if (datas) {
+      let contentLengthTemp = 0;
+      datas.forEach((data) => {
+        contentLengthTemp += data.modifiedContent.length;
+      });
+      setContentLength(contentLengthTemp);
+    }
   }, [datas]);
+
+  useEffect(() => {
+    if (sentences) {
+      setContentLength(sentences.length);
+    }
+  }, [sentences]);
 
   // progress bar percent 계산
   useEffect(() => {

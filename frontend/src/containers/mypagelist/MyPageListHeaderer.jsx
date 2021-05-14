@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const Header = styled.div`
   height: 80px;
   text-align: center;
-  font-size: 28px;
+  font-size: 32px;
+  font-family: 'Samlip';
 `;
 
 function TemplateHeader({ children }) {
