@@ -2,6 +2,8 @@ package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.devfolio.commentroom.CommentRoom;
+import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.sentence.dto.FeelingRequest;
@@ -11,6 +13,7 @@ import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -27,16 +30,20 @@ public class SentenceService {
     private final RedisKeyPrefixProperties keyPrefixProperties;
 
     private String DOCUMENT_PREFIX;
+    private String COMMENT_ROOM_PREFIX;
     private String MEMBER_ROOM_PREFIX;
 
+    private final ValueOperations<String, String> valueOperations;
     private final HashOperations<String, String, String> hashOperations;
     private final ListOperations<String, String> listOperations;
 
     private final ObjectMapper objectMapper;
+    private final CommentRoomService commentRoomService;
 
     @PostConstruct
     public void init() {
         DOCUMENT_PREFIX = keyPrefixProperties.getDocument();
+        COMMENT_ROOM_PREFIX = keyPrefixProperties.getCommentRoom();
         MEMBER_ROOM_PREFIX = keyPrefixProperties.getMemberRoom();
     }
 
@@ -61,7 +68,9 @@ public class SentenceService {
      * @param request
      */
     public Sentence fixSentence(Long memberId, String documentId, String sentenceId, SentenceFixRequest request) throws JsonProcessingException {
-        if (listOperations.indexOf(MEMBER_ROOM_PREFIX + memberId, request.getRoomId()) == null) {
+        CommentRoom commentRoom = commentRoomService.getCommentRoomById(request.getRoomId());
+
+        if (!commentRoom.getMemberId().equals(memberId)) {
             throw new BaseException(ErrorCode.SENTENCE_ONLY_FIXED_BY_OWNER_EXCEPTION);
         }
 
