@@ -7,11 +7,13 @@ import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.sentence.dto.FeelingRequest;
 import com.ssafy.devfolio.sentence.dto.FeelingType;
 import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
+import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +24,21 @@ import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 @RequiredArgsConstructor
 public class SentenceService {
 
-    private final String DOCUMENT_PREFIX = "document:";
-    private final String MEMBER_ROOM_PREFIX = "member-room:";
+    private final RedisKeyPrefixProperties keyPrefixProperties;
+
+    private String DOCUMENT_PREFIX;
+    private String MEMBER_ROOM_PREFIX;
 
     private final HashOperations<String, String, String> hashOperations;
     private final ListOperations<String, String> listOperations;
 
     private final ObjectMapper objectMapper;
+
+    @PostConstruct
+    public void init() {
+        DOCUMENT_PREFIX = keyPrefixProperties.getDocument();
+        MEMBER_ROOM_PREFIX = keyPrefixProperties.getMemberRoom();
+    }
 
     /**
      *

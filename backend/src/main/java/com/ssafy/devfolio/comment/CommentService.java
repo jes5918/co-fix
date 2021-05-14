@@ -6,10 +6,12 @@ import com.ssafy.devfolio.comment.dto.CommentRequest;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.sentence.SentenceService;
+import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,13 +21,19 @@ import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 @RequiredArgsConstructor
 public class CommentService {
 
-    private final String SENTENCE_PREFIX = "sentence:";
+    private final RedisKeyPrefixProperties keyPrefixProperties;
+
+    private String SENTENCE_PREFIX;
 
     private final SentenceService sentenceService;
     private final HashOperations<String, String, String> hashOperations;
 
     private final ObjectMapper objectMapper;
 
+    @PostConstruct
+    public void init() {
+        SENTENCE_PREFIX = keyPrefixProperties.getSentence();
+    }
 
     public Comment writeComment(String documentId, String sentenceId, CommentRequest request) throws JsonProcessingException {
         Comment comment = Comment.createComment(request);
