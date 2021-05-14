@@ -1,5 +1,6 @@
 import { SET_USER, SET_UNAUTHENTICATED } from '../types';
 import axios from 'axios';
+import { UserGraduate } from '@styled-icons/fa-solid';
 
 export const LoginAction = (userData) => (dispatch) => {
   console.log('success login action', userData);
@@ -9,8 +10,10 @@ export const LoginAction = (userData) => (dispatch) => {
     type: SET_USER,
     payload: userData,
   });
-  const token = `Bearer ${userData.token}`;
-  axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
+  if (userData.token) {
+    const token = `Bearer ${userData.token}`;
+    axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
+  }
   window.location.href = '/';
 };
 

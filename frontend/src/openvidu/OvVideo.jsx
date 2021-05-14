@@ -31,9 +31,9 @@ const V = {
     height: auto;
     border: ${(props) =>
       props.isSpeak === 'Main'
-        ? '7px solid #ff006a'
+        ? '5px solid #56acf3'
         : props.isSpeak === true
-        ? '7px solid #56acf3'
+        ? '5px solid #ff006a'
         : 'none'};
     border-radius: 15px;
     margin: 0;
