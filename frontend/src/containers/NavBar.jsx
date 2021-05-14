@@ -236,10 +236,14 @@ const FooterText = styled.div`
 const HamburgerMenu = {
   Container: styled.div`
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     z-index: 10;
   `,
   Name: styled.div`
     font-size: 17px;
+    margin-right: 10px;
   `,
   Icon: styled.div`
     width: 55px;
