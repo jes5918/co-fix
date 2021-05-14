@@ -64,11 +64,9 @@ export default function NavBar({ isLoggedIn, user }) {
         <HamburgerMenu.Container>
           {isLoggedIn ? (
             <>
-              {user && user.credentials.member ? (
-                <HamburgerMenu.Name>
-                  {user.credentials.member.name}
-                </HamburgerMenu.Name>
-              ) : null}
+              {user.name && (
+                <HamburgerMenu.Name>{user.name}</HamburgerMenu.Name>
+              )}
               <HamburgerMenu.Icon onClick={HamburgerMenuToggleHandler} />
               {isHamburgerMenuOpen ? (
                 <HamburgerMenu.Wrapper>

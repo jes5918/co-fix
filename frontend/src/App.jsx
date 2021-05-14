@@ -24,7 +24,10 @@ function App() {
 
   return (
     <>
-      <NavBar isLoggedIn={user.authenticated ? true : false} user={user} />
+      <NavBar
+        isLoggedIn={user.authenticated ? true : false}
+        user={user.credentials.member}
+      />
       {/* <AnimatedCursor
         innerSize={20}
         outerSize={20}
