@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "0.1.14",
     "@kunukn/react-collapse": "^2.2.9",
     "@ramonak/react-progress-bar": "^3.1.0",
+    "@stomp/stompjs": "6.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -31,15 +32,18 @@
     "react-scrollbars-custom": "^4.0.25",
     "react-split-pane": "^0.1.92",
     "react-spring": "9.1.2",
+    "react-stomp": "5.1.0",
     "react-tabs": "^3.2.2",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
+    "sockjs-client": "1.5.1",
     "styled-components": "^5.2.3",
     "styled-icons": "10.33.0",
     "styled-reset": "4.3.4",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "webstomp-client": "1.2.6"
   },
   "scripts": {
     "start": "react-scripts start",
