@@ -79,7 +79,7 @@ public class SentenceController {
                                        @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                        @ApiParam(value = "감정표현 정보", required = true) @RequestBody FeelingRequest request) throws JsonProcessingException {
         Sentence sentence = sentenceService.pressFeeling(documentId, sentenceId, request);
-
+    
         ChannelTopic channel = channels.get(commentRoomId);
         channels.put(commentRoomId, channel);
 
