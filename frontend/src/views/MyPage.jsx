@@ -8,6 +8,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 // containers
+import OpenViduMain from '../openvidu/OpenViduMain';
 import ScreenSlideDivider from '../containers/ScreenSlideDivider';
 import Participant from '../containers/mypage/Participant';
 import DocumentContainer from '../containers/DocumentContainer';
@@ -155,13 +156,15 @@ export default function MyPage() {
           </TabPanel>
         </MyPageContainer>
       </StyledTabs>
-      <Participant />
+      {/* <Participant /> */}
+      <OpenViduMain />
     </BackGround>
   );
 }
 
 // 백그라운드
 const BackGround = styled.div`
+  position: relative;
   width: 100vw;
   height: 100vh;
   padding-top: 86px;
