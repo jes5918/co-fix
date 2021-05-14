@@ -30,7 +30,7 @@ const ContainerFrame = styled.div`
 const InputLabel = styled.div`
   font-size: 45px;
   font-weight: bold;
-  font-family: 'Samlip';
+  font-family: 'SCD_bold';
   color: black;
   margin: 10px;
   word-break: keep-all;

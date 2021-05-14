@@ -21,7 +21,7 @@ const S = {
     for: 'comment',
   })`
     padding-left: 10px;
-    font-family: 'Samlip';
+    font-family: 'SCD_bold';
     font-size: 16px;
     color: #727272;
   `,
@@ -42,7 +42,7 @@ const S = {
     outline: none;
     width: 100%;
     height: 80%;
-    font-family: 'Samlip';
+    font-family: 'SCD_medium';
     overflow: hidden;
     font-size: 14px;
   `,

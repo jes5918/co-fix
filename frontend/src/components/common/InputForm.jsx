@@ -10,7 +10,7 @@ const Input = styled.input`
   height: ${({ height }) => `${height}px`};
   padding-left: 18px;
   padding-right: 18px;
-  font-family: 'Samlip';
+  font-family: 'SCD_medium';
   font-size: 1.25rem;
   font-weight: bold;
   text-align: center;

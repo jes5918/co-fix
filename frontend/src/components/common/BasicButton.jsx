@@ -9,7 +9,6 @@ const Button = styled.div`
   color: ${({ color }) => `${color ? `${color}` : 'black'}`};
   margin: ${({ margin }) => `${margin ? `${margin}px` : '10px'}`};
   border: none;
-  font-family: 'Samlip';
   font-weight: bold;
   border-radius: 15px;
   box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
