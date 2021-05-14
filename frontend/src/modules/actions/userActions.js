@@ -9,10 +9,10 @@ export const LoginAction = (userData) => (dispatch) => {
     type: SET_USER,
     payload: userData,
   });
-  // if (userData.token) {
-  //   const token = `Bearer ${userData.token}`;
-  //   axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
-  // }
+  if (userData.token) {
+    const token = `Bearer ${userData.token}`;
+    axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
+  }
   window.location.href = '/';
 };
 
@@ -22,6 +22,6 @@ export const logoutUserAction = (dispatch) => {
   dispatch({
     type: SET_UNAUTHENTICATED,
   });
-  // delete axios.defaults.headers.common['Authorization'];
+  delete axios.defaults.headers.common['Authorization'];
   window.location.href = '/';
 };
