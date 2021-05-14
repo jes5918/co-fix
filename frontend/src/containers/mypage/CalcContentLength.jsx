@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProgressBar from '@ramonak/react-progress-bar';
+import { Steering2 } from '@styled-icons/remix-fill';
 
 function CalcContentLength({ datas, sentences, splitPosX, windowWidthSize }) {
   const [contentLength, setContentLength] = useState(0);
@@ -41,8 +42,8 @@ function CalcContentLength({ datas, sentences, splitPosX, windowWidthSize }) {
           bgColor="#ff950e"
           width={
             windowWidthSize > screen.width / 1.85
-              ? splitPosX * 0.55
-              : windowWidthSize * 0.35
+              ? String(splitPosX * 0.55) + 'px'
+              : String(windowWidthSize * 0.35) + 'px'
           }
           height="25px"
           labelColor="#000000"
