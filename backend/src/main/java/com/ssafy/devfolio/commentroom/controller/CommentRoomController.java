@@ -100,6 +100,7 @@ public class CommentRoomController {
         CommentRoom commentRoom = commentRoomService.enterCommentRoom(pinNumber, nickname);
 
         ChannelTopic channel = channels.get(commentRoom.getRoomId());
+
         redisSenderService.sendRoomUpdateService(channel, commentRoom);
 
         SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.OK);
