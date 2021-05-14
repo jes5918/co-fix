@@ -69,7 +69,9 @@ export default function NavBar({ isLoggedIn, user }) {
               )}
               <HamburgerMenu.Icon onClick={HamburgerMenuToggleHandler} />
               {isHamburgerMenuOpen ? (
-                <HamburgerMenu.Wrapper>
+                <HamburgerMenu.Wrapper
+                  onMouseLeave={HamburgerMenuToggleHandler}
+                >
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
                     <Link to="/mypagelist">MyPageList</Link>
                   </NavbarItem>
