@@ -13,7 +13,7 @@ function createInstance() {
 // Localstorage 에서 토큰을 받아오는 함수 -> refatoring 들어가야함
 const getToken = () => {
   try {
-    return JSON.stringify(localStorage.getItem('user')).token;
+    return JSON.parse(localStorage.getItem('user')).token;
   } catch (e) {
     console.error(e);
   }
