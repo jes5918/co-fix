@@ -11,8 +11,8 @@
     "es2021": true
   },
   "rules": {
-    "react-hooks/rules-of-hooks": "warning",
-    "react-hooks/exhaustive-deps": "warning",
+    "react-hooks/rules-of-hooks": 0,
+    "react-hooks/exhaustive-deps": 0,
     "prettier/prettier": 0,
     "indent": 0,
     "no-unused-vars": 0,
