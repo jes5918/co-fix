@@ -36,7 +36,7 @@ public class CommentController {
     private final RedisSentenceSubscriber redisSentenceSubscriber;
     private final Map<String, ChannelTopic> channels;
 
-    @ApiOperation(value = "문장에 코멘트 작성")
+    @ApiOperation(value = "문장에 코멘트 작성", notes = "작성 후 sentence 채널 구독자에게 작성내역 보냄")
     @PostMapping("/sentences/{sentenceId}/comments")
     public ResponseEntity writeComment(@ApiParam(value = "첨삭방 id", required = true) @PathVariable String commentRoomId,
                                        @ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
@@ -52,7 +52,7 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @ApiOperation(value = "문장에 달린 코멘트 조회")
+    @ApiOperation(value = "문장에 달린 코멘트 조회", notes = "조회시 해당 문장에 대한 sentence 채널이 생성됨")
     @GetMapping("/sentences/{sentenceId}/comments")
     public ResponseEntity getComments(@ApiParam(value = "첨삭방 id", required = true) @PathVariable String commentRoomId,
                                       @ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
@@ -69,7 +69,7 @@ public class CommentController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @ApiOperation(value = "코멘트에 agree (이미 한 사람이 요청시 취소)")
+    @ApiOperation(value = "코멘트에 agree (이미 한 사람이 요청시 취소)", notes = "동의 후 sentence 채널 구독자에게 변경내역 보냄")
     @PostMapping("/sentences/{sentenceId}/comments/{commentId}/agree")
     public ResponseEntity getComments(@ApiParam(value = "첨삭방 id", required = true) @PathVariable String commentRoomId,
                                       @ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
