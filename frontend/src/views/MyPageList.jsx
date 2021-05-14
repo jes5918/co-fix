@@ -25,8 +25,8 @@ const Background = styled.div`
   background-color: #f9f5f4;
 `;
 const MyPageListWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   padding-top: 100px;
   background-color: #f9f5f4;
   display: flex;

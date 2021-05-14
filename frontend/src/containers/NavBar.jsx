@@ -28,21 +28,6 @@ export default function NavBar({ isLoggedIn }) {
   const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
 
-  // 반응형 작업을 위한 screen width 계산 작업
-  const [windowWidthSize, setWindowWidthSize] = useState(window.innerWidth);
-
-  // Boolean (반응형)
-  const isHalfScreen = windowWidthSize > screen.width / 2;
-
-  // 반응형을 위한 EventListner 등록
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidthSize(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   // 모달 토글 핸들러(로그인)
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
@@ -77,7 +62,7 @@ export default function NavBar({ isLoggedIn }) {
       <NavbarMainWrapper>
         <NavbarLogo onClick={LogoClickHandler} />
         <HamburgerMenu.Container>
-          {!isLoggedIn ? (
+          {isLoggedIn ? (
             <>
               <HamburgerMenu.Icon onClick={HamburgerMenuToggleHandler} />
               {isHamburgerMenuOpen ? (
@@ -92,7 +77,7 @@ export default function NavBar({ isLoggedIn }) {
                     <Link to="/create">Create</Link>
                   </NavbarItem>
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/commonWorkPage">commonWorkPage</Link>
+                    <Link to="/co-fix/asd">Co-Fix</Link>
                   </NavbarItem>
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
                     <Link to="/openvidutest">openvidutest</Link>
