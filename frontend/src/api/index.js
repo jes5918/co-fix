@@ -11,11 +11,9 @@ function createInstance() {
 }
 
 // Localstorage 에서 토큰을 받아오는 함수 -> refatoring 들어가야함
-const getToken = async () => {
+const getToken = () => {
   try {
-    await localStorage.getItem('user').then((user) => {
-      return user.token;
-    });
+    return localStorage.getItem('user').token;
   } catch (e) {
     console.error(e);
   }
