@@ -50,8 +50,8 @@ public class SentenceController {
                                       @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                       @ApiParam(value = "문장 수정 정보", required = true) @RequestBody SentenceFixRequest request) throws JsonProcessingException {
         Long memberId = getMemberIdFromAuthentication();
-        
-        Sentence sentence = sentenceService.fixSentence(memberId, documentId, sentenceId, request);
+
+        Sentence sentence = sentenceService.fixSentence(memberId, commentRoomId, documentId, sentenceId, request.getModifiedContent());
 
         redisSenderService.sendSentenceUpdateService(commentRoomId, sentence);
 
