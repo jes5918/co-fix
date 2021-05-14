@@ -1,19 +1,45 @@
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
+// hook
+import useLoginUser from '../hook/useLoginUser';
+
+// containers
 import MyPageListBody from '../containers/mypagelist/MyPageListBody';
 import MyPageListHeader from '../containers/mypagelist/MyPageListHeaderer';
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import useLoginUser from '../hook/useLoginUser';
+
+// apis
+import { getCommentRoomsInstance } from '../api/mypage/mypageList';
+
 export default function MyPageList() {
+  const [roomInfos, setRoomInfos] = useState('');
   const user = useLoginUser();
+
+  useEffect(() => {
+    getCommentRoomsInstance(
+      (res) => {
+        console.log(res.data.data);
+        setRoomInfos(res.data.data);
+      },
+      (err) => {
+        console.log(`err`, err);
+      },
+    );
+  }, []);
+
   return (
     <Background>
       <MyPageListWrapper>
         {user.authenticated ? (
-          <MyPageListHeader>{user.credentials}</MyPageListHeader>
+          <MyPageListHeader>
+            <b>{user.credentials.member.name}</b> 님의 첨삭방
+          </MyPageListHeader>
         ) : (
-          <MyPageListHeader>첨삭받은 리스트</MyPageListHeader>
+          <MyPageListHeader>
+            <b>Test User</b> 님의 첨삭방
+          </MyPageListHeader>
         )}
-        <MyPageListBody />
+        <MyPageListBody roomInfos={roomInfos} />
       </MyPageListWrapper>
     </Background>
   );

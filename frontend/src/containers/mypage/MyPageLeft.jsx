@@ -7,21 +7,17 @@ const LeftPanel = styled.div`
   display: flex;
   flex-direction: column;
   word-break: keep-all;
+  white-space: pre-wrap;
+  line-height: 27px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Samlip';
 `;
 
-function MypageLeft({ datas }) {
+function MypageLeft({ content }) {
   return (
     <>
-      <LeftPanel>
-        {datas &&
-          datas.map((data, idx) => {
-            return (
-              <>
-                <CommentBlock key={idx} data={data} />
-              </>
-            );
-          })}
-      </LeftPanel>
+      <LeftPanel>{content}</LeftPanel>
     </>
   );
 }

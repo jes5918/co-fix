@@ -17,10 +17,11 @@ const TempCard = {
   tags: ['React', 'Redux', 'Frontend'],
 };
 
-export default function TemplateBody() {
+export default function TemplateBody({ roomInfos }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const history = useHistory();
+
   const onZZimToggleHandler = () => {
     console.log('찜클릭');
   };
@@ -54,42 +55,12 @@ export default function TemplateBody() {
         ModalToggleHandler={AlertModalToggleHandler}
       >
         <AlertModal
-          PropsText="새 프로젝트를 만드시겠습니까?"
+          PropsText="새 첨삭 프로젝트를 만드시겠습니까?"
           PropsComfirmHandler={() => onPlusCardClickHandler()}
           PropsRejectHandler={() => AlertModalToggleHandler()}
         />
       </Modal>
       <CardWrapper>
-        <Card
-          thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-          card={TempCard}
-          onHandleZZim={onZZimToggleHandler}
-          onClickTag={onTagClickHandler}
-          propsWidth={280}
-          propsHeight={330}
-          propsFontSize={18}
-          onClickImage={ModalToggleHandler}
-        />
-        <Card
-          thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-          card={TempCard}
-          onHandleZZim={onZZimToggleHandler}
-          onClickTag={onTagClickHandler}
-          propsWidth={280}
-          propsHeight={330}
-          propsFontSize={18}
-          onClickImage={ModalToggleHandler}
-        />
-        <Card
-          thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-          card={TempCard}
-          onHandleZZim={onZZimToggleHandler}
-          onClickTag={onTagClickHandler}
-          propsWidth={280}
-          propsHeight={330}
-          propsFontSize={18}
-          onClickImage={ModalToggleHandler}
-        />
         <Card
           thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
           card={TempCard}
