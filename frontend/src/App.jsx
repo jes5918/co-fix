@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import useLoginUser from './hook/useLoginUser';
 import styled from 'styled-components';
 import AnimatedCursor from 'react-animated-cursor';
 
@@ -19,22 +20,11 @@ import NavBar from './containers/NavBar';
 // import { PrivateRoute } from './utils/PrivateRoute';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // 로그인 상태 알기
-  const CheckAuthentication = () => {
-    const user = localStorage.getItem('user');
-    setIsLoggedIn(user ? true : false);
-  };
-
-  useEffect(() => {
-    CheckAuthentication();
-    console.log(`AuthCheckTriger isLoggedIn = `, isLoggedIn);
-  }, [isLoggedIn]);
+  const user = useLoginUser();
 
   return (
     <>
-      <NavBar isLoggedIn={isLoggedIn} />
+      <NavBar isLoggedIn={user.authenticated ? true : false} />
       {/* <AnimatedCursor
         innerSize={20}
         outerSize={20}

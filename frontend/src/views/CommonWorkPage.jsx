@@ -15,6 +15,7 @@ import CommentContainer from '../containers/CommentContainer';
 
 // components
 import CalcContentLength from '../containers/mypage/CalcContentLength';
+import OpenViduMain from '../openvidu/OpenViduMain';
 
 import useRoomInfo from '../hook/useRoomInfo';
 
@@ -49,7 +50,8 @@ export default function CommonWorkPage() {
           </Scrollbars>
         </S.RightSide>
       </S.UsableSpace>
-      <Participant />
+      {/* <Participant /> */}
+      <OpenViduMain />
     </S.CommonWorkPage>
   );
 }
