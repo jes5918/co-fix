@@ -76,7 +76,7 @@ export default function TemplateBody({ roomInfos }) {
                 propsWidth={280}
                 propsHeight={330}
                 propsFontSize={18}
-                onClickImage={ModalToggleHandler(roomInfo)}
+                onClickImage={() => ModalToggleHandler(roomInfo)}
               />
             );
           })}
