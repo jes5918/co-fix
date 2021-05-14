@@ -77,12 +77,10 @@ export default function Join() {
     );
   };
   const duplicatedNickName = (data) => {
-    const dupli = data.members.map((member) => {
+    data.members.forEach((member) => {
       if (member.nickname === nickName && member.online) {
         NickNameAlertModalToggleHandler();
-        return;
       } else {
-        //join api작성.
         enterRoom(
           pinCode,
           nickName,
