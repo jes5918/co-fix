@@ -1,23 +1,24 @@
 import { AuthorizationInstance, createInstance } from './index.js';
 
-const instance = AuthorizationInstance();
-const basInstance = createInstance();
+const Authinstance = AuthorizationInstance();
+const BasInstance = createInstance();
 
 function createRoom(info, success, fail) {
-  instance.post('commentRooms', info).then(success).catch(fail);
+  Authinstance.post('commentRooms', info).then(success).catch(fail);
 }
 
 function getRoomInfo(pinNumber, success, fail) {
-  basInstance.get(`commentRooms/${pinNumber}`).then(success).catch(fail);
+  BasInstance.get(`commentRooms/${pinNumber}`).then(success).catch(fail);
 }
 
 function closeRoom(roomId, success, fail) {
-  instance.patch(`commentRooms/${roomId}`).then(success).catch(fail);
+  Authinstance.patch(`commentRooms/${roomId}`).then(success).catch(fail);
 }
 
 function modifyRoom(roomId, maxCnt, title, success, fail) {
-  instance
-    .put(`commentRooms/${roomId}?memberLimit=${maxCnt}&roomTitle=%${title}`)
+  Authinstance.put(
+    `commentRooms/${roomId}?memberLimit=${maxCnt}&roomTitle=%${title}`,
+  )
     .then(success)
     .catch(fail);
 }
