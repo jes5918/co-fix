@@ -2,6 +2,8 @@ package com.ssafy.devfolio.comment;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.comment.dto.CommentRequest;
+import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
+import com.ssafy.devfolio.commentroom.pubsub.RedisSentenceSubscriber;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.response.ResponseService;
@@ -12,11 +14,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +31,11 @@ public class CommentController {
 
     private final ResponseService responseService;
     private final CommentService commentService;
+    private final RedisSenderService redisSenderService;
+
+    private final RedisMessageListenerContainer redisMessageListener;
+    private final RedisSentenceSubscriber redisSentenceSubscriber;
+    private final Map<String, ChannelTopic> channels;
 
     @ApiOperation(value = "문장에 코멘트 작성")
     @PostMapping("/sentences/{sentenceId}/comments")
@@ -35,6 +45,9 @@ public class CommentController {
                                        @ApiParam(value = "코멘트 작성 정보", required = true) @RequestBody CommentRequest request) throws JsonProcessingException {
 
         Comment comment = commentService.writeComment(documentId, sentenceId, request);
+
+        ChannelTopic channel = channels.get(sentenceId);
+        redisSenderService.sendCommentUpdateService(channel, sentenceId, comment);
 
         SingleDataResponse<Comment> response = responseService.getSingleDataResponse(comment, HttpStatus.CREATED);
 
@@ -50,6 +63,11 @@ public class CommentController {
 
         ListDataResponse<Comment> response = responseService.getListDataResponse(comments, HttpStatus.OK);
 
+        ChannelTopic channel = new ChannelTopic(sentenceId);
+
+        redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
+        channels.put(sentenceId, channel);
+
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
@@ -64,7 +82,10 @@ public class CommentController {
             throw new BaseException(ErrorCode.COMMENT_INVALID_NICKNAME_EXCEPTION);
         }
 
-        commentService.pressAgree(sentenceId, commentId, nickname);
+        Comment comment = commentService.pressAgree(sentenceId, commentId, nickname);
+
+        ChannelTopic channel = channels.get(sentenceId);
+        redisSenderService.sendCommentUpdateService(channel, sentenceId, comment);
 
         BaseResponse response = responseService.getSuccessResponse();
 

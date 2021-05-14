@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
+import com.ssafy.devfolio.commentroom.pubsub.RedisRoomSubscriber;
 import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
@@ -12,10 +13,14 @@ import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.SingleDataResponse;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 
@@ -28,6 +33,11 @@ public class CommentRoomController {
     private final CommentRoomService commentRoomService;
     private final RedisSenderService redisSenderService;
     private final ResponseService responseService;
+
+    private final RedisMessageListenerContainer redisMessageListener;
+    private final RedisRoomSubscriber redisRoomSubscriber;
+    private final Map<String, ChannelTopic> channels;
+
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 Bearer token", required = true, dataType = "String", paramType = "header")
@@ -44,6 +54,10 @@ public class CommentRoomController {
         }
 
         CommentRoom commentRoom = commentRoomService.createCommentRoom(request, memberId);
+
+        ChannelTopic channel = new ChannelTopic(commentRoom.getRoomId());
+        redisMessageListener.addMessageListener(redisRoomSubscriber, channel);
+        channels.put(commentRoom.getRoomId(), channel);
 
         SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.CREATED);
 
@@ -85,7 +99,8 @@ public class CommentRoomController {
         }
         CommentRoom commentRoom = commentRoomService.enterCommentRoom(pinNumber, nickname);
 
-        redisSenderService.sendRoomUpdateService(commentRoom);
+        ChannelTopic channel = channels.get(commentRoom.getRoomId());
+        redisSenderService.sendRoomUpdateService(channel, commentRoom);
 
         SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.OK);
 
@@ -103,14 +118,15 @@ public class CommentRoomController {
                                              @ApiParam(value = "수정할 인원 제한(1 이상 정수)", required = false) @RequestParam(value = "memberLimit", required = false, defaultValue = "0") int memberLimit) throws JsonProcessingException {
 
         Long memberId = getMemberIdFromAuthentication();
+        ChannelTopic channel = channels.get(commentRoomId);
 
         if (roomTitle != null) {
             CommentRoom commentRoom = commentRoomService.fixRoomTitle(commentRoomId, roomTitle, memberId);
-            redisSenderService.sendRoomUpdateService(commentRoom);
+            redisSenderService.sendRoomUpdateService(channel, commentRoom);
         }
         if (memberLimit != 0) {
             CommentRoom commentRoom = commentRoomService.fixMemberLimit(commentRoomId, memberLimit, memberId);
-            redisSenderService.sendRoomUpdateService(commentRoom);
+            redisSenderService.sendRoomUpdateService(channel, commentRoom);
         }
 
         BaseResponse response = responseService.getSuccessResponse();
