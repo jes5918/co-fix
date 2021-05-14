@@ -30,9 +30,9 @@ export default function TemplateBody({ roomInfos }) {
     console.log(`${tag}`, '태그클릭');
   };
 
-  const ModalToggleHandler = () => {
+  const ModalToggleHandler = (roomInfo) => {
     setIsModalOpen(!isModalOpen);
-    history.push(`/mypage/${roomInfos.roomId}/${roomInfos.documentId}`);
+    history.push(`/mypage/${roomInfo.roomId}/${roomInfo.documentId}`);
   };
   const AlertModalToggleHandler = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
@@ -76,7 +76,7 @@ export default function TemplateBody({ roomInfos }) {
                 propsWidth={280}
                 propsHeight={330}
                 propsFontSize={18}
-                onClickImage={ModalToggleHandler}
+                onClickImage={ModalToggleHandler(roomInfo)}
               />
             );
           })}

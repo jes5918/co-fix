@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
-import { createRoom, getRoomInfo, closeRoom, modifyRoom } from '../api/co-fix';
+import {
+  createRoom,
+  getRoomInfo,
+  enterRoom,
+  closeRoom,
+  modifyRoom,
+} from '../api/co-fix';
 
 // container
 import Privacy from '../containers/join/Privacy';
@@ -77,9 +83,17 @@ export default function Join() {
         return;
       } else {
         //join api작성.
-        localStorage.setItem('nickName', nickName);
-        history.push(`/co-fix/${data.roomId}`);
-        return;
+        enterRoom(
+          pinCode,
+          nickName,
+          (res) => {
+            localStorage.setItem('nickName', nickName);
+            history.push(`/co-fix/${data.roomId}`);
+          },
+          (err) => {
+            console.log(`err`, err);
+          },
+        );
       }
     });
   };
