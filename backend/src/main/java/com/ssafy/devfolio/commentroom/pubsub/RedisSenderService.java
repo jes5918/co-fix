@@ -7,28 +7,33 @@ import com.ssafy.devfolio.comment.dto.SentenceSub;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.dto.CommentRoomSub;
 import com.ssafy.devfolio.sentence.Sentence;
+import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.listener.ChannelTopic;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor
 public class RedisSenderService {
 
-    private final String COMMENT_ROOM_PREFIX = "room:";
-    private final String SENTENCE_PREFIX = "sentence:";
+    private String COMMENT_ROOM_PREFIX;
 
     private final RedisTemplate<String, String> redisTemplate;
     private final ValueOperations<String, String> valueOperations;
-    private final HashOperations<String, String, String> hashOperations;
 
     private final ObjectMapper objectMapper;
 
-    private final SimpMessageSendingOperations messageTemplate;
+    //    private final SimpMessageSendingOperations messageTemplate;
+    private final RedisKeyPrefixProperties keyPrefixProperties;
+
+    @PostConstruct
+    public void init() {
+        COMMENT_ROOM_PREFIX = keyPrefixProperties.getCommentRoom();
+    }
 
     public void sendRoomUpdateService(ChannelTopic channelTopic, CommentRoom room) throws JsonProcessingException {
         CommentRoomSub commentRoomSub = CommentRoomSub.builder()
