@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 // 이런 형태로 내려옴
-const test = {
+const roomInfotest = {
   roomId: '101181c0-0517-40a8-8931-8df5da61623b',
   memberId: 5,
   roomTitle: '한국가스공사',
@@ -34,6 +34,7 @@ const test = {
 };
 
 function Card({
+  roomInfo,
   propsWidth,
   propsHeight,
   propsFontSize,
@@ -44,22 +45,23 @@ function Card({
 }) {
   return (
     <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
-      <cardStyle.imgFrame>한</cardStyle.imgFrame>
+      <cardStyle.imgFrame>{roomInfo.roomTitle[0]}</cardStyle.imgFrame>
       <cardStyle.hoverContainer>
         {/* hover */}
         <cardStyle.infoBox onClick={() => onClickImage()}>
           <cardStyle.madeby propsFontSize={propsFontSize}>
-            {test && test.roomTitle}
+            {roomInfo && roomInfo.roomTitle}
           </cardStyle.madeby>
           <cardStyle.madeby propsFontSize={propsFontSize}>
             Created :{' '}
-            {test && test.createdDate.substring(0, 10).replaceAll('-', '.')}
+            {roomInfo &&
+              roomInfo.createdDate.substring(0, 10).replaceAll('-', '.')}
             <br />
             Modified :{' '}
-            {test &&
-              test.lastModifiedDate.substring(0, 10).replaceAll('-', '.')}
+            {roomInfo &&
+              roomInfo.lastModifiedDate.substring(0, 10).replaceAll('-', '.')}
             <br />
-            PIN : {test && test.pinNumber}
+            PIN : {roomInfo && roomInfo.pinNumber}
           </cardStyle.madeby>
         </cardStyle.infoBox>
         {/* {test && test.zzim ? (
@@ -69,8 +71,8 @@ function Card({
         )} */}
         <cardStyle.tagBox>
           <cardStyle.tags>
-            {test &&
-              test.members.map((member, i) => {
+            {roomInfo &&
+              roomInfo.members.map((member, i) => {
                 return (
                   <cardStyle.tag
                     key={i}
@@ -115,7 +117,7 @@ const cardStyle = {
     align-items: center;
     font-weight: bold;
     font-size: 30px;
-    font-family: 'Samlip'
+    font-family: 'Samlip';
     width: 100%;
     height: 100%;
     z-index: 1;

@@ -39,7 +39,7 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/mypagelist" component={MyPageList} />
-        <Route path="/mypage" component={MyPage} />
+        <Route path="/mypage/:roomid/:documentid" component={MyPage} />
         <Route path="/create" component={Create} />
         <Route path="/join" component={Join} />
         <Route path="/co-fix/:id" component={CommonWorkPage} />
