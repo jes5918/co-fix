@@ -40,6 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션 사용 안함
 
                 .and()
+                .headers()
+                .frameOptions().disable() // TODO: 개발 완료 이후 sameOrigin()으로 바꿔야 함
+
+                .and()
                 .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 
                 .and()
