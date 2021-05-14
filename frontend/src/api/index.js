@@ -12,14 +12,10 @@ function createInstance() {
 
 // Localstorage 에서 토큰을 받아오는 함수 -> refatoring 들어가야함
 const getToken = async () => {
-  let tempToken = '';
   try {
-    await localStorage.getItem('jwt').then((jwt) => {
-      tempToken = jwt;
+    await localStorage.getItem('user').then((user) => {
+      return user.token ? user.token : null;
     });
-    if (tempToken) {
-      return tempToken;
-    }
   } catch (e) {
     console.error(e);
   }
@@ -34,11 +30,11 @@ function AuthorizationInstance() {
   instance.defaults.headers.post['Content-Type'] = 'multipart/form-data';
   instance.interceptors.request.use(
     async function (config) {
-      // const accToken = await getToken();
-      // const token = 'Bearer' + accToken;
-      const temp =
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImlhdCI6MTYyMDkxMTYyNywiZXhwIjoxNjIwOTE1MjI3fQ.vaU1kX0az5wIclwJNBuMjA7P1ZoHDPU9Unm9DO7rEjE';
-      const token = 'Bearer ' + temp;
+      const accToken = await getToken();
+      const token = 'Bearer ' + accToken;
+      // const temp =
+      //   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImlhdCI6MTYyMDkxMTYyNywiZXhwIjoxNjIwOTE1MjI3fQ.vaU1kX0az5wIclwJNBuMjA7P1ZoHDPU9Unm9DO7rEjE';
+      // const token = 'Bearer ' + temp;
 
       config.headers = {
         Authorization: token,
@@ -46,8 +42,6 @@ function AuthorizationInstance() {
       return config;
     },
     function (error) {
-      // 오류 요청을 보내기전 수행할 일
-      // ...
       return Promise.reject(error);
     },
   );
