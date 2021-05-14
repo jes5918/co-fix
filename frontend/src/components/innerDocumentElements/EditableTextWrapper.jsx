@@ -9,7 +9,11 @@ import {
 import styled from 'styled-components';
 import Editabletext from './Editabletext';
 
-export default function EditableTextWrapper({ data }) {
+export default function EditableTextWrapper({
+  data,
+  testRequest,
+  onHandleClickSentence,
+}) {
   const { modifiedContent } = data;
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
@@ -37,7 +41,11 @@ export default function EditableTextWrapper({ data }) {
       {!isEditMode ? (
         <TextContainer
           onDoubleClick={editorModeToggleHandler}
-          onClick={selectDocumentHandler}
+          onClick={() => {
+            selectDocumentHandler();
+            testRequest(data.sentenceId);
+            onHandleClickSentence(data.sentenceId);
+          }}
         >
           {modifiedContent}
         </TextContainer>

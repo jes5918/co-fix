@@ -48,10 +48,19 @@ const S = {
   `,
 };
 
-function CommentForm({ onSubmit }) {
+function CommentForm({ sentenceId, onSubmit }) {
   const inputRef = useRef(null);
+  const localStorage = window.localStorage;
 
-  useEffect(() => {}, []);
+  const onHandleSubmit = (e) => {
+    if (e.keyCode === 13) {
+      const content = inputRef.current.value;
+      const nickname = '임시 닉네임';
+      inputRef.current.value = '';
+      onSubmit(sentenceId, nickname, content);
+    }
+  };
+
   return (
     <S.CommentForm>
       <S.FormLabelBox>
@@ -60,7 +69,7 @@ function CommentForm({ onSubmit }) {
         <S.FormLabel>Comment</S.FormLabel>
       </S.FormLabelBox>
       <S.FormInputBox>
-        <S.FormInput ref={inputRef} />
+        <S.FormInput ref={inputRef} onKeyUp={(e) => onHandleSubmit(e)} />
       </S.FormInputBox>
     </S.CommentForm>
   );

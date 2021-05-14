@@ -1,7 +1,7 @@
 // Roll : 편집 화면에서 우측 Comment 작성 및 보이는 부분의 상태를 관리함.
 
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 import CommentForm from '../components/innerCommentElements/CommentForm';
 import CommentWrapper from '../components/innerCommentElements/CommentWrapper';
@@ -17,27 +17,22 @@ const S = {
   `,
 };
 
-export default function CommentContainer({ data }) {
-  const [isToggle, setIsToggle] = useState(false);
+export default function CommentContainer({
+  comments,
+  sentenceId,
+  onHandleSubmitComment,
+  onHandleClickAgree,
+}) {
   const onHandleSubmit = () => {
     // 1. 이벤트 props로 내려주고,
-    // 2. 이벤트 발생 -> 기존 데이터에 새로운 데이터 추가.
-    // 3. 컴포넌트 unMount 되면 백에 통신 보내고 종료..?(쓸때마다 보내면 비효율적이려나...? 적어서 괜찮을 것 같기도)
-  };
-  const onHandleClick = (e) => {
-    // comment Agree 로직 처리
-
-    // toggle 처리
-    if (e.target.nodeName === 'BUTTON') {
-      console.log(e.target.dataset.userId);
-      setIsToggle(!isToggle);
-    }
+    // 2. CommentForm에서 onSubmit 이벤트에 대한 콜백함수로 실행
+    // 3. 소켓 통신해서 UI 렌더링하는 데이터에 추가, 백에 API 요청 보냄.(동시)
   };
 
   return (
-    <S.CommentContainer onClick={(e) => onHandleClick(e)}>
-      {data &&
-        data.map((item) => {
+    <S.CommentContainer>
+      {comments &&
+        comments.map((item) => {
           return (
             <CommentWrapper
               key={item.id}
@@ -45,11 +40,10 @@ export default function CommentContainer({ data }) {
               avatar={item.avatar}
               comment={item.comment}
               nickName={item.nickName}
-              isToggle={isToggle}
             />
           );
         })}
-      <CommentForm />
+      <CommentForm onSubmit={onHandleSubmitComment} sentenceId={sentenceId} />
     </S.CommentContainer>
   );
 }
