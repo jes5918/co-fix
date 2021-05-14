@@ -40,9 +40,9 @@ const S = {
     border-radius: 20px;
     text-align: center;
     padding: 2px 10px;
-    color: ${({ isAgree }) => (isAgree ? 'white' : '#14880c')};
-    background-color: ${({ isAgree }) => (!isAgree ? 'white' : '#14880c')};
-    font-family: 'Samlip';
+    color: ${({ isToggle }) => (isToggle ? 'white' : '#14880c')};
+    background-color: ${({ isToggle }) => (!isToggle ? 'white' : '#14880c')};
+    font-family: 'SCD_bold';
     font-size: 12px;
     font-weight: bold;
     justify-items: flex-end;

@@ -7,8 +7,7 @@ const S = {
   UserNickName: styled.span`
     font-weight: bold;
     font-size: 14px;
-    font-family: 'Samlip';
-    color: black;
+    font-family: 'SCD_bold';
   `,
 };
 
