@@ -14,7 +14,7 @@ const Section = {
     position: relative;
     justify-content: flex-end;
     padding-top: 86px;
-    overflow: hidden;
+    /* overflow: hidden; */
     @media only screen and (max-width: 768px) {
       flex-direction: column;
     }
@@ -73,7 +73,7 @@ const Section = {
   `,
   title: styled.div`
     font-weight: bold;
-    font-family: 'Samlip';
+    font-family: 'SCD_heavy';
     font-size: 45px;
     @media only screen and (max-width: 1024px) {
       font-size: 35px;
@@ -92,7 +92,7 @@ const Section = {
     }
   `,
   buttonBox: styled.div`
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -118,9 +118,9 @@ export default function Section_1({ ModalToggleHandler }) {
       <Section.circle></Section.circle>
       <Section.leftFrame>
         <Section.titleBox>
-          <Section.title>Co-Fix는</Section.title>
-          <Section.title>실시간 기반 공동 첨삭</Section.title>
-          <Section.title>플랫폼입니다.</Section.title>
+          <Section.title>Co-Fix로</Section.title>
+          <Section.title>라이브 첨삭을</Section.title>
+          <Section.title>시작해보세요.</Section.title>
         </Section.titleBox>
         <Section.buttonBox>
           <BasicButton

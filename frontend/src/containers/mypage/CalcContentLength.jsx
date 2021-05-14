@@ -93,7 +93,7 @@ const Length = styled.div`
 const SetLength = styled.input`
   width: 80px;
   height: 27px;
-  font-family: 'Samlip';
+  font-family: 'SCD_bold';
   font-size: 1.15rem;
   font-weight: bold;
   text-align: center;

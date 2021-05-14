@@ -65,7 +65,7 @@ const TextContainer = styled.div`
   word-break: keep-all;
   font-size: 18px;
   font-weight: bold;
-  font-family: 'Samlip';
+  font-family: 'SCD_medium';
   margin: 0px 0px 12px 0px;
   &:hover {
     background-color: #feffbc;
