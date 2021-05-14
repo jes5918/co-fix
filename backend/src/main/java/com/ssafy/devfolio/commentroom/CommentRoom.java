@@ -1,6 +1,8 @@
 package com.ssafy.devfolio.commentroom;
 
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
+import com.ssafy.devfolio.exception.BaseException;
+import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.dto.JoinMember;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -85,6 +87,14 @@ public class CommentRoom implements Serializable {
      * @return int
      */
     public int enterCommentRoom(String nickname) {
+        // 현재 참가자 인원이 최대인 경우 예외처리
+        long onlineMemberCount = this.members.stream()
+                .filter(member -> member.isOnline())
+                .count();
+        if (onlineMemberCount >= this.memberLimit) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_FULL_EXCEPTION);
+        }
+
         // 이미 참가했었던 유저라면 online 상태로 변경
         for (JoinMember member : this.members) {
             if (nickname.equals(member.getNickname())) {
