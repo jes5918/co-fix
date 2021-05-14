@@ -70,6 +70,10 @@
 `https://k4b104.p.ssafy.io`도메인 - FE, BE 총괄
 
 ```
+docker-compose up
+```
+
+```
 80 & 443 : 웹서비스 접속
 9090 : 젠킨스
 5601: kibana

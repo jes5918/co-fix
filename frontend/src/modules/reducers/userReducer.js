@@ -7,7 +7,9 @@ import {
 
 const initialState = {
   authenticated: false,
-  credentials: {},
+  credentials: {
+    member: {},
+  },
   loading: false,
 };
 
