@@ -32,7 +32,7 @@ export default function TemplateBody({ roomInfos }) {
 
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
-    history.push(`/mypagelist/${roomInfos.roomId}/${roomInfos.documentId}`);
+    history.push(`/mypage/${roomInfos.roomId}/${roomInfos.documentId}`);
   };
   const AlertModalToggleHandler = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
