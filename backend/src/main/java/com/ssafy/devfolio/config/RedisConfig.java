@@ -15,6 +15,9 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
 @EnableRedisRepositories
 public class RedisConfig {
@@ -25,17 +28,13 @@ public class RedisConfig {
     private int redisPort;
 
     @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(redisHost, redisPort);
+    public Map<String, ChannelTopic> channels() {
+        return new HashMap<>();
     }
 
-    /**
-     * 단일 Topic 사용을 위한 Bean 설정
-     *  -> commentroom, comment 두 종류의 채널로 변경해야 함
-     */
     @Bean
-    public ChannelTopic channelTopic() {
-        return new ChannelTopic("room");
+    public RedisConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory(redisHost, redisPort);
     }
 
     /**
