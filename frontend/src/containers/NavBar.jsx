@@ -76,7 +76,7 @@ export default function NavBar({ isLoggedIn, user }) {
                     <Link to="/mypagelist">MyPageList</Link>
                   </NavbarItem>
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/mypage">MyPage</Link>
+                    <Link to="/mypage/a/a">MyPage</Link>
                   </NavbarItem>
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
                     <Link to="/create">Create</Link>
