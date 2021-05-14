@@ -13,9 +13,7 @@ function createInstance() {
 // Localstorage 에서 토큰을 받아오는 함수 -> refatoring 들어가야함
 const getToken = () => {
   try {
-    const temp = localStorage.getItem('user');
-    console.log(`temp`, temp);
-    return temp.token;
+    return JSON.stringify(localStorage.getItem('user')).token;
   } catch (e) {
     console.error(e);
   }
@@ -30,18 +28,12 @@ function AuthorizationInstance() {
   instance.interceptors.request.use(
     async function (config) {
       const accToken = await getToken();
-      const token = 'Bearer ' + accToken;
-      if (accToken) {
-        console.log(accToken, token);
-      } else {
-        console.log(`모야`, token);
-      }
       // const temp =
       //   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImlhdCI6MTYyMDkxMTYyNywiZXhwIjoxNjIwOTE1MjI3fQ.vaU1kX0az5wIclwJNBuMjA7P1ZoHDPU9Unm9DO7rEjE';
       // const token = 'Bearer ' + temp;
 
       config.headers = {
-        Authorization: token,
+        Authorization: 'Bearer ' + accToken,
       };
       return config;
     },
