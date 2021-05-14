@@ -11,6 +11,13 @@ function getRoomInfo(pinNumber, success, fail) {
   basInstance.get(`commentRooms/${pinNumber}`).then(success).catch(fail);
 }
 
+function enterRoom(pinNumber, nickName, success, fail) {
+  basInstance
+    .get(`commentRooms/enter/${pinNumber}?nickname=${nickName}`)
+    .then(success)
+    .catch(fail);
+}
+
 function closeRoom(roomId, success, fail) {
   instance.patch(`commentRooms/${roomId}`).then(success).catch(fail);
 }
@@ -22,4 +29,4 @@ function modifyRoom(roomId, maxCnt, title, success, fail) {
     .catch(fail);
 }
 
-export { createRoom, getRoomInfo, closeRoom, modifyRoom };
+export { createRoom, getRoomInfo, enterRoom, closeRoom, modifyRoom };
