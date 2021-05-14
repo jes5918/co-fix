@@ -50,7 +50,9 @@ const CustomTab = ({ children }) => (
 );
 
 CustomTab.tabsRole = 'Tab';
-export default function MyPage() {
+export default function MyPage({ match }) {
+  const roomId = match.params.roomid;
+  const documentId = match.params.documentid;
   const [tabIndex, setTabIndex] = useState(0);
   const [documentInfo, setDocumentInfo] = useState([]);
   const [originalContent, setOriginalContent] = useState([]);
@@ -76,8 +78,8 @@ export default function MyPage() {
     console.log(`sentenceId`, sentenceId);
     setOnFocusedSentence(sentenceId);
     getAllComments(
-      '101181c0-0517-40a8-8931-8df5da61623b',
-      'a39beabe-19cf-49bf-baad-6d383a164716',
+      roomId,
+      documentId,
       sentenceId,
       (res) => {
         setCommentInfo(res.data.data);
@@ -94,8 +96,8 @@ export default function MyPage() {
 
   useEffect(() => {
     getDocuments(
-      '101181c0-0517-40a8-8931-8df5da61623b',
-      'a39beabe-19cf-49bf-baad-6d383a164716',
+      roomId,
+      documentId,
       (res) => {
         setDocumentInfo(res.data.data);
         let tempOrigin = '';

@@ -32,6 +32,7 @@ export default function TemplateBody({ roomInfos }) {
 
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
+    history.push(`/mypagelist/${roomInfos.roomId}/${roomInfos.documentId}`);
   };
   const AlertModalToggleHandler = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
@@ -61,17 +62,24 @@ export default function TemplateBody({ roomInfos }) {
         />
       </Modal>
       <CardWrapper>
-        <Card
-          thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-          card={TempCard}
-          onHandleZZim={onZZimToggleHandler}
-          onClickTag={onTagClickHandler}
-          propsWidth={280}
-          propsHeight={330}
-          propsFontSize={18}
-          onClickImage={ModalToggleHandler}
-        />
-
+        {roomInfos &&
+          roomInfos.map((roomInfo, idx) => {
+            console.log(`roomInfo`, roomInfo);
+            return (
+              <Card
+                key={idx}
+                roomInfo={roomInfo}
+                thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
+                card={TempCard}
+                onHandleZZim={onZZimToggleHandler}
+                onClickTag={onTagClickHandler}
+                propsWidth={280}
+                propsHeight={330}
+                propsFontSize={18}
+                onClickImage={ModalToggleHandler}
+              />
+            );
+          })}
         <PlusCard.Wrapper onClick={AlertModalToggleHandler}>
           <PlusCard.InnerContainer>
             <PlusCard.Icon />
