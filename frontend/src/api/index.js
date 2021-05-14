@@ -13,7 +13,9 @@ function createInstance() {
 // Localstorage 에서 토큰을 받아오는 함수 -> refatoring 들어가야함
 const getToken = () => {
   try {
-    return localStorage.getItem('user').token;
+    const temp = localStorage.getItem('user').token;
+    console.log(`temp`, temp);
+    return temp;
   } catch (e) {
     console.error(e);
   }
@@ -25,7 +27,6 @@ function AuthorizationInstance() {
     baseURL: API_BASE_URL,
   });
 
-  instance.defaults.headers.post['Content-Type'] = 'multipart/form-data';
   instance.interceptors.request.use(
     async function (config) {
       const accToken = await getToken();
