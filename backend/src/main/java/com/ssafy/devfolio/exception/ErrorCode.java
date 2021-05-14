@@ -44,6 +44,10 @@ public enum ErrorCode {
     COMMENT_INVALID_NICKNAME_EXCEPTION(HttpStatus.BAD_REQUEST, "0602", "잘못된 닉네임"),
     COMMENT_NOT_EXIST(HttpStatus.BAD_REQUEST, "0603", "존재하지 않는 코멘트"),
 
+    // 소켓 관련
+    SOCKET_HEADER_EXCEPTION(HttpStatus.CONFLICT, "0701", "소켓 헤더 가져오는 과정에서 에러 발생"),
+    SOCKET_HEADER_INFO_NOT_EXIST(HttpStatus.BAD_REQUEST, "0702", "소켓 헤더에 닉네임, 첨삭방 ID가 포함되어야함"),
+
     // 기타 오류 처리
     RUNTIME_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "9902", "런타임 오류"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "9903", "서버 오류"),
