@@ -13,9 +13,9 @@ function createInstance() {
 // Localstorage 에서 토큰을 받아오는 함수 -> refatoring 들어가야함
 const getToken = () => {
   try {
-    const temp = localStorage.getItem('user').token;
+    const temp = localStorage.getItem('user');
     console.log(`temp`, temp);
-    return temp;
+    return temp.token;
   } catch (e) {
     console.error(e);
   }
