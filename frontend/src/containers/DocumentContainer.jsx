@@ -4,16 +4,23 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import EditableTextWrapper from '../components/innerDocumentElements/EditableTextWrapper';
 
-function DocumentContainer(props) {
-  const datas = useSelector((state) => {
-    return state.document.data;
-  });
+function DocumentContainer({ sentences, testRequest, onHandleClickSentence }) {
+  // const datas = useSelector((state) => {
+  //   return state.document.data;
+  // });
 
   return (
     <>
-      {datas &&
-        datas.map((data, idx) => {
-          return <EditableTextWrapper key={idx} data={data} />;
+      {sentences &&
+        sentences.map((data, idx) => {
+          return (
+            <EditableTextWrapper
+              key={idx}
+              data={data}
+              testRequest={testRequest}
+              onHandleClickSentence={onHandleClickSentence}
+            />
+          );
         })}
     </>
   );

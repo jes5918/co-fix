@@ -8,6 +8,7 @@ const S = {
     font-weight: bold;
     font-size: 14px;
     font-family: 'Samlip';
+    color: black;
   `,
 };
 
