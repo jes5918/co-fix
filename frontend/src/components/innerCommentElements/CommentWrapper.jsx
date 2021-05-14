@@ -1,6 +1,6 @@
 // Roll : Comment 컨테이너에서 Avatar, NickName, Comment를 하나로 묶어서 표현하는 UI
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // components
@@ -40,8 +40,8 @@ const S = {
     border-radius: 20px;
     text-align: center;
     padding: 2px 10px;
-    color: ${({ isToggle }) => (isToggle ? 'white' : '#14880c')};
-    background-color: ${({ isToggle }) => (!isToggle ? 'white' : '#14880c')};
+    color: ${({ isAgree }) => (isAgree ? 'white' : '#14880c')};
+    background-color: ${({ isAgree }) => (!isAgree ? 'white' : '#14880c')};
     font-family: 'Samlip';
     font-size: 12px;
     font-weight: bold;
@@ -58,7 +58,12 @@ const S = {
   `,
 };
 
-function CommentWrapper({ userId, avatar, comment, nickName, isToggle }) {
+function CommentWrapper({ userId, avatar, comment, nickName }) {
+  const [isAgree, setIsAgree] = useState(false);
+  const onHandleClick = () => {
+    setIsAgree((prev) => !prev);
+    // Agree 요청.
+  };
   return (
     <S.CommentWrapper>
       <S.TopPart>
@@ -66,7 +71,11 @@ function CommentWrapper({ userId, avatar, comment, nickName, isToggle }) {
           <UserAvatar avatar={avatar} />
           <UserNickName nickName={nickName} />
         </S.TopLeft>
-        <S.AgreeButton data-user-id={userId} isToggle={isToggle}>
+        <S.AgreeButton
+          data-user-id={userId}
+          onClick={() => onHandleClick()}
+          isAgree={isAgree}
+        >
           Agree
         </S.AgreeButton>
       </S.TopPart>
