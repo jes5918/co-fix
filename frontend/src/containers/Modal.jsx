@@ -2,6 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsX } from 'react-icons/bs';
 
+export default function Modal({
+  children,
+  ModalToggleHandler,
+  isModalOpen,
+  height,
+  width,
+}) {
+  return (
+    <ModalLayer isModalOpen={isModalOpen}>
+      <ModalCloseLayer onClick={ModalToggleHandler} />
+      <ModalContent height={height} width={width}>
+        <ExitIcon onClick={ModalToggleHandler} />
+        {children}
+      </ModalContent>
+    </ModalLayer>
+  );
+}
+
 const ModalLayer = styled.div`
   position: fixed;
   display: ${({ isModalOpen }) => (isModalOpen ? 'flex' : 'none')};
@@ -67,17 +85,3 @@ const ExitIcon = styled(BsX)`
     opacity: 0.6;
   }
 `;
-
-function Modal({ children, ModalToggleHandler, isModalOpen, height, width }) {
-  return (
-    <ModalLayer isModalOpen={isModalOpen}>
-      <ModalCloseLayer onClick={ModalToggleHandler} />
-      <ModalContent height={height} width={width}>
-        <ExitIcon onClick={ModalToggleHandler} />
-        {children}
-      </ModalContent>
-    </ModalLayer>
-  );
-}
-
-export default Modal;
