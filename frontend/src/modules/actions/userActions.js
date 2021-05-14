@@ -1,6 +1,5 @@
 import { SET_USER, SET_UNAUTHENTICATED } from '../types';
 import axios from 'axios';
-import { UserGraduate } from '@styled-icons/fa-solid';
 
 export const LoginAction = (userData) => (dispatch) => {
   console.log('success login action', userData);
