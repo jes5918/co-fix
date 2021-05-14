@@ -9,7 +9,6 @@ import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
-import com.ssafy.devfolio.response.dto.SingleDataResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -49,9 +48,8 @@ public class CommentController {
         ChannelTopic channel = channels.get(sentenceId);
         redisSenderService.sendCommentUpdateService(channel, sentenceId, comment);
 
-        SingleDataResponse<Comment> response = responseService.getSingleDataResponse(comment, HttpStatus.CREATED);
 
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "문장에 달린 코멘트 조회")
