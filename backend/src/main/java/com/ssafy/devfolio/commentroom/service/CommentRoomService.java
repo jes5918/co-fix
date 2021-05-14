@@ -11,6 +11,7 @@ import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
 import com.ssafy.devfolio.member.domain.Member;
 import com.ssafy.devfolio.sentence.Sentence;
+import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
@@ -33,11 +34,13 @@ import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
 @RequiredArgsConstructor
 public class CommentRoomService {
 
-    private final String COMMENT_ROOM_PREFIX = "room:";
-    private final String DOCUMENT_PREFIX = "document:";
-    private final String PIN_CHECK_PREFIX = "pin-room:";
-    private final String MEMBER_ROOM_PREFIX = "member-room:";
-    private final String PARTICIPANT_PREFIX = "participant:";
+    private final RedisKeyPrefixProperties keyPrefixProperties;
+
+    private String COMMENT_ROOM_PREFIX;
+    private String DOCUMENT_PREFIX;
+    private String PIN_CHECK_PREFIX;
+    private String MEMBER_ROOM_PREFIX;
+    private String PARTICIPANT_PREFIX;
     private final int PIN_NUMBER_DIGITS = 8;
 
     private final RedisTemplate<String, String> redisTemplate;
@@ -50,6 +53,15 @@ public class CommentRoomService {
     private final ChannelTopic channelTopic;
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
+
+    @PostConstruct
+    public void init() {
+        COMMENT_ROOM_PREFIX = keyPrefixProperties.getCommentRoom();
+        DOCUMENT_PREFIX = keyPrefixProperties.getDocument();
+        PIN_CHECK_PREFIX = keyPrefixProperties.getPinCheck();
+        MEMBER_ROOM_PREFIX = keyPrefixProperties.getMemberRoom();
+        PARTICIPANT_PREFIX = keyPrefixProperties.getParticipant();
+    }
 
     public CommentRoom createCommentRoom(CreateCommentRoomRequest request, Long memberId) throws JsonProcessingException {
         Member member = memberRepository.findById(memberId)
