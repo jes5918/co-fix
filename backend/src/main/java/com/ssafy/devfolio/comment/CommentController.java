@@ -2,8 +2,8 @@ package com.ssafy.devfolio.comment;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.comment.dto.CommentRequest;
+import com.ssafy.devfolio.commentroom.pubsub.RedisListenerService;
 import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
-import com.ssafy.devfolio.commentroom.pubsub.RedisSentenceSubscriber;
 import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
@@ -14,14 +14,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.listener.ChannelTopic;
-import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,10 +30,7 @@ public class CommentController {
     private final CommentService commentService;
     private final CommentRoomService commentRoomService;
     private final RedisSenderService redisSenderService;
-
-    private final RedisMessageListenerContainer redisMessageListener;
-    private final RedisSentenceSubscriber redisSentenceSubscriber;
-    private final Map<String, ChannelTopic> channels;
+    private final RedisListenerService redisListenerService;
 
     @ApiOperation(value = "문장에 코멘트 작성 (닫힌 첨삭방엔 불가능)", notes = "작성 후 sentence 채널 구독자에게 작성내역 보냄")
     @PostMapping("/sentences/{sentenceId}/comments")
@@ -49,9 +43,7 @@ public class CommentController {
         }
         Comment comment = commentService.writeComment(documentId, sentenceId, request);
 
-        ChannelTopic channel = channels.get(sentenceId);
-        redisSenderService.sendCommentUpdateService(channel, sentenceId, comment);
-
+        redisSenderService.sendCommentUpdateService(sentenceId, comment);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -65,10 +57,7 @@ public class CommentController {
 
         ListDataResponse<Comment> response = responseService.getListDataResponse(comments, HttpStatus.OK);
 
-        ChannelTopic channel = new ChannelTopic(sentenceId);
-
-        redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
-        channels.put(sentenceId, channel);
+        redisListenerService.createSentenceTopic(sentenceId);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
@@ -90,8 +79,7 @@ public class CommentController {
 
         Comment comment = commentService.pressAgree(sentenceId, commentId, nickname);
 
-        ChannelTopic channel = channels.get(sentenceId);
-        redisSenderService.sendCommentUpdateService(channel, sentenceId, comment);
+        redisSenderService.sendCommentUpdateService(sentenceId, comment);
 
         BaseResponse response = responseService.getSuccessResponse();
 
