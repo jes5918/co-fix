@@ -27,7 +27,7 @@ public enum ErrorCode {
     COMMENT_ROOM_ONLY_FIXED_BY_OWNER_EXCEPTION(HttpStatus.BAD_REQUEST, "0303", "첨삭방 만든 사람만 방 정보 수정 가능"),
     COMMENT_ROOM_INVALID_MEMBER_LIMIT(HttpStatus.BAD_REQUEST, "0304", "첨삭방 인원 제한은 0보다 큰 정수만 가능"),
     COMMENT_ROOM_INVALID_NICKNAME(HttpStatus.BAD_REQUEST, "0305", "잘못된 닉네임"),
-    COMMENT_ROOM_CLOSED_EXCEPTION(HttpStatus.BAD_REQUEST, "0306", "닫힌 첨삭방은 입장 불가능"),
+    COMMENT_ROOM_CLOSED_EXCEPTION(HttpStatus.BAD_REQUEST, "0306", "이미 닫힌 첨삭방"),
     COMMENT_ROOM_FULL_EXCEPTION(HttpStatus.CONFLICT, "0307", "현재 방이 가득 참"),
     COMMENT_ROOM_FIX_MEMBER_LIMIT_EXCEPTION(HttpStatus.CONFLICT, "0308", "현재 참가자 인원보다 작은 수로는 변경할 수 없음"),
 
