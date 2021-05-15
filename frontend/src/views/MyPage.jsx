@@ -16,7 +16,6 @@ import ScreenSlideDivider from '../containers/ScreenSlideDivider';
 import Participant from '../containers/mypage/Participant';
 import DocumentContainer from '../containers/DocumentContainer';
 import CommentContainer from '../containers/CommentContainer';
-import TEST from '../containers/TEST';
 import MypageLeft from '../containers/mypage/MyPageLeft';
 import MyPageRight from '../containers/mypage/MyPageRight';
 
@@ -172,7 +171,6 @@ export default function MyPage({ match }) {
                 )}
               </>
               <Scrollbars style={{ width: '100%', height: '100%' }}>
-                {/* <TEST /> */}
                 <CommentContainer
                   comments={commentInfo}
                   sentenceId={onFocusedSentence}
