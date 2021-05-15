@@ -2,6 +2,7 @@ package com.ssafy.devfolio.commentroom.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.commentroom.CommentRoom;
+import com.ssafy.devfolio.commentroom.dto.ChannelDto;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
 import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
 import com.ssafy.devfolio.commentroom.pubsub.RedisRoomSubscriber;
@@ -10,6 +11,7 @@ import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
+import com.ssafy.devfolio.response.dto.ListDataResponse;
 import com.ssafy.devfolio.response.dto.SingleDataResponse;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -139,7 +143,12 @@ public class CommentRoomController {
     @ApiOperation(value = "현재 존재하는 채널 확인 (데이터 검사용도)")
     @GetMapping("/channels")
     public ResponseEntity getChannels() {
-        SingleDataResponse<String> response = responseService.getSingleDataResponse(channels.toString(), HttpStatus.OK);
+        List<ChannelDto> list = new ArrayList<>();
+        for (Map.Entry<String, ChannelTopic> channel : channels.entrySet()) {
+            list.add(new ChannelDto(channel.getKey(), channel.getValue()));
+        }
+
+        ListDataResponse<ChannelDto> response = responseService.getListDataResponse(list, HttpStatus.OK);
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
