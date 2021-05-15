@@ -9,10 +9,12 @@ import com.ssafy.devfolio.sentence.SentenceService;
 import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
@@ -28,6 +30,7 @@ public class CommentService {
     private final SentenceService sentenceService;
     private final HashOperations<String, String, String> hashOperations;
 
+    private final Map<String, ChannelTopic> channels;
     private final ObjectMapper objectMapper;
 
     @PostConstruct
@@ -70,4 +73,5 @@ public class CommentService {
 
         return comment;
     }
+
 }

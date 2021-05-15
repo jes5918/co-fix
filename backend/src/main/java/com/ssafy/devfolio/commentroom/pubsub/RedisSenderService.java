@@ -15,6 +15,7 @@ import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +26,9 @@ public class RedisSenderService {
     private final RedisTemplate<String, String> redisTemplate;
     private final ValueOperations<String, String> valueOperations;
 
+    private final Map<String, ChannelTopic> channels;
     private final ObjectMapper objectMapper;
 
-    //    private final SimpMessageSendingOperations messageTemplate;
     private final RedisKeyPrefixProperties keyPrefixProperties;
 
     @PostConstruct
@@ -35,7 +36,7 @@ public class RedisSenderService {
         COMMENT_ROOM_PREFIX = keyPrefixProperties.getCommentRoom();
     }
 
-    public void sendRoomUpdateService(ChannelTopic channelTopic, CommentRoom room) throws JsonProcessingException {
+    public void sendRoomUpdateService(CommentRoom room) throws JsonProcessingException {
         CommentRoomSub commentRoomSub = CommentRoomSub.builder()
                 .roomId(room.getRoomId())
                 .roomTitle(room.getRoomTitle())
@@ -45,12 +46,12 @@ public class RedisSenderService {
                 .lastModifiedDate(room.getLastModifiedDate())
                 .build();
 
-        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
-//        messageTemplate.convertAndSend("/room/" + commentRoomSub.getRoomId(), commentRoomSub);
+        ChannelTopic channel = channels.get(room.getRoomId());
 
+        redisTemplate.convertAndSend(channel.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
     }
 
-    public void sendSentenceUpdateService(ChannelTopic channelTopic, String roomId, Sentence sentence) throws JsonProcessingException {
+    public void sendSentenceUpdateService(String roomId, Sentence sentence) throws JsonProcessingException {
         CommentRoom commentRoom = objectMapper.readValue(valueOperations.get(COMMENT_ROOM_PREFIX + roomId), CommentRoom.class);
 
         CommentRoomSub commentRoomSub = CommentRoomSub.builder()
@@ -59,11 +60,12 @@ public class RedisSenderService {
                 .lastModifiedDate(commentRoom.getLastModifiedDate())
                 .build();
 
-        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
-//        messageTemplate.convertAndSend("/room/" + commentRoomSub.getRoomId(), commentRoomSub);
+        ChannelTopic channel = channels.get(roomId);
+
+        redisTemplate.convertAndSend(channel.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
     }
 
-    public void sendCommentUpdateService(ChannelTopic channelTopic, String sentenceId, Comment comment) throws JsonProcessingException {
+    public void sendCommentUpdateService(String sentenceId, Comment comment) throws JsonProcessingException {
 
         SentenceSub sentenceSub = SentenceSub.builder()
                 .sentenceId(sentenceId)
@@ -74,8 +76,10 @@ public class RedisSenderService {
                 .lastModifiedDate(comment.getLastModifiedDate())
                 .build();
 
-        redisTemplate.convertAndSend(channelTopic.getTopic(), objectMapper.writeValueAsString(sentenceSub));
-//        messageTemplate.convertAndSend("/sentence/" + sentenceId, sentenceSub);
+        ChannelTopic channel = channels.get(sentenceId);
+
+        redisTemplate.convertAndSend(channel.getTopic(), objectMapper.writeValueAsString(sentenceSub));
 
     }
+
 }

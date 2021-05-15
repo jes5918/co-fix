@@ -2,7 +2,6 @@ package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
-import com.ssafy.devfolio.commentroom.pubsub.RedisRoomSubscriber;
 import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
@@ -13,15 +12,12 @@ import com.ssafy.devfolio.sentence.dto.FeelingRequest;
 import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.listener.ChannelTopic;
-import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 
@@ -35,10 +31,6 @@ public class SentenceController {
     private final CommentRoomService commentRoomService;
     private final RedisSenderService redisSenderService;
     private final ResponseService responseService;
-
-    private final RedisMessageListenerContainer redisMessageListener;
-    private final RedisRoomSubscriber redisRoomSubscriber;
-    private final Map<String, ChannelTopic> channels;
 
 
     @ApiOperation(value = "문서 조회", notes = "문서 id를 이용해 문서 내부 문장 전체 조회")
@@ -66,10 +58,7 @@ public class SentenceController {
 
         Sentence sentence = sentenceService.fixSentence(memberId, commentRoomId, documentId, sentenceId, request.getModifiedContent());
 
-        ChannelTopic channel = channels.get(commentRoomId);
-        channels.put(commentRoomId, channel);
-
-        redisSenderService.sendSentenceUpdateService(channel, commentRoomId, sentence);
+        redisSenderService.sendSentenceUpdateService(commentRoomId, sentence);
 
         BaseResponse response = responseService.getSuccessResponse();
 
@@ -87,10 +76,7 @@ public class SentenceController {
         }
         Sentence sentence = sentenceService.pressFeeling(documentId, sentenceId, request);
     
-        ChannelTopic channel = channels.get(commentRoomId);
-        channels.put(commentRoomId, channel);
-
-        redisSenderService.sendSentenceUpdateService(channel, commentRoomId, sentence);
+        redisSenderService.sendSentenceUpdateService(commentRoomId, sentence);
 
         BaseResponse response = responseService.getSuccessResponse();
 
