@@ -44,7 +44,10 @@ export default function TemplateBody({ roomInfos }) {
 
   return (
     <>
-      <Modal isModalOpen={isModalOpen} ModalToggleHandler={ModalToggleHandler}>
+      <Modal
+        isModalOpen={isModalOpen}
+        ModalToggleHandler={() => ModalToggleHandler}
+      >
         <ModalContent
           thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
           card={TempCard}

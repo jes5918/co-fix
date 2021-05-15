@@ -51,7 +51,6 @@ const CustomTab = ({ children }) => (
 
 CustomTab.tabsRole = 'Tab';
 export default function MyPage({ match }) {
-  console.log(match);
   const roomId = match.params.roomid;
   const documentId = match.params.documentid;
   const [tabIndex, setTabIndex] = useState(0);

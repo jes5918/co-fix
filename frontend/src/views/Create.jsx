@@ -30,11 +30,10 @@ export default function Create() {
   const [maxcnt, setMaxcnt] = useState(1);
   const [text, setText] = useState('');
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   const changePage = () => {
     setCurrent(current + 1);
-    console.log('title', title);
-    console.log('maxcnt', maxcnt);
   };
   const gotoBack = () => {
     if (current === 0) {
@@ -59,6 +58,7 @@ export default function Create() {
           history.push(`/co-fix/${res.data.data.roomId}`);
         },
         (err) => {
+          AlertModalToggleHandler('Server Error');
           console.error('err', err.response.data);
         },
       );
@@ -75,25 +75,23 @@ export default function Create() {
   const textValueSave = (e) => {
     setText(e.target.value);
   };
-  const changeCurrent = (e) => {
-    if (current !== e) {
-      setCurrent(e);
-    }
-  };
 
-  const AlertModalToggleHandler = () => {
+  const AlertModalToggleHandler = (message) => {
+    setAlertMessage(message);
     setIsAlertModalOpen(!isAlertModalOpen);
   };
 
   return (
     <>
       <Modal
+        width="fit-content"
+        height="320px"
         isModalOpen={isAlertModalOpen}
-        ModalToggleHandler={AlertModalToggleHandler}
+        ModalToggleHandler={() => AlertModalToggleHandler('')}
       >
         <AlertModal
-          PropsText="빈 칸으로 넘어갈 수 없어요!"
-          PropsComfirmHandler={() => AlertModalToggleHandler()}
+          PropsText={alertMessage}
+          PropsComfirmHandler={() => AlertModalToggleHandler('')}
         />
       </Modal>
       <Wrapper>
@@ -107,7 +105,7 @@ export default function Create() {
               if (title) {
                 changePage();
               } else {
-                AlertModalToggleHandler();
+                AlertModalToggleHandler('제목을 입력해주세요');
               }
             }}
           />
@@ -116,10 +114,12 @@ export default function Create() {
             value={maxcnt}
             onHandleValue={maxCntValueSave}
             onHandleNext={() => {
-              if (maxcnt >= 1) {
-                changePage();
+              if (maxcnt === 0 || maxcnt > 10) {
+                AlertModalToggleHandler(
+                  '최대 참가 인원수는 1명 이상 10명 이하 입니다.',
+                );
               } else {
-                AlertModalToggleHandler();
+                changePage();
               }
             }}
           />
@@ -128,10 +128,12 @@ export default function Create() {
             value={text}
             onValueChange={textValueSave}
             onHandleSubmit={() => {
-              if (text) {
+              if (text.length > 2000) {
+                AlertModalToggleHandler('2000자 이하로 입력해주세요.');
+              } else if (text) {
                 submitForm();
               } else {
-                AlertModalToggleHandler();
+                AlertModalToggleHandler('빈 칸으로 넘어갈 수 없어요!');
               }
             }}
           />
