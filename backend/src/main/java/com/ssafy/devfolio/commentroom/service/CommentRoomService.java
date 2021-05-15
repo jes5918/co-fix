@@ -217,6 +217,12 @@ public class CommentRoomService {
         return commentRoom;
     }
 
+    public boolean isClosedRoom(String commentRoomId) throws JsonProcessingException {
+        CommentRoom commentRoom = getCommentRoomById(commentRoomId);
+
+        return commentRoom.getStatus().equals(RoomStatus.CLOSED);
+    }
+
     public CommentRoom enterCommentRoom(String pinNumber, String nickname) throws JsonProcessingException {
         CommentRoom commentRoom = getCommentRoom(pinNumber);
 
