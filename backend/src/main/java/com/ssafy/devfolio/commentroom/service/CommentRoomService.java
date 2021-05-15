@@ -264,6 +264,6 @@ public class CommentRoomService {
         // 변경 내용 publish
         ChannelTopic channel = channels.get(commentRoom.getRoomId());
 
-        redisSenderService.sendRoomUpdateService(channel, commentRoom);
+        redisSenderService.sendRoomUpdateService(commentRoom);
     }
 }
