@@ -21,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 
 import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 
@@ -135,4 +136,11 @@ public class CommentRoomController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @ApiOperation(value = "현재 존재하는 채널 확인 (데이터 검사용도)")
+    @GetMapping("/channels")
+    public ResponseEntity getChannels() {
+        SingleDataResponse<String> response = responseService.getSingleDataResponse(channels.toString(), HttpStatus.OK);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 }
