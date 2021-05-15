@@ -3,6 +3,9 @@ package com.ssafy.devfolio.sentence;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
 import com.ssafy.devfolio.commentroom.pubsub.RedisRoomSubscriber;
+import com.ssafy.devfolio.commentroom.service.CommentRoomService;
+import com.ssafy.devfolio.exception.BaseException;
+import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.response.ResponseService;
 import com.ssafy.devfolio.response.dto.BaseResponse;
 import com.ssafy.devfolio.response.dto.ListDataResponse;
@@ -29,6 +32,7 @@ import static com.ssafy.devfolio.utils.Utility.getMemberIdFromAuthentication;
 public class SentenceController {
 
     private final SentenceService sentenceService;
+    private final CommentRoomService commentRoomService;
     private final RedisSenderService redisSenderService;
     private final ResponseService responseService;
 
@@ -72,12 +76,15 @@ public class SentenceController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @ApiOperation(value = "문장 감정표현 - 테스트용 (소켓 연결 후 제거 예정)", notes = "이미 감정표현 한 사람이 또 하면 취소, 수정 후 room 채널 구독자에게 변경내역 보냄")
+    @ApiOperation(value = "문장 감정표현 (종료된 첨삭방엔 불가능)", notes = "이미 감정표현 한 사람이 또 하면 취소, 수정 후 room 채널 구독자에게 변경내역 보냄")
     @PostMapping("/{documentId}/sentences/{sentenceId}/feelings")
     public ResponseEntity pressFeeling(@ApiParam(value = "첨삭방 id", required = true) @PathVariable String commentRoomId,
                                        @ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
                                        @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId,
                                        @ApiParam(value = "감정표현 정보", required = true) @RequestBody FeelingRequest request) throws JsonProcessingException {
+        if (commentRoomService.isClosedRoom(commentRoomId)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_CLOSED_EXCEPTION);
+        }
         Sentence sentence = sentenceService.pressFeeling(documentId, sentenceId, request);
     
         ChannelTopic channel = channels.get(commentRoomId);
