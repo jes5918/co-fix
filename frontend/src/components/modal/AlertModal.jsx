@@ -11,15 +11,17 @@ export default function AlertModal({
     <AlertModalContainer>
       <TextWrapper>{PropsText}</TextWrapper>
       <ButtonWrapper>
-        <BasicButton
-          width={180}
-          height={50}
-          fontSize={18}
-          color={'white'}
-          backgroundColor={'green'}
-          onClickHandler={PropsComfirmHandler}
-          text="확인"
-        />
+        {PropsComfirmHandler && (
+          <BasicButton
+            width={180}
+            height={50}
+            fontSize={18}
+            color={'white'}
+            backgroundColor={'green'}
+            onClickHandler={PropsComfirmHandler}
+            text="확인"
+          />
+        )}
         {PropsRejectHandler && (
           <BasicButton
             width={180}
