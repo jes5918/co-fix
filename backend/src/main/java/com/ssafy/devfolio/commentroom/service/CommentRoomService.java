@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.RoomStatus;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
+import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;
 import com.ssafy.devfolio.member.domain.Member;
+import com.ssafy.devfolio.member.dto.SocketMemberInfo;
 import com.ssafy.devfolio.sentence.Sentence;
 import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +18,11 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
@@ -47,6 +47,9 @@ public class CommentRoomService {
 
     private final ObjectMapper objectMapper;
     private final MemberRepository memberRepository;
+
+    private final RedisSenderService redisSenderService;
+    private final Map<String, ChannelTopic> channels;
 
     @PostConstruct
     public void init() {
@@ -244,4 +247,17 @@ public class CommentRoomService {
                 .collect(Collectors.toList());
     }
 
+    public void exitCommentRoom(SocketMemberInfo currentSession) throws JsonProcessingException {
+        CommentRoom commentRoom = getCommentRoomById(currentSession.getCommentRoomId());
+
+        commentRoom.exitCommentRoom(currentSession.getNickname());
+
+        // 수정된 첨삭방 정보 저장
+        valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoom.getRoomId(), objectMapper.writeValueAsString(commentRoom));
+
+        // 변경 내용 publish
+        ChannelTopic channel = channels.get(commentRoom.getRoomId());
+
+        redisSenderService.sendRoomUpdateService(channel, commentRoom);
+    }
 }
