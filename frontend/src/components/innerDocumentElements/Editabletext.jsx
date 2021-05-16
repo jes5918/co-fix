@@ -8,6 +8,8 @@ export default function Editabletext({
   content,
   setNewValue,
   editorModeToggleHandler,
+  testRequest,
+  sentenceId,
 }) {
   const textRef = useRef();
   const [currentValue, setCurrentValue] = useState(content);
@@ -15,6 +17,7 @@ export default function Editabletext({
   const onHandleDebounce = debounce((e) => {
     setNewValue(e);
     setCurrentValue(e);
+    testRequest(sentenceId, e);
   }, 200);
 
   const changeh1Value = (e) => {
@@ -24,7 +27,7 @@ export default function Editabletext({
   useEffect(() => {
     textRef.current.style.height = '30px';
     textRef.current.style.height = `${textRef.current.scrollHeight}px`;
-  }, [currentValue]);
+  }, []);
 
   return (
     <StyleH1Input

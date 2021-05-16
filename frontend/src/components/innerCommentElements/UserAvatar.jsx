@@ -20,10 +20,10 @@ const S = {
   `,
 };
 
-function UserAvatar({ avatar }) {
+function UserAvatar() {
   return (
     <S.UserAvatarWrapper>
-      <S.UserAvatar avatar={avatar} />
+      <S.UserAvatar />
     </S.UserAvatarWrapper>
   );
 }
