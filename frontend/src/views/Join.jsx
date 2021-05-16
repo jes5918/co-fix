@@ -61,7 +61,7 @@ export default function Join() {
       },
       (err) => {
         if (err.response.data.message === '존재하지 않는 첨삭방') {
-          AlertModalToggleHandler('존재하지 않는 첨삭방');
+          AlertModalToggleHandler('존재하지 않는 첨삭방 입니다.');
         }
       },
     );
@@ -99,7 +99,7 @@ export default function Join() {
       },
       (err) => {
         if (err.response.data.message === '존재하지 않는 첨삭방') {
-          AlertModalToggleHandler('존재하지 않는 첨삭방');
+          AlertModalToggleHandler('유효한 Pin Code가 아닙니다.');
         }
       },
     );

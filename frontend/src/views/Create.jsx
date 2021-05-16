@@ -59,7 +59,7 @@ export default function Create() {
         },
         (err) => {
           AlertModalToggleHandler('Server Error');
-          console.error('err', err.response.data);
+          console.error('err', err);
         },
       );
     } else {
