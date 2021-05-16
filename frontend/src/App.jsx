@@ -26,7 +26,7 @@ function App() {
     <>
       <NavBar
         isLoggedIn={user.authenticated ? true : false}
-        user={user.credentials.member}
+        user={user && user.credentials.member}
       />
       {/* <AnimatedCursor
         innerSize={20}

@@ -11,8 +11,8 @@ const S = {
   `,
 };
 
-function UserNickName({ nickName }) {
-  return <S.UserNickName>{nickName}</S.UserNickName>;
+function UserNickName({ nickname }) {
+  return <S.UserNickName>{nickname}</S.UserNickName>;
 }
 
 export default UserNickName;
