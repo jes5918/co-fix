@@ -1,92 +1,142 @@
-import React, { ReactElement } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { closeRoom } from '../../api/co-fix';
+import { updateMyPageList } from '../../modules/actions/mypagelistActions';
+
+// modal component
+import Modal from '../../containers/Modal';
+import AlertModal from '../../components/modal/AlertModal';
 
 // 이런 형태로 내려옴
-const roomInfotest = {
-  roomId: '101181c0-0517-40a8-8931-8df5da61623b',
-  memberId: 5,
-  roomTitle: '한국가스공사',
-  memberLimit: 3,
-  documentId: 'a39beabe-19cf-49bf-baad-6d383a164716',
-  pinNumber: '21423333',
-  status: 'OPEN',
-  members: [
-    {
-      nickname: 'J Euisss',
-      online: true,
-    },
-    {
-      nickname: 'J Euisss',
-      online: true,
-    },
-    {
-      nickname: 'J Euisss',
-      online: true,
-    },
-    {
-      nickname: 'J Euisss',
-      online: true,
-    },
-  ],
-  createdDate: '2021-05-14T15:06:59.246958',
-  lastModifiedDate: '2021-05-14T15:06:59.246958',
-};
+// const roomInfotest = {
+//   roomId: '101181c0-0517-40a8-8931-8df5da61623b',
+//   memberId: 5,
+//   roomTitle: '한국가스공사',
+//   memberLimit: 3,
+//   documentId: 'a39beabe-19cf-49bf-baad-6d383a164716',
+//   pinNumber: '21423333',
+//   status: 'OPEN',
+//   members: [
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//   ],
+//   createdDate: '2021-05-14T15:06:59.246958',
+//   lastModifiedDate: '2021-05-14T15:06:59.246958',
+// };
 
 function Card({
-  roomInfo,
+  RoomInfo,
   propsWidth,
   propsHeight,
   propsFontSize,
-  card,
-  onHandleZZim,
-  onClickTag,
-  onClickImage,
+  onGotoMyPageHandler,
+  onGotoLiveHandler,
 }) {
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const onCloseRoomHandler = () => {
+    setIsAlertModalOpen(!isAlertModalOpen);
+  };
+
+  const CloseRoom = () => {
+    closeRoom(
+      RoomInfo.roomId,
+      (res) => {
+        console.log(`res`, res);
+        dispatch(updateMyPageList(RoomInfo));
+        onCloseRoomHandler();
+      },
+      (err) => {
+        console.log(`이미 닫힌 방인지 확인`, err);
+      },
+    );
+  };
+
   return (
-    <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
-      <cardStyle.imgFrame>{roomInfo.roomTitle[0]}</cardStyle.imgFrame>
-      <cardStyle.hoverContainer>
-        {/* hover */}
-        <cardStyle.infoBox onClick={() => onClickImage()}>
-          <cardStyle.madeby propsFontSize={propsFontSize}>
-            {roomInfo && roomInfo.roomTitle}
-          </cardStyle.madeby>
-          <cardStyle.madeby propsFontSize={propsFontSize}>
-            Created :{' '}
-            {roomInfo &&
-              roomInfo.createdDate.substring(0, 10).replaceAll('-', '.')}
-            <br />
-            Modified :{' '}
-            {roomInfo &&
-              roomInfo.lastModifiedDate.substring(0, 10).replaceAll('-', '.')}
-            <br />
-            PIN : {roomInfo && roomInfo.pinNumber}
-          </cardStyle.madeby>
-        </cardStyle.infoBox>
-        {/* {test && test.zzim ? (
-          <cardStyle.zzimedIcon onClick={() => onHandleZZim()} />
-        ) : (
-          <cardStyle.zzimIcon onClick={() => onHandleZZim()} />
-        )} */}
-        <cardStyle.tagBox>
-          <cardStyle.tags>
-            {roomInfo &&
-              roomInfo.members.map((member, i) => {
-                return (
-                  <cardStyle.tag
-                    key={i}
-                    onClick={() => onClickTag(member.nickname)}
-                    propsFontSize={propsFontSize}
-                  >
-                    {member.nickname}
-                  </cardStyle.tag>
-                );
-              })}
-          </cardStyle.tags>
-        </cardStyle.tagBox>
-      </cardStyle.hoverContainer>
-    </cardStyle.mainFrame>
+    <>
+      <Modal
+        width="fit-content"
+        height="320px"
+        isModalOpen={isAlertModalOpen}
+        ModalToggleHandler={() => onCloseRoomHandler()}
+      >
+        <AlertModal
+          PropsText="정말로 Live Room을 닫으시겠습니까?"
+          PropsComfirmHandler={() => CloseRoom()}
+          PropsRejectHandler={() => onCloseRoomHandler()}
+        />
+      </Modal>
+      <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
+        <cardStyle.frontpannel>
+          <cardStyle.title propsFontSize={propsFontSize}>
+            {RoomInfo && RoomInfo.roomTitle}
+          </cardStyle.title>
+          <cardStyle.tagBox>
+            <cardStyle.tags>
+              {RoomInfo &&
+                RoomInfo.members.map((member, i) => {
+                  return (
+                    <cardStyle.tag key={i} propsFontSize={propsFontSize}>
+                      {member.nickname}
+                    </cardStyle.tag>
+                  );
+                })}
+            </cardStyle.tags>
+          </cardStyle.tagBox>
+        </cardStyle.frontpannel>
+        <cardStyle.hoverContainer>
+          <cardStyle.infoBox>
+            <cardStyle.madeby propsFontSize={propsFontSize}>
+              Created :{' '}
+              {RoomInfo &&
+                RoomInfo.createdDate.substring(0, 10).replaceAll('-', '.')}
+            </cardStyle.madeby>
+            <cardStyle.madeby>
+              Modified :{' '}
+              {RoomInfo &&
+                RoomInfo.lastModifiedDate.substring(0, 10).replaceAll('-', '.')}
+            </cardStyle.madeby>
+            <cardStyle.madeby>
+              Status : {RoomInfo && RoomInfo.status}
+            </cardStyle.madeby>
+            <cardStyle.madeby>
+              PIN : {RoomInfo && RoomInfo.pinNumber}
+            </cardStyle.madeby>
+            <cardStyle.buttonwrapper>
+              {RoomInfo.status === 'OPEN' ? (
+                <>
+                  <cardStyle.button enter onClick={() => onGotoLiveHandler()}>
+                    Enter Live Room
+                  </cardStyle.button>
+                  <cardStyle.button onClick={() => onCloseRoomHandler()}>
+                    Close Live Room
+                  </cardStyle.button>
+                </>
+              ) : (
+                <cardStyle.button enter onClick={() => onGotoMyPageHandler()}>
+                  Enter Result Room
+                </cardStyle.button>
+              )}
+            </cardStyle.buttonwrapper>
+          </cardStyle.infoBox>
+        </cardStyle.hoverContainer>
+      </cardStyle.mainFrame>
+    </>
   );
 }
 export default Card;
@@ -97,6 +147,7 @@ const cardStyle = {
     height: ${({ propsHeight }) => `${propsHeight ? propsHeight : 400}px`};
     overflow: hidden;
     position: relative;
+    background-color: #ffffff;
     border-radius: 30px;
     margin: 10px 25px;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
@@ -111,13 +162,16 @@ const cardStyle = {
       transform: scale(1.1);
     }
   `,
-  imgFrame: styled.div`
+  frontpannel: styled.div`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     font-weight: bold;
     font-size: 30px;
     font-family: 'Samlip';
+    padding: 20px 20px;
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -126,7 +180,7 @@ const cardStyle = {
   hoverContainer: styled.div`
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.55);
+    background: linear-gradient(to bottom, #fef9d7, #fec9d7);
     position: absolute;
     top: 20%;
     z-index: 1;
@@ -138,58 +192,57 @@ const cardStyle = {
   `,
   infoBox: styled.div`
     width: 100%;
-    height: 75%;
+    height: 100%;
     margin: 0;
     z-index: 1;
     opacity: 1;
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 10%;
   `,
   madeby: styled.div`
-    color: white;
     z-index: 1;
     opacity: 1;
     font-weight: bold;
     font-size: ${({ propsFontSize }) =>
       `${propsFontSize ? propsFontSize : 17}px`};
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
     word-break: keep-all;
     line-height: ${({ propsFontSize }) =>
       `${propsFontSize ? propsFontSize + 20 : 27}px`};
   `,
-  zzimedIcon: styled(AiFillStar)`
-    position: absolute;
-    bottom: 28%;
-    right: 5%;
-    color: rgb(215 164 4);
-    font-size: 30px;
-  `,
-  zzimIcon: styled(AiOutlineStar)`
-    position: absolute;
-    bottom: 28%;
-    right: 5%;
-    color: rgb(215 164 4);
-    font-size: 30px;
+  title: styled.div`
+    z-index: 1;
+    opacity: 1;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 30px;
+    text-align: center;
+    word-break: keep-all;
+    line-height: ${({ propsFontSize }) =>
+      `${propsFontSize ? propsFontSize + 20 : 27}px`};
   `,
   tagBox: styled.div`
     width: 100%;
-    height: 40%;
+    height: 50%;
     margin: 0;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(256, 256, 256, 0.85);
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
   `,
   tags: styled.div`
     width: 80%;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     word-break: keep-all;
@@ -204,5 +257,23 @@ const cardStyle = {
     line-height: 20px;
     word-break: keep-all;
     margin-right: 5px;
+  `,
+  buttonwrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+  `,
+  button: styled.div`
+    margin: 5px 10px 5px;
+    padding: 10px 20px;
+    border: ${({ enter }) =>
+      enter ? '2px solid #addd8c' : '2px solid #e66b53'};
+    border-radius: 10px;
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+    &:hover {
+      background-color: ${({ enter }) => (enter ? '#addd8c' : '#e66b53')};
+    }
   `,
 };
