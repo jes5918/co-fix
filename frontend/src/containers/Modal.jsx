@@ -52,7 +52,7 @@ const ModalContent = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 50px;
-  padding: 70px 50px;
+  padding: 50px 50px;
   height: ${({ height }) => (height ? `${height}` : '300px')};
   width: ${({ width }) => (width ? `${width}` : '500px')};
   border-radius: 15px;
