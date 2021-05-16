@@ -32,11 +32,11 @@ export default function MyPageList() {
       <MyPageListWrapper>
         {user.authenticated ? (
           <MyPageListHeader>
-            <b>{user.credentials.member.name}</b> 님의 첨삭방
+            <b>{user.credentials.member.name}</b> 님의 Co-Fix History
           </MyPageListHeader>
         ) : (
           <MyPageListHeader>
-            <b>Test User</b> 님의 첨삭방
+            <b>Test User</b> 님의 Co-Fix History
           </MyPageListHeader>
         )}
         <MyPageListBody roomInfos={roomInfos} />
