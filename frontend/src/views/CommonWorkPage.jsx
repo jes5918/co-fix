@@ -26,7 +26,6 @@ import CommentContainer from '../containers/CommentContainer';
 
 // components
 import OpenViduMain from '../openvidu/OpenViduMain';
-
 import useRoomInfo from '../hook/useRoomInfo';
 
 const localStorage = window.localStorage;
@@ -52,7 +51,6 @@ export default function CommonWorkPage() {
       documentId,
       sentenceId,
       (res) => {
-        console.log('아쉬밤', res.data.data);
         dispatch(commentSetAction(res.data.data));
       },
       (error) => {
@@ -103,7 +101,7 @@ export default function CommonWorkPage() {
   const connectSocket = () => {
     stompClient.connect(
       {
-        nickname: localStorage.getItem('nickname') || '기본 닉네임',
+        nickname: localStorage.getItem('nickname') || 'defaultNickName',
         commentRoomId: roomId,
       },
       (frame) => {
@@ -111,11 +109,16 @@ export default function CommonWorkPage() {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
           dispatch(documentModifyAction(modifiedSentence));
-          console.log('소켓 수정 :', modifiedSentence);
           return body;
         });
       },
     );
+  };
+
+  const disconnectSocket = () => {
+    stompClient.disconnect(() => {
+      console.log('room socket disconnected');
+    });
   };
 
   // redux에 저장되어있는 documentReducer 가져오기
@@ -125,7 +128,6 @@ export default function CommonWorkPage() {
       documentId,
       (response) => {
         dispatch(documentGetAction(response.data.data));
-        console.log(response.data.data);
       },
       (error) => {
         console.log(`error`, error);
@@ -133,6 +135,10 @@ export default function CommonWorkPage() {
     );
 
     connectSocket();
+
+    return () => {
+      disconnectSocket();
+    };
   }, []);
 
   return (
