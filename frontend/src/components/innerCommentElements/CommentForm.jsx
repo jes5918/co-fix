@@ -8,9 +8,6 @@ import { createComment } from '../../api/comments.js';
 
 function CommentForm({ sentenceId, onHandleClickSentence }) {
   const inputRef = useRef(null);
-  const id = sentenceId;
-  const localStorage = window.localStorage;
-  const dispatch = useDispatch();
   const { roomId, documentId } = useSelector((state) => {
     return state.room;
   });
@@ -26,8 +23,7 @@ function CommentForm({ sentenceId, onHandleClickSentence }) {
         nickname,
       },
       (res) => {
-        console.log('진우 멍청이', res.data.data);
-        // dispatch(commentCreateAction(res.data.data));
+        // console.log('POST: Comment :', res.data.data);
       },
       (error) => {
         console.log(error);
@@ -39,8 +35,8 @@ function CommentForm({ sentenceId, onHandleClickSentence }) {
     if (e.keyCode === 13) {
       const content = inputRef.current.value;
       const nickname = '임시 닉네임';
-      inputRef.current.value = '';
       onHandleSubmitComment(sentenceId, nickname, content);
+      inputRef.current.value = '';
     }
   };
 
