@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // library
 import styled from 'styled-components';
@@ -11,13 +11,13 @@ import 'react-tabs/style/react-tabs.css';
 import { getDocuments } from '../api/documents';
 import { getAllComments } from '../api/comments';
 
+// redux
+import { documentGetAction } from '../modules/actions/documentActions';
+
 // containers
 import ScreenSlideDivider from '../containers/ScreenSlideDivider';
-import Participant from '../containers/mypage/Participant';
-import DocumentContainer from '../containers/DocumentContainer';
 import CommentContainer from '../containers/CommentContainer';
 import MypageLeft from '../containers/mypage/MyPageLeft';
-import MyPageRight from '../containers/mypage/MyPageRight';
 
 // components
 import CalcContentLength from '../containers/mypage/CalcContentLength';
@@ -49,6 +49,7 @@ const CustomTab = ({ children }) => (
 );
 
 CustomTab.tabsRole = 'Tab';
+
 export default function MyPage({ match }) {
   const roomId = match.params.roomid;
   const documentId = match.params.documentid;
@@ -67,7 +68,7 @@ export default function MyPage({ match }) {
   const [windowWidthSize, setWindowWidthSize] = useState(window.innerWidth);
   const isHalfScreen = windowWidthSize > screen.width / 1.85;
   const isMobileScreen = windowWidthSize > screen.width / 3;
-
+  const dispatch = useDispatch();
   const sentences = useSelector((state) => {
     return state.document.data;
   });
@@ -91,13 +92,13 @@ export default function MyPage({ match }) {
 
   const onHandleSubmitComment = () => {};
   const onHandleClickAgree = () => {};
-  const testRequest = () => {};
 
   useEffect(() => {
     getDocuments(
       roomId,
       documentId,
       (res) => {
+        dispatch(documentGetAction(res.data.data));
         setDocumentInfo(res.data.data);
         let tempOrigin = '';
         let tempModify = '';
@@ -156,27 +157,27 @@ export default function MyPage({ match }) {
             <ScreenSlideDivider setSplitPosX={setSplitPosX}>
               <>
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
-                  <DocumentContainer
-                    sentences={documentInfo}
-                    testRequest={testRequest}
-                    onHandleClickSentence={onHandleClickSentence}
+                  <MyDocumentContainer
+                    sentences={sentences}
+                    roomId={roomId}
+                    documentId={documentId}
                   />
                 </Scrollbars>
                 {sentences && (
                   <CalcContentLength
-                    datas={documentInfo}
+                    datas={sentences}
                     splitPosX={splitPosX}
                     windowWidthSize={windowWidthSize}
                   />
                 )}
               </>
               <Scrollbars style={{ width: '100%', height: '100%' }}>
-                <CommentContainer
+                {/* <CommentContainer
                   comments={commentInfo}
                   sentenceId={onFocusedSentence}
                   onHandleClickAgree={onHandleClickAgree}
                   onHandleSubmitComment={onHandleSubmitComment}
-                />
+                /> */}
               </Scrollbars>
             </ScreenSlideDivider>
           </TabPanel>
@@ -206,7 +207,6 @@ export default function MyPage({ match }) {
           </TabPanel>
         </MyPageContainer>
       </StyledTabs>
-      {/* <Participant /> */}
     </BackGround>
   );
 }
