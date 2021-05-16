@@ -25,10 +25,10 @@ export default function CommentContainer({
   onHandleClickSentence,
 }) {
   const comments = useCommentData();
-  console.log('!@#!@#!@#', comments);
   return (
     <S.CommentContainer>
       {comments &&
+        comments[0] !== null &&
         comments.map((item, idx) => {
           return <CommentWrapper key={idx * 123413} comment={item} />;
         })}
