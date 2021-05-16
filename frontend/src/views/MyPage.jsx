@@ -16,6 +16,7 @@ import { documentGetAction } from '../modules/actions/documentActions';
 
 // containers
 import ScreenSlideDivider from '../containers/ScreenSlideDivider';
+import MyDocumentContainer from '../containers/mypage/MyDocumentContainer';
 import CommentContainer from '../containers/CommentContainer';
 import MypageLeft from '../containers/mypage/MyPageLeft';
 
