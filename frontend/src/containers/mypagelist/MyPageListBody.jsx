@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { CgMathPlus } from 'react-icons/cg';
 
@@ -9,30 +10,17 @@ import Modal from '../Modal';
 import ModalContent from '../../components/template/ModalContent';
 import AlertModal from '../../components/modal/AlertModal';
 
-const TempCard = {
-  zzim: false,
-  pk: 1,
-  madeby: '의수',
-  createdAt: '2020. 04. 26',
-  tags: ['React', 'Redux', 'Frontend'],
-};
+// redux
+import { saveRoomInfo } from '../../modules/actions/roomActions';
 
-export default function TemplateBody({ roomInfos }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function TemplateBody({ RoomInfos }) {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const onZZimToggleHandler = () => {
-    console.log('찜클릭');
-  };
-
-  const onTagClickHandler = (tag) => {
-    console.log(`${tag}`, '태그클릭');
-  };
-
-  const ModalToggleHandler = (roomInfo) => {
-    setIsModalOpen(!isModalOpen);
-    history.push(`/mypage/${roomInfo.roomId}/${roomInfo.documentId}`);
+  const ModalToggleHandler = (RoomInfo) => {
+    dispatch(saveRoomInfo(RoomInfo));
+    history.push(`/mypage/${RoomInfo.roomId}/${RoomInfo.documentId}`);
   };
   const AlertModalToggleHandler = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
@@ -42,18 +30,13 @@ export default function TemplateBody({ roomInfos }) {
     history.push('/create');
   };
 
+  const onGotoLiveHandler = (RoomInfo) => {
+    dispatch(saveRoomInfo(RoomInfo));
+    history.push(`/co-fix/${RoomInfo.roomId}`);
+  };
+
   return (
     <>
-      <Modal
-        isModalOpen={isModalOpen}
-        ModalToggleHandler={() => ModalToggleHandler}
-      >
-        <ModalContent
-          thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-          card={TempCard}
-          onClickTag={onTagClickHandler}
-        />
-      </Modal>
       <Modal
         isModalOpen={isAlertModalOpen}
         ModalToggleHandler={AlertModalToggleHandler}
@@ -65,21 +48,17 @@ export default function TemplateBody({ roomInfos }) {
         />
       </Modal>
       <CardWrapper>
-        {roomInfos &&
-          roomInfos.map((roomInfo, idx) => {
-            console.log(`roomInfo`, roomInfo);
+        {RoomInfos.length > 0 &&
+          RoomInfos.map((RoomInfo, idx) => {
             return (
               <Card
                 key={idx}
-                roomInfo={roomInfo}
-                thumbnailURL="https://imgscf.slidemembers.com/docs/1/1/101/portfolio_fashion_google_slides_templates_100601.jpg"
-                card={TempCard}
-                onHandleZZim={onZZimToggleHandler}
-                onClickTag={onTagClickHandler}
+                RoomInfo={RoomInfo}
                 propsWidth={280}
                 propsHeight={330}
                 propsFontSize={18}
-                onClickImage={() => ModalToggleHandler(roomInfo)}
+                onGotoMyPageHandler={() => ModalToggleHandler(RoomInfo)}
+                onGotoLiveHandler={() => onGotoLiveHandler(RoomInfo)}
               />
             );
           })}
@@ -98,7 +77,7 @@ const CardWrapper = styled.div`
   height: 90%;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
