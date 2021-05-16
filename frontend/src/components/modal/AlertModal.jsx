@@ -48,7 +48,7 @@ const TextWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 30px 30px;
   margin-bottom: 20px;
   font-size: 22px;
   font-weight: bold;

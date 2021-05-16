@@ -8,7 +8,7 @@ const Button = styled.div`
   text-align: center;
   color: ${({ color }) => `${color ? `${color}` : 'black'}`};
   margin: ${({ margin }) => `${margin ? `${margin}px` : '10px'}`};
-  border: none;
+  border: ${({ border }) => `${border ? `${border}` : 'none'}`};
   font-weight: bold;
   border-radius: 15px;
   box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
@@ -31,9 +31,11 @@ const Button = styled.div`
 
 function BasicButton({
   text,
+  children,
   margin,
   onClickHandler,
   color,
+  border,
   width,
   height,
   fontSize,
@@ -45,11 +47,12 @@ function BasicButton({
       height={height}
       width={width}
       color={color}
+      border={border}
       fontSize={fontSize}
       backgroundColor={backgroundColor}
       onClick={onClickHandler}
     >
-      {text}
+      {text ? text : children}
     </Button>
   );
 }
