@@ -36,19 +36,29 @@ function CalcContentLength({ datas, sentences, splitPosX, windowWidthSize }) {
 
   return (
     <Container>
-      {splitPosX > 700 || windowWidthSize < screen.width / 1.85 ? (
+      {splitPosX ? (
+        splitPosX > 700 || windowWidthSize < screen.width / 1.85 ? (
+          <ProgressBar
+            completed={percent}
+            bgColor="#ff950e"
+            width={
+              windowWidthSize > screen.width / 1.85
+                ? String(splitPosX * 0.55) + 'px'
+                : String(windowWidthSize * 0.35) + 'px'
+            }
+            height="25px"
+            labelColor="#000000"
+          />
+        ) : null
+      ) : (
         <ProgressBar
           completed={percent}
           bgColor="#ff950e"
-          width={
-            windowWidthSize > screen.width / 1.85
-              ? String(splitPosX * 0.55) + 'px'
-              : String(windowWidthSize * 0.35) + 'px'
-          }
+          width={'500px'}
           height="25px"
           labelColor="#000000"
         />
-      ) : null}
+      )}
       <Wrapper>
         <Length>
           {contentLength} 자 / &nbsp;
