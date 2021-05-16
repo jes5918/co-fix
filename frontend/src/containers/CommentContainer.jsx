@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { closeRoom } from '../api/co-fix';
 
 import CommentForm from '../components/innerCommentElements/CommentForm';
 import CommentWrapper from '../components/innerCommentElements/CommentWrapper';
+
+import useCommentData from '../hook/useComment.js';
 
 const S = {
   CommentContainer: styled.div`
@@ -18,32 +21,21 @@ const S = {
 };
 
 export default function CommentContainer({
-  comments,
   sentenceId,
-  onHandleSubmitComment,
-  onHandleClickAgree,
+  onHandleClickSentence,
 }) {
-  const onHandleSubmit = () => {
-    // 1. 이벤트 props로 내려주고,
-    // 2. CommentForm에서 onSubmit 이벤트에 대한 콜백함수로 실행
-    // 3. 소켓 통신해서 UI 렌더링하는 데이터에 추가, 백에 API 요청 보냄.(동시)
-  };
-
+  const comments = useCommentData();
+  console.log('!@#!@#!@#', comments);
   return (
     <S.CommentContainer>
       {comments &&
-        comments.map((item) => {
-          return (
-            <CommentWrapper
-              key={item.id}
-              userId={item.id}
-              avatar={item.avatar}
-              comment={item.comment}
-              nickName={item.nickName}
-            />
-          );
+        comments.map((item, idx) => {
+          return <CommentWrapper key={idx * 123413} comment={item} />;
         })}
-      <CommentForm onSubmit={onHandleSubmitComment} sentenceId={sentenceId} />
+      <CommentForm
+        sentenceId={sentenceId}
+        onHandleClickSentence={onHandleClickSentence}
+      />
     </S.CommentContainer>
   );
 }

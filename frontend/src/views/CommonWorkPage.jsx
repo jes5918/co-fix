@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
+import { commentSetAction } from '../modules/actions/commentActions';
 import { getRoomInfo, closeRoom } from '../api/co-fix';
 import { modifyDocuments } from '../api/documents';
 import { getDocuments } from '../api/documents';
-import { documentGetAction } from '../modules/actions/documentActions';
 import {
-  getAllComments,
-  createComment,
-  agreeComment,
-} from '../api/comments.js';
+  documentGetAction,
+  documentModifyAction,
+} from '../modules/actions/documentActions';
+import { getAllComments, agreeComment } from '../api/comments.js';
 
 // socket
 import SockJS from 'sockjs-client';
@@ -29,6 +29,8 @@ import OpenViduMain from '../openvidu/OpenViduMain';
 
 import useRoomInfo from '../hook/useRoomInfo';
 
+const localStorage = window.localStorage;
+
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
   const { roomId, documentId } = useRoomInfo();
@@ -36,9 +38,7 @@ export default function CommonWorkPage() {
     return state.document.data;
   });
 
-  const [msg, setMsg] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [onFocusedSentence, setOnFocusedSentence] = useState(sentences[0]);
+  const [onFocusedSentence, setOnFocusedSentence] = useState('');
 
   // socket
   const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
@@ -46,32 +46,14 @@ export default function CommonWorkPage() {
 
   // sentence 클릭 -> comment 조회
   const onHandleClickSentence = (sentenceId) => {
+    setOnFocusedSentence(sentenceId);
     getAllComments(
       roomId,
       documentId,
       sentenceId,
       (res) => {
-        console.log(res);
-        setComments(res.data.data);
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
-  };
-
-  // comment 생성
-  const onHandleSubmitComment = (sentenceId, nickname, content) => {
-    createComment(
-      roomId,
-      documentId,
-      sentenceId,
-      {
-        content,
-        nickname,
-      },
-      (res) => {
-        console.log(res);
+        console.log('아쉬밤', res.data.data);
+        dispatch(commentSetAction(res.data.data));
       },
       (error) => {
         console.log(error);
@@ -97,16 +79,16 @@ export default function CommonWorkPage() {
   };
 
   // socket 테스트
-  const testRequest = (sentenceId) => {
+  const testRequest = (sentenceId, modifiedContent) => {
     modifyDocuments(
       roomId,
       documentId,
       sentenceId,
       {
-        modifiedContent: '안녕하세요?23',
+        modifiedContent: modifiedContent,
       },
       (res) => {
-        console.log('반환되는 값입니다. : ', res);
+        // console.log('반환되는 값입니다. : ', res);
       },
       (error) => {
         console.log(error);
@@ -114,15 +96,27 @@ export default function CommonWorkPage() {
     );
   };
 
-  stompClient.connect({}, (frame) => {
-    console.log(frame);
-    stompClient.subscribe('/room/' + roomId, (res) => {
-      const body = JSON.parse(res.body);
-      console.log('res.body : ', body);
-      setMsg(body);
-      return body;
-    });
-  });
+  const onHandleDispatch = (nextSentences) => {
+    dispatch(documentModifyAction());
+  };
+
+  const connectSocket = () => {
+    stompClient.connect(
+      {
+        nickname: localStorage.getItem('nickname') || '기본 닉네임',
+        commentRoomId: roomId,
+      },
+      (frame) => {
+        stompClient.subscribe('/room/' + roomId, (res) => {
+          const body = JSON.parse(res.body);
+          const modifiedSentence = body.sentence; // 들어오는거 확인
+          dispatch(documentModifyAction(modifiedSentence));
+          console.log('소켓 수정 :', modifiedSentence);
+          return body;
+        });
+      },
+    );
+  };
 
   // redux에 저장되어있는 documentReducer 가져오기
   useEffect(() => {
@@ -131,17 +125,14 @@ export default function CommonWorkPage() {
       documentId,
       (response) => {
         dispatch(documentGetAction(response.data.data));
+        console.log(response.data.data);
       },
       (error) => {
         console.log(`error`, error);
       },
     );
 
-    // return () => {
-    //   stompClient.disconnect(() => {
-    //     console.log('socket disconnected');
-    //   }, {});
-    // };
+    connectSocket();
   }, []);
 
   return (
@@ -154,16 +145,14 @@ export default function CommonWorkPage() {
               testRequest={testRequest}
               onHandleClickSentence={onHandleClickSentence}
             />
-            <span>{msg && msg.sentence.sentenceId}</span>
           </Scrollbars>
         </S.LeftSide>
         <S.RightSide>
           <Scrollbars style={{ width: '100%', height: '100%' }}>
             <CommentContainer
-              comments={comments}
-              sentenceId={onFocusedSentence.sentenceId}
+              sentenceId={onFocusedSentence}
               onHandleClickAgree={onHandleClickAgree}
-              onHandleSubmitComment={onHandleSubmitComment}
+              onHandleClickSentence={onHandleClickSentence}
             />
           </Scrollbars>
         </S.RightSide>

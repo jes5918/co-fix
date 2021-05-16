@@ -2,6 +2,67 @@
 
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { commentCreateAction } from '../../modules/actions/commentActions';
+import { createComment } from '../../api/comments.js';
+
+function CommentForm({ sentenceId, onHandleClickSentence }) {
+  const inputRef = useRef(null);
+  const id = sentenceId;
+  const localStorage = window.localStorage;
+  const dispatch = useDispatch();
+  const { roomId, documentId } = useSelector((state) => {
+    return state.room;
+  });
+
+  // comment 생성
+  const onHandleSubmitComment = (sentenceId, nickname, content) => {
+    createComment(
+      roomId,
+      documentId,
+      sentenceId,
+      {
+        content,
+        nickname,
+      },
+      (res) => {
+        console.log('진우 멍청이', res.data.data);
+        // dispatch(commentCreateAction(res.data.data));
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+  };
+
+  const onHandleSubmit = (e) => {
+    if (e.keyCode === 13) {
+      const content = inputRef.current.value;
+      const nickname = '임시 닉네임';
+      inputRef.current.value = '';
+      onHandleSubmitComment(sentenceId, nickname, content);
+    }
+  };
+
+  return (
+    <S.CommentForm>
+      <S.FormLabelBox>
+        {/* 새로운 아이콘을 주시오. */}
+        <span style={{ color: '#aaaaaa' }}>🗨</span>
+        <S.FormLabel>Comment</S.FormLabel>
+      </S.FormLabelBox>
+      <S.FormInputBox>
+        <S.FormInput
+          require
+          ref={inputRef}
+          onKeyDown={(e) => onHandleSubmit(e)}
+        />
+      </S.FormInputBox>
+    </S.CommentForm>
+  );
+}
+
+export default CommentForm;
 
 const S = {
   CommentForm: styled.div`
@@ -47,32 +108,3 @@ const S = {
     font-size: 14px;
   `,
 };
-
-function CommentForm({ sentenceId, onSubmit }) {
-  const inputRef = useRef(null);
-  const localStorage = window.localStorage;
-
-  const onHandleSubmit = (e) => {
-    if (e.keyCode === 13) {
-      const content = inputRef.current.value;
-      const nickname = '임시 닉네임';
-      inputRef.current.value = '';
-      onSubmit(sentenceId, nickname, content);
-    }
-  };
-
-  return (
-    <S.CommentForm>
-      <S.FormLabelBox>
-        {/* 새로운 아이콘을 주시오. */}
-        <span style={{ color: '#aaaaaa' }}>🗨</span>
-        <S.FormLabel>Comment</S.FormLabel>
-      </S.FormLabelBox>
-      <S.FormInputBox>
-        <S.FormInput ref={inputRef} onKeyUp={(e) => onHandleSubmit(e)} />
-      </S.FormInputBox>
-    </S.CommentForm>
-  );
-}
-
-export default CommentForm;

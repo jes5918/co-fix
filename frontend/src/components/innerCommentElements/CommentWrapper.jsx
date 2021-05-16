@@ -58,7 +58,7 @@ const S = {
   `,
 };
 
-function CommentWrapper({ userId, avatar, comment, nickName }) {
+function CommentWrapper({ userId, comment }) {
   const [isAgree, setIsAgree] = useState(false);
   const onHandleClick = () => {
     setIsAgree((prev) => !prev);
@@ -68,8 +68,8 @@ function CommentWrapper({ userId, avatar, comment, nickName }) {
     <S.CommentWrapper>
       <S.TopPart>
         <S.TopLeft>
-          <UserAvatar avatar={avatar} />
-          <UserNickName nickName={nickName} />
+          <UserAvatar />
+          <UserNickName nickname={comment.nickname} />
         </S.TopLeft>
         <S.AgreeButton
           data-user-id={userId}
@@ -80,7 +80,7 @@ function CommentWrapper({ userId, avatar, comment, nickName }) {
         </S.AgreeButton>
       </S.TopPart>
       <S.BottomPart>
-        <UserComment comment={comment} />
+        <UserComment comment={comment.content} />
       </S.BottomPart>
     </S.CommentWrapper>
   );

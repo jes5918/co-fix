@@ -9,14 +9,22 @@ import {
 import styled from 'styled-components';
 import Editabletext from './Editabletext';
 
+// socket
+import SockJS from 'sockjs-client';
+import Stomp from 'webstomp-client';
+
 export default function EditableTextWrapper({
   data,
   testRequest,
   onHandleClickSentence,
 }) {
   const { modifiedContent } = data;
+  console.log(data);
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
+  // socket
+  const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
+  const stompClient = Stomp.over(socket);
 
   const editorModeToggleHandler = () => {
     setIsEditMode(!isEditMode);
@@ -36,6 +44,26 @@ export default function EditableTextWrapper({
     // backend 로 수정하는거 보내야 하는 자리 (츄츄가)
   };
 
+  // const connectSocket = () => {
+  //   stompClient.connect(
+  //     {
+  //       nickname: localStorage.getItem('nickname') || '기본 닉네임',
+  //       commentRoomId: roomId,
+  //     },
+  //     (frame) => {
+  //       stompClient.subscribe('/sentence/' + roomId, (res) => {
+  //         const body = JSON.parse(res.body);
+  //         const modifiedSentence = body.sentence; // 들어오는거 확인
+  //         dispatch(documentModifyAction(modifiedSentence));
+  //         console.log('소켓 수정 :', modifiedSentence);
+  //         return body;
+  //       });
+  //     },
+  //   );
+  // };
+
+  // useEffect(() => {}, []);
+
   return (
     <>
       {!isEditMode ? (
@@ -43,7 +71,6 @@ export default function EditableTextWrapper({
           onDoubleClick={editorModeToggleHandler}
           onClick={() => {
             selectDocumentHandler();
-            testRequest(data.sentenceId);
             onHandleClickSentence(data.sentenceId);
           }}
         >
@@ -54,6 +81,8 @@ export default function EditableTextWrapper({
           editorModeToggleHandler={editorModeToggleHandler}
           setNewValue={setNewValue}
           content={modifiedContent}
+          testRequest={testRequest}
+          sentenceId={data.sentenceId}
         />
       )}
     </>
