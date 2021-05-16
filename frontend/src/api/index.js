@@ -29,7 +29,7 @@ function AuthorizationInstance() {
     async function (config) {
       // const accToken = await getToken();
       const accToken =
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNyIsImlhdCI6MTYyMTA4NjY1NiwiZXhwIjoxNjIxMDkwMjU2fQ.mqbxi5DFegSHK2oCEwfeUSCmQi0St6vjlU-QYaXX67s';
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNyIsImlhdCI6MTYyMTE0OTQ3NywiZXhwIjoxNjIxMTUzMDc3fQ.kDwVRdHUpoWX1IvplNnqDmCWJmyy-An5Z66qVeEkkZ4';
 
       config.headers = {
         Authorization: 'Bearer ' + accToken,

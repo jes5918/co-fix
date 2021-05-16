@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { RiSettings3Fill } from 'react-icons/ri';
+import { IoMdExit } from 'react-icons/io';
 
 // apis
-import { closeRoom } from '../api/co-fix';
+import { closeRoom, modifyRoom } from '../api/co-fix';
 
 // hooks
+import { resetRoomInfo } from '../modules/actions/roomActions';
+import { documentGetAction } from '../modules/actions/documentActions';
 import useRoomInfo from '../hook/useRoomInfo';
 
 // modal components
@@ -13,34 +19,68 @@ import ModifyRoomSettingModal from '../components/modal/ModifyRoomSettingModal';
 import AlertModal from '../components/modal/AlertModal';
 
 export default function RoomSettingButtonContainer() {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const RoomInfo = useRoomInfo();
+  const [title, setTitle] = useState(RoomInfo.roomTitle || '데이터 안들어옴');
+  const [numParticipant, setNumParticipant] = useState(
+    Number(RoomInfo.memberLimit) || 1,
+  );
+
   // 모달창 관련
   const [
     isModifyRoomSettingModalOpen,
     setIsModifyRoomSettingModalOpen,
-  ] = useState(true);
+  ] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+
   const ModifyRoomSettingModalToggleHandler = () => {
     setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
   };
+
+  const ModifyRoomSettingHandler = () => {
+    modifyRoom(
+      RoomInfo.roomId,
+      numParticipant,
+      title,
+      (res) => {
+        console.log(`res`, res);
+        setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
+      },
+      (err) => {
+        console.log(`이미 닫힌 방인지 확인`, err);
+      },
+    );
+  };
+
   const AlertModalToggleHandler = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
   };
 
   const CloseRoomHandler = () => {
-    console.log('첨삭방 닫기');
-    // closeRoom(
-    //   RoomInfo.roomId,
-    //   (res) => {
-    //     console.log(`res`, res);
-    //   },
-    //   (err) => {
-    //     console.log(`err`, err);
-    //   },
-    // );
+    closeRoom(
+      RoomInfo.roomId,
+      (res) => {
+        console.log(`res`, res);
+        dispatch(resetRoomInfo());
+        dispatch(documentGetAction([]));
+        history.push('/');
+      },
+      (err) => {
+        console.log(`이미 닫힌 방인지 확인`, err);
+      },
+    );
   };
   return (
     <>
+      <B.container>
+        <B.button onClick={ModifyRoomSettingModalToggleHandler}>
+          <B.settingIcon />
+        </B.button>
+        <B.button onClick={AlertModalToggleHandler}>
+          <B.exitIcon />
+        </B.button>
+      </B.container>
       <Modal
         width="fit-content"
         height="fit-content"
@@ -49,8 +89,12 @@ export default function RoomSettingButtonContainer() {
       >
         <ModifyRoomSettingModal
           RoomInfo={RoomInfo}
-          PropsComfirmHandler={CloseRoomHandler}
+          PropsComfirmHandler={ModifyRoomSettingHandler}
           PropsRejectHandler={ModifyRoomSettingModalToggleHandler}
+          setTitle={setTitle}
+          setNumParticipant={setNumParticipant}
+          title={title}
+          numParticipant={numParticipant}
         />
       </Modal>
       <Modal
@@ -65,21 +109,19 @@ export default function RoomSettingButtonContainer() {
           PropsRejectHandler={AlertModalToggleHandler}
         />
       </Modal>
-      <B.container>
-        <B.button onClick={ModifyRoomSettingModalToggleHandler}>셋팅</B.button>
-        <B.button onClick={AlertModalToggleHandler}>나가기</B.button>
-      </B.container>
     </>
   );
 }
 
 const B = {
   container: styled.div`
-    width: 150px;
+    /* position: absolute; */
+    /* right: 250px; */
+    z-index: 10;
+    width: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
   `,
   button: styled.div`
     display: flex;
@@ -87,8 +129,8 @@ const B = {
     overflow: hidden;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     font-family: 'SCD_bold';
     font-size: 20px;
     color: #020236;
@@ -114,5 +156,17 @@ const B = {
         opacity: 1;
       }
     }
+  `,
+
+  settingIcon: styled(RiSettings3Fill)`
+    width: 33px;
+    height: 33px;
+    color: #6e5e5e;
+  `,
+  exitIcon: styled(IoMdExit)`
+    width: 33px;
+    height: 33px;
+    font-weight: bold;
+    color: #6e5e5e;
   `,
 };
