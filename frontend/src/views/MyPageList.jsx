@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 // hook
 import useLoginUser from '../hook/useLoginUser';
+import useMyPageList from '../hook/useMyPageList';
+import { setMyPageList } from '../modules/actions/mypagelistActions';
 
 // containers
 import MyPageListBody from '../containers/mypagelist/MyPageListBody';
@@ -12,14 +15,15 @@ import MyPageListHeader from '../containers/mypagelist/MyPageListHeaderer';
 import { getCommentRoomsInstance } from '../api/mypage/mypageList';
 
 export default function MyPageList() {
-  const [roomInfos, setRoomInfos] = useState('');
+  const dispatch = useDispatch();
+  const RoomInfos = useMyPageList();
   const user = useLoginUser();
 
   useEffect(() => {
     getCommentRoomsInstance(
       (res) => {
-        console.log(res.data.data);
-        setRoomInfos(res.data.data);
+        console.log('리덕스 저장하자', res.data.data);
+        dispatch(setMyPageList(res.data.data));
       },
       (err) => {
         console.log(`err`, err);
@@ -32,29 +36,29 @@ export default function MyPageList() {
       <MyPageListWrapper>
         {user.authenticated ? (
           <MyPageListHeader>
-            <b>{user.credentials.member.name}</b> 님의 Co-Fix History
+            <b>{user.credentials.member.name}</b> 님의 <b>Co-Fix History</b>
           </MyPageListHeader>
         ) : (
           <MyPageListHeader>
-            <b>Test User</b> 님의 Co-Fix History
+            <b>Test User</b> 님의 <b>Co-Fix History</b>
           </MyPageListHeader>
         )}
-        <MyPageListBody roomInfos={roomInfos} />
+        <MyPageListBody RoomInfos={RoomInfos} />
       </MyPageListWrapper>
     </Background>
   );
 }
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #f9f5f4;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to left, #fef9d7, #d299c2);
+  /* background-color: #f9f5f4; */
 `;
 const MyPageListWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 100px;
-  background-color: #f9f5f4;
+  padding-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
