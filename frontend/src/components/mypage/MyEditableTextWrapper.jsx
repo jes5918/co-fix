@@ -68,6 +68,9 @@ export default function MyEditableTextWrapper({
 const TextContainer = styled.div`
   position: relative;
   word-break: keep-all;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'SCD_medium';
   margin: 15px 30px 0px 10px;
   &:hover {
     background-color: #ffffdf;

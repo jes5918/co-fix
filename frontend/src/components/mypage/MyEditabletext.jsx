@@ -8,16 +8,11 @@ export default function MyEditabletext({
   content,
   setNewValue,
   editorModeToggleHandler,
-  testRequest,
-  sentenceId,
 }) {
   const textRef = useRef();
-  const [currentValue, setCurrentValue] = useState(content);
 
   const onHandleDebounce = debounce((e) => {
     setNewValue(e);
-    setCurrentValue(e);
-    testRequest(sentenceId, e);
   }, 200);
 
   const changeh1Value = (e) => {
@@ -46,7 +41,7 @@ const StyleH1Input = styled.textarea`
   min-height: 30px;
   resize: none;
   overflow: hidden;
-  margin: -2px -3px 0px 2px;
+  margin: 15px 30px 0px 10px;
   padding: 3px;
   font-size: 14px;
   word-break: keep-all;
