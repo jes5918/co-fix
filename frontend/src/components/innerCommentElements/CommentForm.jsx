@@ -8,7 +8,11 @@ import { createComment } from '../../api/comments.js';
 
 const localStorage = window.localStorage;
 
-function CommentForm({ sentenceId, onHandleClickSentence }) {
+function CommentForm({
+  sentenceId,
+  onHandleClickSentence,
+  onHandleScrollToBottom,
+}) {
   const inputRef = useRef(null);
   const { roomId, documentId } = useSelector((state) => {
     return state.room;
@@ -26,6 +30,10 @@ function CommentForm({ sentenceId, onHandleClickSentence }) {
       },
       (res) => {
         // console.log('POST: Comment :', res.data.data);
+        onHandleScrollToBottom();
+        setTimeout(() => {
+          onHandleScrollToBottom();
+        }, 1);
       },
       (error) => {
         console.log(error);
@@ -33,20 +41,19 @@ function CommentForm({ sentenceId, onHandleClickSentence }) {
     );
   };
 
-  const onHandleSubmit = (e) => {
+  const onHandleSubmit = async (e) => {
     const content = inputRef.current.value.trim();
     if (!e.shiftKey && e.keyCode === 13 && content) {
       const nickname = localStorage.getItem('nickName') || 'anonymous';
       onHandleSubmitComment(sentenceId, nickname, content);
       inputRef.current.value = '';
+      onHandleScrollToBottom();
     }
   };
 
   return (
     <S.CommentForm>
       <S.FormLabelBox>
-        {/* 새로운 아이콘을 주시오. */}
-        <span style={{ color: '#aaaaaa' }}>🗨</span>
         <S.FormLabel>Comment</S.FormLabel>
       </S.FormLabelBox>
       <S.FormInputBox>
@@ -66,29 +73,32 @@ const S = {
   CommentForm: styled.div`
     display: flex;
     flex-direction: column;
-    width: 400px;
-    height: 130px;
-    padding: 0 20px;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 2% 5%;
   `,
   FormLabelBox: styled.div`
     display: flex;
     align-items: center;
-    padding-left: 10px;
-    flex-basis: 20%;
+    padding-left: 2%;
+    /* flex-basis: 20%; */
   `,
   FormLabel: styled.label.attrs({
     for: 'comment',
   })`
-    padding-left: 10px;
+    padding-left: 2%;
     font-family: 'S-CoreDream-6Bold';
     font-size: 16px;
     color: #727272;
   `,
   FormInputBox: styled.div`
-    flex-basis: 80%;
+    /* flex-basis: 80%; */
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 80%;
   `,
   FormInput: styled.textarea.attrs({
     type: 'text',

@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const S = {
-  CommentWrapper: styled.div`
+  CommentWrapper: styled.span`
     width: 100%;
     height: fit-content;
     background-color: #d3f8da;

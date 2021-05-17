@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { closeRoom } from '../api/co-fix';
 
-import CommentForm from '../components/innerCommentElements/CommentForm';
 import CommentWrapper from '../components/innerCommentElements/CommentWrapper';
 
 import useCommentData from '../hook/useComment.js';
@@ -23,11 +22,13 @@ const S = {
 export default function CommentContainer({
   sentenceId,
   onHandleClickSentence,
+  onHandleScrollToBottom,
 }) {
   const comments = useCommentData();
   return (
     <S.CommentContainer>
-      {comments &&
+      {sentenceId &&
+        comments &&
         comments[0] !== null &&
         comments.map((item, idx) => {
           return (
@@ -38,10 +39,6 @@ export default function CommentContainer({
             />
           );
         })}
-      <CommentForm
-        sentenceId={sentenceId}
-        onHandleClickSentence={onHandleClickSentence}
-      />
     </S.CommentContainer>
   );
 }
