@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { RiSettings3Fill } from 'react-icons/ri';
+import { FiSettings } from 'react-icons/fi';
 import { IoMdExit } from 'react-icons/io';
+import { BsArrowsFullscreen, BsInfo } from 'react-icons/bs';
 
 // apis
 import { closeRoom, modifyRoom } from '../api/co-fix';
@@ -39,6 +40,7 @@ export default function RoomSettingButtonContainer({
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isParticipantModalOpen, setIsParticipantModalOpen] = useState(false);
   const [isPartNumModalOpen, setIsPartNumModalOpen] = useState(false);
+  const [isRoomInfoModalOpen, setIsRoomInfoModalOpen] = useState(false);
 
   const ModifyRoomSettingModalToggleHandler = () => {
     setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
@@ -81,6 +83,10 @@ export default function RoomSettingButtonContainer({
     setIsPartNumModalOpen(!isPartNumModalOpen);
   };
 
+  const RoomInfoModalToggleHandler = () => {
+    setIsRoomInfoModalOpen(!isRoomInfoModalOpen);
+  };
+
   const CloseRoomHandler = () => {
     closeRoom(
       RoomInfo.roomId,
@@ -106,20 +112,41 @@ export default function RoomSettingButtonContainer({
     }, {});
     history.push('/');
   };
+
+  // full Screen
+  const FullScreenToggleHandler = () => {
+    const element = document.getElementById('root');
+    if (!document.fullscreenElement) {
+      element.requestFullscreen().catch((err) => {
+        alert(
+          `Error attempting to enable full-screen mode: ${err.message} (${err.name})`,
+        );
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   return (
+    //
     <>
       <B.container>
         {user.authenticated &&
         RoomInfo.memberId === user.credentials.member.id ? (
           <>
             <B.button>?</B.button>
-            <B.button>!</B.button>
+            <B.button onClick={RoomInfoModalToggleHandler}>
+              <BsInfo size="35px" />
+            </B.button>
+            <B.button onClick={FullScreenToggleHandler}>
+              <BsArrowsFullscreen />
+            </B.button>
             <B.button onClick={ModifyRoomSettingModalToggleHandler}>
               <B.settingIcon />
             </B.button>
             <BasicButton
-              width={80}
-              height={40}
+              width={120}
+              height={45}
               fontSize={18}
               color={'white'}
               backgroundColor={'#CF0101'}
@@ -130,9 +157,14 @@ export default function RoomSettingButtonContainer({
         ) : (
           <>
             <B.button>?</B.button>
-            <B.button>!</B.button>
+            <B.button onClick={RoomInfoModalToggleHandler}>
+              <BsInfo size="35px" />
+            </B.button>
+            <B.button onClick={FullScreenToggleHandler}>
+              <BsArrowsFullscreen />
+            </B.button>
             <BasicButton
-              width={80}
+              width={120}
               height={40}
               fontSize={18}
               color={'#ffffff'}
@@ -193,6 +225,14 @@ export default function RoomSettingButtonContainer({
           PropsComfirmHandler={ParticipantNumModalToggleHandler}
         />
       </Modal>
+      <Modal
+        width="500px"
+        height="320px"
+        isModalOpen={isRoomInfoModalOpen}
+        ModalToggleHandler={RoomInfoModalToggleHandler}
+      >
+        진우바보
+      </Modal>
     </>
   );
 }
@@ -242,9 +282,9 @@ const B = {
       }
     }
   `,
-  settingIcon: styled(RiSettings3Fill)`
-    width: 33px;
-    height: 33px;
+  settingIcon: styled(FiSettings)`
+    width: 27px;
+    height: 27px;
     color: #6e5e5e;
   `,
   exitIcon: styled(IoMdExit)`
