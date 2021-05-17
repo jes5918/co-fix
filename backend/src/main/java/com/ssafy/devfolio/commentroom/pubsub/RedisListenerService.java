@@ -24,9 +24,21 @@ public class RedisListenerService {
     }
 
     public void createSentenceTopic(String sentenceId) {
-        ChannelTopic channel = new ChannelTopic(sentenceId);
-        redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
-        channels.put(sentenceId, channel);
+        // 해당 채널이 존재하는 지 확인
+        // 해당 채널이 없다면 채널 생성
+        ChannelTopic channel = channels.get(sentenceId);
+
+        if ( channel == null ){
+            channel = new ChannelTopic(sentenceId);
+            redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
+            channels.put(sentenceId, channel);
+        }
+
+        else {
+            redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
+            channels.put(sentenceId, channel);
+        }
+
     }
 
 }
