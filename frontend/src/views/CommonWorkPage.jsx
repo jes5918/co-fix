@@ -85,7 +85,7 @@ export default function CommonWorkPage() {
     setStompClientTest(stompClient);
     stompClient.connect(
       {
-        nickname: localStorage.getItem('nickname') || 'defaultNickName',
+        nickname: localStorage.getItem('nickName') || 'defaultNickName',
         commentRoomId: roomId,
       },
       (frame) => {
