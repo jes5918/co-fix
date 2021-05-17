@@ -36,7 +36,6 @@ const localStorage = window.localStorage;
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
   const { roomId, documentId, memberId, roomTitle } = useRoomInfo();
-  const { credentials } = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
   const sentences = useSelector((state) => {
     return state.document.data;
@@ -110,8 +109,8 @@ export default function CommonWorkPage() {
     onHandleDebounce(modifiedSentence);
   };
 
-  const disconnectSocket = () => {
-    stompClientTest.disconnect(() => {
+  const disconnectSocket = (stompClient) => {
+    stompClient.disconnect(() => {
       console.log('room socket disconnected');
     });
   };
@@ -132,8 +131,7 @@ export default function CommonWorkPage() {
     connectSocket();
 
     return () => {
-      // console.log('CommonWorkPage is unmounted.');
-      // disconnectSocket();
+      // stompClientTest.disconnect();
     };
   }, []);
 
@@ -144,7 +142,10 @@ export default function CommonWorkPage() {
           <S.HeaderTitle>제목 : {roomTitle}</S.HeaderTitle>
         </S.HeaderLeft>
         <S.HeaderRight>
-          <RoomSettingButtonContainer />
+          <RoomSettingButtonContainer
+            stompClientTest={stompClientTest}
+            disconnectSocket={disconnectSocket}
+          />
         </S.HeaderRight>
       </S.HeaderSpace>
       <S.UsableSpace>
