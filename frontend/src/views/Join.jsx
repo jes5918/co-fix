@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaAngleLeft } from 'react-icons/fa';
+
+// api and redux
 import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
+import { commentResetAction } from '../modules/actions/commentActions';
 import {
   createRoom,
   getRoomInfo,
@@ -34,6 +38,14 @@ export default function Join() {
   // 모달창 관련
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+
+  const gotoBack = () => {
+    if (current === 0) {
+      history.goBack();
+    } else {
+      setCurrent(current - 1);
+    }
+  };
 
   const changePage = () => {
     setCurrent(current + 1);
@@ -86,6 +98,7 @@ export default function Join() {
         nickName,
         (res) => {
           dispatch(saveRoomInfo(res.data.data));
+          dispatch(commentResetAction());
           localStorage.setItem('nickName', nickName);
           history.push(`/co-fix/${data.roomId}`);
         },
@@ -93,8 +106,6 @@ export default function Join() {
           console.error(err.response.data);
           if (err.response.data.message === '현재 방이 가득 참') {
             AlertModalToggleHandler('참여 가능 인원이 다 찼습니다.');
-          } else {
-            AlertModalToggleHandler('서버 에러 발생');
           }
         },
       );
@@ -129,6 +140,7 @@ export default function Join() {
         />
       </Modal>
       <Wrapper>
+        <Prev onClick={gotoBack} />
         {current === 0 ? (
           <Privacy
             onHandleNext={() => {
@@ -171,4 +183,13 @@ const Wrapper = styled.div`
   background: linear-gradient(to top, #fef9d7, #d299c2);
   overflow: hidden;
   justify-content: space-around;
+`;
+
+const Prev = styled(FaAngleLeft)`
+  font-size: 55px;
+  color: #5f5f5f;
+  position: absolute;
+  top: 20%;
+  left: 3%;
+  cursor: pointer;
 `;
