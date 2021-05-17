@@ -56,7 +56,7 @@ const PersonListButton = styled.div`
   height: 60px;
   margin-right: 4vw;
   /* padding: 20px; */
-  font-family: 'SCD_bold';
+  font-family: 'S-CoreDream-6Bold';
   font-size: 20px;
   color: #020236;
   font-weight: bold;

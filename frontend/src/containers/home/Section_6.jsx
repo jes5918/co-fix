@@ -5,11 +5,11 @@ const Section = {
   wrapper: styled.div`
     width: 100%;
     height: 100vh;
-    background-color: #fce6f6;
+    background-color: transparent;
     z-index: 0;
   `,
 };
-export default function Section_5() {
+export default function Section_6() {
   return (
     <Section.wrapper>
       <div></div>

@@ -78,7 +78,7 @@ const S = {
     for: 'comment',
   })`
     padding-left: 10px;
-    font-family: 'SCD_bold';
+    font-family: 'S-CoreDream-6Bold';
     font-size: 16px;
     color: #727272;
   `,
@@ -99,7 +99,7 @@ const S = {
     outline: none;
     width: 100%;
     height: 80%;
-    font-family: 'SCD_medium';
+    font-family: 'S-CoreDream-5Medium';
     overflow: hidden;
     font-size: 14px;
   `,

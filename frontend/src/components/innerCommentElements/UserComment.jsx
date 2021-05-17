@@ -10,7 +10,7 @@ const S = {
     background-color: #d3f8da;
     padding: 10px 10px;
     border-radius: 10px;
-    font-family: 'SCD_medium';
+    font-family: 'S-CoreDream-5Medium';
     font-size: 16px;
     color: #414141;
   `,

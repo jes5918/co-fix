@@ -27,6 +27,7 @@ import Section_2 from '../containers/home/Section_2';
 import Section_3 from '../containers/home/Section_3';
 import Section_4 from '../containers/home/Section_4';
 import Section_5 from '../containers/home/Section_5';
+import Section_6 from '../containers/home/Section_6';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,6 +61,7 @@ export default function Home() {
         <Section_3 className="test" />
         <Section_4 className="test" />
         <Section_5 className="test" />
+        <Section_6 className="test" />
         <Footer />
       </HomeWrapper>
       <Modal

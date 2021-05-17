@@ -111,7 +111,7 @@ const TextContainer = styled.div`
   word-break: keep-all;
   font-size: 18px;
   font-weight: bold;
-  font-family: 'SCD_medium';
+  font-family: 'S-CoreDream-5Medium';
   margin: 0px 0px 12px 0px;
   &:hover {
     background-color: #feffbc;
