@@ -262,7 +262,7 @@ const MyPageContainer = styled.div`
   width: 85%;
   height: 80vh;
   margin: 0px auto;
-  font-family: 'Roboto';
+  font-family: 'S-CoreDream-5Medium';
   font-size: 18px;
   /* box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3); */
   background-color: #fff;
