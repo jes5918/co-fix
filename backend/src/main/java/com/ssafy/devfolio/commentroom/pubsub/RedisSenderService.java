@@ -72,7 +72,7 @@ public class RedisSenderService {
                 .commentId(comment.getCommentId())
                 .nickname(comment.getNickname())
                 .content(comment.getContent())
-                .isAgree(false)
+                .isAgree("false")
                 .agree(comment.getAgree())
                 .lastModifiedDate(comment.getLastModifiedDate())
                 .build();
@@ -90,7 +90,7 @@ public class RedisSenderService {
                 .commentId(comment.getCommentId())
                 .nickname(comment.getNickname())
                 .content(comment.getContent())
-                .isAgree(true)
+                .isAgree("true")
                 .agree(comment.getAgree())
                 .lastModifiedDate(comment.getLastModifiedDate())
                 .build();
