@@ -18,7 +18,7 @@ public class SentenceSub {
     private String commentId;
     private String nickname;
     private String content;
-    private boolean isAgree;
+    private String isAgree;
     private Agree agree;
     private LocalDateTime lastModifiedDate;
 
