@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+
+// icon
 import { CgMathPlus } from 'react-icons/cg';
 
 // components
 import Card from '../../components/common/Card';
 import Modal from '../Modal';
-import ModalContent from '../../components/template/ModalContent';
 import AlertModal from '../../components/modal/AlertModal';
 
 // redux
@@ -18,18 +19,23 @@ export default function TemplateBody({ RoomInfos }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const ModalToggleHandler = (RoomInfo) => {
+  // 마이페이지 가는 핸들러
+  const GoToMyPageHandler = (RoomInfo) => {
     dispatch(saveRoomInfo(RoomInfo));
     history.push(`/mypage/${RoomInfo.roomId}/${RoomInfo.documentId}`);
   };
+
+  // 모달 토글 핸들러
   const AlertModalToggleHandler = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
   };
 
+  // 새로운 프로젝트 생성
   const onPlusCardClickHandler = () => {
     history.push('/create');
   };
 
+  // 방 닫는 함수
   const onGotoLiveHandler = (RoomInfo) => {
     dispatch(saveRoomInfo(RoomInfo));
     history.push(`/co-fix/${RoomInfo.roomId}`);
@@ -42,7 +48,7 @@ export default function TemplateBody({ RoomInfos }) {
         ModalToggleHandler={AlertModalToggleHandler}
       >
         <AlertModal
-          PropsText="새 첨삭 프로젝트를 만드시겠습니까?"
+          PropsText="새 Co-Fix를 만드시겠습니까?"
           PropsComfirmHandler={() => onPlusCardClickHandler()}
           PropsRejectHandler={() => AlertModalToggleHandler()}
         />
@@ -57,7 +63,7 @@ export default function TemplateBody({ RoomInfos }) {
                 propsWidth={280}
                 propsHeight={330}
                 propsFontSize={18}
-                onGotoMyPageHandler={() => ModalToggleHandler(RoomInfo)}
+                onGotoMyPageHandler={() => GoToMyPageHandler(RoomInfo)}
                 onGotoLiveHandler={() => onGotoLiveHandler(RoomInfo)}
               />
             );

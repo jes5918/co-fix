@@ -58,7 +58,6 @@ export default function Create() {
           history.push(`/co-fix/${res.data.data.roomId}`);
         },
         (err) => {
-          AlertModalToggleHandler('Server Error');
           console.error('err', err);
         },
       );
@@ -128,8 +127,8 @@ export default function Create() {
             value={text}
             onValueChange={textValueSave}
             onHandleSubmit={() => {
-              if (text.length > 2000) {
-                AlertModalToggleHandler('2000자 이하로 입력해주세요.');
+              if (text.length > 3000) {
+                AlertModalToggleHandler('3000자 이하로 입력해주세요.');
               } else if (text) {
                 submitForm();
               } else {

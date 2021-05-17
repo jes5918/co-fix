@@ -104,7 +104,7 @@ const U = {
     color: #000000;
     font-size: 11px;
     font-weight: bold;
-    font-family: 'NotoSans';
+    font-family: 'S-CoreDream-5Medium';
     border-radius: 10px;
   `,
   MediaWrapper: styled.div`

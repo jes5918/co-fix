@@ -8,37 +8,6 @@ import { updateMyPageList } from '../../modules/actions/mypagelistActions';
 import Modal from '../../containers/Modal';
 import AlertModal from '../../components/modal/AlertModal';
 
-// 이런 형태로 내려옴
-// const roomInfotest = {
-//   roomId: '101181c0-0517-40a8-8931-8df5da61623b',
-//   memberId: 5,
-//   roomTitle: '한국가스공사',
-//   memberLimit: 3,
-//   documentId: 'a39beabe-19cf-49bf-baad-6d383a164716',
-//   pinNumber: '21423333',
-//   status: 'OPEN',
-//   members: [
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//   ],
-//   createdDate: '2021-05-14T15:06:59.246958',
-//   lastModifiedDate: '2021-05-14T15:06:59.246958',
-// };
-
 function Card({
   RoomInfo,
   propsWidth,
@@ -154,27 +123,27 @@ const Container = styled.div`
 
 const CloseButton = styled.div`
   position: absolute;
-  top: 0;
-  left: 0px;
+  top: 20px;
+  left: 40px;
   z-index: 2;
-  transform: rotate(30deg);
+  width: 80px;
+  /* height: 80px; */
   color: #555;
-  font-size: 2rem;
-  font-weight: 700;
-  border: 0.25rem solid #555;
-  display: inline-block;
-  padding: 0.25rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-transform: uppercase;
-  border-radius: 1rem;
   font-family: 'Courier';
   mix-blend-mode: multiply;
-  color: #0a9928;
-  border: 0.5rem solid #0a9928;
-  border-radius: 0;
-  transform: rotate(-20deg);
-  -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+  color: #ff0000;
+  border: 0.3rem solid #ff0000;
+  border-radius: 10%;
+  /* transform: rotate(-30deg); */
+  /* -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
   -webkit-mask-size: 944px 604px;
-  -webkit-mask-position: 13rem 6rem;
+  -webkit-mask-position: 13rem 6rem; */
 `;
 
 const cardStyle = {
@@ -314,3 +283,34 @@ const cardStyle = {
     }
   `,
 };
+
+// 이런 형태로 내려옴
+// const roomInfotest = {
+//   roomId: '101181c0-0517-40a8-8931-8df5da61623b',
+//   memberId: 5,
+//   roomTitle: '한국가스공사',
+//   memberLimit: 3,
+//   documentId: 'a39beabe-19cf-49bf-baad-6d383a164716',
+//   pinNumber: '21423333',
+//   status: 'OPEN',
+//   members: [
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//     {
+//       nickname: 'J Euisss',
+//       online: true,
+//     },
+//   ],
+//   createdDate: '2021-05-14T15:06:59.246958',
+//   lastModifiedDate: '2021-05-14T15:06:59.246958',
+// };
