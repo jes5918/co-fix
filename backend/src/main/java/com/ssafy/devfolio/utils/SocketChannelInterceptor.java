@@ -69,14 +69,18 @@ public class SocketChannelInterceptor implements ChannelInterceptor {
                 case DISCONNECT:
                     // 웹소켓 연결 끊긴 경우 해당 유저 sessionId 제거 및 첨삭방 퇴장 처리
                     SocketMemberInfo currentSession = sessionInfoMap.remove(sessionId);
-                    commentRoomService.exitCommentRoom(currentSession);
+                    if (currentSession != null) {
+                        commentRoomService.exitCommentRoom(currentSession);
 
-                    logData.put("status", "disconnect");
-                    logData.put("sessionId", sessionId);
-                    logData.put("nickname", currentSession.getNickname());
-                    logData.put("commentRoomId", currentSession.getCommentRoomId());
+                        logData.put("status", "disconnect");
+                        logData.put("sessionId", sessionId);
+                        logData.put("nickname", currentSession.getNickname());
+                        logData.put("commentRoomId", currentSession.getCommentRoomId());
 
-                    log.info("websocket message : {}", logData);
+                        log.info("websocket message : {}", logData);
+                    } else {
+                        log.info("message : {} 이미 끊어진 session", sessionId);
+                    }
             }
         } catch (NullPointerException exception) {
             throw new BaseException(ErrorCode.SOCKET_HEADER_EXCEPTION);
