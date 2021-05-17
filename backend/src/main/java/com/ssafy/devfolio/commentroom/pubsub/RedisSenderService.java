@@ -72,6 +72,25 @@ public class RedisSenderService {
                 .commentId(comment.getCommentId())
                 .nickname(comment.getNickname())
                 .content(comment.getContent())
+                .isAgree(false)
+                .agree(comment.getAgree())
+                .lastModifiedDate(comment.getLastModifiedDate())
+                .build();
+
+        ChannelTopic channel = channels.get(sentenceId);
+
+        redisTemplate.convertAndSend(channel.getTopic(), objectMapper.writeValueAsString(sentenceSub));
+
+    }
+
+    public void sendCommentAgreeUpdateService(String sentenceId, Comment comment) throws JsonProcessingException {
+
+        SentenceSub sentenceSub = SentenceSub.builder()
+                .sentenceId(sentenceId)
+                .commentId(comment.getCommentId())
+                .nickname(comment.getNickname())
+                .content(comment.getContent())
+                .isAgree(true)
                 .agree(comment.getAgree())
                 .lastModifiedDate(comment.getLastModifiedDate())
                 .build();
