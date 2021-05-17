@@ -34,6 +34,7 @@ export default function RoomSettingButtonContainer() {
   const [isModifyRoomSettingModalOpen, setIsModifyRoomSettingModalOpen] =
     useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isParticipantModalOpen, setIsParticipantModalOpen] = useState(false);
   const [isPartNumModalOpen, setIsPartNumModalOpen] = useState(false);
 
   const ModifyRoomSettingModalToggleHandler = () => {
@@ -69,6 +70,10 @@ export default function RoomSettingButtonContainer() {
     setIsAlertModalOpen(!isAlertModalOpen);
   };
 
+  const ParticipantOutToggleHandler = () => {
+    setIsParticipantModalOpen(!isParticipantModalOpen);
+  };
+
   const ParticipantNumModalToggleHandler = () => {
     setIsPartNumModalOpen(!isPartNumModalOpen);
   };
@@ -87,12 +92,19 @@ export default function RoomSettingButtonContainer() {
       },
     );
   };
+
+  const OutRoomHandler = () => {
+    // 진우야 여기 소켓 아웃하자
+    history.push('/');
+  };
   return (
     <>
       <B.container>
         {user.authenticated &&
         RoomInfo.memberId === user.credentials.memberId ? (
           <>
+            <B.button>?</B.button>
+            <B.button>!</B.button>
             <B.button onClick={ModifyRoomSettingModalToggleHandler}>
               <B.settingIcon />
             </B.button>
@@ -104,24 +116,22 @@ export default function RoomSettingButtonContainer() {
               backgroundColor={'#CF0101'}
               onClickHandler={AlertModalToggleHandler}
               text="Co-Fix 종료"
-            >
-              <B.exitIcon />
-            </BasicButton>
+            ></BasicButton>
           </>
         ) : (
           <>
-            {/* <B.button>
-              <B.settingIcon />
-            </B.button>
+            <B.button>?</B.button>
+            <B.button>!</B.button>
             <BasicButton
               width={150}
               height={50}
               fontSize={18}
-              color={'white'}
+              color={'#ffffff'}
               backgroundColor={'#CF0101'}
-              onClickHandler={AlertModalToggleHandler}
-              text="Co-Fix 종료"
-            ></BasicButton> */}
+              onClickHandler={ParticipantOutToggleHandler}
+            >
+              <B.exitIcon color={'#ffffff'} />
+            </BasicButton>
           </>
         )}
       </B.container>
@@ -154,6 +164,18 @@ export default function RoomSettingButtonContainer() {
       <Modal
         width="500px"
         height="320px"
+        isModalOpen={isParticipantModalOpen}
+        ModalToggleHandler={ParticipantOutToggleHandler}
+      >
+        <AlertModal
+          PropsText="정말 방을 나가시겠습니까?"
+          PropsComfirmHandler={OutRoomHandler}
+          PropsRejectHandler={ParticipantOutToggleHandler}
+        />
+      </Modal>
+      <Modal
+        width="500px"
+        height="320px"
         isModalOpen={isPartNumModalOpen}
         ModalToggleHandler={ParticipantNumModalToggleHandler}
       >
@@ -170,8 +192,7 @@ const B = {
   container: styled.div`
     /* position: absolute; */
     /* right: 250px; */
-    z-index: 10;
-    width: 230px;
+    /* width: 350px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -182,8 +203,9 @@ const B = {
     overflow: hidden;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    margin-right: 15px;
+    width: 40px;
+    height: 40px;
     font-family: 'S-CoreDream-6Bold';
     font-size: 20px;
     color: #020236;
