@@ -56,8 +56,13 @@ export default function Join() {
     getRoomInfo(
       pinCode,
       (res) => {
-        console.log(res.data);
-        setCurrent(current + 1);
+        console.log('0000000', res.data.data.status);
+        if (res.data.data.status === 'CLOSED') {
+          AlertModalToggleHandler('종료된 첨삭방입니다.');
+          setPinCode('');
+        } else {
+          setCurrent(current + 1);
+        }
       },
       (err) => {
         if (err.response.data.message === '존재하지 않는 첨삭방') {

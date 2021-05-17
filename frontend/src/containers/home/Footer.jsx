@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router';
 
 const StyledFooter = {
   container: styled.div`
@@ -8,7 +9,7 @@ const StyledFooter = {
     background-color: #fff7f7;
     color: #090e36;
     font-family: 'S-CoreDream-6Bold';
-    z-index: -5;
+    z-index: 0;
     @media only screen and (max-width: 480px) {
       padding: 2.25rem 0;
     }
@@ -60,11 +61,13 @@ const FooterNav = {
   menu: styled.div`
     font-size: 1.5rem;
     font-weight: bold;
+    cursor: pointer;
     font-family: 'S-CoreDream-6Bold';
     width: auto;
     margin-top: 10px;
     margin-bottom: 10px;
     color: black;
+    z-index: 1000;
     @media only screen and (max-width: 768px) {
       font-size: 1.25rem;
     }
@@ -73,7 +76,9 @@ const FooterNav = {
     }
   `,
 };
+
 export default function Footer() {
+  const history = useHistory();
   return (
     <StyledFooter.container>
       <StyledFooter.rowBox>
@@ -83,8 +88,20 @@ export default function Footer() {
           <FooterLeft.info>Privacy Policy</FooterLeft.info>
         </FooterLeft.container>
         <FooterNav.container>
-          <FooterNav.menu>Home</FooterNav.menu>
-          <FooterNav.menu>History</FooterNav.menu>
+          <FooterNav.menu
+            onClick={() => {
+              history.push('/');
+            }}
+          >
+            Home
+          </FooterNav.menu>
+          <FooterNav.menu
+            onClick={() => {
+              history.push('/mypagelist');
+            }}
+          >
+            History
+          </FooterNav.menu>
           <FooterNav.menu>Start Co-Fix Project</FooterNav.menu>
           <FooterNav.menu>Contact Us</FooterNav.menu>
         </FooterNav.container>
