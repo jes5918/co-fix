@@ -130,11 +130,13 @@ export default function EditableTextWrapper({
 
 const TextContainer = styled.div`
   position: relative;
+  cursor: pointer;
   word-break: keep-all;
   font-size: 18px;
   font-weight: bold;
   font-family: 'S-CoreDream-5Medium';
   margin: 0px 0px 12px 0px;
+  border-radius: 10px;
   &:hover {
     background-color: #feffbc;
   }

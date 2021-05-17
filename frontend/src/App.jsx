@@ -39,14 +39,14 @@ function App() {
           user={user && user.credentials.member}
         />
       )}
-      <AnimatedCursor
+      {/* <AnimatedCursor
         innerSize={20}
         outerSize={20}
         color="220, 110, 90"
         outerAlpha={0.1}
         innerScale={0.8}
         outerScale={4}
-      />
+      /> */}
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/mypagelist" component={MyPageList} />
