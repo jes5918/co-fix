@@ -9,6 +9,7 @@ const LeftPanel = styled.div`
   word-break: keep-all;
   white-space: pre-wrap;
   line-height: 27px;
+  padding-right: 30px;
   font-size: 18px;
   font-weight: bold;
   font-family: 'S-CoreDream-5Medium';

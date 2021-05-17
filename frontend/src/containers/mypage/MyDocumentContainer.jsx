@@ -4,7 +4,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import MyEditableTextWrapper from '../../components/mypage/MyEditableTextWrapper';
 
-export default function MyDocumentContainer({ sentences, roomId, documentId }) {
+export default function MyDocumentContainer({
+  sentences,
+  roomId,
+  documentId,
+  onHandleClickSentence,
+}) {
   return (
     <>
       {sentences &&
@@ -15,6 +20,7 @@ export default function MyDocumentContainer({ sentences, roomId, documentId }) {
               sentence={sentence}
               roomId={roomId}
               documentId={documentId}
+              onHandleClickSentence={onHandleClickSentence}
             />
           );
         })}

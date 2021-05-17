@@ -32,6 +32,7 @@ import OpenViduMain from '../openvidu/OpenViduMain';
 import useRoomInfo from '../hook/useRoomInfo';
 import useLoginUser from '../hook/useLoginUser';
 import CommentForm from '../components/innerCommentElements/CommentForm';
+import CalcContentLength from '../containers/mypage/CalcContentLength';
 
 const localStorage = window.localStorage;
 
@@ -40,7 +41,7 @@ export default function CommonWorkPage() {
   const { roomId, documentId, memberId, roomTitle, pinNumber } = useRoomInfo();
   const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
-  const [isToggle, setIsToggle] = useState(true);
+  const [isToggle, setIsToggle] = useState(false);
   const scrollRef = useRef(null);
   const sentences = useSelector((state) => {
     return state.document.data;
@@ -161,7 +162,6 @@ export default function CommonWorkPage() {
     pinNum.select();
     document.execCommand('copy');
   };
-
   return (
     <S.CommonWorkPage oncopy="return false" oncut="return false">
       <S.HeaderSpace isToggle={isToggle}>
@@ -174,13 +174,13 @@ export default function CommonWorkPage() {
             <S.HeaderInput id="pinNum" value={pinNumber} readOnly />
             <S.PasteIcon onClick={onPinPasteHandler} />
           </S.HeaderCenter>
-        ) : null}
-        <S.HeaderRight>
-          <RoomSettingButtonContainer
-            stompClientTest={stompClientTest}
-            disconnectSocket={disconnectSocket}
-          />
-        </S.HeaderRight>
+        ) : (
+          <div></div>
+        )}
+        <S.HeaderRight
+          stompClientTest={stompClientTest}
+          disconnectSocket={disconnectSocket}
+        />
       </S.HeaderSpace>
       <S.UsableSpace isToggle={isToggle}>
         <S.LeftSide>
@@ -192,6 +192,11 @@ export default function CommonWorkPage() {
               stompClientTest={stompClientTest}
             />
           </Scrollbars>
+          <CalcContentLength
+            datas={sentences}
+            splitPosX={800}
+            windowWidthSize={1920}
+          />
         </S.LeftSide>
         <S.RightSide>
           <Scrollbars
@@ -217,7 +222,12 @@ export default function CommonWorkPage() {
         </S.RightSide>
       </S.UsableSpace>
       {/* <Participant /> */}
-      <OpenViduMain isToggle={isToggle} setIsToggle={onHandleClickLayout} />
+      <OpenViduMain
+        isToggle={isToggle}
+        setIsToggle={onHandleClickLayout}
+        roomTitle={roomTitle}
+        pinNumber={pinNumber}
+      />
     </S.CommonWorkPage>
   );
 }
@@ -232,19 +242,20 @@ const S = {
     justify-content: center;
     align-items: center;
     background: linear-gradient(to bottom, #ffffeb, #ffcbee);
-    padding: 0 5%;
+    padding: 0;
     padding-bottom: 30px;
   `,
   HeaderSpace: styled.div`
     width: 100%;
     height: 10%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 0 10%;
+    padding: 0;
     transition: all 0.7s ease-in-out;
     transform: ${({ isToggle }) =>
       isToggle ? 'translateX(-11%)' : 'translateX(0px)'};
+    z-index: 1;
   `,
   HeaderTitle: styled.span`
     display: flex;
@@ -257,7 +268,7 @@ const S = {
     font-family: 'S-CoreDream-6Bold';
     font-size: 1.2rem;
   `,
-  HeaderRight: styled.div`
+  HeaderRight: styled(RoomSettingButtonContainer)`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,7 +301,7 @@ const S = {
   `,
   HeaderLeft: styled.div``,
   UsableSpace: styled.div`
-    width: 100%;
+    width: 90%;
     height: 90%;
     display: flex;
     justify-content: center;
@@ -300,6 +311,10 @@ const S = {
       isToggle ? 'translateX(-11%)' : 'translateX(0)'};
   `,
   LeftSide: styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-basis: 55%;
     max-width: 60%;
     box-shadow: 0 0 30px #dddddd;

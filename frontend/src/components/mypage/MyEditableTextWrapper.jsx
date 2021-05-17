@@ -13,6 +13,7 @@ export default function MyEditableTextWrapper({
   sentence,
   roomId,
   documentId,
+  onHandleClickSentence,
 }) {
   const { modifiedContent, sentenceId } = sentence;
   const dispatch = useDispatch();
@@ -23,7 +24,8 @@ export default function MyEditableTextWrapper({
   };
 
   const selectDocumentHandler = () => {
-    dispatch(documentSelectAction(sentence.id));
+    onHandleClickSentence(sentence.sentenceId);
+    dispatch(documentSelectAction(sentence.sentenceId));
   };
 
   const onHandleDebounce = debounce((modifiedSentence) => {
@@ -59,7 +61,7 @@ export default function MyEditableTextWrapper({
       {!isEditMode ? (
         <TextContainer
           onDoubleClick={editorModeToggleHandler}
-          onClick={() => selectDocumentHandler}
+          onClick={selectDocumentHandler}
         >
           {modifiedContent}
         </TextContainer>
@@ -82,6 +84,9 @@ const TextContainer = styled.div`
   font-family: 'S-CoreDream-5Medium';
   margin: 15px 30px 0px 10px;
   &:hover {
+    background-color: #ffffdf;
+  }
+  &:focus {
     background-color: #ffffdf;
   }
 `;

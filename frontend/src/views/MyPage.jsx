@@ -10,6 +10,7 @@ import 'react-tabs/style/react-tabs.css';
 // apis
 import { getDocuments } from '../api/documents';
 import { getAllComments } from '../api/comments';
+import { commentSetAction } from '../modules/actions/commentActions';
 
 // redux
 import { documentGetAction } from '../modules/actions/documentActions';
@@ -40,10 +41,13 @@ const CustomTab = ({ children }) => (
       boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
       fontWeight: 'bold',
       fontSize: '20px',
-      background: 'linear-gradient(to bottom, #fef9d7, #d299c2)',
+      background: '#ffffff',
     }}
-    // onMouseEnter={(e) => (e.target.style.backgroundColor = '#d3d3d3')}
-    // onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+    onMouseEnter={(e) =>
+      (e.target.style.background =
+        'linear-gradient(to bottom, #fef9d7, #d299c2)')
+    }
+    onMouseLeave={(e) => (e.target.style.background = '#ffffff')}
   >
     {children}
   </Tab>
@@ -83,6 +87,7 @@ export default function MyPage({ match }) {
       documentId,
       sentenceId,
       (res) => {
+        dispatch(commentSetAction(res.data.data));
         setCommentInfo(res.data.data);
       },
       (err) => {
@@ -90,9 +95,6 @@ export default function MyPage({ match }) {
       },
     );
   };
-
-  const onHandleSubmitComment = () => {};
-  const onHandleClickAgree = () => {};
 
   useEffect(() => {
     getDocuments(
@@ -162,6 +164,7 @@ export default function MyPage({ match }) {
                     sentences={sentences}
                     roomId={roomId}
                     documentId={documentId}
+                    onHandleClickSentence={onHandleClickSentence}
                   />
                 </Scrollbars>
                 {sentences && (
@@ -173,12 +176,7 @@ export default function MyPage({ match }) {
                 )}
               </>
               <Scrollbars style={{ width: '100%', height: '100%' }}>
-                {/* <CommentContainer
-                  comments={commentInfo}
-                  sentenceId={onFocusedSentence}
-                  onHandleClickAgree={onHandleClickAgree}
-                  onHandleSubmitComment={onHandleSubmitComment}
-                /> */}
+                <CommentContainer sentenceId={onFocusedSentence} />
               </Scrollbars>
             </ScreenSlideDivider>
           </TabPanel>
@@ -198,11 +196,11 @@ export default function MyPage({ match }) {
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <MypageLeft content={modifiedContent} />
                 </Scrollbars>
-                {/* <CalcContentLength
+                <CalcContentLength
                   sentences={modifiedContent}
                   splitPosX={splitPosX}
                   windowWidthSize={windowWidthSize}
-                /> */}
+                />
               </>
             </ScreenSlideDivider>
           </TabPanel>
@@ -218,7 +216,7 @@ const BackGround = styled.div`
   width: 100vw;
   height: 100vh;
   padding-top: 86px;
-  background-color: #ffffff;
+  background: linear-gradient(to top, #fef9d7, #d299c2);
 `;
 
 // 왼쪽 위에 탭 스타일
@@ -235,8 +233,13 @@ const TabListStyle = {
 
 // 탭 태그 네임
 const TagName = styled.div`
+  padding: 10px 30px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
   font-weight: bold;
   font-size: 18px;
+  font-family: 'S-CoreDream-6Bold';
 `;
 
 const StyledTabs = styled(Tabs)`
@@ -265,7 +268,6 @@ const MyPageContainer = styled.div`
   font-family: 'S-CoreDream-5Medium';
   font-size: 18px;
   /* box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3); */
-  background-color: #fff;
   border-radius: 20px;
 `;
 
