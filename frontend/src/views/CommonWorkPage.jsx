@@ -184,6 +184,8 @@ const S = {
     justify-content: center;
     align-items: center;
     background: linear-gradient(to bottom, #ffffeb, #ffcbee);
+    padding: 0 5%;
+    padding-bottom: 30px;
   `,
   HeaderSpace: styled.div`
     width: 100%;
@@ -191,7 +193,7 @@ const S = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    /* padding: 0 10%; */
   `,
   HeaderTitle: styled.span`
     font-family: 'S-CoreDream-6Bold';
@@ -200,23 +202,29 @@ const S = {
   HeaderRight: styled.div``,
   HeaderLeft: styled.div``,
   UsableSpace: styled.div`
-    width: 80%;
+    width: 100%;
     height: 90%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-items: flex-end;
   `,
   LeftSide: styled.div`
     flex-basis: 55%;
+    max-width: 60%;
     box-shadow: 0 0 30px #dddddd;
     border-radius: 20px;
     overflow: hidden;
     background-color: white;
+    padding: 20px;
+    height: 95%;
   `,
   RightSide: styled.div`
     flex-basis: 35%;
+    max-width: 35%;
     box-shadow: 0 0 30px #dddddd;
     border-radius: 20px;
     overflow: hidden;
     background-color: white;
+    height: 95%;
   `,
 };
