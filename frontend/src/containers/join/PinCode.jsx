@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputForm from '../../components/common/InputForm';
 import BasicButton from '../../components/common/BasicButton';
+import Video from '../../assets/Video.png';
 const ContainerFrame = styled.div`
   width: 100%;
   height: 100%;
@@ -43,7 +44,7 @@ const LeftFrame = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 30px;
   padding-bottom: 30px;
   @media only screen and (max-width: 768px) {
     width: 100%;
@@ -51,7 +52,29 @@ const LeftFrame = styled.div`
     justify-content: center;
   }
 `;
-
+const LeftTitleFrame = styled.div`
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+  }
+`;
+const LeftImgFrame = styled.img`
+  height: 50%;
+  display: flex;
+  object-fit: contain;
+  margin: auto;
+  padding-bottom: 50px;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 const RightFrame = styled.div`
   width: 50%;
   height: 100%;
@@ -71,8 +94,11 @@ export default function PinCode({ onHandleNext, onHandleValue, value }) {
   return (
     <ContainerFrame>
       <LeftFrame>
-        <InputLabel>참여할 Co-Fix 번호를</InputLabel>
-        <InputLabel>입력해주세요.</InputLabel>
+        <LeftTitleFrame>
+          <InputLabel>PIN 번호를</InputLabel>
+          <InputLabel>입력해주세요.</InputLabel>
+        </LeftTitleFrame>
+        <LeftImgFrame src={Video} alt="" />
       </LeftFrame>
       <RightFrame>
         <InputForm

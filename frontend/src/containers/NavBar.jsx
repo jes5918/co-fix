@@ -75,18 +75,6 @@ export default function NavBar({ isLoggedIn, user }) {
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
                     <Link to="/mypagelist">MyPageList</Link>
                   </NavbarItem>
-                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/mypage/a/a">MyPage</Link>
-                  </NavbarItem>
-                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/create">Create</Link>
-                  </NavbarItem>
-                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/co-fix/asd">Co-Fix</Link>
-                  </NavbarItem>
-                  <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/openvidutest">openvidutest</Link>
-                  </NavbarItem>
                   <BasicButton
                     onClickHandler={LogoutHandler}
                     width={150}
