@@ -53,7 +53,7 @@ public class CommentController {
     public ResponseEntity getComments(@ApiParam(value = "첨삭방 id", required = true) @PathVariable String commentRoomId,
                                       @ApiParam(value = "문서 id", required = true) @PathVariable String documentId,
                                       @ApiParam(value = "문장 id", required = true) @PathVariable String sentenceId) throws JsonProcessingException {
-        List<Comment> comments = commentService.getComments(sentenceId);
+        List<Comment> comments = commentService.getComments(documentId, sentenceId);
 
         ListDataResponse<Comment> response = responseService.getListDataResponse(comments, HttpStatus.OK);
 
