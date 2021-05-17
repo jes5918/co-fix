@@ -14,7 +14,7 @@ const Section = {
     position: relative;
     justify-content: flex-end;
     padding-top: 86px;
-    /* overflow: hidden; */
+    overflow: hidden;
     @media only screen and (max-width: 768px) {
       flex-direction: column;
     }
@@ -24,7 +24,7 @@ const Section = {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     @media only screen and (max-width: 768px) {
       width: 100%;
@@ -72,8 +72,8 @@ const Section = {
     }
   `,
   title: styled.div`
-    font-weight: bold;
-    font-family: 'SCD_heavy';
+    font-weight: normal;
+    font-family: 'S-CoreDream-6Bold';
     font-size: 45px;
     @media only screen and (max-width: 1024px) {
       font-size: 35px;
@@ -83,7 +83,7 @@ const Section = {
     }
   `,
   titleBox: styled.div`
-    margin: 100px auto;
+    margin: 0 auto;
     @media only screen and (max-width: 768px) {
       margin: 50px auto;
     }
@@ -92,15 +92,18 @@ const Section = {
     }
   `,
   buttonBox: styled.div`
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin-top: 50px;
     @media only screen and (max-width: 768px) {
       width: 70%;
+      margin-top: 10px;
     }
     @media only screen and (max-width: 480px) {
       flex-direction: column;
+      margin-top: 10px;
     }
   `,
 };
@@ -124,7 +127,7 @@ export default function Section_1({ ModalToggleHandler }) {
         </Section.titleBox>
         <Section.buttonBox>
           <BasicButton
-            text={'Co-Fix 시작하기'}
+            text={'start Co-Fix'}
             backgroundColor={'#FAE5F4'}
             width={200}
             height={50}

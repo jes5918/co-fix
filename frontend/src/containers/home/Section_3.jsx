@@ -16,6 +16,9 @@ const Section = {
     justify-content: center;
     align-items: center;
     padding: 5% 0;
+    @media only screen and (max-width: 480px) {
+      flex-direction: column-reverse;
+    }
   `,
   leftFrmae: styled.div`
     width: 50%;
@@ -26,6 +29,10 @@ const Section = {
     align-items: center;
     background-color: transparent;
     position: relative;
+    @media only screen and (max-width: 480px) {
+      width: 100%;
+      height: 50%;
+    }
   `,
   leftImg: styled.img`
     width: 80%;
@@ -36,10 +43,13 @@ const Section = {
   leftText: styled.div`
     font-size: 2.5rem;
     font-weight: bold;
-    font-family: 'SCD_bold';
+    font-family: 'S-CoreDream-6Bold';
     z-index: 10;
     margin: 15px auto;
     cursor: pointer;
+    @media only screen and (max-width: 768px) {
+      font-size: 1.5rem;
+    }
   `,
   rightFrmae: styled.div`
     width: 50%;
@@ -48,6 +58,10 @@ const Section = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media only screen and (max-width: 480px) {
+      width: 100%;
+      height: 50%;
+    }
   `,
   rightImg: styled.img`
     width: 80%;

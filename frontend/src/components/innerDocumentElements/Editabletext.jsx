@@ -54,6 +54,6 @@ const StyleH1Input = styled.textarea`
   border: none !important;
   font-size: 18px;
   font-weight: bold;
-  font-family: 'SCD_medium';
+  font-family: 'S-CoreDream-5Medium';
   box-shadow: 2px 2px 4px 2px #c8c1c4;
 `;
