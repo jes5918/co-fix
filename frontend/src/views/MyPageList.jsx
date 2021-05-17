@@ -22,7 +22,6 @@ export default function MyPageList() {
   useEffect(() => {
     getCommentRoomsInstance(
       (res) => {
-        console.log('리덕스 저장하자', res.data.data);
         dispatch(setMyPageList(res.data.data));
       },
       (err) => {

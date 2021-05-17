@@ -11,7 +11,7 @@ const LeftPanel = styled.div`
   line-height: 27px;
   font-size: 18px;
   font-weight: bold;
-  font-family: 'Samlip';
+  font-family: 'S-CoreDream-5Medium';
 `;
 
 function MypageLeft({ content }) {

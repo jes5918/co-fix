@@ -106,7 +106,7 @@ const TextAreaWrapper = styled.div`
 const TextArea = styled.textarea`
   width: 96%;
   font-size: 18px;
-  font-family: 'Roboto';
+  font-family: 'S-CoreDream-5Medium';
   line-height: 30px;
   padding: 50px 30px 30px;
   border-radius: 255px 15px 255px 15px/15px 255px 15px 255px;
