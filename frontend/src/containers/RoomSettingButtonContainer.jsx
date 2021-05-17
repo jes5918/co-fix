@@ -20,7 +20,10 @@ import ModifyRoomSettingModal from '../components/modal/ModifyRoomSettingModal';
 import AlertModal from '../components/modal/AlertModal';
 import BasicButton from '../components/common/BasicButton';
 
-export default function RoomSettingButtonContainer() {
+export default function RoomSettingButtonContainer({
+  stompClientTest,
+  disconnectSocket,
+}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const RoomInfo = useRoomInfo();
@@ -85,6 +88,9 @@ export default function RoomSettingButtonContainer() {
         console.log(`res`, res);
         dispatch(resetRoomInfo());
         dispatch(documentGetAction([]));
+        stompClientTest.disconnect(() => {
+          console.log('소켓 닫힘');
+        }, {});
         history.push('/');
       },
       (err) => {
@@ -95,6 +101,9 @@ export default function RoomSettingButtonContainer() {
 
   const OutRoomHandler = () => {
     // 진우야 여기 소켓 아웃하자
+    stompClientTest.disconnect(() => {
+      console.log('소켓 닫힘');
+    }, {});
     history.push('/');
   };
   return (
