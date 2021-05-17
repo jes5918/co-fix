@@ -37,6 +37,7 @@ export default function CommonWorkPage() {
   const dispatch = useDispatch();
   const { roomId, documentId, memberId } = useRoomInfo();
   const { credentials } = useLoginUser();
+  const [stompClientTest, setStompClientTest] = useState();
   const sentences = useSelector((state) => {
     return state.document.data;
   });
@@ -44,8 +45,6 @@ export default function CommonWorkPage() {
   const [onFocusedSentence, setOnFocusedSentence] = useState('');
 
   // socket
-  const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
-  const stompClient = Stomp.over(socket);
 
   // sentence 클릭 -> comment 조회
   const onHandleClickSentence = (sentenceId) => {
@@ -82,6 +81,9 @@ export default function CommonWorkPage() {
   };
 
   const connectSocket = () => {
+    const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
+    const stompClient = Stomp.over(socket);
+    setStompClientTest(stompClient);
     stompClient.connect(
       {
         nickname: localStorage.getItem('nickname') || 'defaultNickName',
@@ -109,7 +111,7 @@ export default function CommonWorkPage() {
   };
 
   const disconnectSocket = () => {
-    stompClient.disconnect(() => {
+    stompClientTest.disconnect(() => {
       console.log('room socket disconnected');
     });
   };
@@ -145,6 +147,7 @@ export default function CommonWorkPage() {
               sentences={sentences}
               testRequest={testRequest}
               onHandleClickSentence={onHandleClickSentence}
+              stompClientTest={stompClientTest}
             />
           </Scrollbars>
         </S.LeftSide>
@@ -192,37 +195,3 @@ const S = {
     overflow: hidden;
   `,
 };
-
-const testData = [
-  {
-    id: 0,
-    avatar:
-      'https://www.pikpng.com/pngl/m/357-3577415_free-png-download-cat-cute-png-images-background.png',
-    nickName: '비와 당신',
-    comment: '지금 이 순간, 마법처럼 날 묶어왔던 사슬을 벗어던진다.',
-  },
-  {
-    id: 1,
-    avatar:
-      'https://www.pikpng.com/pngl/m/357-3577415_free-png-download-cat-cute-png-images-background.png',
-    nickName: '비와 당신',
-    comment:
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque , e.',
-  },
-  {
-    id: 2,
-    avatar:
-      'https://www.pikpng.com/pngl/m/357-3577415_free-png-download-cat-cute-png-images-background.png',
-    nickName: '비와 당신',
-    comment:
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque , e.',
-  },
-  {
-    id: 3,
-    avatar:
-      'https://www.pikpng.com/pngl/m/357-3577415_free-png-download-cat-cute-png-images-background.png',
-    nickName: '비와 당신',
-    comment:
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque , e.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque , e.',
-  },
-];
