@@ -31,6 +31,7 @@ import RoomSettingButtonContainer from '../containers/RoomSettingButtonContainer
 import OpenViduMain from '../openvidu/OpenViduMain';
 import useRoomInfo from '../hook/useRoomInfo';
 import useLoginUser from '../hook/useLoginUser';
+import CommentForm from '../components/innerCommentElements/CommentForm';
 
 const localStorage = window.localStorage;
 
@@ -39,6 +40,8 @@ export default function CommonWorkPage() {
   const { roomId, documentId, memberId, roomTitle, pinNumber } = useRoomInfo();
   const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
+  const [isToggle, setIsToggle] = useState(true);
+  const scrollRef = useRef(null);
   const sentences = useSelector((state) => {
     return state.document.data;
   });
@@ -117,6 +120,22 @@ export default function CommonWorkPage() {
     });
   };
 
+  const onHandleScrollToBottom = () => {
+    if (!scrollRef || !scrollRef.current) {
+      return;
+    }
+
+    scrollRef.current.scrollToBottom({
+      behavior: 'smooth',
+    });
+    console.log(scrollRef);
+    console.log(scrollRef.current);
+  };
+
+  const onHandleClickLayout = () => {
+    setIsToggle((prev) => !prev);
+  };
+
   // redux에 저장되어있는 documentReducer 가져오기
   useEffect(() => {
     getDocuments(
@@ -145,7 +164,7 @@ export default function CommonWorkPage() {
 
   return (
     <S.CommonWorkPage oncopy="return false" oncut="return false">
-      <S.HeaderSpace>
+      <S.HeaderSpace isToggle={isToggle}>
         <S.HeaderLeft>
           <S.HeaderTitle>제목 : {roomTitle}</S.HeaderTitle>
         </S.HeaderLeft>
@@ -163,7 +182,7 @@ export default function CommonWorkPage() {
           />
         </S.HeaderRight>
       </S.HeaderSpace>
-      <S.UsableSpace>
+      <S.UsableSpace isToggle={isToggle}>
         <S.LeftSide>
           <Scrollbars style={{ width: '100%', height: '100%' }}>
             <DocumentContainer
@@ -175,16 +194,30 @@ export default function CommonWorkPage() {
           </Scrollbars>
         </S.LeftSide>
         <S.RightSide>
-          <Scrollbars style={{ width: '100%', height: '100%' }}>
+          <Scrollbars
+            ref={scrollRef}
+            style={{
+              width: '100%',
+              height: '80%',
+            }}
+          >
             <CommentContainer
               sentenceId={onFocusedSentence}
               onHandleClickSentence={onHandleClickSentence}
+              onHandleScrollToBottom={onHandleScrollToBottom}
             />
           </Scrollbars>
+          <S.CommentFormWrapper>
+            <CommentForm
+              sentenceId={onFocusedSentence}
+              onHandleClickSentence={onHandleClickSentence}
+              onHandleScrollToBottom={onHandleScrollToBottom}
+            />
+          </S.CommentFormWrapper>
         </S.RightSide>
       </S.UsableSpace>
       {/* <Participant /> */}
-      <OpenViduMain />
+      <OpenViduMain isToggle={isToggle} setIsToggle={onHandleClickLayout} />
     </S.CommonWorkPage>
   );
 }
@@ -208,7 +241,10 @@ const S = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 0 10%; */
+    padding: 0 10%;
+    transition: all 0.7s ease-in-out;
+    transform: ${({ isToggle }) =>
+      isToggle ? 'translateX(-11%)' : 'translateX(0px)'};
   `,
   HeaderTitle: styled.span`
     display: flex;
@@ -257,8 +293,11 @@ const S = {
     width: 100%;
     height: 90%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: flex-end;
+    transition: all 0.7s ease-in-out;
+    transform: ${({ isToggle }) =>
+      isToggle ? 'translateX(-11%)' : 'translateX(0)'};
   `,
   LeftSide: styled.div`
     flex-basis: 55%;
@@ -268,15 +307,23 @@ const S = {
     overflow: hidden;
     background-color: white;
     padding: 20px;
-    height: 95%;
+    height: 100%;
+    margin-right: 2%;
   `,
   RightSide: styled.div`
-    flex-basis: 35%;
+    flex-basis: 25%;
     max-width: 35%;
     box-shadow: 0 0 30px #dddddd;
     border-radius: 20px;
     overflow: hidden;
     background-color: white;
-    height: 95%;
+    height: 100%;
+  `,
+  CommentFormWrapper: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: 100%;
   `,
 };
