@@ -2,6 +2,7 @@ import {
   SET_COMMENT_TEXT,
   CREATE_COMMENT_TEXT,
   AGREE_COMMENT_TEXT,
+  RESET_COMMENT_TEXT,
 } from '../types';
 
 const initialState = {
@@ -26,6 +27,9 @@ export default function (state = initialState, action) {
       console.log(newData);
       newData[index] = action.payload;
       return { data: newData };
+    }
+    case RESET_COMMENT_TEXT: {
+      return initialState;
     }
     default:
       return state;
