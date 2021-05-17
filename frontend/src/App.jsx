@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, useHistory } from 'react-router-dom';
 import useLoginUser from './hook/useLoginUser';
 import styled from 'styled-components';
 import AnimatedCursor from 'react-animated-cursor';
@@ -21,21 +21,31 @@ import NavBar from './containers/NavBar';
 
 function App() {
   const user = useLoginUser();
+  const history = useHistory();
+  const [isCoFixRoom, setIsCoFixRoom] = useState(false);
+
+  useEffect(() => {
+    setIsCoFixRoom(
+      history.location.pathname.startsWith('/co-fix/') ? true : false,
+    );
+  }, [history.location.pathname]);
 
   return (
     <>
-      {/* <NavBar
-        isLoggedIn={user.authenticated ? true : false}
-        user={user && user.credentials.member}
-      /> */}
-      {/* <AnimatedCursor
+      {!isCoFixRoom && (
+        <NavBar
+          isLoggedIn={user.authenticated ? true : false}
+          user={user && user.credentials.member}
+        />
+      )}
+      <AnimatedCursor
         innerSize={20}
         outerSize={20}
         color="220, 110, 90"
         outerAlpha={0.1}
         innerScale={0.8}
-        outerScale={4} 
-      /> */}
+        outerScale={4}
+      />
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/mypagelist" component={MyPageList} />
