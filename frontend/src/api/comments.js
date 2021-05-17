@@ -1,6 +1,6 @@
-import { AuthorizationInstance } from './index.js';
+import { createInstance } from './index.js';
 
-const instance = AuthorizationInstance();
+const instance = createInstance();
 
 export const getAllComments = (
   commentRoomId,
