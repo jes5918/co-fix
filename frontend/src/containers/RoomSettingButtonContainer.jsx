@@ -118,8 +118,8 @@ export default function RoomSettingButtonContainer({
               <B.settingIcon />
             </B.button>
             <BasicButton
-              width={150}
-              height={50}
+              width={80}
+              height={40}
               fontSize={18}
               color={'white'}
               backgroundColor={'#CF0101'}
@@ -132,8 +132,8 @@ export default function RoomSettingButtonContainer({
             <B.button>?</B.button>
             <B.button>!</B.button>
             <BasicButton
-              width={150}
-              height={50}
+              width={80}
+              height={40}
               fontSize={18}
               color={'#ffffff'}
               backgroundColor={'#CF0101'}
@@ -223,7 +223,8 @@ const B = {
     box-shadow: 2px 2px 4px 2px #bebebe;
     overflow: hidden;
     transition: all 0.2s ease-in-out;
-    background: linear-gradient(to bottom, #fef9d7, #d299c2);
+    background-color: #fff;
+    /* background: linear-gradient(to bottom, #fef9d7, #d299c2); */
     &:hover {
       background: linear-gradient(to bottom, #f3edb6, #d28cc2);
     }
