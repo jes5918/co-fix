@@ -85,7 +85,12 @@ export default function Join() {
           history.push(`/co-fix/${data.roomId}`);
         },
         (err) => {
-          AlertModalToggleHandler('서버 에러 발생');
+          console.error(err.response.data);
+          if (err.response.data.message === '현재 방이 가득 참') {
+            AlertModalToggleHandler('참여 가능 인원이 다 찼습니다.');
+          } else {
+            AlertModalToggleHandler('서버 에러 발생');
+          }
         },
       );
     }
@@ -158,7 +163,7 @@ export default function Join() {
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom, #fef9d7, #d299c2);
+  background: linear-gradient(to top, #fef9d7, #d299c2);
   overflow: hidden;
   justify-content: space-around;
 `;

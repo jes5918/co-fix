@@ -70,7 +70,7 @@ const TextContainer = styled.div`
   word-break: keep-all;
   font-size: 18px;
   font-weight: bold;
-  font-family: 'SCD_medium';
+  font-family: 'S-CoreDream-5Medium';
   margin: 15px 30px 0px 10px;
   &:hover {
     background-color: #ffffdf;

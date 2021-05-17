@@ -131,7 +131,7 @@ const B = {
     align-items: center;
     width: 50px;
     height: 50px;
-    font-family: 'SCD_bold';
+    font-family: 'S-CoreDream-6Bold';
     font-size: 20px;
     color: #020236;
     font-weight: bold;
