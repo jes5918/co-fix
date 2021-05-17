@@ -9,12 +9,11 @@ import com.ssafy.devfolio.sentence.SentenceService;
 import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
@@ -26,16 +25,18 @@ public class CommentService {
     private final RedisKeyPrefixProperties keyPrefixProperties;
 
     private String SENTENCE_PREFIX;
+    private String DOCUMENT_PREFIX;
 
     private final SentenceService sentenceService;
+    private final RedisTemplate<String, String> redisTemplate;
     private final HashOperations<String, String, String> hashOperations;
 
-    private final Map<String, ChannelTopic> channels;
     private final ObjectMapper objectMapper;
 
     @PostConstruct
     public void init() {
         SENTENCE_PREFIX = keyPrefixProperties.getSentence();
+        DOCUMENT_PREFIX = keyPrefixProperties.getDocument();
     }
 
     public Comment writeComment(String documentId, String sentenceId, CommentRequest request) throws JsonProcessingException {
@@ -49,7 +50,7 @@ public class CommentService {
         return comment;
     }
 
-    public List<Comment> getComments(String sentenceId) {
+    public List<Comment> getComments(String documentId, String sentenceId) {
         return hashOperations.values(SENTENCE_PREFIX + sentenceId).stream()
                 .map(wrapper(commentString -> objectMapper.readValue(commentString, Comment.class)))
                 .collect(Collectors.toList());
