@@ -42,7 +42,7 @@ const S = {
     padding: 2px 10px;
     color: ${({ isToggle }) => (isToggle ? 'white' : '#14880c')};
     background-color: ${({ isToggle }) => (!isToggle ? 'white' : '#14880c')};
-    font-family: 'SCD_bold';
+    font-family: 'S-CoreDream-6Bold';
     font-size: 12px;
     font-weight: bold;
     justify-items: flex-end;

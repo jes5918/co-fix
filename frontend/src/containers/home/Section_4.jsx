@@ -11,6 +11,7 @@ const Section = {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    padding: 30px 0;
   `,
   card1: styled.div`
     width: 400px;
@@ -19,6 +20,10 @@ const Section = {
     box-shadow: 4px 4px 5px 3px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     margin: 30px 0;
+    @media only screen and (max-width: 480px) {
+      width: 70%;
+      height: 400px;
+    }
   `,
   card2: styled.div`
     width: 400px;
@@ -28,6 +33,10 @@ const Section = {
     border-radius: 15px;
     align-self: flex-end;
     margin: 30px 15px;
+    @media only screen and (max-width: 480px) {
+      width: 70%;
+      height: 400px;
+    }
   `,
   card3: styled.div`
     width: 400px;
@@ -36,6 +45,10 @@ const Section = {
     box-shadow: 4px 4px 5px 3px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     margin: 30px 0;
+    @media only screen and (max-width: 480px) {
+      width: 70%;
+      height: 400px;
+    }
   `,
 };
 export default function Section_4() {

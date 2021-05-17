@@ -7,7 +7,7 @@ const StyledFooter = {
     padding: 6.25rem 0;
     background-color: #fff7f7;
     color: #090e36;
-    font-family: 'SCD_bold';
+    font-family: 'S-CoreDream-6Bold';
     z-index: -5;
     @media only screen and (max-width: 480px) {
       padding: 2.25rem 0;
@@ -37,7 +37,7 @@ const FooterLeft = {
   info: styled.div`
     font-size: 17px;
     font-weight: bold;
-    font-family: 'SCD_bold';
+    font-family: 'S-CoreDream-6Bolds';
     width: fit-content;
     margin: 10px;
     color: black;
@@ -60,7 +60,7 @@ const FooterNav = {
   menu: styled.div`
     font-size: 1.5rem;
     font-weight: bold;
-    font-family: 'SCD_bold';
+    font-family: 'S-CoreDream-6Bold';
     width: auto;
     margin-top: 10px;
     margin-bottom: 10px;

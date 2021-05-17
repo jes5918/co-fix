@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputForm from '../../components/common/InputForm';
 import BasicButton from '../../components/common/BasicButton';
+import Document from '../../assets/document.png';
 const ContainerFrame = styled.div`
   width: 100%;
   height: 100%;
@@ -32,7 +33,7 @@ const ContainerFrame = styled.div`
 const InputLabel = styled.div`
   font-size: 45px;
   font-weight: bold;
-  font-family: 'SCD_bold';
+  font-family: 'S-CoreDream-6Bold';
   color: black;
   margin: 10px;
   word-break: keep-all;
@@ -45,11 +46,34 @@ const LeftFrame = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 30px;
   @media only screen and (max-width: 1024px) {
     width: 100%;
     height: 30%;
     justify-content: center;
+  }
+`;
+const LeftTitleFrame = styled.div`
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+  }
+`;
+const LeftImgFrame = styled.img`
+  width: 35%;
+  display: flex;
+  object-fit: contain;
+  margin: auto;
+  padding-top: 50px;
+  @media only screen and (max-width: 1024px) {
+    display: none;
   }
 `;
 
@@ -60,7 +84,7 @@ const RightFrame = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 30px;
   @media only screen and (max-width: 1024px) {
     width: 100%;
     height: 70%;
@@ -82,12 +106,22 @@ export default function Privacy({ onHandleNext }) {
   return (
     <ContainerFrame>
       <LeftFrame>
-        <InputLabel>잠깐!</InputLabel>
-        <InputLabel>Co-Fix 참여 전</InputLabel>
-        <InputLabel>확인해주세요.</InputLabel>
+        <LeftTitleFrame>
+          <InputLabel>잠깐!</InputLabel>
+          <InputLabel>Co-Fix 참여 전</InputLabel>
+          <InputLabel>확인해주세요.</InputLabel>
+        </LeftTitleFrame>
+        <LeftImgFrame src={Document} alt="" />
       </LeftFrame>
       <RightFrame>
-        <Info autoCapitalize={'none'} autoFocus={'off'} required={true} />
+        <Info autoCapitalize={'none'} autoFocus={'off'} required={true}>
+          {/* <div>1. 첨삭 대상물의 저작권은 제작자에게 있습니다.</div>
+          <div>
+            2. 본 서비스를 이용해 불법적으로 공유, 복사, 배포하는 것을
+            금지합니다.
+          </div>
+          <div></div> */}
+        </Info>
         <BasicButton
           text={'다음'}
           width={400}
