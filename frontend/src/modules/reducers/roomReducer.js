@@ -1,4 +1,4 @@
-import { SET_ROOM_INFO, RESET_ROOM_INFO } from '../types';
+import { SET_ROOM_INFO, RESET_ROOM_INFO, UPDATE_ROOM_INFO } from '../types';
 
 const initialState = {
   roomId: '',
@@ -28,6 +28,14 @@ export default function (state = initialState, action) {
       };
     case RESET_ROOM_INFO:
       return initialState;
+    case UPDATE_ROOM_INFO:
+      if (state.roomId == action.payload.roomId) {
+        return {
+          ...state,
+          roomTitle: action.payload.title,
+          memberLimit: action.payload.maxcnt,
+        };
+      } else return state;
     default:
       return state;
   }

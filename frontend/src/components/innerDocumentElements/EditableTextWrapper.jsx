@@ -11,6 +11,9 @@ import styled from 'styled-components';
 import Editabletext from './Editabletext';
 import useRoomInfo from '../../hook/useRoomInfo';
 
+// library
+import { debounce } from 'lodash';
+
 // socket
 import SockJS from 'sockjs-client';
 import Stomp from 'webstomp-client';
@@ -41,8 +44,16 @@ export default function EditableTextWrapper({
       sentenceId: sentenceId,
       modifiedContent: newValue,
     };
-    dispatch(documentModifyAction(updateData));
+    ModifyActionHandler(updateData);
     // backend 로 수정하는거 보내야 하는 자리 (츄츄가)
+  };
+
+  const onHandleDebounce = debounce((modifiedSentence) => {
+    dispatch(documentModifyAction(modifiedSentence));
+  }, 500);
+
+  const ModifyActionHandler = (modifiedSentence) => {
+    onHandleDebounce(modifiedSentence);
   };
 
   const connectSocket = () => {

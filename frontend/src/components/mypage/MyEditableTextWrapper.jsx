@@ -7,6 +7,7 @@ import {
 import { modifyDocuments } from '../../api/documents';
 import styled from 'styled-components';
 import MyEditabletext from './MyEditabletext';
+import { debounce } from 'lodash';
 
 export default function MyEditableTextWrapper({
   sentence,
@@ -25,10 +26,18 @@ export default function MyEditableTextWrapper({
     dispatch(documentSelectAction(sentence.id));
   };
 
+  const onHandleDebounce = debounce((modifiedSentence) => {
+    dispatch(documentModifyAction(modifiedSentence));
+  }, 500);
+
+  const ModifyActionHandler = (modifiedSentence) => {
+    onHandleDebounce(modifiedSentence);
+  };
+
   const setNewValue = (newValue) => {
     let updateData = sentence;
     updateData.modifiedContent = newValue;
-    dispatch(documentModifyAction(updateData));
+    ModifyActionHandler(updateData);
     modifyDocuments(
       roomId,
       documentId,
