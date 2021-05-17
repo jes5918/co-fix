@@ -18,6 +18,7 @@ import Stomp from 'webstomp-client';
 // library
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import { debounce } from 'lodash';
 
 // containers
 import Participant from '../containers/mypage/Participant';
@@ -80,10 +81,6 @@ export default function CommonWorkPage() {
     );
   };
 
-  const onHandleDispatch = (nextSentences) => {
-    dispatch(documentModifyAction());
-  };
-
   const connectSocket = () => {
     stompClient.connect(
       {
@@ -96,11 +93,19 @@ export default function CommonWorkPage() {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
           console.log('room에 문장 추가.');
-          dispatch(documentModifyAction(modifiedSentence));
+          ModifyActionHandler(modifiedSentence);
           return body;
         });
       },
     );
+  };
+
+  const onHandleDebounce = debounce((modifiedSentence) => {
+    dispatch(documentModifyAction(modifiedSentence));
+  }, 500);
+
+  const ModifyActionHandler = (modifiedSentence) => {
+    onHandleDebounce(modifiedSentence);
   };
 
   const disconnectSocket = () => {
