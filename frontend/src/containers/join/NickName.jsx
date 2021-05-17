@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputForm from '../../components/common/InputForm';
 import BasicButton from '../../components/common/BasicButton';
+import NickNameImg from '../../assets/NickName.png';
 const ContainerFrame = styled.div`
   width: 100%;
   height: 100%;
@@ -43,12 +44,35 @@ const LeftFrame = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 30px;
   padding-bottom: 30px;
   @media only screen and (max-width: 768px) {
     width: 100%;
     height: 50%;
     justify-content: center;
+  }
+`;
+const LeftTitleFrame = styled.div`
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+  }
+`;
+const LeftImgFrame = styled.img`
+  height: 50%;
+  display: flex;
+  object-fit: contain;
+  margin: auto;
+  padding-bottom: 50px;
+  @media only screen and (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -71,8 +95,12 @@ export default function NickName({ onHandleSubmit, onHandleValue, value }) {
   return (
     <ContainerFrame>
       <LeftFrame>
-        <InputLabel>사용하실 닉네임을</InputLabel>
-        <InputLabel>입력해주세요.</InputLabel>
+        <LeftTitleFrame>
+          <InputLabel>사용하실</InputLabel>
+          <InputLabel>닉네임을</InputLabel>
+          <InputLabel>입력해주세요.</InputLabel>
+        </LeftTitleFrame>
+        <LeftImgFrame src={NickNameImg} alt="" />
       </LeftFrame>
       <RightFrame>
         <InputForm
