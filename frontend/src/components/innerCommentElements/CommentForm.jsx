@@ -53,7 +53,7 @@ function CommentForm({ sentenceId, onHandleClickSentence }) {
         <S.FormInput
           require
           ref={inputRef}
-          onKeyDown={(e) => onHandleSubmit(e)}
+          onKeyUp={(e) => onHandleSubmit(e)}
         />
       </S.FormInputBox>
     </S.CommentForm>
