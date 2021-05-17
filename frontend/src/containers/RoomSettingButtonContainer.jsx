@@ -110,7 +110,7 @@ export default function RoomSettingButtonContainer({
     <>
       <B.container>
         {user.authenticated &&
-        RoomInfo.memberId === user.credentials.memberId ? (
+        RoomInfo.memberId === user.credentials.member.id ? (
           <>
             <B.button>?</B.button>
             <B.button>!</B.button>
