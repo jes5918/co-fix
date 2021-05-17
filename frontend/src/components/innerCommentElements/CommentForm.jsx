@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { commentCreateAction } from '../../modules/actions/commentActions';
 import { createComment } from '../../api/comments.js';
 
+const localStorage = window.localStorage;
+
 function CommentForm({ sentenceId, onHandleClickSentence }) {
   const inputRef = useRef(null);
   const { roomId, documentId } = useSelector((state) => {
@@ -34,7 +36,7 @@ function CommentForm({ sentenceId, onHandleClickSentence }) {
   const onHandleSubmit = (e) => {
     if (e.keyCode === 13) {
       const content = inputRef.current.value;
-      const nickname = '임시 닉네임';
+      const nickname = localStorage.getItem('nickname') || 'anonymous';
       onHandleSubmitComment(sentenceId, nickname, content);
       inputRef.current.value = '';
     }
