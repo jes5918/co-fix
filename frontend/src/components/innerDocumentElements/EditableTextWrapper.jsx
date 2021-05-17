@@ -7,6 +7,7 @@ import {
   documentSelectAction,
 } from '../../modules/actions/documentActions';
 import { commentCreateAction } from '../../modules/actions/commentActions';
+import { setSubscription } from '../../modules/actions/roomActions';
 import styled from 'styled-components';
 import Editabletext from './Editabletext';
 import useRoomInfo from '../../hook/useRoomInfo';
@@ -14,28 +15,28 @@ import useRoomInfo from '../../hook/useRoomInfo';
 // library
 import { debounce } from 'lodash';
 
-// socket
-import SockJS from 'sockjs-client';
-import Stomp from 'webstomp-client';
+import useDocument from '../../hook/useDocument';
 
 export default function EditableTextWrapper({
   data,
   testRequest,
+  stompClientTest,
   onHandleClickSentence,
+  subscription,
+  setSubscription,
 }) {
   const { modifiedContent, sentenceId } = data;
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
   const { roomId, documentId } = useRoomInfo();
-
-  // socket
+  const { selectNum } = useDocument();
 
   const editorModeToggleHandler = () => {
     setIsEditMode(!isEditMode);
   };
 
   const selectDocumentHandler = () => {
-    dispatch(documentSelectAction(data.id));
+    dispatch(documentSelectAction(sentenceId));
   };
 
   const setNewValue = (newValue) => {
@@ -56,37 +57,23 @@ export default function EditableTextWrapper({
     onHandleDebounce(modifiedSentence);
   };
 
-  const connectSocket = () => {
-    const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
-    const stompClient = Stomp.over(socket);
-    console.log('소켓 연결');
-    stompClient.connect(
-      {
-        nickname: localStorage.getItem('nickname') || 'defaultNickName',
-        commentRoomId: roomId,
-      },
-      (frame) => {
-        stompClient.subscribe('/sentence/' + sentenceId, (res) => {
-          const body = JSON.parse(res.body);
-          console.log('소켓 연결 : ', body);
-          console.log('isAgree :', body.isAgree);
-          if (!body.isAgree) {
-            dispatch(commentCreateAction(body));
-          }
-          // return body;
-        });
+  const subscribe = (getSentenceId) => {
+    // const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
+    // const stompClient = Stomp.over(socket);
+    const subscription = stompClientTest.subscribe(
+      '/sentence/' + getSentenceId,
+      (res) => {
+        const body = JSON.parse(res.body);
+        const isAgree = body.isAgree === 'false' ? false : true;
+        console.log('소켓 연결 : ', body);
+        console.log(isAgree);
+        if (!isAgree) {
+          dispatch(commentCreateAction(body));
+        }
+        return body;
       },
     );
-  };
-
-  const disconnectSocket = () => {
-    const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
-    const stompClient = Stomp.over(socket);
-    console.log('소켓 연결 해제');
-
-    stompClient.disconnect(() => {
-      console.log('sentence scoket disconnected');
-    });
+    return subscription;
   };
 
   useEffect(() => {
@@ -98,7 +85,14 @@ export default function EditableTextWrapper({
   return (
     <div
       onClick={() => {
-        connectSocket();
+        console.log('clicked');
+        if (selectNum !== sentenceId) {
+          if (subscription) {
+            subscription.unsubscribe();
+          }
+          const getSubscription = subscribe(sentenceId);
+          setSubscription(getSubscription);
+        }
       }}
       // div에서 한다.
       // onBlur={() => {
