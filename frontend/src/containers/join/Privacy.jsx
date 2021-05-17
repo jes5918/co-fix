@@ -31,13 +31,16 @@ const ContainerFrame = styled.div`
   }
 `;
 const InputLabel = styled.div`
-  font-size: 45px;
+  font-size: 40px;
   font-weight: bold;
   font-family: 'S-CoreDream-6Bold';
   color: black;
-  margin: 10px;
+  margin: 5px;
   word-break: keep-all;
   text-align: center;
+  @media only screen and (max-width: 1024px) {
+    font-size: 38px;
+  }
 `;
 const LeftFrame = styled.div`
   width: 50%;

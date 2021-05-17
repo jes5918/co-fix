@@ -56,7 +56,7 @@ export default function Join() {
     getRoomInfo(
       pinCode,
       (res) => {
-        console.log('0000000', res.data.data.status);
+        console.log('0000000', res.data.data);
         if (res.data.data.status === 'CLOSED') {
           AlertModalToggleHandler('종료된 첨삭방입니다.');
           setPinCode('');
