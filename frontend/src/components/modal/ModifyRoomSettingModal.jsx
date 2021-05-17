@@ -7,7 +7,6 @@ import useRoomInfo from '../../hook/useRoomInfo';
 
 export default function ModifyRoomSettingModal({
   PropsComfirmHandler,
-  PropsRejectHandler,
   setTitle,
   setNumParticipant,
   title,

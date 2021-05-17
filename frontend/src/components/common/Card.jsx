@@ -81,68 +81,105 @@ function Card({
           PropsRejectHandler={() => onCloseRoomHandler()}
         />
       </Modal>
-      <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
-        <cardStyle.frontpannel>
-          <cardStyle.title propsFontSize={propsFontSize}>
-            {RoomInfo && RoomInfo.roomTitle}
-          </cardStyle.title>
-          <cardStyle.tagBox>
-            <cardStyle.tags>
-              {RoomInfo &&
-                RoomInfo.members.map((member, i) => {
-                  return (
-                    <cardStyle.tag key={i} propsFontSize={propsFontSize}>
-                      {member.nickname}
-                    </cardStyle.tag>
-                  );
-                })}
-            </cardStyle.tags>
-          </cardStyle.tagBox>
-        </cardStyle.frontpannel>
-        <cardStyle.hoverContainer>
-          <cardStyle.infoBox>
-            <cardStyle.madeby propsFontSize={propsFontSize}>
-              Created :{' '}
-              {RoomInfo &&
-                RoomInfo.createdDate.substring(0, 10).replaceAll('-', '.')}
-            </cardStyle.madeby>
-            <cardStyle.madeby>
-              Modified :{' '}
-              {RoomInfo &&
-                RoomInfo.lastModifiedDate.substring(0, 10).replaceAll('-', '.')}
-            </cardStyle.madeby>
-            <cardStyle.madeby>
-              Status : {RoomInfo && RoomInfo.status}
-            </cardStyle.madeby>
-            <cardStyle.madeby>
-              PIN : {RoomInfo && RoomInfo.pinNumber}
-            </cardStyle.madeby>
-            <cardStyle.buttonwrapper>
-              {RoomInfo.status === 'OPEN' ? (
-                <>
-                  <cardStyle.button enter onClick={() => onGotoLiveHandler()}>
-                    Enter Live Room
+      <Container>
+        {RoomInfo.status === 'CLOSED' ? (
+          <CloseButton>CLOSED</CloseButton>
+        ) : null}
+        <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
+          <cardStyle.frontpannel>
+            <cardStyle.title propsFontSize={propsFontSize}>
+              {RoomInfo && RoomInfo.roomTitle}
+            </cardStyle.title>
+            <cardStyle.tagBox>
+              <cardStyle.tags>
+                {RoomInfo &&
+                  RoomInfo.members.map((member, i) => {
+                    return (
+                      <cardStyle.tag key={i} propsFontSize={propsFontSize}>
+                        {member.nickname}
+                      </cardStyle.tag>
+                    );
+                  })}
+              </cardStyle.tags>
+            </cardStyle.tagBox>
+          </cardStyle.frontpannel>
+          <cardStyle.hoverContainer>
+            <cardStyle.infoBox>
+              <cardStyle.madeby propsFontSize={propsFontSize}>
+                Created :{' '}
+                {RoomInfo &&
+                  RoomInfo.createdDate.substring(0, 10).replaceAll('-', '.')}
+              </cardStyle.madeby>
+              <cardStyle.madeby>
+                Modified :{' '}
+                {RoomInfo &&
+                  RoomInfo.lastModifiedDate
+                    .substring(0, 10)
+                    .replaceAll('-', '.')}
+              </cardStyle.madeby>
+              <cardStyle.madeby>
+                Status : {RoomInfo && RoomInfo.status}
+              </cardStyle.madeby>
+              <cardStyle.madeby>
+                PIN : {RoomInfo && RoomInfo.pinNumber}
+              </cardStyle.madeby>
+              <cardStyle.buttonwrapper>
+                {RoomInfo.status === 'OPEN' ? (
+                  <>
+                    <cardStyle.button enter onClick={() => onGotoLiveHandler()}>
+                      Enter Live Room
+                    </cardStyle.button>
+                    <cardStyle.button onClick={() => onCloseRoomHandler()}>
+                      Close Live Room
+                    </cardStyle.button>
+                  </>
+                ) : (
+                  <cardStyle.button enter onClick={() => onGotoMyPageHandler()}>
+                    Enter Result Room
                   </cardStyle.button>
-                  <cardStyle.button onClick={() => onCloseRoomHandler()}>
-                    Close Live Room
-                  </cardStyle.button>
-                </>
-              ) : (
-                <cardStyle.button enter onClick={() => onGotoMyPageHandler()}>
-                  Enter Result Room
-                </cardStyle.button>
-              )}
-            </cardStyle.buttonwrapper>
-          </cardStyle.infoBox>
-        </cardStyle.hoverContainer>
-      </cardStyle.mainFrame>
+                )}
+              </cardStyle.buttonwrapper>
+            </cardStyle.infoBox>
+          </cardStyle.hoverContainer>
+        </cardStyle.mainFrame>
+      </Container>
     </>
   );
 }
 export default Card;
 
+const Container = styled.div`
+  position: relative;
+`;
+
+const CloseButton = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0px;
+  z-index: 2;
+  transform: rotate(30deg);
+  color: #555;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 0.25rem solid #555;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  font-family: 'Courier';
+  mix-blend-mode: multiply;
+  color: #0a9928;
+  border: 0.5rem solid #0a9928;
+  border-radius: 0;
+  transform: rotate(-20deg);
+  -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+  -webkit-mask-size: 944px 604px;
+  -webkit-mask-position: 13rem 6rem;
+`;
+
 const cardStyle = {
   mainFrame: styled.div`
+    position: relative;
     width: ${({ propsWidth }) => `${propsWidth ? propsWidth : 300}px`};
     height: ${({ propsHeight }) => `${propsHeight ? propsHeight : 400}px`};
     overflow: hidden;

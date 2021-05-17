@@ -20,12 +20,17 @@ export default function (state = initialState, action) {
       return { ...state, data: action.payload };
     }
     case MODIFY_DOCUMENT_TEXT: {
-      const index = state.data.findIndex(
-        (text) => text.sentenceId === action.payload.sentenceId,
-      );
-      const newData = [...state.data];
-      newData[index] = action.payload;
-      return { ...state, data: newData };
+      if (state.data.length > 0) {
+        const index = state.data.findIndex(
+          (text) => text.sentenceId === action.payload.sentenceId,
+        );
+        const newData = [...state.data];
+        newData[index] = action.payload;
+        return { ...state, data: newData };
+      } else {
+        console.log('documentReducer 확인해 이거 에러니깐', state);
+        return { ...state, data: state.data };
+      }
     }
     case SELECT_DOCUMENT_TEXT: {
       return { ...state, selectNum: action.payload };
