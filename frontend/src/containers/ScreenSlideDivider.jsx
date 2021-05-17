@@ -57,10 +57,11 @@ export default function ScreenSlideDivider({ children, setSplitPosX }) {
 }
 
 const pane1StyleRow = {
-  padding: '35px 35px 75px 45px',
+  padding: '35px 0px 75px 45px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
+  backgroundColor: '#ffffff',
 };
 
 const pane1StyleCol = {
@@ -68,12 +69,14 @@ const pane1StyleCol = {
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
+  backgroundColor: '#ffffff',
 };
 const pane2StyleRow = {
-  padding: '20px 35px 75px 45px',
+  padding: '35px 0px 75px 45px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
+  backgroundColor: '#ffffff',
 };
 
 const pane2StyleCol = {
@@ -81,6 +84,7 @@ const pane2StyleCol = {
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
+  backgroundColor: '#ffffff',
 };
 
 const SplitPanel = {
