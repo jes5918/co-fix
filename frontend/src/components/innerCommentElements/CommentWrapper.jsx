@@ -8,6 +8,10 @@ import UserAvatar from '../innerCommentElements/UserAvatar';
 import UserComment from '../innerCommentElements/UserComment';
 import UserNickName from '../innerCommentElements/UserNickName';
 
+import useRoomInfo from '../../hook/useRoomInfo';
+import useComment from '../../hook/useComment';
+import { agreeComment } from '../../api/comments';
+
 const S = {
   CommentWrapper: styled.div`
     display: flex;
@@ -40,17 +44,13 @@ const S = {
     border-radius: 20px;
     text-align: center;
     padding: 2px 10px;
-    color: ${({ isToggle }) => (isToggle ? 'white' : '#14880c')};
-    background-color: ${({ isToggle }) => (!isToggle ? 'white' : '#14880c')};
+    color: ${({ isAgree }) => (isAgree ? 'white' : '#14880c')};
+    background-color: ${({ isAgree }) => (!isAgree ? 'white' : '#14880c')};
     font-family: 'S-CoreDream-6Bold';
     font-size: 12px;
     font-weight: bold;
     justify-items: flex-end;
     cursor: pointer;
-    &:hover {
-      color: white;
-      background-color: #1fb614;
-    }
   `,
   TopLeft: styled.div`
     display: flex;
@@ -58,11 +58,26 @@ const S = {
   `,
 };
 
-function CommentWrapper({ userId, comment }) {
+function CommentWrapper({ userId, comment, sentenceId }) {
   const [isAgree, setIsAgree] = useState(false);
+  const { roomId, documentId } = useRoomInfo();
+  const { commentId, nickname } = comment;
   const onHandleClick = () => {
     setIsAgree((prev) => !prev);
     // Agree 요청.
+    agreeComment(
+      roomId,
+      documentId,
+      sentenceId,
+      commentId,
+      nickname,
+      (res) => {
+        console.log('Agree 요청 성공');
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
   };
   return (
     <S.CommentWrapper>

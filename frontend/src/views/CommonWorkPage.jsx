@@ -23,16 +23,19 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import Participant from '../containers/mypage/Participant';
 import DocumentContainer from '../containers/DocumentContainer';
 import CommentContainer from '../containers/CommentContainer';
+import RoomSettingButtonContainer from '../containers/RoomSettingButtonContainer';
 
 // components
 import OpenViduMain from '../openvidu/OpenViduMain';
 import useRoomInfo from '../hook/useRoomInfo';
+import useLoginUser from '../hook/useLoginUser';
 
 const localStorage = window.localStorage;
 
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
-  const { roomId, documentId } = useRoomInfo();
+  const { roomId, documentId, memberId } = useRoomInfo();
+  const { credentials } = useLoginUser();
   const sentences = useSelector((state) => {
     return state.document.data;
   });
@@ -52,23 +55,6 @@ export default function CommonWorkPage() {
       sentenceId,
       (res) => {
         dispatch(commentSetAction(res.data.data));
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
-  };
-
-  // agree 요청
-  const onHandleClickAgree = (sentenceId, commentId, nickname) => {
-    agreeComment(
-      roomId,
-      documentId,
-      sentenceId,
-      commentId,
-      nickname,
-      (res) => {
-        console.log(res);
       },
       (error) => {
         console.log(error);
@@ -105,9 +91,11 @@ export default function CommonWorkPage() {
         commentRoomId: roomId,
       },
       (frame) => {
+        console.log('room connected : ', roomId);
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
+          console.log('room에 문장 추가.');
           dispatch(documentModifyAction(modifiedSentence));
           return body;
         });
@@ -137,12 +125,14 @@ export default function CommonWorkPage() {
     connectSocket();
 
     return () => {
+      console.log('CommonWorkPage is unmounted.');
       disconnectSocket();
     };
   }, []);
 
   return (
     <S.CommonWorkPage oncopy="return false" oncut="return false">
+      <RoomSettingButtonContainer />
       <S.UsableSpace>
         <S.LeftSide>
           <Scrollbars style={{ width: '100%', height: '100%' }}>
@@ -157,7 +147,6 @@ export default function CommonWorkPage() {
           <Scrollbars style={{ width: '100%', height: '100%' }}>
             <CommentContainer
               sentenceId={onFocusedSentence}
-              onHandleClickAgree={onHandleClickAgree}
               onHandleClickSentence={onHandleClickSentence}
             />
           </Scrollbars>
@@ -175,6 +164,7 @@ const S = {
     height: 100%;
     padding-top: 86px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   `,

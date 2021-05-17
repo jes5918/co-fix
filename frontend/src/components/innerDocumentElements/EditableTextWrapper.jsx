@@ -26,8 +26,6 @@ export default function EditableTextWrapper({
   const { roomId, documentId } = useRoomInfo();
 
   // socket
-  const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
-  const stompClient = Stomp.over(socket);
 
   const editorModeToggleHandler = () => {
     setIsEditMode(!isEditMode);
@@ -48,47 +46,61 @@ export default function EditableTextWrapper({
   };
 
   const connectSocket = () => {
+    const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
+    const stompClient = Stomp.over(socket);
+    console.log('소켓 연결');
     stompClient.connect(
       {
         nickname: localStorage.getItem('nickname') || 'defaultNickName',
         commentRoomId: roomId,
       },
       (frame) => {
-        console.log('연결됨');
-        console.log(sentenceId);
         stompClient.subscribe('/sentence/' + sentenceId, (res) => {
           const body = JSON.parse(res.body);
           console.log('소켓 연결 : ', body);
-          dispatch(commentCreateAction(body));
-          return body;
+          console.log('isAgree :', body.isAgree);
+          if (!body.isAgree) {
+            dispatch(commentCreateAction(body));
+          }
+          // return body;
         });
       },
     );
   };
 
   const disconnectSocket = () => {
+    const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
+    const stompClient = Stomp.over(socket);
+    console.log('소켓 연결 해제');
+
     stompClient.disconnect(() => {
       console.log('sentence scoket disconnected');
     });
   };
 
   useEffect(() => {
-    connectSocket();
-
-    return () => {
-      disconnectSocket();
-    };
+    // return () => {
+    //   disconnectSocket();
+    // };
   }, []);
 
   return (
-    <>
+    <div
+      onClick={() => {
+        connectSocket();
+      }}
+      // div에서 한다.
+      // onBlur={() => {
+      //   console.log('실행');
+      //   disconnectSocket();
+      // }}
+    >
       {!isEditMode ? (
         <TextContainer
           onDoubleClick={editorModeToggleHandler}
           onClick={() => {
             selectDocumentHandler();
             onHandleClickSentence(data.sentenceId);
-            // connectSocket();
           }}
         >
           {modifiedContent}
@@ -102,7 +114,7 @@ export default function EditableTextWrapper({
           sentenceId={data.sentenceId}
         />
       )}
-    </>
+    </div>
   );
 }
 

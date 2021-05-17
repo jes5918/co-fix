@@ -30,7 +30,13 @@ export default function CommentContainer({
       {comments &&
         comments[0] !== null &&
         comments.map((item, idx) => {
-          return <CommentWrapper key={idx * 123413} comment={item} />;
+          return (
+            <CommentWrapper
+              key={idx * 123413}
+              comment={item}
+              sentenceId={sentenceId}
+            />
+          );
         })}
       <CommentForm
         sentenceId={sentenceId}
