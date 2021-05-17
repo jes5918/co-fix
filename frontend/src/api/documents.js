@@ -1,9 +1,10 @@
-import { AuthorizationInstance } from './index.js';
+import { AuthorizationInstance, createInstance } from './index.js';
 
 const instance = AuthorizationInstance();
+const basInstance = createInstance();
 
 function getDocuments(roomId, documentId, success, fail) {
-  instance
+  basInstance
     .get(`commentRooms/${roomId}/documents/${documentId}`)
     .then(success)
     .catch(fail);
