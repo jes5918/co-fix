@@ -51,14 +51,14 @@ function Card({
         />
       </Modal>
       <Container>
-        {RoomInfo.status === 'CLOSED' ? (
-          <CloseButton>CLOSED</CloseButton>
-        ) : null}
         <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
           <cardStyle.frontpannel>
             <cardStyle.title propsFontSize={propsFontSize}>
               {RoomInfo && RoomInfo.roomTitle}
             </cardStyle.title>
+            {RoomInfo.status === 'CLOSED' ? (
+              <CloseButton>CLOSED</CloseButton>
+            ) : null}
             <cardStyle.tagBox>
               <cardStyle.tags>
                 {RoomInfo &&
@@ -74,20 +74,20 @@ function Card({
           </cardStyle.frontpannel>
           <cardStyle.hoverContainer>
             <cardStyle.infoBox>
-              <cardStyle.madeby propsFontSize={propsFontSize}>
-                Created :{' '}
+              <cardStyle.madeby>
+                만든 날짜 :{' '}
                 {RoomInfo &&
                   RoomInfo.createdDate.substring(0, 10).replaceAll('-', '.')}
               </cardStyle.madeby>
               <cardStyle.madeby>
-                Modified :{' '}
+                수정 날짜 :{' '}
                 {RoomInfo &&
                   RoomInfo.lastModifiedDate
                     .substring(0, 10)
                     .replaceAll('-', '.')}
               </cardStyle.madeby>
               <cardStyle.madeby>
-                Status : {RoomInfo && RoomInfo.status}
+                상태 : {RoomInfo && RoomInfo.status}
               </cardStyle.madeby>
               <cardStyle.madeby>
                 PIN : {RoomInfo && RoomInfo.pinNumber}
@@ -96,15 +96,15 @@ function Card({
                 {RoomInfo.status === 'OPEN' ? (
                   <>
                     <cardStyle.button enter onClick={() => onGotoLiveHandler()}>
-                      Enter Live Room
+                      ENTER
                     </cardStyle.button>
                     <cardStyle.button onClick={() => onCloseRoomHandler()}>
-                      Close Live Room
+                      CLOSE
                     </cardStyle.button>
                   </>
                 ) : (
                   <cardStyle.button enter onClick={() => onGotoMyPageHandler()}>
-                    Enter Result Room
+                    CO-FIX 결과
                   </cardStyle.button>
                 )}
               </cardStyle.buttonwrapper>
@@ -122,12 +122,12 @@ const Container = styled.div`
 `;
 
 const CloseButton = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 40px;
-  z-index: 2;
-  width: 80px;
-  /* height: 80px; */
+  /* position: absolute;
+  top: 30%;
+  left: 0%; */
+  z-index: 1;
+  width: 90%;
+  height: 40px;
   color: #555;
   font-size: 1.2rem;
   font-weight: bold;
@@ -135,11 +135,12 @@ const CloseButton = styled.div`
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  font-family: 'Courier';
+  font-family: 'Samlip';
+  font-weight: bold;
   mix-blend-mode: multiply;
-  color: #ff0000;
-  border: 0.3rem solid #ff0000;
-  border-radius: 10%;
+  color: #d63b3b;
+  border: 0.2rem solid #d81f1f;
+  border-radius: 5%;
   /* transform: rotate(-30deg); */
   /* -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
   -webkit-mask-size: 944px 604px;
@@ -186,8 +187,11 @@ const cardStyle = {
   hoverContainer: styled.div`
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #fef9d7, #fec9d7);
+    background-color: #e7ecda;
     position: absolute;
+    font-family: 'S-CoreDream-6Bold';
+    font-weight: 300;
+    font-size: 1.2rem;
     top: 20%;
     z-index: 1;
     opacity: 0;
@@ -220,6 +224,11 @@ const cardStyle = {
     word-break: keep-all;
     line-height: ${({ propsFontSize }) =>
       `${propsFontSize ? propsFontSize + 20 : 27}px`};
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
   `,
   title: styled.div`
     z-index: 1;
@@ -247,7 +256,7 @@ const cardStyle = {
   tags: styled.div`
     width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -259,27 +268,33 @@ const cardStyle = {
     color: #262626;
     font-weight: bold;
     text-align: center;
-    font-family: 'NotoSans';
     line-height: 20px;
     word-break: keep-all;
     margin-right: 5px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
   `,
   buttonwrapper: styled.div`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    margin: 5px;
+    margin-top: 20px;
   `,
   button: styled.div`
     margin: 5px 10px 5px;
     padding: 10px 20px;
-    border: ${({ enter }) =>
-      enter ? '2px solid #addd8c' : '2px solid #e66b53'};
+    font-size: 1rem;
+    background-color: ${({ enter }) => (enter ? '#d3a9a9' : '#e66b53')};
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    color: #ffffff;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     &:hover {
-      background-color: ${({ enter }) => (enter ? '#addd8c' : '#e66b53')};
+      box-shadow: 3px 3px 12px 3px rgba(0, 0, 0, 0.2);
+      background-color: ${({ enter }) => (enter ? '#c08d8d' : '#d84e33')};
     }
   `,
 };
