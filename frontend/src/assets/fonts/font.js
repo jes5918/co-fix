@@ -27,12 +27,11 @@ export default createGlobalStyle`
   }
 
   @font-face {
-    font-family: 'Samlip';	
-    src: local('Samlip'),
-    url(${Samlip}) format('otf');
-    font-weight: 300; 	
+    font-family: 'Samlip';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
-  }
+}
   @font-face {
     font-family: 'SCD_regular';	
     src: local('SCD_regular'),
