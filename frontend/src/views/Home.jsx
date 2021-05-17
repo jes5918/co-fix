@@ -76,12 +76,12 @@ export default function Home() {
             <GoogleAuth ModalToggleHandler={ModalToggleHandler} />
             <GithubAuth ModalToggleHandler={ModalToggleHandler} />
           </SocialLoginWrapper>
-          <CheckBox
+          {/* <CheckBox
             onChange={AutoLoginToggleHandler}
             checked={isAutoLoginChecked}
           >
             로그인 상태 유지할래요.
-          </CheckBox>
+          </CheckBox> */}
           <BottomLine />
           <FooterText>
             간편 로그인으로 <span>Co-Fix</span>와 함께하세요.
@@ -142,7 +142,7 @@ const SocialLoginWrapper = styled.div`
 const BottomLine = styled.div`
   width: 90%;
   height: 2px;
-  margin: 10px auto 10px;
+  margin: 40px auto 10px;
   background-color: rgba(0, 0, 0, 0.2);
 `;
 

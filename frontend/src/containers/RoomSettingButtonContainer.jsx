@@ -12,16 +12,19 @@ import { closeRoom, modifyRoom } from '../api/co-fix';
 import { resetRoomInfo, updateRoomInfo } from '../modules/actions/roomActions';
 import { documentGetAction } from '../modules/actions/documentActions';
 import useRoomInfo from '../hook/useRoomInfo';
+import useLoginUser from '../hook/useLoginUser';
 
 // modal components
 import Modal from '../containers/Modal';
 import ModifyRoomSettingModal from '../components/modal/ModifyRoomSettingModal';
 import AlertModal from '../components/modal/AlertModal';
+import BasicButton from '../components/common/BasicButton';
 
 export default function RoomSettingButtonContainer() {
   const dispatch = useDispatch();
   const history = useHistory();
   const RoomInfo = useRoomInfo();
+  const user = useLoginUser();
   const [title, setTitle] = useState(RoomInfo.roomTitle || '데이터 안들어옴');
   const [numParticipant, setNumParticipant] = useState(
     Number(RoomInfo.memberLimit) || 1,
@@ -87,12 +90,40 @@ export default function RoomSettingButtonContainer() {
   return (
     <>
       <B.container>
-        <B.button onClick={ModifyRoomSettingModalToggleHandler}>
-          <B.settingIcon />
-        </B.button>
-        <B.button onClick={AlertModalToggleHandler}>
-          <B.exitIcon />
-        </B.button>
+        {user.authenticated &&
+        RoomInfo.memberId === user.credentials.memberId ? (
+          <>
+            <B.button onClick={ModifyRoomSettingModalToggleHandler}>
+              <B.settingIcon />
+            </B.button>
+            <BasicButton
+              width={150}
+              height={50}
+              fontSize={18}
+              color={'white'}
+              backgroundColor={'#CF0101'}
+              onClickHandler={AlertModalToggleHandler}
+              text="Co-Fix 종료"
+            >
+              <B.exitIcon />
+            </BasicButton>
+          </>
+        ) : (
+          <>
+            {/* <B.button>
+              <B.settingIcon />
+            </B.button>
+            <BasicButton
+              width={150}
+              height={50}
+              fontSize={18}
+              color={'white'}
+              backgroundColor={'#CF0101'}
+              onClickHandler={AlertModalToggleHandler}
+              text="Co-Fix 종료"
+            ></BasicButton> */}
+          </>
+        )}
       </B.container>
       <Modal
         width="fit-content"
@@ -140,7 +171,7 @@ const B = {
     /* position: absolute; */
     /* right: 250px; */
     z-index: 10;
-    width: 120px;
+    width: 230px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -179,7 +210,6 @@ const B = {
       }
     }
   `,
-
   settingIcon: styled(RiSettings3Fill)`
     width: 33px;
     height: 33px;

@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
       return { ...state, data: action.payload };
     }
     case MODIFY_DOCUMENT_TEXT: {
-      if (state.data.length > 0) {
+      if (state.data.length > 0 && action.payload) {
         const index = state.data.findIndex(
           (text) => text.sentenceId === action.payload.sentenceId,
         );
@@ -28,8 +28,7 @@ export default function (state = initialState, action) {
         newData[index] = action.payload;
         return { ...state, data: newData };
       } else {
-        console.log('documentReducer 확인해 이거 에러니깐', state);
-        return { ...state, data: state.data };
+        return state;
       }
     }
     case SELECT_DOCUMENT_TEXT: {
