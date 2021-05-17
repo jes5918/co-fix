@@ -79,7 +79,7 @@ public class CommentController {
 
         Comment comment = commentService.pressAgree(sentenceId, commentId, nickname);
 
-        redisSenderService.sendCommentUpdateService(sentenceId, comment);
+        redisSenderService.sendCommentAgreeUpdateService(sentenceId, comment);
 
         BaseResponse response = responseService.getSuccessResponse();
 
