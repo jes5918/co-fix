@@ -104,7 +104,7 @@ export default function EditableTextWrapper({
       {!isEditMode ? (
         <TextContainer
           onDoubleClick={() => {
-            if (memberId === credentials.member.id) {
+            if (credentials.length > 0 && memberId === credentials.member.id) {
               editorModeToggleHandler();
             }
           }}

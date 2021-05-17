@@ -40,7 +40,7 @@ function CalcContentLength({ datas, sentences, splitPosX, windowWidthSize }) {
         splitPosX > 700 || windowWidthSize < screen.width / 1.85 ? (
           <ProgressBar
             completed={percent}
-            bgColor="#ff950e"
+            bgColor="lightcoral"
             width={
               windowWidthSize > screen.width / 1.85
                 ? String(splitPosX * 0.55) + 'px'
@@ -83,15 +83,18 @@ const Container = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  margin: 25px 0px 10px;
+  margin: 15px 0px 5px;
+  overflow: hidden;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding: 5px;
   align-items: center;
   font-size: 1.15rem;
   font-weight: bold;
+  overflow: hidden;
 `;
 
 const Length = styled.div`
