@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { MdContentPaste } from 'react-icons/md';
 import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
 import { commentSetAction } from '../modules/actions/commentActions';
 import { getRoomInfo, closeRoom } from '../api/co-fix';
@@ -35,7 +36,8 @@ const localStorage = window.localStorage;
 
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
-  const { roomId, documentId, memberId, roomTitle } = useRoomInfo();
+  const { roomId, documentId, memberId, roomTitle, pinNumber } = useRoomInfo();
+  const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
   const sentences = useSelector((state) => {
     return state.document.data;
@@ -135,12 +137,25 @@ export default function CommonWorkPage() {
     };
   }, []);
 
+  const onPinPasteHandler = () => {
+    const pinNum = document.getElementById('pinNum');
+    pinNum.select();
+    document.execCommand('copy');
+  };
+
   return (
     <S.CommonWorkPage oncopy="return false" oncut="return false">
       <S.HeaderSpace>
         <S.HeaderLeft>
           <S.HeaderTitle>제목 : {roomTitle}</S.HeaderTitle>
         </S.HeaderLeft>
+        {user.authenticated && memberId === user.credentials.member.id ? (
+          <S.HeaderCenter>
+            PIN : &nbsp;
+            <S.HeaderInput id="pinNum" value={pinNumber} readOnly />
+            <S.PasteIcon onClick={onPinPasteHandler} />
+          </S.HeaderCenter>
+        ) : null}
         <S.HeaderRight>
           <RoomSettingButtonContainer
             stompClientTest={stompClientTest}
@@ -196,10 +211,47 @@ const S = {
     /* padding: 0 10%; */
   `,
   HeaderTitle: styled.span`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
     font-family: 'S-CoreDream-6Bold';
     font-size: 1.2rem;
   `,
-  HeaderRight: styled.div``,
+  HeaderRight: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
+  HeaderCenter: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    font-family: 'S-CoreDream-6Bold';
+    font-size: 1.2rem;
+  `,
+  HeaderInput: styled.input`
+    width: 100px;
+    font-family: 'S-CoreDream-6Bold';
+    font-size: 1.2rem;
+  `,
+  PasteIcon: styled(MdContentPaste)`
+    margin-left: 5px;
+    width: 24px;
+    height: 24px;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      color: #907b7b;
+      transform: scale(1.1);
+    }
+  `,
   HeaderLeft: styled.div``,
   UsableSpace: styled.div`
     width: 100%;
