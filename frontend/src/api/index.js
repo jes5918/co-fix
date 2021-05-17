@@ -27,9 +27,9 @@ function AuthorizationInstance() {
 
   instance.interceptors.request.use(
     async function (config) {
-      const accToken = await getToken();
-      // const accToken =
-      //   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNyIsImlhdCI6MTYyMTIzODEwNiwiZXhwIjoxNjIxMzI0NTA2fQ.yxs_hL1nu09K0BW3P9fsK_fRrzVsuLdJA0nFgKelEzM';
+      // const accToken = await getToken();
+      const accToken =
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNyIsImlhdCI6MTYyMTI0MjMzNiwiZXhwIjoxNjIxMzI4NzM2fQ.TYfAIDmlyjdlICsJoBYuCnwolahyTsG4-x6UpM6Q788';
 
       config.headers = {
         Authorization: 'Bearer ' + accToken,

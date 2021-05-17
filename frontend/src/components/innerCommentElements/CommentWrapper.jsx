@@ -17,10 +17,10 @@ const S = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 400px;
+    width: 100%;
     height: fit-content;
-    padding: 0 20px;
-    margin-bottom: 20px;
+    padding: 0 5%;
+    margin-bottom: 5%;
   `,
   TopPart: styled.div`
     display: flex;
@@ -36,7 +36,9 @@ const S = {
     align-items: center;
     flex-basis: 65%;
     background-color: transparent;
+    width: 100%;
     height: fit-content;
+    word-wrap: break-word;
   `,
   AgreeButton: styled.button`
     outline: none;
