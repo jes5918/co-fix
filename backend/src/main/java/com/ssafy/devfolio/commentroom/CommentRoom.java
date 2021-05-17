@@ -95,13 +95,10 @@ public class CommentRoom implements Serializable {
      * @return int
      */
     public int enterCommentRoom(String nickname) {
-        // 현재 참가자 인원이 최대인 경우 예외처리
+        // 현재 참가자 인원
         long onlineMemberCount = this.members.stream()
                 .filter(member -> member.isOnline())
                 .count();
-        if (onlineMemberCount >= this.memberLimit) {
-            throw new BaseException(ErrorCode.COMMENT_ROOM_FULL_EXCEPTION);
-        }
 
         // 이미 참가했었던 유저라면 online 상태로 변경
         for (JoinMember member : this.members) {
@@ -110,6 +107,12 @@ public class CommentRoom implements Serializable {
                 return 0;
             }
         }
+
+        // 신규 유저인 경우 최대 참가 인원 초과시 접속 불가능
+        if (onlineMemberCount >= this.memberLimit) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_FULL_EXCEPTION);
+        }
+
         // 신규 유저면 첨삭방에 추가
         this.members.add(JoinMember.newMember(nickname));
         return 1;
