@@ -35,7 +35,7 @@ const localStorage = window.localStorage;
 
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
-  const { roomId, documentId, memberId } = useRoomInfo();
+  const { roomId, documentId, memberId, roomTitle } = useRoomInfo();
   const { credentials } = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
   const sentences = useSelector((state) => {
@@ -132,14 +132,21 @@ export default function CommonWorkPage() {
     connectSocket();
 
     return () => {
-      console.log('CommonWorkPage is unmounted.');
-      disconnectSocket();
+      // console.log('CommonWorkPage is unmounted.');
+      // disconnectSocket();
     };
   }, []);
 
   return (
     <S.CommonWorkPage oncopy="return false" oncut="return false">
-      <RoomSettingButtonContainer />
+      <S.HeaderSpace>
+        <S.HeaderLeft>
+          <S.HeaderTitle>제목 : {roomTitle}</S.HeaderTitle>
+        </S.HeaderLeft>
+        <S.HeaderRight>
+          <RoomSettingButtonContainer />
+        </S.HeaderRight>
+      </S.HeaderSpace>
       <S.UsableSpace>
         <S.LeftSide>
           <Scrollbars style={{ width: '100%', height: '100%' }}>
@@ -170,12 +177,27 @@ const S = {
   CommonWorkPage: styled.div`
     width: 100%;
     height: 100%;
-    padding-top: 86px;
+    /* padding-top: 86px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(to bottom, #ffffeb, #ffcbee);
   `,
+  HeaderSpace: styled.div`
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+  `,
+  HeaderTitle: styled.span`
+    font-family: 'S-CoreDream-6Bold';
+    font-size: 1.2rem;
+  `,
+  HeaderRight: styled.div``,
+  HeaderLeft: styled.div``,
   UsableSpace: styled.div`
     width: 80%;
     height: 90%;
@@ -187,11 +209,13 @@ const S = {
     box-shadow: 0 0 30px #dddddd;
     border-radius: 20px;
     overflow: hidden;
+    background-color: white;
   `,
   RightSide: styled.div`
     flex-basis: 35%;
     box-shadow: 0 0 30px #dddddd;
     border-radius: 20px;
     overflow: hidden;
+    background-color: white;
   `,
 };
