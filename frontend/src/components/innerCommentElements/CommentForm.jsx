@@ -34,8 +34,8 @@ function CommentForm({ sentenceId, onHandleClickSentence }) {
   };
 
   const onHandleSubmit = (e) => {
-    if (e.keyCode === 13) {
-      const content = inputRef.current.value;
+    const content = inputRef.current.value.trim();
+    if (!e.shiftKey && e.keyCode === 13 && content) {
       const nickname = localStorage.getItem('nickname') || 'anonymous';
       onHandleSubmitComment(sentenceId, nickname, content);
       inputRef.current.value = '';
