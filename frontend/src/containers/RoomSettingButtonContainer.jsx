@@ -28,33 +28,41 @@ export default function RoomSettingButtonContainer() {
   );
 
   // 모달창 관련
-  const [
-    isModifyRoomSettingModalOpen,
-    setIsModifyRoomSettingModalOpen,
-  ] = useState(false);
+  const [isModifyRoomSettingModalOpen, setIsModifyRoomSettingModalOpen] =
+    useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isPartNumModalOpen, setIsPartNumModalOpen] = useState(false);
 
   const ModifyRoomSettingModalToggleHandler = () => {
     setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
   };
 
   const ModifyRoomSettingHandler = () => {
-    modifyRoom(
-      RoomInfo.roomId,
-      numParticipant,
-      title,
-      (res) => {
-        console.log(`res`, res);
-        setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
-      },
-      (err) => {
-        console.log(`이미 닫힌 방인지 확인`, err);
-      },
-    );
+    const originNum = Number(RoomInfo.memberLimit);
+    if (originNum > numParticipant) {
+      ParticipantNumModalToggleHandler();
+    } else {
+      modifyRoom(
+        RoomInfo.roomId,
+        numParticipant,
+        title,
+        (res) => {
+          console.log(`res`, res);
+          setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
+        },
+        (err) => {
+          console.log(`이미 닫힌 방인지 확인`, err);
+        },
+      );
+    }
   };
 
   const AlertModalToggleHandler = () => {
     setIsAlertModalOpen(!isAlertModalOpen);
+  };
+
+  const ParticipantNumModalToggleHandler = () => {
+    setIsPartNumModalOpen(!isPartNumModalOpen);
   };
 
   const CloseRoomHandler = () => {
@@ -88,9 +96,7 @@ export default function RoomSettingButtonContainer() {
         ModalToggleHandler={ModifyRoomSettingModalToggleHandler}
       >
         <ModifyRoomSettingModal
-          RoomInfo={RoomInfo}
           PropsComfirmHandler={ModifyRoomSettingHandler}
-          PropsRejectHandler={ModifyRoomSettingModalToggleHandler}
           setTitle={setTitle}
           setNumParticipant={setNumParticipant}
           title={title}
@@ -104,9 +110,20 @@ export default function RoomSettingButtonContainer() {
         ModalToggleHandler={AlertModalToggleHandler}
       >
         <AlertModal
-          PropsText="첨삭방을 정말 닫으시겠습니까?"
+          PropsText="정말 방을 닫으시겠습니까?"
           PropsComfirmHandler={CloseRoomHandler}
           PropsRejectHandler={AlertModalToggleHandler}
+        />
+      </Modal>
+      <Modal
+        width="500px"
+        height="320px"
+        isModalOpen={isPartNumModalOpen}
+        ModalToggleHandler={ParticipantNumModalToggleHandler}
+      >
+        <AlertModal
+          PropsText="원래 인원 수 보다 줄일 수 없어요"
+          PropsComfirmHandler={ParticipantNumModalToggleHandler}
         />
       </Modal>
     </>
