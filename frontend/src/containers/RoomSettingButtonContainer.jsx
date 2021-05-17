@@ -9,7 +9,7 @@ import { IoMdExit } from 'react-icons/io';
 import { closeRoom, modifyRoom } from '../api/co-fix';
 
 // hooks
-import { resetRoomInfo } from '../modules/actions/roomActions';
+import { resetRoomInfo, updateRoomInfo } from '../modules/actions/roomActions';
 import { documentGetAction } from '../modules/actions/documentActions';
 import useRoomInfo from '../hook/useRoomInfo';
 
@@ -47,7 +47,12 @@ export default function RoomSettingButtonContainer() {
         numParticipant,
         title,
         (res) => {
-          console.log(`res`, res);
+          const data = {
+            roomId: RoomInfo.roomId,
+            title: title,
+            maxcnt: numParticipant,
+          };
+          dispatch(updateRoomInfo(data));
           setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
         },
         (err) => {
