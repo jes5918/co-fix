@@ -28,7 +28,6 @@ public class CommentService {
     private String DOCUMENT_PREFIX;
 
     private final SentenceService sentenceService;
-    private final RedisTemplate<String, String> redisTemplate;
     private final HashOperations<String, String, String> hashOperations;
 
     private final ObjectMapper objectMapper;
@@ -51,6 +50,10 @@ public class CommentService {
     }
 
     public List<Comment> getComments(String documentId, String sentenceId) {
+        if (!hashOperations.hasKey(DOCUMENT_PREFIX + documentId, sentenceId)){
+            throw new BaseException(ErrorCode.SENTENCE_NOT_EXIST);
+        }
+
         return hashOperations.values(SENTENCE_PREFIX + sentenceId).stream()
                 .map(wrapper(commentString -> objectMapper.readValue(commentString, Comment.class)))
                 .collect(Collectors.toList());
