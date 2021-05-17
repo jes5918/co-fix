@@ -17,7 +17,8 @@ import OpenviduTest from './views/OpenviduTest';
 import NavBar from './containers/NavBar';
 
 // components
-// import { PrivateRoute } from './utils/PrivateRoute';
+import { PrivateRoute } from './utils/PrivateRoute';
+import { NickNameRoute } from './utils/NickNameRoute';
 
 function App() {
   const user = useLoginUser();
