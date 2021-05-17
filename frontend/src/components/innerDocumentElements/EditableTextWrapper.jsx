@@ -11,11 +11,11 @@ import { setSubscription } from '../../modules/actions/roomActions';
 import styled from 'styled-components';
 import Editabletext from './Editabletext';
 import useRoomInfo from '../../hook/useRoomInfo';
+import useLoginUser from '../../hook/useLoginUser';
+import useDocument from '../../hook/useDocument';
 
 // library
 import { debounce } from 'lodash';
-
-import useDocument from '../../hook/useDocument';
 
 export default function EditableTextWrapper({
   data,
@@ -28,7 +28,8 @@ export default function EditableTextWrapper({
   const { modifiedContent, sentenceId } = data;
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
-  const { roomId, documentId } = useRoomInfo();
+  const { roomId, documentId, memberId } = useRoomInfo();
+  const { credentials } = useLoginUser();
   const { selectNum } = useDocument();
 
   const editorModeToggleHandler = () => {
@@ -102,7 +103,11 @@ export default function EditableTextWrapper({
     >
       {!isEditMode ? (
         <TextContainer
-          onDoubleClick={editorModeToggleHandler}
+          onDoubleClick={() => {
+            if (memberId === credentials.member.id) {
+              editorModeToggleHandler();
+            }
+          }}
           onClick={() => {
             selectDocumentHandler();
             onHandleClickSentence(data.sentenceId);
