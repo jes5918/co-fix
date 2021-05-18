@@ -11,6 +11,7 @@ import { debounce } from 'lodash';
 
 export default function MyEditableTextWrapper({
   sentence,
+  isSelected,
   roomId,
   documentId,
   onHandleClickSentence,
@@ -60,6 +61,7 @@ export default function MyEditableTextWrapper({
     <>
       {!isEditMode ? (
         <TextContainer
+          isSelected={isSelected}
           onDoubleClick={editorModeToggleHandler}
           onClick={selectDocumentHandler}
         >
@@ -83,10 +85,10 @@ const TextContainer = styled.div`
   font-weight: bold;
   font-family: 'S-CoreDream-5Medium';
   margin: 15px 30px 0px 10px;
+  border-radius: 10px;
   &:hover {
-    background-color: #ffffdf;
+    background-color: #feffbc;
   }
-  &:focus {
-    background-color: #ffffdf;
-  }
+  border: ${({ isSelected }) =>
+    isSelected ? '2px solid #f1abab' : '2px solid transparent'};
 `;

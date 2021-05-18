@@ -37,11 +37,11 @@ export default function MyEditabletext({
 }
 
 const StyleH1Input = styled.textarea`
-  width: 98%;
+  width: 95%;
   min-height: 30px;
   resize: none;
   overflow: hidden;
-  margin: 15px 30px 0px 10px;
+  margin: 15px 20px 0px 10px;
   padding: 3px;
   font-size: 14px;
   word-break: keep-all;
