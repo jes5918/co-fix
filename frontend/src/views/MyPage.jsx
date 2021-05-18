@@ -77,9 +77,10 @@ export default function MyPage({ match }) {
   const isHalfScreen = windowWidthSize > screen.width / 1.85;
   const isMobileScreen = windowWidthSize > screen.width / 3;
   const dispatch = useDispatch();
-  const sentences = useSelector((state) => {
-    return state.document.data;
+  const documentData = useSelector((state) => {
+    return state.document;
   });
+  const sentences = documentData.data;
 
   // sentence 클릭 -> comment 조회
   const onHandleClickSentence = (sentenceId) => {
@@ -132,7 +133,7 @@ export default function MyPage({ match }) {
   }, []);
 
   const gotoBack = () => {
-    history.goBack();
+    history.push('/mypagelist');
   };
 
   return (
@@ -157,13 +158,10 @@ export default function MyPage({ match }) {
         </TabList>
         <MyPageContainer>
           <MyPageHeader>
-            {isMobileScreen ? (
-              <>{sentences && <MyPageTitle>{sentences.title}</MyPageTitle>}</>
-            ) : (
-              <MyPageTitle></MyPageTitle>
-            )}
+            <MyPageHeaderInner>
+              <MyPageTitle>제목 : {documentData.title}</MyPageTitle>
+            </MyPageHeaderInner>
           </MyPageHeader>
-
           <TabPanel>
             <ScreenSlideDivider setSplitPosX={setSplitPosX}>
               <>
@@ -225,7 +223,7 @@ const BackGround = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
-  padding-top: 86px;
+  padding-top: 50px;
   background: linear-gradient(to top, #fef9d7, #d299c2);
 `;
 
@@ -273,7 +271,7 @@ const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 85%;
-  height: 80vh;
+  height: 100%;
   margin: 0px auto;
   font-family: 'S-CoreDream-5Medium';
   font-size: 18px;
@@ -287,15 +285,24 @@ const MyPageHeader = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
+  padding-bottom: 10px;
 `;
 
+const MyPageHeaderInner = styled.div`
+  margin-bottom: 0;
+`;
 const MyPageTitle = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
+  align-items: center;
   height: 50px;
   font-size: 21px;
   font-weight: bold;
+  padding: 10px 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
 `;
 
 const Prev = styled(FaAngleLeft)`
