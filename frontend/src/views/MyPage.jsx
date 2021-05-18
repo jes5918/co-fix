@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 // library
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import { FaAngleLeft } from 'react-icons/fa';
 
 // apis
 import { getDocuments } from '../api/documents';
@@ -56,6 +58,7 @@ const CustomTab = ({ children }) => (
 CustomTab.tabsRole = 'Tab';
 
 export default function MyPage({ match }) {
+  const history = useHistory();
   const roomId = match.params.roomid;
   const documentId = match.params.documentid;
   const [tabIndex, setTabIndex] = useState(0);
@@ -128,8 +131,13 @@ export default function MyPage({ match }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const gotoBack = () => {
+    history.goBack();
+  };
+
   return (
     <BackGround>
+      <Prev onClick={gotoBack} />
       <StyledTabs
         selectedIndex={tabIndex}
         onSelect={(index) => setTabIndex(index)}
@@ -288,4 +296,14 @@ const MyPageTitle = styled.div`
   height: 50px;
   font-size: 21px;
   font-weight: bold;
+`;
+
+const Prev = styled(FaAngleLeft)`
+  font-size: 55px;
+  color: #5f5f5f;
+  position: absolute;
+  top: 2%;
+  left: 1%;
+  cursor: pointer;
+  z-index: 2;
 `;
