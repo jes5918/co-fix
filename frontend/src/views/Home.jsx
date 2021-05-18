@@ -43,16 +43,6 @@ export default function Home() {
     setIsAutoLoginChecked(!isAutoLoginChecked);
   };
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setScrollY(window.scrollY + window.innerHeight - 200);
-  //     console.log('현재 스크롤 위치 : ', window.scrollY);
-  //     console.log('계산값 : ', window.scrollY + window.innerHeight - 200);
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, []);
-
   return (
     <>
       <HomeWrapper>
