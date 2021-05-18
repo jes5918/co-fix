@@ -7,17 +7,21 @@ const S = {
   CommentWrapper: styled.span`
     width: 100%;
     height: fit-content;
-    background-color: #d3f8da;
     padding: 10px 10px;
     border-radius: 10px;
     font-family: 'S-CoreDream-5Medium';
     font-size: 16px;
     color: #414141;
+    background-color: ${({ backgroundColor }) => backgroundColor};
   `,
 };
 
-function UserComment({ comment }) {
-  return <S.CommentWrapper>{comment}</S.CommentWrapper>;
+function UserComment({ comment, backgroundColor }) {
+  return (
+    <S.CommentWrapper backgroundColor={backgroundColor}>
+      {comment}
+    </S.CommentWrapper>
+  );
 }
 
 export default UserComment;

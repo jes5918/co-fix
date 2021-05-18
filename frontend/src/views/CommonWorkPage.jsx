@@ -136,8 +136,6 @@ export default function CommonWorkPage() {
     scrollRef.current.scrollToBottom({
       behavior: 'smooth',
     });
-    console.log(scrollRef);
-    console.log(scrollRef.current);
   };
 
   const onHandleClickLayout = () => {
@@ -215,6 +213,7 @@ export default function CommonWorkPage() {
                 testRequest={testRequest}
                 onHandleClickSentence={onHandleClickSentence}
                 stompClientTest={stompClientTest}
+                onFocusedSentenceId={onFocusedSentence}
               />
             </Scrollbars>
             <CalcContentLength

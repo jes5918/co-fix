@@ -9,6 +9,7 @@ function DocumentContainer({
   testRequest,
   stompClientTest,
   onHandleClickSentence,
+  onFocusedSentenceId,
 }) {
   // const datas = useSelector((state) => {
   //   return state.document.data;
@@ -19,6 +20,8 @@ function DocumentContainer({
     <>
       {sentences &&
         sentences.map((data, idx) => {
+          const isSelected =
+            onFocusedSentenceId && onFocusedSentenceId === data.sentenceId;
           return (
             <EditableTextWrapper
               key={idx}
@@ -28,6 +31,7 @@ function DocumentContainer({
               stompClientTest={stompClientTest}
               subscription={subscription}
               setSubscription={setSubscription}
+              isSelected={isSelected}
             />
           );
         })}
