@@ -18,7 +18,12 @@ public class RedisListenerService {
 
 
     public void createRoomTopic(String roomId) {
-        ChannelTopic channel = new ChannelTopic(roomId);
+        ChannelTopic channel = channels.get(roomId);
+
+        // 현재 roomId로 된 채널 없으면 생성
+        if (channel == null) {
+            channel = ChannelTopic.of(roomId);
+        }
         redisMessageListener.addMessageListener(redisRoomSubscriber, channel);
         channels.put(roomId, channel);
     }
@@ -30,15 +35,9 @@ public class RedisListenerService {
 
         if ( channel == null ){
             channel = new ChannelTopic(sentenceId);
-            redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
-            channels.put(sentenceId, channel);
         }
-
-        else {
-            redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
-            channels.put(sentenceId, channel);
-        }
-
+        redisMessageListener.addMessageListener(redisSentenceSubscriber, channel);
+        channels.put(sentenceId, channel);
     }
 
 }
