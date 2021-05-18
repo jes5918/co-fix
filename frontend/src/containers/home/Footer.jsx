@@ -81,8 +81,22 @@ const FooterNav = {
   `,
 };
 
-export default function Footer() {
+export default function Footer({ ModalToggleHandler }) {
   const history = useHistory();
+  const onClickCreateHandler = () => {
+    if (localStorage.getItem('user')) {
+      history.push('/create');
+    } else {
+      ModalToggleHandler();
+    }
+  };
+  const onClickHistoryHandler = () => {
+    if (localStorage.getItem('user')) {
+      history.push('/history');
+    } else {
+      ModalToggleHandler();
+    }
+  };
   return (
     <StyledFooter.container>
       <StyledFooter.rowBox>
@@ -101,14 +115,14 @@ export default function Footer() {
           </FooterNav.menu>
           <FooterNav.menu
             onClick={() => {
-              history.push('/history');
+              onClickHistoryHandler();
             }}
           >
             History
           </FooterNav.menu>
           <FooterNav.menu
             onClick={() => {
-              history.push('/create');
+              onClickCreateHandler();
             }}
           >
             Start Co-Fix Project

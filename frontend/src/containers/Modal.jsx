@@ -21,7 +21,7 @@ export default function Modal({
 }
 
 const ModalLayer = styled.div`
-  position: absolute;
+  position: fixed;
   display: ${({ isModalOpen }) => (isModalOpen ? 'flex' : 'none')};
   align-items: center;
   justify-content: center;

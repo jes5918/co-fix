@@ -52,7 +52,7 @@ export default function Home() {
         <Section_4 className="test" />
         {/* <Section_5 className="test" /> */}
         {/* <Section_6 className="test" /> */}
-        <Footer />
+        <Footer ModalToggleHandler={ModalToggleHandler} />
       </HomeWrapper>
       <Modal
         ModalToggleHandler={ModalToggleHandler}
