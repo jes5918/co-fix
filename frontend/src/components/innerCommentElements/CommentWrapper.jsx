@@ -82,15 +82,15 @@ const S = {
 };
 
 const backgroundColors = [
-  '#FFADAD',
-  '#FFD6A5',
-  '#FDFFB6',
-  '#CAFFBF',
-  '#9BF6FF',
-  '#A0C4FF',
-  '#BDB2FF',
-  '#FFC6FF',
-  '#faedcd',
+  '#ffe6e6',
+  '#fceede',
+  '#fffbd5',
+  '#e9ffe2',
+  '#d9fcff',
+  '#e2edff',
+  '#eae7ff',
+  '#ffeeff',
+  '#fff2f2',
 ];
 
 function CommentWrapper({ userId, comment, sentenceId }) {

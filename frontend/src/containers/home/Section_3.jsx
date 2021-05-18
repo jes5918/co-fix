@@ -59,7 +59,7 @@ const Section = {
     }
   `,
   leftText: styled.div`
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: bold;
     font-family: 'S-CoreDream-6Bold';
     z-index: 10;
@@ -111,11 +111,12 @@ export default function Section_3() {
         </Section.leftTitle>
         <Section.leftContentFrame {...animatedFadeItem[3]}>
           <Section.leftText>
-            CO-FIX는 비대면 온라인 첨삭의 불편함을 줄이기 위해 시작되었습니다.
+            CO-FIX는 비대면 온라인 첨삭의 불편함을
+            <br /> 줄이기 위해 시작되었습니다.
             <br />
             화상 미팅, 실시간 공유 문서, 의견 취합을 <br />
-            모두 한 번에 가능하게 하여 편리한 라이브 온라인 첨삭 플랫폼을
-            만들었습니다.
+            모두 한 번에 가능하게 해<br /> 편리한 라이브 온라인 첨삭 플랫폼을
+            만들게 되었습니다.
           </Section.leftText>
         </Section.leftContentFrame>
       </Section.leftFrmae>
