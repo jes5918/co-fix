@@ -98,16 +98,12 @@ function CommentWrapper({ userId, comment, sentenceId }) {
   const { roomId, documentId, members } = useRoomInfo();
   const { credentials } = useLoginUser();
   const { commentId, nickname, agree } = comment;
+  const userNickName = window.localStorage.getItem('nickName');
   const backgroundIndex = members.findIndex(
     (member) => member.nickname === nickname,
   );
 
-  const isAgree =
-    credentials &&
-    credentials.member &&
-    agree.members.includes(credentials.member.name)
-      ? true
-      : false;
+  const isAgree = agree.members.includes(userNickName) ? true : false;
   const onHandleClick = () => {
     // Agree 요청.
     agreeComment(
