@@ -268,6 +268,11 @@ public class CommentRoomService {
     public void reenterCommentRoom(SocketMemberInfo currentSession) throws JsonProcessingException {
         CommentRoom commentRoom = getCommentRoomById(currentSession.getCommentRoomId());
 
+        // 첨삭방 새로 생성된 경우 처리 안함
+        if (commentRoom == null) {
+            return;
+        }
+
         if (commentRoom.getStatus().equals(RoomStatus.CLOSED)) {
             throw new BaseException(ErrorCode.COMMENT_ROOM_CLOSED_EXCEPTION);
         }
