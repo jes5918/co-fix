@@ -110,5 +110,11 @@ export default createGlobalStyle`
      font-weight: normal;
      font-style: normal;
 }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
   
    `;
