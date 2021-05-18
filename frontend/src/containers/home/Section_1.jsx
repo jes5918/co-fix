@@ -127,19 +127,20 @@ export default function Section_1({ ModalToggleHandler }) {
         </Section.titleBox>
         <Section.buttonBox>
           <BasicButton
-            text={'start Co-Fix'}
+            text={'START CO-FIX'}
             backgroundColor={'#fff'}
+            border={'4px solid #FAE5F4'}
             width={200}
             height={70}
-            fontSize={17}
+            fontSize={20}
             onClickHandler={() => onClickStartHandler()}
           />
           <BasicButton
-            text={'Pin Code'}
+            text={'PIN CODE'}
             backgroundColor={'#FAE5F4'}
             width={200}
             height={70}
-            fontSize={17}
+            fontSize={20}
             onClickHandler={() => {
               history.push('/join');
             }}

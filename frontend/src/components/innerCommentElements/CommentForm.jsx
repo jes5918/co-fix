@@ -111,7 +111,7 @@ const S = {
     outline: none;
     width: 100%;
     height: 80%;
-    font-family: 'S-CoreDream-5Medium';
+    font-family: 'GongGothicLight';
     overflow: hidden;
     font-size: 14px;
   `,

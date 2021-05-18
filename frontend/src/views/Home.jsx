@@ -60,8 +60,8 @@ export default function Home() {
         <Section_2 className="test" />
         <Section_3 className="test" />
         <Section_4 className="test" />
-        <Section_5 className="test" />
-        <Section_6 className="test" />
+        {/* <Section_5 className="test" /> */}
+        {/* <Section_6 className="test" /> */}
         <Footer />
       </HomeWrapper>
       <Modal
