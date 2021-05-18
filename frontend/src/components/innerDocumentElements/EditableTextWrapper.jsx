@@ -128,7 +128,7 @@ const TextContainer = styled.div`
   font-size: 18px;
   font-weight: bold;
   font-family: 'S-CoreDream-5Medium';
-  margin: 0px 0px 12px 0px;
+  margin: 0px 12px 12px 0px;
   border-radius: 10px;
   &:hover {
     background-color: #feffbc;
