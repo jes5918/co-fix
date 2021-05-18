@@ -165,11 +165,11 @@ export default function Section_4() {
             <Section.cardContentBox>
               <Section.cardContent>
                 실시간으로 문서를 첨삭해보세요.
-              </Section.cardContent>
-              <Section.cardContent>
+                <br />
                 문장에 대한 다양한 의견을
+                <br />
+                남길 수 있습니다.
               </Section.cardContent>
-              <Section.cardContent>남길 수 있습니다.</Section.cardContent>
             </Section.cardContentBox>
           </Section.cardDescribe>
         </Section.card2>
