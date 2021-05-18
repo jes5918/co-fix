@@ -6,7 +6,10 @@ import {
   documentModifyAction,
   documentSelectAction,
 } from '../../modules/actions/documentActions';
-import { commentCreateAction } from '../../modules/actions/commentActions';
+import {
+  commentCreateAction,
+  commentAgreeAction,
+} from '../../modules/actions/commentActions';
 import { setSubscription } from '../../modules/actions/roomActions';
 import styled from 'styled-components';
 import Editabletext from './Editabletext';
@@ -24,6 +27,7 @@ export default function EditableTextWrapper({
   onHandleClickSentence,
   subscription,
   setSubscription,
+  isSelected,
 }) {
   const { modifiedContent, sentenceId } = data;
   const dispatch = useDispatch();
@@ -59,29 +63,21 @@ export default function EditableTextWrapper({
   };
 
   const subscribe = (getSentenceId) => {
-    // const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
-    // const stompClient = Stomp.over(socket);
     const subscription = stompClientTest.subscribe(
       '/sentence/' + getSentenceId,
       (res) => {
         const body = JSON.parse(res.body);
         const isAgree = body.isAgree === 'false' ? false : true;
-        console.log('소켓 연결 : ', body);
-        console.log(isAgree);
         if (!isAgree) {
           dispatch(commentCreateAction(body));
+        } else {
+          dispatch(commentAgreeAction(body));
         }
         return body;
       },
     );
     return subscription;
   };
-
-  useEffect(() => {
-    // return () => {
-    //   disconnectSocket();
-    // };
-  }, []);
 
   return (
     <div
@@ -95,17 +91,12 @@ export default function EditableTextWrapper({
           setSubscription(getSubscription);
         }
       }}
-      // div에서 한다.
-      // onBlur={() => {
-      //   console.log('실행');
-      //   disconnectSocket();
-      // }}
     >
       {!isEditMode ? (
         <TextContainer
+          isSelected={isSelected}
           onDoubleClick={() => {
-            console.log(credentials.member, memberId);
-            if (credentials.member && memberId === credentials.member.id) {
+            if (credentials && memberId === credentials.member.id) {
               editorModeToggleHandler();
             }
           }}
@@ -141,4 +132,8 @@ const TextContainer = styled.div`
   &:hover {
     background-color: #feffbc;
   }
+  padding: 2px 4px;
+  border: ${({ isSelected }) =>
+    isSelected ? '2px solid #f1abab' : '2px solid transparent'};
+  /* border: 2px solid #677eff */
 `;
