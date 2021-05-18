@@ -55,6 +55,7 @@ public class SocketChannelInterceptor implements ChannelInterceptor {
                     }
                     if (socketMemberInfo.isValid()) {
                         sessionInfoMap.put(sessionId, socketMemberInfo);
+                        commentRoomService.reenterCommentRoom(socketMemberInfo);
                     } else {
                         throw new BaseException(ErrorCode.SOCKET_HEADER_INFO_NOT_EXIST);
                     }
