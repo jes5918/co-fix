@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+
+//redux
 import { useSelector, useDispatch } from 'react-redux';
 import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
 import { documentGetAction } from '../modules/actions/documentActions';
+import { logoutUserAction } from '../modules/actions/userActions';
 
 // container
 import Title from '../containers/makepjt/Title';
@@ -18,6 +21,9 @@ import { useHistory } from 'react-router';
 import { createRoom, getRoomInfo, closeRoom } from '../api/co-fix';
 import { getDocuments } from '../api/documents';
 
+//hooks
+import useLoginUser from '../hook/useLoginUser';
+
 // modal component
 import Modal from '../containers/Modal';
 import AlertModal from '../components/modal/AlertModal';
@@ -25,6 +31,7 @@ import AlertModal from '../components/modal/AlertModal';
 export default function Create() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useLoginUser();
   const [current, setCurrent] = useState(0);
   const [title, setTitle] = useState('');
   const [maxcnt, setMaxcnt] = useState(1);
@@ -53,9 +60,19 @@ export default function Create() {
         info,
         (res) => {
           console.log(`res`, res.data.data);
-          dispatch(saveRoomInfo(res.data.data));
-          // documentId로 조회
-          history.push(`/co-fix/${res.data.data.roomId}`);
+          if (user.credentials.member) {
+            dispatch(saveRoomInfo(res.data.data));
+            localStorage.setItem('nickName', user.credentials.member.name);
+            history.push(`/co-fix/${res.data.data.roomId}`);
+          } else {
+            AlertModalToggleHandler(
+              '로그인이 만료되었습니다. 다시 로그인 해주세요.',
+            );
+            setTimeout(() => {
+              AlertModalToggleHandler('');
+              dispatch(logoutUserAction);
+            }, 3000);
+          }
         },
         (err) => {
           console.error('err', err);
