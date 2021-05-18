@@ -68,6 +68,10 @@ const FooterNav = {
     margin-bottom: 10px;
     color: black;
     z-index: 1000;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+    }
     @media only screen and (max-width: 768px) {
       font-size: 1.25rem;
     }
@@ -90,7 +94,7 @@ export default function Footer() {
         <FooterNav.container>
           <FooterNav.menu
             onClick={() => {
-              history.push('/');
+              window.scrollTo(0, 0);
             }}
           >
             Home

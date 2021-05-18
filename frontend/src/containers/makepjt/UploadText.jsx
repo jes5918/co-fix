@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputForm from '../../components/common/InputForm';
 import BasicButton from '../../components/common/BasicButton';
+import Papers from '../../assets/Paper.png';
 
 export default function UploadText({ onHandleSubmit, value, onValueChange }) {
   const [length, setLength] = useState(0);
@@ -18,8 +19,11 @@ export default function UploadText({ onHandleSubmit, value, onValueChange }) {
     <>
       <ContainerFrame>
         <LeftFrame>
-          <InputLabel>첨삭할 파일을</InputLabel>
-          <InputLabel>입력해주세요.</InputLabel>
+          <LeftTitleFrame>
+            <InputLabel>첨삭할 파일을</InputLabel>
+            <InputLabel>입력해주세요.</InputLabel>
+          </LeftTitleFrame>
+          <LeftImgFrame src={Papers} alt="" />
         </LeftFrame>
         <RightFrame>
           <TextArea
@@ -100,6 +104,29 @@ const LeftFrame = styled.div`
     width: 100%;
     height: 30%;
     justify-content: center;
+  }
+`;
+const LeftTitleFrame = styled.div`
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+  }
+`;
+const LeftImgFrame = styled.img`
+  width: 80%;
+  display: flex;
+  object-fit: contain;
+  margin: auto;
+  padding-top: 50px;
+  @media only screen and (max-width: 1024px) {
+    display: none;
   }
 `;
 
