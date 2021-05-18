@@ -10,15 +10,16 @@ const LeftPanel = styled.div`
   white-space: pre-wrap;
   line-height: 27px;
   padding-right: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: 'S-CoreDream-5Medium';
+  font-size: ${({ right }) => `${right ? '19px' : '18px'}`};
+  font-weight: ${({ right }) => `${right ? '700' : 'bold'}`};
+  font-family: ${({ right }) =>
+    `${right ? 'Notosans' : 'S-CoreDream-5Medium'}`};
 `;
 
-function MypageLeft({ content }) {
+function MypageLeft({ content, right }) {
   return (
     <>
-      <LeftPanel>{content}</LeftPanel>
+      <LeftPanel right={right ? true : false}>{content}</LeftPanel>
     </>
   );
 }

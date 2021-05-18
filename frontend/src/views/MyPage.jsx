@@ -18,7 +18,7 @@ import { documentGetAction } from '../modules/actions/documentActions';
 // containers
 import ScreenSlideDivider from '../containers/ScreenSlideDivider';
 import MyDocumentContainer from '../containers/mypage/MyDocumentContainer';
-import CommentContainer from '../containers/CommentContainer';
+import MyCommentContainer from '../containers/mypage/MyCommentContainer';
 import MypageLeft from '../containers/mypage/MyPageLeft';
 
 // components
@@ -165,6 +165,7 @@ export default function MyPage({ match }) {
                     roomId={roomId}
                     documentId={documentId}
                     onHandleClickSentence={onHandleClickSentence}
+                    onFocusedSentenceId={onFocusedSentence}
                   />
                 </Scrollbars>
                 {sentences && (
@@ -176,7 +177,7 @@ export default function MyPage({ match }) {
                 )}
               </>
               <Scrollbars style={{ width: '100%', height: '100%' }}>
-                <CommentContainer sentenceId={onFocusedSentence} />
+                <MyCommentContainer sentenceId={onFocusedSentence} />
               </Scrollbars>
             </ScreenSlideDivider>
           </TabPanel>
@@ -194,12 +195,13 @@ export default function MyPage({ match }) {
               </>
               <>
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
-                  <MypageLeft content={modifiedContent} />
+                  <MypageLeft content={modifiedContent} right />
                 </Scrollbars>
                 <CalcContentLength
                   sentences={modifiedContent}
                   splitPosX={splitPosX}
                   windowWidthSize={windowWidthSize}
+                  right={true}
                 />
               </>
             </ScreenSlideDivider>

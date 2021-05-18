@@ -1,23 +1,19 @@
 import { SET_MYPAGELIST, UPDATE_MYPAGELIST_ITEM } from '../types';
 
-const initialState = {
-  data: [],
-};
+const initialState = [];
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_MYPAGELIST:
-      return {
-        data: action.payload,
-      };
+      return [...action.payload];
     case UPDATE_MYPAGELIST_ITEM: {
-      const index = state.data.findIndex(
+      const index = state.findIndex(
         (roomInfo) => roomInfo.roomId === action.payload.roomId,
       );
-      const newData = [...state.data];
+      const newData = [...state];
       newData[index] = action.payload;
-      newData[index].status = 'CLOSE';
-      return { ...state, data: newData };
+      newData[index].status = 'CLOSED';
+      return [...newData];
     }
     default:
       return state;
