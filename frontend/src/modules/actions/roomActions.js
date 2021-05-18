@@ -3,6 +3,7 @@ import {
   RESET_ROOM_INFO,
   SET_DOCUMENT_TITLE,
   UPDATE_ROOM_INFO,
+  UPDATE_MEMBER_LIST,
 } from '../types';
 
 export const saveRoomInfo = (Data) => (dispatch) => {
@@ -30,5 +31,12 @@ export const updateRoomInfo = (Data) => (dispatch) => {
   dispatch({
     type: UPDATE_ROOM_INFO,
     payload: Data,
+  });
+};
+
+export const updateMemberList = (members) => (dispatch) => {
+  dispatch({
+    type: UPDATE_MEMBER_LIST,
+    payload: members,
   });
 };
