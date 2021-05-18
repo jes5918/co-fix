@@ -14,19 +14,36 @@ const S = {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height: 100%;
+    height: 90%;
     padding: 20px 10px;
+  `,
+  CommentNotExistInfoWrapper: styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+  CommentNotExistInfo: styled.span`
+    font-family: 'S-CoreDream-5Medium';
+    font-size: 1.3rem;
+    color: #838383;
   `,
 };
 
-export default function CommentContainer({
-  sentenceId,
-  onHandleClickSentence,
-  onHandleScrollToBottom,
-}) {
+export default function CommentContainer({ sentenceId }) {
   const comments = useCommentData();
   return (
     <S.CommentContainer>
+      {comments.length < 1 && (
+        <S.CommentNotExistInfoWrapper>
+          <S.CommentNotExistInfo>
+            {sentenceId
+              ? '현재 선택된 문장에 대한 코멘트가 없습니다.'
+              : '문장을 선택해주세요.'}
+          </S.CommentNotExistInfo>
+        </S.CommentNotExistInfoWrapper>
+      )}
       {sentenceId &&
         comments &&
         comments[0] !== null &&

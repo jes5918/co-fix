@@ -10,6 +10,7 @@ import UserNickName from '../innerCommentElements/UserNickName';
 
 import useRoomInfo from '../../hook/useRoomInfo';
 import useComment from '../../hook/useComment';
+import useLoginUser from '../../hook/useLoginUser';
 import { agreeComment } from '../../api/comments';
 
 const S = {
@@ -17,9 +18,9 @@ const S = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: 95%;
     height: fit-content;
-    padding: 0 5%;
+    padding: 2% 2%;
     margin-bottom: 5%;
   `,
   TopPart: styled.div`
@@ -42,30 +43,72 @@ const S = {
   `,
   AgreeButton: styled.button`
     outline: none;
-    border: 3px solid #14880c;
+    border: 2px solid #adadad;
     border-radius: 20px;
     text-align: center;
     padding: 2px 10px;
-    color: ${({ isAgree }) => (isAgree ? 'white' : '#14880c')};
-    background-color: ${({ isAgree }) => (!isAgree ? 'white' : '#14880c')};
+    color: ${({ isAgree }) => (isAgree ? 'white' : '#adadad')};
+    background-color: ${({ isAgree }) => (!isAgree ? 'white' : '#adadad')};
     font-family: 'S-CoreDream-6Bold';
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     justify-items: flex-end;
     cursor: pointer;
+    margin-right: 10px;
   `,
   TopLeft: styled.div`
     display: flex;
     align-items: center;
   `,
+  TopRight: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+  AgreeMembersWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #adadad;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  `,
+  AgreeMembers: styled.span`
+    font-family: 'S-CoreDream-6Bold';
+    color: white;
+    font-size: 16px;
+  `,
 };
 
+const backgroundColors = [
+  '#FFADAD',
+  '#FFD6A5',
+  '#FDFFB6',
+  '#CAFFBF',
+  '#9BF6FF',
+  '#A0C4FF',
+  '#BDB2FF',
+  '#FFC6FF',
+  '#faedcd',
+];
+const avatarColors = [];
+
 function CommentWrapper({ userId, comment, sentenceId }) {
-  const [isAgree, setIsAgree] = useState(false);
-  const { roomId, documentId } = useRoomInfo();
-  const { commentId, nickname } = comment;
+  const { roomId, documentId, members } = useRoomInfo();
+  const { credentials } = useLoginUser();
+  const { commentId, nickname, agree } = comment;
+  const backgroundIndex = members.findIndex(
+    (member) => member.nickname === nickname,
+  );
+
+  const isAgree =
+    credentials &&
+    credentials.member &&
+    agree.members.includes(credentials.member.name)
+      ? true
+      : false;
   const onHandleClick = () => {
-    setIsAgree((prev) => !prev);
     // Agree 요청.
     agreeComment(
       roomId,
@@ -85,19 +128,27 @@ function CommentWrapper({ userId, comment, sentenceId }) {
     <S.CommentWrapper>
       <S.TopPart>
         <S.TopLeft>
-          <UserAvatar />
+          <UserAvatar backgroundColor={backgroundColors[backgroundIndex]} />
           <UserNickName nickname={comment.nickname} />
         </S.TopLeft>
-        <S.AgreeButton
-          data-user-id={userId}
-          onClick={() => onHandleClick()}
-          isAgree={isAgree}
-        >
-          Agree
-        </S.AgreeButton>
+        <S.TopRight>
+          <S.AgreeButton
+            data-user-id={userId}
+            onClick={() => onHandleClick()}
+            isAgree={isAgree}
+          >
+            Agree
+          </S.AgreeButton>
+          <S.AgreeMembersWrapper>
+            <S.AgreeMembers>{agree.count}</S.AgreeMembers>
+          </S.AgreeMembersWrapper>
+        </S.TopRight>
       </S.TopPart>
       <S.BottomPart>
-        <UserComment comment={comment.content} />
+        <UserComment
+          comment={comment.content}
+          backgroundColor={backgroundColors[backgroundIndex]}
+        />
       </S.BottomPart>
     </S.CommentWrapper>
   );

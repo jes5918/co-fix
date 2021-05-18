@@ -24,7 +24,6 @@ export default function (state = initialState, action) {
         (comment) => comment.commentId === action.payload.commentId,
       );
       const newData = [...state.data];
-      console.log(newData);
       newData[index] = action.payload;
       return { data: newData };
     }
