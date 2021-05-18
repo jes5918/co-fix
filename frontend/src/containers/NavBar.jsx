@@ -21,7 +21,7 @@ import Logo from '../assets/logo.png';
 // containers
 import Modal from '../containers/Modal';
 
-export default function NavBar({ isLoggedIn, user }) {
+export default function NavBar({ isLoggedIn, user, isNoLogo }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,7 +60,7 @@ export default function NavBar({ isLoggedIn, user }) {
   return (
     <>
       <NavbarMainWrapper>
-        <NavbarLogo onClick={LogoClickHandler} />
+        {!isNoLogo ? <NavbarLogo onClick={LogoClickHandler} /> : <div></div>}
         <HamburgerMenu.Container>
           {isLoggedIn ? (
             <>
@@ -144,6 +144,7 @@ const NavbarLogo = styled.img.attrs({ src: '/logo.png' })`
   height: 100%;
   box-sizing: border-box;
   z-index: 10;
+  cursor: pointer;
 `;
 
 const NavbarMenuWraper = styled.div`

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdContentPaste } from 'react-icons/md';
+import { FaAngleLeft } from 'react-icons/fa';
 import {
   saveRoomInfo,
   resetRoomInfo,
@@ -46,6 +48,7 @@ const localStorage = window.localStorage;
 
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { roomId, documentId, memberId, roomTitle, pinNumber } = useRoomInfo();
   const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
@@ -162,8 +165,8 @@ export default function CommonWorkPage() {
       );
       connectSocket();
     } else {
-      alert('잘못된 접근입니다.');
       history.push('/');
+      alert('잘못된 접근입니다.');
     }
 
     return () => {
@@ -183,6 +186,11 @@ export default function CommonWorkPage() {
     setAlertMessage(message);
     setIsAlertModalOpen(!isAlertModalOpen);
   };
+
+  const gotoBack = () => {
+    history.goBack();
+  };
+
   return (
     <>
       <Modal
@@ -197,6 +205,7 @@ export default function CommonWorkPage() {
         />
       </Modal>
       <S.CommonWorkPage oncopy="return false" oncut="return false">
+        <Prev onClick={gotoBack} />
         <S.HeaderSpace isToggle={isToggle}>
           <S.HeaderLeft>
             <S.HeaderTitle>제목 : {roomTitle}</S.HeaderTitle>
@@ -266,6 +275,16 @@ export default function CommonWorkPage() {
     </>
   );
 }
+
+const Prev = styled(FaAngleLeft)`
+  font-size: 55px;
+  color: #5f5f5f;
+  position: absolute;
+  top: 2%;
+  left: 1%;
+  cursor: pointer;
+  z-index: 2;
+`;
 
 const S = {
   CommonWorkPage: styled.div`

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import { FaAngleLeft } from 'react-icons/fa';
 
 // hook
 import useLoginUser from '../hook/useLoginUser';
@@ -16,8 +18,13 @@ import { getCommentRoomsInstance } from '../api/mypage/mypageList';
 
 export default function MyPageList() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const RoomInfos = useMyPageList();
   const user = useLoginUser();
+
+  const gotoBack = () => {
+    history.goBack();
+  };
 
   useEffect(() => {
     getCommentRoomsInstance(
@@ -32,6 +39,7 @@ export default function MyPageList() {
 
   return (
     <Background>
+      <Prev onClick={gotoBack} />
       <MyPageListWrapper>
         {user.authenticated ? (
           <MyPageListHeader>
@@ -75,4 +83,14 @@ const MyPageListWrapper = styled.div`
       opacity: 1;
     }
   }
+`;
+
+const Prev = styled(FaAngleLeft)`
+  font-size: 55px;
+  color: #5f5f5f;
+  position: absolute;
+  top: 2%;
+  left: 1%;
+  cursor: pointer;
+  z-index: 2;
 `;
