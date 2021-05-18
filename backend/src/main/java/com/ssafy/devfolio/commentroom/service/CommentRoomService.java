@@ -262,8 +262,22 @@ public class CommentRoomService {
         valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoom.getRoomId(), objectMapper.writeValueAsString(commentRoom));
 
         // 변경 내용 publish
-        ChannelTopic channel = channels.get(commentRoom.getRoomId());
+        redisSenderService.sendRoomUpdateService(commentRoom);
+    }
 
+    public void reenterCommentRoom(SocketMemberInfo currentSession) throws JsonProcessingException {
+        CommentRoom commentRoom = getCommentRoomById(currentSession.getCommentRoomId());
+
+        if (commentRoom.getStatus().equals(RoomStatus.CLOSED)) {
+            throw new BaseException(ErrorCode.COMMENT_ROOM_CLOSED_EXCEPTION);
+        }
+
+        commentRoom.enterCommentRoom(currentSession.getNickname());
+
+        // 첨삭방 정보 저장
+        valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoom.getRoomId(), objectMapper.writeValueAsString(commentRoom));
+
+        // 변경 내용 publish
         redisSenderService.sendRoomUpdateService(commentRoom);
     }
 }
