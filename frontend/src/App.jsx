@@ -36,8 +36,7 @@ function App() {
       {!isCoFixRoom && (
         <NavBar
           isLoggedIn={
-            user.authenticated &&
-            JSON.stringify(localStorage.getItem('user')).token
+            user.authenticated && JSON.parse(localStorage.getItem('user')).token
               ? true
               : false
           }
