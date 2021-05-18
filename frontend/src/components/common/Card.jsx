@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { closeRoom } from '../../api/co-fix';
 import { updateMyPageList } from '../../modules/actions/mypagelistActions';
+import DoneIcon from '../../assets/done.png';
+import CloseIcon from '../../assets/ing.png';
 
 // modal component
 import Modal from '../../containers/Modal';
 import AlertModal from '../../components/modal/AlertModal';
 
-function Card({
+export default function Card({
   RoomInfo,
   propsWidth,
   propsHeight,
@@ -22,28 +24,14 @@ function Card({
       <Container>
         <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
           <cardStyle.frontpannel>
+            {RoomInfo.status === 'CLOSED' ? (
+              <cardStyle.OpenIcon />
+            ) : (
+              <cardStyle.CloseIcon />
+            )}
             <cardStyle.title propsFontSize={propsFontSize}>
               {RoomInfo && RoomInfo.roomTitle}
             </cardStyle.title>
-            {RoomInfo.status === 'CLOSED' ? (
-              <CloseButton>CLOSED</CloseButton>
-            ) : null}
-            <cardStyle.tagBox>
-              <cardStyle.tags>
-                {RoomInfo &&
-                  RoomInfo.members.map((member, i) => {
-                    if (member.online) {
-                      return (
-                        <cardStyle.tag key={i} propsFontSize={propsFontSize}>
-                          {member.nickname}
-                        </cardStyle.tag>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-              </cardStyle.tags>
-            </cardStyle.tagBox>
           </cardStyle.frontpannel>
           <cardStyle.hoverContainer>
             <cardStyle.infoBox>
@@ -53,7 +41,7 @@ function Card({
                   RoomInfo.createdDate.substring(0, 10).replaceAll('-', '.')}
               </cardStyle.madeby>
               <cardStyle.madeby>
-                수정 날짜 :{' '}
+                마지막 수정 :{' '}
                 {RoomInfo &&
                   RoomInfo.lastModifiedDate
                     .substring(0, 10)
@@ -65,61 +53,35 @@ function Card({
               <cardStyle.madeby>
                 PIN : {RoomInfo && RoomInfo.pinNumber}
               </cardStyle.madeby>
-              <cardStyle.buttonwrapper>
-                {RoomInfo.status === 'OPEN' ? (
-                  <>
-                    <cardStyle.button enter onClick={() => onGotoLiveHandler()}>
-                      ENTER
-                    </cardStyle.button>
-                    <cardStyle.button
-                      onClick={() => onCloseRoomHandler(RoomInfo)}
-                    >
-                      CLOSE
-                    </cardStyle.button>
-                  </>
-                ) : (
-                  <cardStyle.button enter onClick={() => onGotoMyPageHandler()}>
-                    CO-FIX 결과
-                  </cardStyle.button>
-                )}
-              </cardStyle.buttonwrapper>
             </cardStyle.infoBox>
+            <cardStyle.buttonwrapper>
+              {RoomInfo.status === 'OPEN' ? (
+                <>
+                  <cardStyle.button enter onClick={() => onGotoLiveHandler()}>
+                    ENTER
+                  </cardStyle.button>
+                  <cardStyle.button
+                    onClick={() => onCloseRoomHandler(RoomInfo)}
+                  >
+                    CLOSE
+                  </cardStyle.button>
+                </>
+              ) : (
+                <cardStyle.button enter onClick={() => onGotoMyPageHandler()}>
+                  CO-FIX 결과
+                </cardStyle.button>
+              )}
+            </cardStyle.buttonwrapper>
           </cardStyle.hoverContainer>
         </cardStyle.mainFrame>
       </Container>
     </>
   );
 }
-export default Card;
+
 const Container = styled.div`
   position: relative;
   margin: 20px 5px;
-`;
-
-const CloseButton = styled.div`
-  /* position: absolute;
-  top: 30%;
-  left: 0%; */
-  z-index: 1;
-  width: 90%;
-  height: 35px;
-  color: #555;
-  font-size: 1.2rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  font-family: 'Samlip';
-  font-weight: bold;
-  mix-blend-mode: multiply;
-  color: #d63b3b;
-  border: 0.2rem solid #d81f1f;
-  border-radius: 5%;
-  /* transform: rotate(-30deg); */
-  /* -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
-  -webkit-mask-size: 944px 604px;
-  -webkit-mask-position: 13rem 6rem; */
 `;
 
 const cardStyle = {
@@ -147,7 +109,7 @@ const cardStyle = {
   frontpannel: styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 30px;
@@ -162,7 +124,8 @@ const cardStyle = {
   hoverContainer: styled.div`
     width: 100%;
     height: 100%;
-    background-color: #e7ecda;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
     position: absolute;
     font-family: 'S-CoreDream-6Bold';
     font-weight: 300;
@@ -177,7 +140,7 @@ const cardStyle = {
   `,
   infoBox: styled.div`
     width: 100%;
-    height: 100%;
+    height: 65%;
     margin: 0;
     z-index: 1;
     opacity: 1;
@@ -186,7 +149,7 @@ const cardStyle = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10%;
+    padding: 25% 10% 5%;
   `,
   madeby: styled.div`
     z-index: 1;
@@ -199,109 +162,53 @@ const cardStyle = {
     word-break: keep-all;
     line-height: ${({ propsFontSize }) =>
       `${propsFontSize ? propsFontSize + 20 : 27}px`};
-    border-radius: 10px;
+    /* border-radius: 10px;
     padding: 5px 10px;
     width: 100%;
     background-color: #ffffff;
-    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2); */
   `,
   title: styled.div`
     z-index: 1;
     opacity: 1;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 22px;
     margin-top: 20px;
     text-align: center;
     word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
     line-height: ${({ propsFontSize }) =>
       `${propsFontSize ? propsFontSize + 20 : 27}px`};
-  `,
-  tagBox: styled.div`
-    width: 100%;
-    height: 63%;
-    margin: 0;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
-  `,
-  tags: styled.div`
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    word-break: keep-all;
-  `,
-  tag: styled.span`
-    font-size: ${({ propsFontSize }) =>
-      `${propsFontSize ? propsFontSize : 17}px`};
-    color: #262626;
-    font-weight: bold;
-    text-align: center;
-    line-height: 20px;
-    word-break: keep-all;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: #ffffff;
-    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
   `,
   buttonwrapper: styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    width: 100%;
+    height: 20%;
+    justify-content: space-evenly;
     align-items: center;
-    margin-top: 20px;
   `,
   button: styled.div`
     margin: 5px 10px 5px;
     padding: 10px 20px;
     font-size: 1rem;
-    background-color: ${({ enter }) => (enter ? '#d3a9a9' : '#e66b53')};
+    background-color: ${({ enter }) => (enter ? '#c39393' : '#e66b53')};
     box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     color: #ffffff;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
     &:hover {
       box-shadow: 3px 3px 12px 3px rgba(0, 0, 0, 0.2);
-      background-color: ${({ enter }) => (enter ? '#c08d8d' : '#d84e33')};
+      background-color: ${({ enter }) => (enter ? '#b37f7f' : '#d84e33')};
     }
   `,
+  OpenIcon: styled.img.attrs({ src: DoneIcon })`
+    width: 150px;
+    height: auto;
+  `,
+  CloseIcon: styled.img.attrs({ src: CloseIcon })`
+    width: 150px;
+    height: auto;
+  `,
 };
-
-// 이런 형태로 내려옴
-// const roomInfotest = {
-//   roomId: '101181c0-0517-40a8-8931-8df5da61623b',
-//   memberId: 5,
-//   roomTitle: '한국가스공사',
-//   memberLimit: 3,
-//   documentId: 'a39beabe-19cf-49bf-baad-6d383a164716',
-//   pinNumber: '21423333',
-//   status: 'OPEN',
-//   members: [
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//     {
-//       nickname: 'J Euisss',
-//       online: true,
-//     },
-//   ],
-//   createdDate: '2021-05-14T15:06:59.246958',
-//   lastModifiedDate: '2021-05-14T15:06:59.246958',
-// };
