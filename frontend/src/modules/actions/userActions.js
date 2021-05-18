@@ -11,7 +11,6 @@ export const LoginAction = (userData) => (dispatch) => {
   });
   const token = `Bearer ${userData.token}`;
   axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
-  window.location.href = '/';
 };
 
 export const logoutUserAction = (dispatch) => {

@@ -107,13 +107,14 @@ const Section = {
     }
   `,
 };
-export default function Section_1({ ModalToggleHandler }) {
+export default function Section_1({ ModalToggleHandler, setFlag, flag }) {
   const history = useHistory();
   const onClickStartHandler = () => {
     if (localStorage.getItem('user')) {
       history.push('/create');
     } else {
       ModalToggleHandler();
+      setFlag(true);
     }
   };
   return (
