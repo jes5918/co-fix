@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { FiSettings } from 'react-icons/fi';
 import { IoMdExit } from 'react-icons/io';
 import { BsArrowsFullscreen, BsInfo } from 'react-icons/bs';
+import { AiOutlineFullscreenExit } from 'react-icons/ai';
 
 // apis
 import { closeRoom, modifyRoom } from '../api/co-fix';
@@ -41,6 +42,7 @@ export default function RoomSettingButtonContainer({
   const [isParticipantModalOpen, setIsParticipantModalOpen] = useState(false);
   const [isPartNumModalOpen, setIsPartNumModalOpen] = useState(false);
   const [isRoomInfoModalOpen, setIsRoomInfoModalOpen] = useState(false);
+  const [isFullScreen, setIstFullScreen] = useState(false);
 
   const ModifyRoomSettingModalToggleHandler = () => {
     setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
@@ -117,12 +119,14 @@ export default function RoomSettingButtonContainer({
   const FullScreenToggleHandler = () => {
     const element = document.getElementById('root');
     if (!document.fullscreenElement) {
+      setIstFullScreen(true);
       element.requestFullscreen().catch((err) => {
         alert(
           `Error attempting to enable full-screen mode: ${err.message} (${err.name})`,
         );
       });
     } else {
+      setIstFullScreen(false);
       document.exitFullscreen();
     }
   };
@@ -139,7 +143,11 @@ export default function RoomSettingButtonContainer({
               <BsInfo size="35px" />
             </B.button>
             <B.button onClick={FullScreenToggleHandler}>
-              <BsArrowsFullscreen />
+              {!isFullScreen ? (
+                <BsArrowsFullscreen />
+              ) : (
+                <AiOutlineFullscreenExit size="27" />
+              )}
             </B.button>
             <B.button onClick={ModifyRoomSettingModalToggleHandler}>
               <B.settingIcon />
@@ -161,7 +169,11 @@ export default function RoomSettingButtonContainer({
               <BsInfo size="35px" />
             </B.button>
             <B.button onClick={FullScreenToggleHandler}>
-              <BsArrowsFullscreen />
+              {!isFullScreen ? (
+                <BsArrowsFullscreen />
+              ) : (
+                <AiOutlineFullscreenExit size="27" />
+              )}
             </B.button>
             <BasicButton
               width={120}

@@ -63,11 +63,15 @@ function Card({
               <cardStyle.tags>
                 {RoomInfo &&
                   RoomInfo.members.map((member, i) => {
-                    return (
-                      <cardStyle.tag key={i} propsFontSize={propsFontSize}>
-                        {member.nickname}
-                      </cardStyle.tag>
-                    );
+                    if (member.online) {
+                      return (
+                        <cardStyle.tag key={i} propsFontSize={propsFontSize}>
+                          {member.nickname}
+                        </cardStyle.tag>
+                      );
+                    } else {
+                      return null;
+                    }
                   })}
               </cardStyle.tags>
             </cardStyle.tagBox>
@@ -127,7 +131,7 @@ const CloseButton = styled.div`
   left: 0%; */
   z-index: 1;
   width: 90%;
-  height: 40px;
+  height: 35px;
   color: #555;
   font-size: 1.2rem;
   font-weight: bold;
@@ -235,7 +239,7 @@ const cardStyle = {
     opacity: 1;
     font-weight: bold;
     font-size: 24px;
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
     word-break: keep-all;
     line-height: ${({ propsFontSize }) =>
@@ -243,7 +247,7 @@ const cardStyle = {
   `,
   tagBox: styled.div`
     width: 100%;
-    height: 50%;
+    height: 63%;
     margin: 0;
     z-index: 1;
     display: flex;

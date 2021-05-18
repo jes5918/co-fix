@@ -149,20 +149,25 @@ export default function CommonWorkPage() {
 
   // redux에 저장되어있는 documentReducer 가져오기
   useEffect(() => {
-    getDocuments(
-      roomId,
-      documentId,
-      (response) => {
-        dispatch(documentGetAction(response.data.data));
-      },
-      (error) => {
-        console.log(`error`, error);
-      },
-    );
-
-    connectSocket();
+    if (localStorage.getItem.nickname) {
+      getDocuments(
+        roomId,
+        documentId,
+        (response) => {
+          dispatch(documentGetAction(response.data.data));
+        },
+        (error) => {
+          console.log(`error`, error);
+        },
+      );
+      connectSocket();
+    } else {
+      alert('잘못된 접근입니다.');
+      history.push('/');
+    }
 
     return () => {
+      localStorage.removeItem('nickName');
       // stompClientTest.disconnect();
     };
   }, []);
@@ -221,11 +226,11 @@ export default function CommonWorkPage() {
                 onFocusedSentenceId={onFocusedSentence}
               />
             </Scrollbars>
-            <CalcContentLength
+            {/* <CalcContentLength
               datas={sentences}
               splitPosX={800}
               windowWidthSize={1920}
-            />
+            /> */}
           </S.LeftSide>
           <S.RightSide>
             <Scrollbars
