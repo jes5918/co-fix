@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdContentPaste } from 'react-icons/md';
-import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
+import {
+  saveRoomInfo,
+  resetRoomInfo,
+  updateMemberList,
+} from '../modules/actions/roomActions';
 import { commentSetAction } from '../modules/actions/commentActions';
 import { getRoomInfo, closeRoom } from '../api/co-fix';
 import { modifyDocuments } from '../api/documents';
@@ -98,7 +102,7 @@ export default function CommonWorkPage() {
     setStompClientTest(stompClient);
     stompClient.connect(
       {
-        nickname: localStorage.getItem('nickName') || 'defaultNickName',
+        nickname: localStorage.getItem('nickName') || 'anonymous',
         commentRoomId: roomId,
       },
       (frame) => {
@@ -106,8 +110,9 @@ export default function CommonWorkPage() {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
-          console.log('room에 문장 추가.');
+          console.log(body);
           ModifyActionHandler(modifiedSentence);
+          dispatch(updateMemberList(body.members));
           return body;
         });
       },
