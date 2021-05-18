@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import BasicButton from '../../components/common/BasicButton';
-import homeimage from '../../assets/home1.png';
+import homeimage from '../../assets/home.png';
 
 const Section = {
   wrapper: styled.div`
