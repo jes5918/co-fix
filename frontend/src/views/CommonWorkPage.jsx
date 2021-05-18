@@ -149,7 +149,7 @@ export default function CommonWorkPage() {
 
   // redux에 저장되어있는 documentReducer 가져오기
   useEffect(() => {
-    if (localStorage.getItem.nickname) {
+    if (localStorage.getItem('nickName')) {
       getDocuments(
         roomId,
         documentId,
