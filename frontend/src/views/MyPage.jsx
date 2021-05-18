@@ -133,7 +133,7 @@ export default function MyPage({ match }) {
   }, []);
 
   const gotoBack = () => {
-    history.push('/mypagelist');
+    history.push('/history');
   };
 
   return (

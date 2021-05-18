@@ -73,7 +73,7 @@ export default function NavBar({ isLoggedIn, user, isNoLogo }) {
                   onMouseLeave={HamburgerMenuToggleHandler}
                 >
                   <NavbarItem onClick={HamburgerMenuToggleHandler}>
-                    <Link to="/mypagelist">MyPageList</Link>
+                    <Link to="/history">History</Link>
                   </NavbarItem>
                   <BasicButton
                     onClickHandler={LogoutHandler}
