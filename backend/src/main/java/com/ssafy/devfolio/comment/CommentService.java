@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,7 @@ public class CommentService {
 
         return hashOperations.values(SENTENCE_PREFIX + sentenceId).stream()
                 .map(wrapper(commentString -> objectMapper.readValue(commentString, Comment.class)))
+                .sorted(Comparator.comparing(Comment::getCreatedDate))
                 .collect(Collectors.toList());
     }
 
