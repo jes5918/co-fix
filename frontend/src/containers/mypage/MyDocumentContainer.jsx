@@ -9,14 +9,18 @@ export default function MyDocumentContainer({
   roomId,
   documentId,
   onHandleClickSentence,
+  onFocusedSentenceId,
 }) {
   return (
     <>
       {sentences &&
         sentences.map((sentence, idx) => {
+          const isSelected =
+            onFocusedSentenceId && onFocusedSentenceId === sentence.sentenceId;
           return (
             <MyEditableTextWrapper
               key={idx}
+              isSelected={isSelected}
               sentence={sentence}
               roomId={roomId}
               documentId={documentId}
