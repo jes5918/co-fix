@@ -34,6 +34,10 @@ import useLoginUser from '../hook/useLoginUser';
 import CommentForm from '../components/innerCommentElements/CommentForm';
 import CalcContentLength from '../containers/mypage/CalcContentLength';
 
+// modal component
+import Modal from '../containers/Modal';
+import AlertModal from '../components/modal/AlertModal';
+
 const localStorage = window.localStorage;
 
 export default function CommonWorkPage() {
@@ -42,6 +46,9 @@ export default function CommonWorkPage() {
   const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
   const [isToggle, setIsToggle] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
   const scrollRef = useRef(null);
   const sentences = useSelector((state) => {
     return state.document.data;
@@ -161,74 +168,93 @@ export default function CommonWorkPage() {
     const pinNum = document.getElementById('pinNum');
     pinNum.select();
     document.execCommand('copy');
+    AlertModalToggleHandler('클립보드에 핀번호 복사 되었습니다.');
+  };
+
+  const AlertModalToggleHandler = (message) => {
+    setAlertMessage(message);
+    setIsAlertModalOpen(!isAlertModalOpen);
   };
   return (
-    <S.CommonWorkPage oncopy="return false" oncut="return false">
-      <S.HeaderSpace isToggle={isToggle}>
-        <S.HeaderLeft>
-          <S.HeaderTitle>제목 : {roomTitle}</S.HeaderTitle>
-        </S.HeaderLeft>
-        {user.authenticated && memberId === user.credentials.member.id ? (
-          <S.HeaderCenter>
-            PIN : &nbsp;
-            <S.HeaderInput id="pinNum" value={pinNumber} readOnly />
-            <S.PasteIcon onClick={onPinPasteHandler} />
-          </S.HeaderCenter>
-        ) : (
-          <div></div>
-        )}
-        <S.HeaderRight
-          stompClientTest={stompClientTest}
-          disconnectSocket={disconnectSocket}
+    <>
+      <Modal
+        width="fit-content"
+        height="320px"
+        isModalOpen={isAlertModalOpen}
+        ModalToggleHandler={() => AlertModalToggleHandler('')}
+      >
+        <AlertModal
+          PropsText={alertMessage}
+          PropsComfirmHandler={() => AlertModalToggleHandler('')}
         />
-      </S.HeaderSpace>
-      <S.UsableSpace isToggle={isToggle}>
-        <S.LeftSide>
-          <Scrollbars style={{ width: '100%', height: '100%' }}>
-            <DocumentContainer
-              sentences={sentences}
-              testRequest={testRequest}
-              onHandleClickSentence={onHandleClickSentence}
-              stompClientTest={stompClientTest}
-            />
-          </Scrollbars>
-          <CalcContentLength
-            datas={sentences}
-            splitPosX={800}
-            windowWidthSize={1920}
+      </Modal>
+      <S.CommonWorkPage oncopy="return false" oncut="return false">
+        <S.HeaderSpace isToggle={isToggle}>
+          <S.HeaderLeft>
+            <S.HeaderTitle>제목 : {roomTitle}</S.HeaderTitle>
+          </S.HeaderLeft>
+          {user.authenticated && memberId === user.credentials.member.id ? (
+            <S.HeaderCenter>
+              PIN : &nbsp;
+              <S.HeaderInput id="pinNum" value={pinNumber} readOnly />
+              <S.PasteIcon onClick={onPinPasteHandler} />
+            </S.HeaderCenter>
+          ) : (
+            <div></div>
+          )}
+          <S.HeaderRight
+            stompClientTest={stompClientTest}
+            disconnectSocket={disconnectSocket}
           />
-        </S.LeftSide>
-        <S.RightSide>
-          <Scrollbars
-            ref={scrollRef}
-            style={{
-              width: '100%',
-              height: '80%',
-            }}
-          >
-            <CommentContainer
-              sentenceId={onFocusedSentence}
-              onHandleClickSentence={onHandleClickSentence}
-              onHandleScrollToBottom={onHandleScrollToBottom}
+        </S.HeaderSpace>
+        <S.UsableSpace isToggle={isToggle}>
+          <S.LeftSide>
+            <Scrollbars style={{ width: '100%', height: '100%' }}>
+              <DocumentContainer
+                sentences={sentences}
+                testRequest={testRequest}
+                onHandleClickSentence={onHandleClickSentence}
+                stompClientTest={stompClientTest}
+              />
+            </Scrollbars>
+            <CalcContentLength
+              datas={sentences}
+              splitPosX={800}
+              windowWidthSize={1920}
             />
-          </Scrollbars>
-          <S.CommentFormWrapper>
-            <CommentForm
-              sentenceId={onFocusedSentence}
-              onHandleClickSentence={onHandleClickSentence}
-              onHandleScrollToBottom={onHandleScrollToBottom}
-            />
-          </S.CommentFormWrapper>
-        </S.RightSide>
-      </S.UsableSpace>
-      {/* <Participant /> */}
-      <OpenViduMain
-        isToggle={isToggle}
-        setIsToggle={onHandleClickLayout}
-        roomTitle={roomTitle}
-        pinNumber={pinNumber}
-      />
-    </S.CommonWorkPage>
+          </S.LeftSide>
+          <S.RightSide>
+            <Scrollbars
+              ref={scrollRef}
+              style={{
+                width: '100%',
+                height: '80%',
+              }}
+            >
+              <CommentContainer
+                sentenceId={onFocusedSentence}
+                onHandleClickSentence={onHandleClickSentence}
+                onHandleScrollToBottom={onHandleScrollToBottom}
+              />
+            </Scrollbars>
+            <S.CommentFormWrapper>
+              <CommentForm
+                sentenceId={onFocusedSentence}
+                onHandleClickSentence={onHandleClickSentence}
+                onHandleScrollToBottom={onHandleScrollToBottom}
+              />
+            </S.CommentFormWrapper>
+          </S.RightSide>
+        </S.UsableSpace>
+        {/* <Participant /> */}
+        <OpenViduMain
+          isToggle={isToggle}
+          setIsToggle={onHandleClickLayout}
+          roomTitle={roomTitle}
+          pinNumber={pinNumber}
+        />
+      </S.CommonWorkPage>
+    </>
   );
 }
 
