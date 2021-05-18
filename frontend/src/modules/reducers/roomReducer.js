@@ -1,4 +1,9 @@
-import { SET_ROOM_INFO, RESET_ROOM_INFO, UPDATE_ROOM_INFO } from '../types';
+import {
+  SET_ROOM_INFO,
+  RESET_ROOM_INFO,
+  UPDATE_ROOM_INFO,
+  UPDATE_MEMBER_LIST,
+} from '../types';
 
 const initialState = {
   roomId: '',
@@ -38,6 +43,11 @@ export default function (state = initialState, action) {
           memberLimit: action.payload.maxcnt,
         };
       } else return state;
+    case UPDATE_MEMBER_LIST:
+      return {
+        ...state,
+        members: action.payload,
+      };
     default:
       return state;
   }
