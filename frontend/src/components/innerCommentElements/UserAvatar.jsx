@@ -11,18 +11,19 @@ const S = {
     justify-content: center;
     align-items: center;
     margin-right: 10px;
+    background-color: ${({ backgroundColor }) => backgroundColor};
+    border-radius: 50%;
   `,
   UserAvatar: styled.span`
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #d3f8da;
   `,
 };
 
-function UserAvatar() {
+function UserAvatar({ backgroundColor }) {
   return (
-    <S.UserAvatarWrapper>
+    <S.UserAvatarWrapper backgroundColor={backgroundColor}>
       <S.UserAvatar />
     </S.UserAvatarWrapper>
   );
