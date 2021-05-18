@@ -15,41 +15,10 @@ function Card({
   propsFontSize,
   onGotoMyPageHandler,
   onGotoLiveHandler,
+  onCloseRoomHandler,
 }) {
-  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const dispatch = useDispatch();
-  const onCloseRoomHandler = () => {
-    setIsAlertModalOpen(!isAlertModalOpen);
-  };
-
-  const CloseRoom = () => {
-    closeRoom(
-      RoomInfo.roomId,
-      (res) => {
-        console.log(`res`, res);
-        dispatch(updateMyPageList(RoomInfo));
-        onCloseRoomHandler();
-      },
-      (err) => {
-        console.log(`이미 닫힌 방인지 확인`, err);
-      },
-    );
-  };
-
   return (
     <>
-      <Modal
-        width="fit-content"
-        height="320px"
-        isModalOpen={isAlertModalOpen}
-        ModalToggleHandler={() => onCloseRoomHandler()}
-      >
-        <AlertModal
-          PropsText="정말로 Live Room을 닫으시겠습니까?"
-          PropsComfirmHandler={() => CloseRoom()}
-          PropsRejectHandler={() => onCloseRoomHandler()}
-        />
-      </Modal>
       <Container>
         <cardStyle.mainFrame propsWidth={propsWidth} propsHeight={propsHeight}>
           <cardStyle.frontpannel>
@@ -102,7 +71,9 @@ function Card({
                     <cardStyle.button enter onClick={() => onGotoLiveHandler()}>
                       ENTER
                     </cardStyle.button>
-                    <cardStyle.button onClick={() => onCloseRoomHandler()}>
+                    <cardStyle.button
+                      onClick={() => onCloseRoomHandler(RoomInfo)}
+                    >
                       CLOSE
                     </cardStyle.button>
                   </>

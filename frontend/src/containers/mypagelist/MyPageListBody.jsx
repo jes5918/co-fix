@@ -14,11 +14,17 @@ import AlertModal from '../../components/modal/AlertModal';
 
 // redux
 import { saveRoomInfo } from '../../modules/actions/roomActions';
+import { commentResetAction } from '../../modules/actions/commentActions';
+import useLoginUser from '../../hook/useLoginUser';
 
-export default function TemplateBody({ RoomInfos }) {
-  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+export default function TemplateBody({
+  RoomInfos,
+  AlertModalToggleHandler,
+  onCloseRoomHandler,
+}) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useLoginUser();
 
   // 마이페이지 가는 핸들러
   const GoToMyPageHandler = (RoomInfo) => {
@@ -26,34 +32,19 @@ export default function TemplateBody({ RoomInfos }) {
     history.push(`/mypage/${RoomInfo.roomId}/${RoomInfo.documentId}`);
   };
 
-  // 모달 토글 핸들러
-  const AlertModalToggleHandler = () => {
-    setIsAlertModalOpen(!isAlertModalOpen);
-  };
-
-  // 새로운 프로젝트 생성
-  const onPlusCardClickHandler = () => {
-    history.push('/create');
-  };
-
   // 라이브 방 가는 핸들러
   const onGotoLiveHandler = (RoomInfo) => {
     dispatch(saveRoomInfo(RoomInfo));
+    dispatch(commentResetAction());
+    localStorage.setItem(
+      'nickName',
+      user.credentials.member && user.credentials.member.name,
+    );
     history.push(`/co-fix/${RoomInfo.roomId}`);
   };
 
   return (
     <>
-      <Modal
-        isModalOpen={isAlertModalOpen}
-        ModalToggleHandler={AlertModalToggleHandler}
-      >
-        <AlertModal
-          PropsText="새 Co-Fix를 만드시겠습니까?"
-          PropsComfirmHandler={() => onPlusCardClickHandler()}
-          PropsRejectHandler={() => AlertModalToggleHandler()}
-        />
-      </Modal>
       <Scrollbars
         style={{
           width: '100%',
@@ -77,6 +68,7 @@ export default function TemplateBody({ RoomInfos }) {
                   propsFontSize={18}
                   onGotoMyPageHandler={() => GoToMyPageHandler(RoomInfo)}
                   onGotoLiveHandler={() => onGotoLiveHandler(RoomInfo)}
+                  onCloseRoomHandler={onCloseRoomHandler}
                 />
               );
             })}
