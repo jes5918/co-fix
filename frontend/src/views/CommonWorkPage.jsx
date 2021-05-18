@@ -179,7 +179,7 @@ export default function CommonWorkPage() {
     const pinNum = document.getElementById('pinNum');
     pinNum.select();
     document.execCommand('copy');
-    AlertModalToggleHandler('클립보드에 핀번호 복사 되었습니다.');
+    AlertModalToggleHandler('클립보드에 핀번호가 복사 되었습니다.');
   };
 
   const AlertModalToggleHandler = (message) => {
@@ -188,7 +188,7 @@ export default function CommonWorkPage() {
   };
 
   const gotoBack = () => {
-    history.goBack();
+    history.push('/');
   };
 
   return (
@@ -303,9 +303,9 @@ const S = {
     width: 100%;
     height: 10%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    padding: 0;
+    padding: 0 0%;
     transition: all 0.7s ease-in-out;
     transform: ${({ isToggle }) =>
       isToggle ? 'translateX(-11%)' : 'translateX(0px)'};

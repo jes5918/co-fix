@@ -72,7 +72,7 @@ function CalcContentLength({
           bgColor="lightcoral"
           width={
             windowWidthSize > screen.width / 1.85
-              ? String(screen.width / 1.85 - splitPosX * 0.9) + 'px'
+              ? String(screen.width / 1.85 - splitPosX * 0.8) + 'px'
               : '0px'
           }
           height={windowWidthSize > screen.width / 1.85 ? '25px' : '0px'}

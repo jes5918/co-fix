@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -8,22 +8,49 @@ import { FaAngleLeft } from 'react-icons/fa';
 import useLoginUser from '../hook/useLoginUser';
 import useMyPageList from '../hook/useMyPageList';
 import { setMyPageList } from '../modules/actions/mypagelistActions';
+import { updateMyPageList } from '../modules/actions/mypagelistActions';
 
 // containers
 import MyPageListBody from '../containers/mypagelist/MyPageListBody';
 import MyPageListHeader from '../containers/mypagelist/MyPageListHeaderer';
 
 // apis
+import { closeRoom } from '../api/co-fix';
 import { getCommentRoomsInstance } from '../api/mypage/mypageList';
 
+// modal
+import Modal from '../containers/Modal';
+import AlertModal from '../components/modal/AlertModal';
+
 export default function MyPageList() {
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const RoomInfos = useMyPageList();
   const user = useLoginUser();
+  const [isCloseModalOpen, setIsCloseModalOpen] = useState(false);
+  const [propsRoomInfo, setPropsRoomInfo] = useState('');
 
+  const onCloseRoomHandler = (RoomInfo) => {
+    setPropsRoomInfo(RoomInfo);
+    setIsCloseModalOpen(!isCloseModalOpen);
+  };
+
+  const CloseRoom = () => {
+    closeRoom(
+      propsRoomInfo.roomId,
+      (res) => {
+        console.log(`res`, res);
+        dispatch(updateMyPageList(propsRoomInfo));
+        onCloseRoomHandler();
+      },
+      (err) => {
+        console.log(`이미 닫힌 방인지 확인`, err);
+      },
+    );
+  };
   const gotoBack = () => {
-    history.goBack();
+    history.push('/');
   };
 
   useEffect(() => {
@@ -37,22 +64,63 @@ export default function MyPageList() {
     );
   }, []);
 
+  // 모달 토글 핸들러
+  const AlertModalToggleHandler = () => {
+    setIsAlertModalOpen(!isAlertModalOpen);
+  };
+
+  // 새로운 프로젝트 생성
+  const onPlusCardClickHandler = () => {
+    localStorage.setItem(
+      'nickName',
+      user.credentials.member && user.credentials.member.name,
+    );
+    history.push('/create');
+  };
   return (
-    <Background>
-      <Prev onClick={gotoBack} />
-      <MyPageListWrapper>
-        {user.authenticated ? (
-          <MyPageListHeader>
-            <b>{user.credentials.member.name}</b> 님의 <b>Co-Fix History</b>
-          </MyPageListHeader>
-        ) : (
-          <MyPageListHeader>
-            <b>Test User</b> 님의 <b>Co-Fix History</b>
-          </MyPageListHeader>
-        )}
-        <MyPageListBody RoomInfos={RoomInfos} />
-      </MyPageListWrapper>
-    </Background>
+    <>
+      <Modal
+        isModalOpen={isAlertModalOpen}
+        ModalToggleHandler={AlertModalToggleHandler}
+      >
+        <AlertModal
+          PropsText="새 Co-Fix를 만드시겠습니까?"
+          PropsComfirmHandler={() => onPlusCardClickHandler()}
+          PropsRejectHandler={() => AlertModalToggleHandler()}
+        />
+      </Modal>
+      <Modal
+        width="fit-content"
+        height="320px"
+        isModalOpen={isCloseModalOpen}
+        ModalToggleHandler={() => onCloseRoomHandler()}
+      >
+        <AlertModal
+          PropsText="정말로 Live Room을 닫으시겠습니까?"
+          PropsComfirmHandler={() => CloseRoom()}
+          PropsRejectHandler={() => onCloseRoomHandler()}
+        />
+      </Modal>
+      <Background>
+        <Prev onClick={gotoBack} />
+        <MyPageListWrapper>
+          {user.authenticated ? (
+            <MyPageListHeader>
+              <b>{user.credentials.member.name}</b> 님의 <b>Co-Fix History</b>
+            </MyPageListHeader>
+          ) : (
+            <MyPageListHeader>
+              <b>Test User</b> 님의 <b>Co-Fix History</b>
+            </MyPageListHeader>
+          )}
+          <MyPageListBody
+            RoomInfos={RoomInfos}
+            AlertModalToggleHandler={AlertModalToggleHandler}
+            onCloseRoomHandler={onCloseRoomHandler}
+          />
+        </MyPageListWrapper>
+      </Background>
+    </>
   );
 }
 
