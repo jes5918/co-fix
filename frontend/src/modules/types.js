@@ -20,6 +20,7 @@ export const SET_DOCUMENT_TITLE = 'SET_DOCUMENT_TITLE';
 export const SET_ROOM_INFO = 'SET_ROOM_INFO';
 export const RESET_ROOM_INFO = 'RESET_ROOM_INFO';
 export const UPDATE_ROOM_INFO = 'UPDATE_ROOM_INFO';
+export const UPDATE_MEMBER_LIST = 'UPDATE_MEMBER_LIST';
 
 // comment Types
 export const SET_COMMENT_TEXT = 'SET_COMMENT_TEXT';

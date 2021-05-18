@@ -35,12 +35,15 @@ export default function CommentContainer({ sentenceId }) {
   const comments = useCommentData();
   return (
     <S.CommentContainer>
+      {!sentenceId && (
+        <S.CommentNotExistInfoWrapper>
+          <S.CommentNotExistInfo>문장을 선택해주세요.</S.CommentNotExistInfo>
+        </S.CommentNotExistInfoWrapper>
+      )}
       {comments.length < 1 && (
         <S.CommentNotExistInfoWrapper>
           <S.CommentNotExistInfo>
-            {sentenceId
-              ? '현재 선택된 문장에 대한 코멘트가 없습니다.'
-              : '문장을 선택해주세요.'}
+            현재 선택된 문장에 대한 코멘트가 없습니다.
           </S.CommentNotExistInfo>
         </S.CommentNotExistInfoWrapper>
       )}
