@@ -97,6 +97,7 @@ public class CommentRoomController {
         }
         CommentRoom commentRoom = commentRoomService.enterCommentRoom(pinNumber, nickname);
 
+        redisListenerService.createRoomTopic(commentRoom.getRoomId());
         redisSenderService.sendRoomUpdateService(commentRoom);
 
         SingleDataResponse<CommentRoom> response = responseService.getSingleDataResponse(commentRoom, HttpStatus.OK);
