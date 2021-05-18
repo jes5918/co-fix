@@ -32,10 +32,14 @@ import Section_6 from '../containers/home/Section_6';
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [flag, setFlag] = useState(false);
   const user = useLoginUser();
 
   const ModalToggleHandler = () => {
+    if (isModalOpen) {
+      setFlag(false);
+      console.log(`flag`, flag);
+    }
     setIsModalOpen(!isModalOpen);
   };
 
@@ -46,7 +50,12 @@ export default function Home() {
   return (
     <>
       <HomeWrapper>
-        <Section_1 className={'test'} ModalToggleHandler={ModalToggleHandler} />
+        <Section_1
+          className={'test'}
+          ModalToggleHandler={ModalToggleHandler}
+          setFlag={setFlag}
+          flag={flag}
+        />
         <Section_2 className="test" />
         <Section_3 className="test" />
         <Section_4 className="test" />
@@ -63,8 +72,8 @@ export default function Home() {
         <ModalContentWrapper>
           <LogoIcon />
           <SocialLoginWrapper>
-            <GoogleAuth ModalToggleHandler={ModalToggleHandler} />
-            <GithubAuth ModalToggleHandler={ModalToggleHandler} />
+            <GoogleAuth ModalToggleHandler={ModalToggleHandler} flag={flag} />
+            <GithubAuth ModalToggleHandler={ModalToggleHandler} flag={flag} />
           </SocialLoginWrapper>
           {/* <CheckBox
             onChange={AutoLoginToggleHandler}
