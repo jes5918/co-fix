@@ -81,7 +81,7 @@ const FooterNav = {
   `,
 };
 
-export default function Footer({ ModalToggleHandler }) {
+export default function Footer({ ModalToggleHandler, setFlag, flag }) {
   const history = useHistory();
   const onClickCreateHandler = () => {
     if (localStorage.getItem('user')) {
@@ -116,6 +116,7 @@ export default function Footer({ ModalToggleHandler }) {
           <FooterNav.menu
             onClick={() => {
               onClickHistoryHandler();
+              setFlag(true);
             }}
           >
             History
