@@ -1,12 +1,7 @@
-// Roll : 편집 화면에서 우측 Comment 작성 및 보이는 부분의 상태를 관리함.
-
-import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { closeRoom } from '../api/co-fix';
-
-import CommentWrapper from '../components/innerCommentElements/CommentWrapper';
-
-import useCommentData from '../hook/useComment.js';
+import React from 'react';
+import styled from 'styled-components';
+import CommentWrapper from '../../components/innerCommentElements/CommentWrapper';
+import useCommentData from '../../hook/useComment';
 
 const S = {
   CommentContainer: styled.div`
@@ -15,7 +10,7 @@ const S = {
     align-items: center;
     width: 100%;
     min-height: 100%;
-    padding: 20px 6%;
+    padding-right: 40px;
   `,
   NoCommentWrapper: styled.div`
     width: 100%;

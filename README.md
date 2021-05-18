@@ -63,14 +63,39 @@
 |   **Git**    |             [Github](https://github.com/mingddo)             |           [Github](https://github.com/glenn93516)            |             [Github](https://github.com/RGunny)              |           [Github](https://github.com/phoenix9373)           |             [Github](https://github.com/jes5918)             |
 | **Position** |                              FE                              |                              BE                              |                              BE                              |                              FE                              |                              FE                              |
 
+#### 🙌 시스템 아키텍쳐
 
+![cofix_system_architecture-3](README.assets/cofix_system_architecture-3.png)
+
+
+
+#### 
 
 #### 🙌포트번호
 
 `https://k4b104.p.ssafy.io`도메인 - FE, BE 총괄
 
-```
-docker-compose up
+```bash
+--- docker 설치
+ $ sudo apt-get update
+ $ sudo apt-get install \
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg \
+     lsb-release
+ $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+ $ echo \
+   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ $ sudo apt-get update
+ $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+ --- docker-compose 설치
+ $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ $ sudo chmod +x /usr/local/bin/docker-compose
+ $ docker-compose build
+ $ docker-compose up -d
 ```
 
 ```
@@ -82,6 +107,10 @@ docker-compose up
 
 
 `https://k4b1041.p.ssafy.io`도메인 - OpenVidu backend server (실시간 화상)
+
+```bash
+docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-server-kms:2.17.0
+```
 
 ```
 4443 : OpenVidu Server

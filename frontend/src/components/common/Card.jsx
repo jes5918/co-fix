@@ -116,9 +116,9 @@ function Card({
   );
 }
 export default Card;
-
 const Container = styled.div`
   position: relative;
+  margin: 20px 5px;
 `;
 
 const CloseButton = styled.div`

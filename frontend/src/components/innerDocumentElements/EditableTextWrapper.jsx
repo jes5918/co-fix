@@ -97,7 +97,7 @@ export default function EditableTextWrapper({
         <TextContainer
           isSelected={isSelected}
           onDoubleClick={() => {
-            if (credentials && memberId === credentials.member.id) {
+            if (credentials.member && memberId === credentials.member.id) {
               editorModeToggleHandler();
             }
           }}
