@@ -24,10 +24,17 @@ function App() {
   const user = useLoginUser();
   const history = useHistory();
   const [isCoFixRoom, setIsCoFixRoom] = useState(false);
+  const [isNoLogo, setIsNoLogo] = useState(false);
 
   useEffect(() => {
     setIsCoFixRoom(
       history.location.pathname.startsWith('/co-fix/') ? true : false,
+    );
+    setIsNoLogo(
+      history.location.pathname.startsWith('/mypagelist') ||
+        history.location.pathname.startsWith('/mypage')
+        ? true
+        : false,
     );
   }, [history.location.pathname]);
 
@@ -41,6 +48,7 @@ function App() {
               : false
           }
           user={user && user.credentials.member}
+          isNoLogo={isNoLogo}
         />
       )}
       {/* <AnimatedCursor
@@ -53,13 +61,12 @@ function App() {
       /> */}
       <Switch>
         <Route path="/" component={Home} exact />
-        <Route path="/mypagelist" component={MyPageList} />
-        <Route path="/mypage/:roomid/:documentid" component={MyPage} />
-        <Route path="/create" component={Create} />
         <Route path="/join" component={Join} />
-        <Route path="/co-fix/:id" component={CommonWorkPage} />
+        <PrivateRoute path="/create" component={Create} />
+        <PrivateRoute path="/mypagelist" component={MyPageList} />
+        <PrivateRoute path="/mypage/:roomid/:documentid" component={MyPage} />
+        <NickNameRoute path="/co-fix/:id" component={CommonWorkPage} />
         <Route path="/openvidutest" component={OpenviduTest} />
-        {/* <PrivateRoute /> */}
       </Switch>
     </>
   );
