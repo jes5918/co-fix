@@ -38,7 +38,6 @@ export default function Home() {
   const ModalToggleHandler = () => {
     if (isModalOpen) {
       setFlag(false);
-      console.log(`flag`, flag);
     }
     setIsModalOpen(!isModalOpen);
   };
@@ -76,8 +75,16 @@ export default function Home() {
         <ModalContentWrapper>
           <LogoIcon />
           <SocialLoginWrapper>
-            <GoogleAuth ModalToggleHandler={ModalToggleHandler} flag={flag} />
-            <GithubAuth ModalToggleHandler={ModalToggleHandler} flag={flag} />
+            <GoogleAuth
+              ModalToggleHandler={ModalToggleHandler}
+              setFlag={setFlag}
+              flag={flag}
+            />
+            <GithubAuth
+              ModalToggleHandler={ModalToggleHandler}
+              setFlag={setFlag}
+              flag={flag}
+            />
           </SocialLoginWrapper>
           {/* <CheckBox
             onChange={AutoLoginToggleHandler}
