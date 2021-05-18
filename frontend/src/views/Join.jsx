@@ -142,12 +142,6 @@ export default function Join() {
       <Wrapper>
         <Prev onClick={gotoBack} />
         {current === 0 ? (
-          <Privacy
-            onHandleNext={() => {
-              changePage();
-            }}
-          />
-        ) : current === 1 ? (
           <PinCode
             value={pinCode}
             onHandleValue={pinCodeValueSave}
