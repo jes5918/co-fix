@@ -9,15 +9,15 @@ import useScrollFadeIn from '../../hook/useScrollFadeIn';
 const Section = {
   wrapper: styled.div`
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     background-color: #fff;
     z-index: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5% 0;
-    @media only screen and (max-width: 480px) {
-      flex-direction: column-reverse;
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
     }
   `,
   leftFrmae: styled.div`
@@ -25,30 +25,51 @@ const Section = {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background-color: transparent;
     position: relative;
-    @media only screen and (max-width: 480px) {
+    padding: 5%;
+    @media only screen and (max-width: 768px) {
       width: 100%;
       height: 50%;
+      padding: 0% 5%;
     }
   `,
-  leftImg: styled.img`
-    width: 80%;
-    object-fit: contain;
-    position: absolute;
-    top: 10%;
+  leftTitle: styled.div`
+    width: 100%;
+    height: 20%;
+    font-size: 2.5rem;
+    font-family: 'S-CoreDream-6Bold';
+    color: #f36c7e;
+    @media only screen and (max-width: 768px) {
+      font-size: 2rem;
+    }
+  `,
+
+  leftContentFrame: styled.div`
+    width: 100%;
+    height: 80%;
+    font-size: 17px;
+    font-family: 'S-CoreDream-6Bold';
+    display: flex;
+    align-items: center;
+    @media only screen and (max-width: 768px) {
+      height: auto;
+    }
   `,
   leftText: styled.div`
-    font-size: 2.5rem;
+    font-size: 1.7rem;
     font-weight: bold;
     font-family: 'S-CoreDream-6Bold';
     z-index: 10;
     margin: 15px auto;
     cursor: pointer;
+    word-break: keep-all;
+    line-height: 2.5rem;
+    text-align: center;
     @media only screen and (max-width: 768px) {
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
   `,
   rightFrmae: styled.div`
@@ -58,7 +79,7 @@ const Section = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    @media only screen and (max-width: 480px) {
+    @media only screen and (max-width: 768px) {
       width: 100%;
       height: 50%;
     }
@@ -85,11 +106,18 @@ export default function Section_3() {
   return (
     <Section.wrapper>
       <Section.leftFrmae>
-        <Section.leftText {...animatedFadeItem[2]}>Co-Fix</Section.leftText>
-        <Section.leftText {...animatedFadeItem[3]}>Live</Section.leftText>
-        <Section.leftText {...animatedFadeItem[4]}>
-          Collaboration
-        </Section.leftText>
+        <Section.leftTitle {...animatedFadeItem[2]}>
+          CO-FIX STORY
+        </Section.leftTitle>
+        <Section.leftContentFrame {...animatedFadeItem[3]}>
+          <Section.leftText>
+            CO-FIX는 비대면 온라인 첨삭의 불편함을 줄이기 위해 시작되었습니다.
+            <br />
+            화상 미팅, 실시간 공유 문서, 의견 취합을 <br />
+            모두 한 번에 가능하게 하여 편리한 라이브 온라인 첨삭 플랫폼을
+            만들었습니다.
+          </Section.leftText>
+        </Section.leftContentFrame>
       </Section.leftFrmae>
       <Section.rightFrmae>
         <Section.rightImg src={coFix} alt="" {...animatedFadeItem[1]} />
