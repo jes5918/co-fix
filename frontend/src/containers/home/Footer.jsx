@@ -101,12 +101,18 @@ export default function Footer() {
           </FooterNav.menu>
           <FooterNav.menu
             onClick={() => {
-              history.push('/mypagelist');
+              history.push('/history');
             }}
           >
             History
           </FooterNav.menu>
-          <FooterNav.menu>Start Co-Fix Project</FooterNav.menu>
+          <FooterNav.menu
+            onClick={() => {
+              history.push('/create');
+            }}
+          >
+            Start Co-Fix Project
+          </FooterNav.menu>
           <FooterNav.menu>Contact Us</FooterNav.menu>
         </FooterNav.container>
       </StyledFooter.rowBox>

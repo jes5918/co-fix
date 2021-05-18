@@ -31,7 +31,7 @@ function App() {
       history.location.pathname.startsWith('/co-fix/') ? true : false,
     );
     setIsNoLogo(
-      history.location.pathname.startsWith('/mypagelist') ||
+      history.location.pathname.startsWith('/history') ||
         history.location.pathname.startsWith('/mypage')
         ? true
         : false,
@@ -63,7 +63,7 @@ function App() {
         <Route path="/" component={Home} exact />
         <Route path="/join" component={Join} />
         <PrivateRoute path="/create" component={Create} />
-        <PrivateRoute path="/mypagelist" component={MyPageList} />
+        <PrivateRoute path="/history" component={MyPageList} />
         <PrivateRoute path="/mypage/:roomid/:documentid" component={MyPage} />
         <NickNameRoute path="/co-fix/:id" component={CommonWorkPage} />
         <Route path="/openvidutest" component={OpenviduTest} />
