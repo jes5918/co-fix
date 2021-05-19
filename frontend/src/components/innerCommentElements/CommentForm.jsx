@@ -29,14 +29,13 @@ function CommentForm({
         nickname,
       },
       (res) => {
-        // console.log('POST: Comment :', res.data.data);
         onHandleScrollToBottom();
         setTimeout(() => {
           onHandleScrollToBottom();
         }, 1);
       },
       (error) => {
-        console.log(error);
+        console.error(error);
       },
     );
   };

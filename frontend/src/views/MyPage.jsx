@@ -84,7 +84,6 @@ export default function MyPage({ match }) {
 
   // sentence 클릭 -> comment 조회
   const onHandleClickSentence = (sentenceId) => {
-    console.log(`sentenceId`, sentenceId);
     setOnFocusedSentence(sentenceId);
     getAllComments(
       roomId,
@@ -95,7 +94,7 @@ export default function MyPage({ match }) {
         setCommentInfo(res.data.data);
       },
       (err) => {
-        console.log(`err`, err);
+        console.error(`err`, err);
       },
     );
   };
@@ -119,7 +118,7 @@ export default function MyPage({ match }) {
         setModifiedContent(tempModify);
       },
       (err) => {
-        console.log(`err`, err);
+        console.error(`err`, err);
       },
     );
   }, []);

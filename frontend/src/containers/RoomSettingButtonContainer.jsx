@@ -68,7 +68,7 @@ export default function RoomSettingButtonContainer({
           setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
         },
         (err) => {
-          console.log(`이미 닫힌 방인지 확인`, err);
+          console.error(`이미 닫힌 방인지 확인`, err);
         },
       );
     }
@@ -93,26 +93,20 @@ export default function RoomSettingButtonContainer({
   const CloseRoomHandler = () => {
     closeRoom(
       RoomInfo.roomId,
-      (res) => {
-        console.log(`res`, res);
+      () => {
         dispatch(resetRoomInfo());
         dispatch(documentGetAction([]));
-        stompClientTest.disconnect(() => {
-          console.log('소켓 닫힘');
-        }, {});
+        stompClientTest.disconnect(() => {}, {});
         history.push('/');
       },
       (err) => {
-        console.log(`이미 닫힌 방인지 확인`, err);
+        console.error(`이미 닫힌 방인지 확인`, err);
       },
     );
   };
 
   const OutRoomHandler = () => {
-    // 진우야 여기 소켓 아웃하자
-    stompClientTest.disconnect(() => {
-      console.log('소켓 닫힘');
-    }, {});
+    stompClientTest.disconnect(() => {}, {});
     history.push('/');
   };
 

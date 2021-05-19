@@ -59,7 +59,6 @@ export default function Create() {
       createRoom(
         info,
         (res) => {
-          console.log(`res`, res.data.data);
           if (user.credentials.member) {
             dispatch(saveRoomInfo(res.data.data));
             localStorage.setItem('nickName', user.credentials.member.name);
