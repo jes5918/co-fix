@@ -100,7 +100,6 @@ export default function Footer({ ModalToggleHandler, setFlag, flag }) {
         <FooterLeft.container>
           <FooterLogo />
           <FooterLeft.info>@Co-Fix. All rights reserved.</FooterLeft.info>
-          <FooterLeft.info>Privacy Policy</FooterLeft.info>
         </FooterLeft.container>
         <FooterNav.container>
           <FooterNav.menu
