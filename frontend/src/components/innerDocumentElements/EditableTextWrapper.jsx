@@ -71,7 +71,6 @@ export default function EditableTextWrapper({
         if (!isAgree) {
           dispatch(commentCreateAction(body));
         } else {
-          console.log(body);
           dispatch(commentAgreeAction(body));
         }
         return body;
@@ -83,7 +82,6 @@ export default function EditableTextWrapper({
   return (
     <div
       onClick={() => {
-        console.log('clicked');
         if (selectNum !== sentenceId) {
           if (subscription) {
             subscription.unsubscribe();
