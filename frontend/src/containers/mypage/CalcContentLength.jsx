@@ -15,7 +15,6 @@ function CalcContentLength({
   const [percent, setPercent] = useState(0);
 
   const onMaxLengthChangeHandler = (e) => {
-    console.log(e.target.value);
     setMaxLength(Number(e.target.value));
   };
 

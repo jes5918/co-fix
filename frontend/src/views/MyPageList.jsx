@@ -39,13 +39,12 @@ export default function MyPageList() {
   const CloseRoom = () => {
     closeRoom(
       propsRoomInfo.roomId,
-      (res) => {
-        console.log(`res`, res);
+      () => {
         dispatch(updateMyPageList(propsRoomInfo));
         onCloseRoomHandler();
       },
       (err) => {
-        console.log(`이미 닫힌 방인지 확인`, err);
+        console.error(`이미 닫힌 방인지 확인`, err);
       },
     );
   };
@@ -59,7 +58,7 @@ export default function MyPageList() {
         dispatch(setMyPageList(res.data.data));
       },
       (err) => {
-        console.log(`err`, err);
+        console.error(`err`, err);
       },
     );
   }, []);

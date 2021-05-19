@@ -112,11 +112,9 @@ function CommentWrapper({ userId, comment, sentenceId }) {
       sentenceId,
       commentId,
       userNickName,
-      (res) => {
-        console.log('Agree 요청 성공');
-      },
+      () => {},
       (error) => {
-        console.log(error);
+        console.error(error);
       },
     );
   };
