@@ -59,9 +59,7 @@ const ModalDetailFrame = {
 };
 
 function ModalContent({ thumbnailURL, card, onClickTag }) {
-  const UseTemplateHandler = () => {
-    console.log('템플릿 사용하기');
-  };
+  const UseTemplateHandler = () => {};
 
   return (
     <TemplateDetailModalContentWrapper>

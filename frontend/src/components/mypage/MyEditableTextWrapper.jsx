@@ -48,11 +48,9 @@ export default function MyEditableTextWrapper({
       {
         modifiedContent: newValue,
       },
-      (res) => {
-        console.log('반환되는 값입니다. : ', res);
-      },
+      () => {},
       (error) => {
-        console.log(error);
+        console.error(error);
       },
     );
   };

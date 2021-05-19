@@ -76,7 +76,7 @@ export default function CommonWorkPage() {
         dispatch(commentSetAction(res.data.data));
       },
       (error) => {
-        console.log(error);
+        console.error(error);
       },
     );
   };
@@ -90,11 +90,9 @@ export default function CommonWorkPage() {
       {
         modifiedContent: modifiedContent,
       },
-      (res) => {
-        // console.log('반환되는 값입니다. : ', res);
-      },
+      () => {},
       (error) => {
-        console.log(error);
+        console.error(error);
       },
     );
   };
@@ -109,11 +107,9 @@ export default function CommonWorkPage() {
         commentRoomId: roomId,
       },
       (frame) => {
-        console.log('room connected : ', roomId);
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
-          console.log(body);
           ModifyActionHandler(modifiedSentence);
           dispatch(updateMemberList(body.members));
           return body;
@@ -131,9 +127,7 @@ export default function CommonWorkPage() {
   };
 
   const disconnectSocket = (stompClient) => {
-    stompClient.disconnect(() => {
-      console.log('room socket disconnected');
-    });
+    stompClient.disconnect(() => {});
   };
 
   const onHandleScrollToBottom = () => {
@@ -160,7 +154,7 @@ export default function CommonWorkPage() {
           dispatch(documentGetAction(response.data.data));
         },
         (error) => {
-          console.log(`error`, error);
+          console.error(`error`, error);
         },
       );
       connectSocket();
