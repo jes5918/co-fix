@@ -240,14 +240,15 @@ export default function RoomSettingButtonContainer({
           <B.RoomInfomation>최대 인원 : {memberLimit}</B.RoomInfomation>
           <B.RoomInfomation>참여한 사람</B.RoomInfomation>
           <B.RoomInfomationUsers>
-            {members.map((member, idx) => {
-              return (
-                <B.InfomationForUserWrapper key={idx}>
-                  <B.InfomationForUserStatus online={member.online} />
-                  <B.InfomationForUser>{member.nickname}</B.InfomationForUser>
-                </B.InfomationForUserWrapper>
-              );
-            })}
+            {members &&
+              members.map((member, idx) => {
+                return (
+                  <B.InfomationForUserWrapper key={idx}>
+                    <B.InfomationForUserStatus online={member.online} />
+                    <B.InfomationForUser>{member.nickname}</B.InfomationForUser>
+                  </B.InfomationForUserWrapper>
+                );
+              })}
           </B.RoomInfomationUsers>
         </B.RoomInfomationWrapper>
       </Modal>
