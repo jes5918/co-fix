@@ -46,7 +46,7 @@ const StyleH1Input = styled.textarea`
   min-height: 30px;
   resize: none;
   overflow: hidden;
-  margin: -2px -3px 0px 2px;
+  margin: 3px -3px 3px 2px;
   padding: 3px;
   font-size: 14px;
   word-break: keep-all;
