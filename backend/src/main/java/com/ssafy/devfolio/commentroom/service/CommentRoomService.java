@@ -103,6 +103,9 @@ public class CommentRoomService {
         }
         commentRoom.closeCommentRoom();
         valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoomId, objectMapper.writeValueAsString(commentRoom));
+
+        // subscriber 에게 방 닫힘 전달
+        redisSenderService.sendRoomUpdateService(commentRoom);
     }
 
     public CommentRoom getCommentRoom(String pinNumber) throws JsonProcessingException {
