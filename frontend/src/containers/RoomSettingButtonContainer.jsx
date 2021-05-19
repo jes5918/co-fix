@@ -34,6 +34,7 @@ export default function RoomSettingButtonContainer({
   const [numParticipant, setNumParticipant] = useState(
     Number(RoomInfo.memberLimit) || 1,
   );
+  const { members, memberLimit } = RoomInfo;
 
   // 모달창 관련
   const [isModifyRoomSettingModalOpen, setIsModifyRoomSettingModalOpen] =
@@ -138,7 +139,6 @@ export default function RoomSettingButtonContainer({
         {user.authenticated &&
         RoomInfo.memberId === user.credentials.member.id ? (
           <>
-            <B.button>?</B.button>
             <B.button onClick={RoomInfoModalToggleHandler}>
               <BsInfo size="35px" />
             </B.button>
@@ -164,7 +164,6 @@ export default function RoomSettingButtonContainer({
           </>
         ) : (
           <>
-            <B.button>?</B.button>
             <B.button onClick={RoomInfoModalToggleHandler}>
               <BsInfo size="35px" />
             </B.button>
@@ -243,12 +242,26 @@ export default function RoomSettingButtonContainer({
         isModalOpen={isRoomInfoModalOpen}
         ModalToggleHandler={RoomInfoModalToggleHandler}
       >
-        진우바보
+        <B.RoomInfomationWrapper>
+          <B.RoomInfomation>최대 인원 : {memberLimit}</B.RoomInfomation>
+          <B.RoomInfomation>참여한 사람</B.RoomInfomation>
+          <B.RoomInfomationUsers>
+            {members.map((member, idx) => {
+              return (
+                <B.InfomationForUserWrapper
+                  backgroundColor={backgroundColors[idx]}
+                >
+                  <B.InfomationForUserStatus online={member.online} />
+                  <B.InfomationForUser>{member.nickname}</B.InfomationForUser>
+                </B.InfomationForUserWrapper>
+              );
+            })}
+          </B.RoomInfomationUsers>
+        </B.RoomInfomationWrapper>
       </Modal>
     </>
   );
 }
-
 const B = {
   container: styled.div`
     /* position: absolute; */
@@ -304,5 +317,48 @@ const B = {
     height: 33px;
     font-weight: bold;
     color: #6e5e5e;
+  `,
+  RoomInfomationWrapper: styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  `,
+  RoomInfomation: styled.div`
+    font-family: 'S-CoreDream-6Bold';
+    font-size: 1.2rem;
+    margin-bottom: 2%;
+  `,
+  InfomationForUserWrapper: styled.div`
+    width: fit-content;
+    height: fit-content;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    margin-right: 3%;
+    margin-bottom: 3%;
+    border: 2px solid #4b4b4b;
+  `,
+  InfomationForUser: styled.span`
+    font-size: 1rem;
+    color: #4b4b4b;
+    font-family: 'S-CoreDream-6Bold';
+  `,
+  InfomationForUserStatus: styled.div`
+    background-color: ${({ online }) => (online ? '#00a000' : 'white')};
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    margin-right: 4px;
+    border: 1px solid #d4d4d4;
+  `,
+  RoomInfomationUsers: styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   `,
 };
