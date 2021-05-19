@@ -56,27 +56,26 @@ export default function Create() {
         memberLimit: maxcnt,
         roomTitle: title,
       };
-      createRoom(
-        info,
-        (res) => {
-          if (user.credentials.member) {
+      if (user.credentials.member) {
+        createRoom(
+          info,
+          (res) => {
             dispatch(saveRoomInfo(res.data.data));
             localStorage.setItem('nickName', user.credentials.member.name);
             history.push(`/co-fix/${res.data.data.roomId}`);
-          } else {
-            AlertModalToggleHandler(
-              '로그인이 만료되었습니다. 다시 로그인 해주세요.',
-            );
-            setTimeout(() => {
-              AlertModalToggleHandler('');
-              dispatch(logoutUserAction);
-            }, 3000);
-          }
-        },
-        (err) => {
-          console.error('err', err);
-        },
-      );
+          },
+          (err) => {
+            console.error('err', err);
+          },
+        );
+      } else {
+        AlertModalToggleHandler(
+          '로그인이 만료되었습니다. 다시 로그인 해주세요.',
+        );
+        setTimeout(() => {
+          dispatch(logoutUserAction);
+        }, 3000);
+      }
     } else {
       alert('빈칸인게 있음!!');
     }

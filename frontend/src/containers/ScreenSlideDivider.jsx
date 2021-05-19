@@ -23,11 +23,11 @@ export default function ScreenSlideDivider({ children, setSplitPosX }) {
         minSize={
           windowWidthSize >= screen.width / 1.85
             ? windowWidthSize * 0.25
-            : windowHeightSize * 0.05
+            : windowHeightSize * 0.2
         }
         maxSize={
           windowWidthSize >= screen.width / 1.85
-            ? windowWidthSize * 0.7
+            ? windowWidthSize * 0.5
             : windowHeightSize * 0.6
         }
         defaultSize={

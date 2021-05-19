@@ -297,7 +297,7 @@ const S = {
     width: 100%;
     height: 10%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     padding: 0 0%;
     transition: all 0.7s ease-in-out;
