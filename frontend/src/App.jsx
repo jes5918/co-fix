@@ -62,10 +62,10 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/join" component={Join} />
-        <PrivateRoute path="/create" component={Create} />
-        <PrivateRoute path="/history" component={MyPageList} />
-        <PrivateRoute path="/mypage/:roomid/:documentid" component={MyPage} />
-        <NickNameRoute path="/co-fix/:id" component={CommonWorkPage} />
+        <Route path="/create" component={Create} />
+        <Route path="/history" component={MyPageList} />
+        <Route path="/mypage/:roomid/:documentid" component={MyPage} />
+        <Route path="/co-fix/:id" component={CommonWorkPage} />
         <Route path="/openvidutest" component={OpenviduTest} />
       </Switch>
     </>
