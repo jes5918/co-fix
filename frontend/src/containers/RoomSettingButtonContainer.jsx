@@ -248,9 +248,7 @@ export default function RoomSettingButtonContainer({
           <B.RoomInfomationUsers>
             {members.map((member, idx) => {
               return (
-                <B.InfomationForUserWrapper
-                  backgroundColor={backgroundColors[idx]}
-                >
+                <B.InfomationForUserWrapper>
                   <B.InfomationForUserStatus online={member.online} />
                   <B.InfomationForUser>{member.nickname}</B.InfomationForUser>
                 </B.InfomationForUserWrapper>
