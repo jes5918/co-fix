@@ -42,6 +42,10 @@ function CommentForm({
   };
 
   const onHandleSubmit = async (e) => {
+    if (!sentenceId) {
+      inputRef.current.value = '';
+      return;
+    }
     const content = inputRef.current.value.trim();
     if (!e.shiftKey && e.keyCode === 13 && content) {
       const nickname = localStorage.getItem('nickName') || 'anonymous';
