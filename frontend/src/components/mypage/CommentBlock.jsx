@@ -52,13 +52,14 @@ export default function CommentBlock({ data }) {
         </InputBlock.input>
         <Collapse isOpen={isOpen}>
           <InputBlock.commentWrapper>
-            {data.comments.map((comment, i) => {
-              return (
-                <InputBlock.comment key={i}>
-                  {comment.content}
-                </InputBlock.comment>
-              );
-            })}
+            {data.comments &&
+              data.comments.map((comment, i) => {
+                return (
+                  <InputBlock.comment key={i}>
+                    {comment.content}
+                  </InputBlock.comment>
+                );
+              })}
           </InputBlock.commentWrapper>
         </Collapse>
       </InputBlock.wrapper>
