@@ -98,9 +98,10 @@ function CommentWrapper({ userId, comment, sentenceId }) {
   const { commentId, nickname, agree } = comment;
   const userNickName = window.localStorage.getItem('nickName');
   // 방에 있는 멤버 중 코멘트 쓴 멤버랑 같으면 인덱스 반환 -> 인덱스에 맞는 색깔로 추출.
-  const backgroundIndex = members.findIndex(
-    (member) => member.nickname === nickname,
-  );
+  const backgroundIndex =
+    members.length > 0 &&
+    members.findIndex((member) => member.nickname === nickname);
+
   // agree한 사람 중, 현재 유저의 닉네임이 포함되어 있으면 true 반환.
   const isAgree = agree.members.includes(userNickName) ? true : false;
 
