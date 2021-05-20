@@ -127,9 +127,12 @@ export default function CommonWorkPage() {
           const getNickname = body.members[body.members.length - 1].nickname;
           if (body.members.length > members.length) {
             notifySuccess(getNickname);
-          } else if (body.members.length < members.length) {
-            notifyError(getNickname);
           }
+          body.members.forEach((member) => {
+            if (!member.online) {
+              notifyError(member.nickname);
+            }
+          });
           if (body.status === 'CLOSED') {
             stompClient.disconnect(() => {}, {});
             setIsRoomClosed((prev) => !prev);
