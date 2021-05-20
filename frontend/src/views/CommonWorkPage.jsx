@@ -54,6 +54,7 @@ export default function CommonWorkPage() {
   const [stompClientTest, setStompClientTest] = useState();
   const [isToggle, setIsToggle] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isRoomClosed, setIsRoomClosed] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
   const scrollRef = useRef(null);
@@ -110,13 +111,26 @@ export default function CommonWorkPage() {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
-          ModifyActionHandler(modifiedSentence);
-          dispatch(updateMemberList(body.members));
-          return body;
+          console.log(body);
+          if (body.status === 'CLOSED') {
+            stompClientTest.disconnect(() => {}, {});
+            setIsRoomClosed((prev) => !prev);
+            setTimeout(() => {
+              setIsRoomClosed((prev) => !prev);
+              history.push('/');
+            }, 2000);
+            return;
+          } else {
+            ModifyActionHandler(modifiedSentence);
+            dispatch(updateMemberList(body.members));
+            return body;
+          }
         });
       },
     );
   };
+
+  console.log(window.localStorage.getItem('nickName'));
 
   const onHandleDebounce = debounce((modifiedSentence) => {
     dispatch(documentModifyAction(modifiedSentence));
@@ -197,6 +211,14 @@ export default function CommonWorkPage() {
           PropsText={alertMessage}
           PropsComfirmHandler={() => AlertModalToggleHandler('')}
         />
+      </Modal>
+      <Modal
+        width="fit-content"
+        height="320px"
+        isModalOpen={isRoomClosed}
+        ModalToggleHandler={() => setIsRoomClosed((prev) => !prev)}
+      >
+        <AlertModal PropsText={'공동 작업이 종료되었습니다.'} />
       </Modal>
       <S.CommonWorkPage oncopy="return false" oncut="return false">
         <Prev onClick={gotoBack} />
