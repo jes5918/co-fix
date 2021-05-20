@@ -113,7 +113,7 @@ export default function CommonWorkPage() {
           const modifiedSentence = body.sentence; // 들어오는거 확인
           console.log(body);
           if (body.status === 'CLOSED') {
-            stompClientTest.disconnect(() => {}, {});
+            stompClient.disconnect(() => {}, {});
             setIsRoomClosed((prev) => !prev);
             setTimeout(() => {
               setIsRoomClosed((prev) => !prev);
