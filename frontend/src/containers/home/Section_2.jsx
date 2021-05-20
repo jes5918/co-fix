@@ -41,7 +41,7 @@ export default function Section_2() {
         <Section.youtube
           width="560"
           height="315"
-          src="https://youtu.be/_IL8XzVtuIk"
+          src="https://www.youtube.com/embed/_IL8XzVtuIk"
           // src="https://www.youtube.com/embed/lXm5AdFigvc?autoplay=1 "
           title="YouTube video player"
           frameborder="0"
