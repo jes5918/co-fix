@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Collapse from '@kunukn/react-collapse';
 import CommentBlock from '../../components/mypage/CommentBlock';
@@ -17,9 +17,18 @@ const LeftPanel = styled.div`
 `;
 
 function MypageLeft({ content, right }) {
+  useEffect(() => {
+    const IdName = right ? 'rightPanel' : 'leftPanel';
+    const temp = document.getElementById(IdName);
+    temp.innerHTML = content;
+  }, []);
+
   return (
     <>
-      <LeftPanel right={right ? true : false}>{content}</LeftPanel>
+      <LeftPanel
+        id={right ? 'rightPanel' : 'leftPanel'}
+        right={right ? true : false}
+      ></LeftPanel>
     </>
   );
 }
