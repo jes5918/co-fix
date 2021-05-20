@@ -22,7 +22,7 @@ export default function ScreenSlideDivider({ children, setSplitPosX }) {
         }
         minSize={
           windowWidthSize >= screen.width / 1.85
-            ? windowWidthSize * 0.25
+            ? windowWidthSize * 0.3
             : windowHeightSize * 0.2
         }
         maxSize={
@@ -112,7 +112,7 @@ const SplitPanel = {
     }
 
     .Resizer.vertical {
-      width: 13px;
+      width: 15px;
       border-left: 5px solid rgba(255, 255, 255, 0);
       border-right: 5px solid rgba(255, 255, 255, 0);
     }

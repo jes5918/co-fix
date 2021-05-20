@@ -42,7 +42,7 @@ function CalcContentLength({
   return (
     <Container>
       {!right ? (
-        splitPosX ? (
+        localStorage.getItem('myPageSplitPosX') ? (
           splitPosX > 700 || windowWidthSize < screen.width / 1.85 ? (
             <ProgressBar
               completed={percent}
@@ -65,21 +65,21 @@ function CalcContentLength({
             labelColor="#000000"
           />
         )
-      ) : (
+      ) : windowWidthSize > screen.width / 1.85 ? (
         <ProgressBar
           completed={percent}
           bgColor="lightcoral"
           width={
-            windowWidthSize > screen.width / 1.85
-              ? String(
-                  screen.width / 2 - (splitPosX * 0.85 || screen.width / 3.2),
-                ) + 'px'
-              : '0px'
+            String(
+              localStorage.getItem('myPageSplitPosX')
+                ? screen.width / 1.85 - splitPosX * 0.83
+                : 250,
+            ) + 'px'
           }
           height={windowWidthSize > screen.width / 1.85 ? '25px' : '0px'}
           labelColor="#000000"
         />
-      )}
+      ) : null}
       <Wrapper>
         <Length>
           {contentLength} 자 / &nbsp;
