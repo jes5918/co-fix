@@ -109,10 +109,17 @@ export default function MyPage({ match }) {
         let tempOrigin = '';
         let tempModify = '';
         res.data.data.forEach((d) => {
-          tempOrigin += d.originalContent;
-          tempOrigin += '\n';
-          tempModify += d.modifiedContent;
-          tempModify += '\n';
+          if (d.originalContent !== d.modifiedContent) {
+            tempOrigin += `<mark>${d.originalContent}</mark>`;
+            tempOrigin += '\n';
+            tempModify += `<mark2>${d.modifiedContent}</mark2>`;
+            tempModify += '\n';
+          } else {
+            tempOrigin += d.originalContent;
+            tempOrigin += '\n';
+            tempModify += d.modifiedContent;
+            tempModify += '\n';
+          }
         });
         setOriginalContent(tempOrigin);
         setModifiedContent(tempModify);
@@ -192,22 +199,26 @@ export default function MyPage({ match }) {
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <MypageLeft content={originalContent} />
                 </Scrollbars>
-                <CalcContentLength
-                  sentences={originalContent}
-                  splitPosX={splitPosX}
-                  windowWidthSize={windowWidthSize}
-                />
+                {windowWidthSize > screen.width / 1.85 ? (
+                  <CalcContentLength
+                    sentences={originalContent}
+                    splitPosX={splitPosX}
+                    windowWidthSize={windowWidthSize}
+                  />
+                ) : null}
               </>
               <>
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <MypageLeft content={modifiedContent} right />
                 </Scrollbars>
-                <CalcContentLength
-                  sentences={modifiedContent}
-                  splitPosX={splitPosX}
-                  windowWidthSize={windowWidthSize}
-                  right={true}
-                />
+                {windowWidthSize > screen.width / 1.85 ? (
+                  <CalcContentLength
+                    sentences={modifiedContent}
+                    splitPosX={splitPosX}
+                    windowWidthSize={windowWidthSize}
+                    right={true}
+                  />
+                ) : null}
               </>
             </ScreenSlideDivider>
           </TabPanel>

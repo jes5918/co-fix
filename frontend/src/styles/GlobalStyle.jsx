@@ -15,6 +15,14 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'NotoSans';
         overflow-x: hidden;
     }
+    mark {
+        background-color: #e5ff004c;
+        color: black;
+    }
+    mark2 {
+        background-color: #bbd5da81;
+        color: black;
+    }
     a{
         text-decoration:none;
         color:inherit;
