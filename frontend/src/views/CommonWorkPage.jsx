@@ -102,7 +102,14 @@ export default function CommonWorkPage() {
     );
   };
 
-  const notify = (nickname) => toast.success(`${nickname}님이 입장했습니다.`);
+  const notifyError = debounce(
+    (nickname) => toast.error(`${nickname}님이 퇴장했습니다.`),
+    500,
+  );
+  const notifySuccess = debounce(
+    (nickname) => toast.success(`${nickname}님이 입장했습니다.`),
+    500,
+  );
 
   const connectSocket = () => {
     const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
@@ -117,9 +124,11 @@ export default function CommonWorkPage() {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
-          if (body.members.length !== members.length) {
-            const getNickname = body.members[body.members.length - 1].nickname;
-            notify(getNickname);
+          const getNickname = body.members[body.members.length - 1].nickname;
+          if (body.members.length > members.length) {
+            notifySuccess(getNickname);
+          } else if (body.members.length < members.length) {
+            notifyError(getNickname);
           }
           if (body.status === 'CLOSED') {
             stompClient.disconnect(() => {}, {});
