@@ -43,7 +43,7 @@ function App() {
       {!isCoFixRoom && (
         <NavBar
           isLoggedIn={
-            user.authenticated && JSON.parse(localStorage.getItem('user')).token
+            user.authenticated && JSON.parse(localStorage.getItem('user'))
               ? true
               : false
           }
@@ -51,14 +51,14 @@ function App() {
           isNoLogo={isNoLogo}
         />
       )}
-      {/* <AnimatedCursor
+      <AnimatedCursor
         innerSize={20}
         outerSize={20}
         color="220, 110, 90"
         outerAlpha={0.1}
         innerScale={0.8}
         outerScale={4}
-      /> */}
+      />
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/join" component={Join} />
