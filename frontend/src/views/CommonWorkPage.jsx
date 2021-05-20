@@ -28,7 +28,6 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import { debounce } from 'lodash';
 
 // containers
-import Participant from '../containers/mypage/Participant';
 import DocumentContainer from '../containers/DocumentContainer';
 import CommentContainer from '../containers/CommentContainer';
 import RoomSettingButtonContainer from '../containers/RoomSettingButtonContainer';
