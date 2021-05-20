@@ -125,14 +125,26 @@ export default function CommonWorkPage() {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
           const getNickname = body.members[body.members.length - 1].nickname;
-          if (body.members.length > members.length) {
+          const getMembers = body.members;
+          // 입장(n-1, n)
+
+          if (getMembers.length === members.length) {
+            // 입장
+            getMembers.forEach((member, idx) => {
+              if (member.online === true && members[idx].online === false) {
+                notifySuccess(member.nickname);
+              }
+            });
+            // 퇴장(n, n-1)
+            getMembers.forEach((member, idx) => {
+              if (member.online === false && members[idx].online === true) {
+                notifyError(member.nickname);
+              }
+            });
+          } else {
             notifySuccess(getNickname);
           }
-          body.members.forEach((member) => {
-            if (!member.online) {
-              notifyError(member.nickname);
-            }
-          });
+
           if (body.status === 'CLOSED') {
             stompClient.disconnect(() => {}, {});
             setIsRoomClosed((prev) => !prev);
