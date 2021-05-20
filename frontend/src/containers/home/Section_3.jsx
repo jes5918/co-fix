@@ -2,7 +2,6 @@ import { Staylinked } from '@styled-icons/fa-brands';
 import React from 'react';
 import styled from 'styled-components';
 import coFix from '../../assets/live.png';
-import cloud from '../../assets/cloud.png';
 import useScrollClipPath from '../../hook/useScrollClipPath';
 import useScrollFadeIn from '../../hook/useScrollFadeIn';
 

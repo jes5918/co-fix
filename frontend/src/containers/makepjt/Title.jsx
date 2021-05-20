@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputForm from '../../components/common/InputForm';
 import BasicButton from '../../components/common/BasicButton';
+import Video from '../../assets/Video.png';
 const ContainerFrame = styled.div`
   width: 100%;
   height: 100%;
@@ -35,6 +36,7 @@ const InputLabel = styled.div`
   margin: 10px;
   word-break: keep-all;
   text-align: center;
+  width: 100%;
 `;
 const LeftFrame = styled.div`
   width: 50%;
@@ -51,7 +53,29 @@ const LeftFrame = styled.div`
     justify-content: center;
   }
 `;
-
+const LeftTitleFrame = styled.div`
+  width: 70%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+  }
+`;
+const LeftImgFrame = styled.img`
+  height: 50%;
+  display: flex;
+  object-fit: contain;
+  margin: auto;
+  padding-top: 0px;
+  @media only screen and (max-width: 1024px) {
+    display: none;
+  }
+`;
 const RightFrame = styled.div`
   width: 50%;
   height: 100%;
@@ -71,8 +95,13 @@ export default function Title({ onHandleNext, value, onHandleValue }) {
   return (
     <ContainerFrame>
       <LeftFrame>
-        <InputLabel>첨삭 프로젝트</InputLabel>
-        <InputLabel>제목을 입력해주세요.</InputLabel>
+        <LeftTitleFrame>
+          <InputLabel>
+            첨삭 프로젝트 <br />
+            제목을 입력해주세요
+          </InputLabel>
+        </LeftTitleFrame>
+        <LeftImgFrame src={Video} alt="" />
       </LeftFrame>
       <RightFrame>
         <InputForm
