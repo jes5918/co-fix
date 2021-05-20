@@ -44,12 +44,16 @@ import CalcContentLength from '../containers/mypage/CalcContentLength';
 import Modal from '../containers/Modal';
 import AlertModal from '../components/modal/AlertModal';
 
+// toast
+import toast, { Toaster } from 'react-hot-toast';
+
 const localStorage = window.localStorage;
 
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { roomId, documentId, memberId, roomTitle, pinNumber } = useRoomInfo();
+  const { roomId, documentId, memberId, roomTitle, pinNumber, members } =
+    useRoomInfo();
   const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
   const [isToggle, setIsToggle] = useState(false);
@@ -98,6 +102,8 @@ export default function CommonWorkPage() {
     );
   };
 
+  const notify = (nickname) => toast.success(`${nickname}님이 입장했습니다.`);
+
   const connectSocket = () => {
     const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
     const stompClient = Stomp.over(socket);
@@ -111,7 +117,10 @@ export default function CommonWorkPage() {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
-          console.log(body);
+          if (body.members.length !== members.length) {
+            const getNickname = body.members[body.members.length - 1].nickname;
+            notify(getNickname);
+          }
           if (body.status === 'CLOSED') {
             stompClient.disconnect(() => {}, {});
             setIsRoomClosed((prev) => !prev);
@@ -129,8 +138,6 @@ export default function CommonWorkPage() {
       },
     );
   };
-
-  console.log(window.localStorage.getItem('nickName'));
 
   const onHandleDebounce = debounce((modifiedSentence) => {
     dispatch(documentModifyAction(modifiedSentence));
@@ -201,6 +208,7 @@ export default function CommonWorkPage() {
 
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false} />
       <Modal
         width="fit-content"
         height="320px"
