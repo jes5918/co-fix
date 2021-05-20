@@ -72,7 +72,7 @@ function CalcContentLength({
           width={
             windowWidthSize > screen.width / 1.85
               ? String(
-                  screen.width / 2 - (splitPosX * 0.85 || screen.width / 4),
+                  screen.width / 2 - (splitPosX * 0.85 || screen.width / 3.2),
                 ) + 'px'
               : '0px'
           }
