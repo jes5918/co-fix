@@ -126,19 +126,18 @@ export default function CommonWorkPage() {
           const getNickname = body.members[body.members.length - 1].nickname;
           const getMembers = body.members;
 
-          console.log(body);
+          console.log('body :', body);
           if (getMembers.length === members.length) {
-            // 입장
-            getMembers.forEach((member, idx) => {
-              if (member.online === true && members[idx].online === false) {
-                notifySuccess(member.nickname);
-              }
-            });
-            // 퇴장
+            console.log('길이 같음.');
             getMembers.forEach((member, idx) => {
               console.log('TEST');
               console.log(member);
               console.log(member.online, members[idx].online);
+              // 입장
+              if (member.online === true && members[idx].online === false) {
+                notifySuccess(member.nickname);
+              }
+              // 퇴장
               if (member.online === false && members[idx].online === true) {
                 notifyError(member.nickname);
               }
