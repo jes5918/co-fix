@@ -86,7 +86,7 @@ function CalcContentLength({
           <SetLength
             type="number"
             min="0"
-            max="2000"
+            max="3000"
             value={maxLength}
             onChange={onMaxLengthChangeHandler}
           />
