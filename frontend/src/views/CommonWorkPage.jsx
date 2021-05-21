@@ -51,8 +51,7 @@ const localStorage = window.localStorage;
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { roomId, documentId, memberId, roomTitle, pinNumber, members } =
-    useRoomInfo();
+  const { roomId, documentId, memberId, roomTitle, pinNumber } = useRoomInfo();
   const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
   const [isToggle, setIsToggle] = useState(false);
@@ -125,15 +124,10 @@ export default function CommonWorkPage() {
           const modifiedSentence = body.sentence; // 들어오는거 확인
           const getNickname = body.members[body.members.length - 1].nickname;
           const getMembers = body.members;
+          const { members } = useRoomInfo();
 
-          console.log('getMembers :', getMembers);
-          console.log('members :', members);
           if (getMembers.length === members.length) {
-            console.log('길이 같음.');
             getMembers.forEach((member, idx) => {
-              console.log('TEST');
-              console.log(member);
-              console.log(member.online, members[idx].online);
               // 입장
               if (member.online === true && members[idx].online === false) {
                 notifySuccess(member.nickname);
@@ -144,12 +138,14 @@ export default function CommonWorkPage() {
               }
             });
           }
+
           if (
             getMembers.length !== members.length &&
             getMembers[getMembers.length - 1].online
           ) {
             notifySuccess(getNickname);
           }
+
           if (body.status === 'CLOSED') {
             stompClient.disconnect(() => {}, {});
             setIsRoomClosed((prev) => !prev);
