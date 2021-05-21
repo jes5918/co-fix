@@ -1,0 +1,138 @@
+// Roll : Document 컨테이너에서 각 문장을 감싸는 UI
+
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  documentModifyAction,
+  documentSelectAction,
+} from '../../modules/actions/documentActions';
+import {
+  commentCreateAction,
+  commentAgreeAction,
+} from '../../modules/actions/commentActions';
+import { setSubscription } from '../../modules/actions/roomActions';
+import styled from 'styled-components';
+import Editabletext from './Editabletext';
+import useRoomInfo from '../../hook/useRoomInfo';
+import useLoginUser from '../../hook/useLoginUser';
+import useDocument from '../../hook/useDocument';
+
+// library
+import { debounce } from 'lodash';
+
+export default function EditableTextWrapper({
+  data,
+  testRequest,
+  stompClientTest,
+  onHandleClickSentence,
+  subscription,
+  setSubscription,
+  isSelected,
+}) {
+  const { modifiedContent, sentenceId } = data;
+  const dispatch = useDispatch();
+  const [isEditMode, setIsEditMode] = useState(false);
+  const { roomId, documentId, memberId } = useRoomInfo();
+  const { credentials } = useLoginUser();
+  const { selectNum } = useDocument();
+
+  const editorModeToggleHandler = () => {
+    setIsEditMode(!isEditMode);
+  };
+
+  const selectDocumentHandler = () => {
+    dispatch(documentSelectAction(sentenceId));
+  };
+
+  const setNewValue = (newValue) => {
+    const updateData = {
+      ...data,
+      sentenceId: sentenceId,
+      modifiedContent: newValue,
+    };
+    ModifyActionHandler(updateData);
+    // backend 로 수정하는거 보내야 하는 자리 (츄츄가)
+  };
+
+  const onHandleDebounce = debounce((modifiedSentence) => {
+    dispatch(documentModifyAction(modifiedSentence));
+  }, 500);
+
+  const ModifyActionHandler = (modifiedSentence) => {
+    onHandleDebounce(modifiedSentence);
+  };
+
+  const subscribe = (getSentenceId) => {
+    const subscription = stompClientTest.subscribe(
+      '/sentence/' + getSentenceId,
+      (res) => {
+        const body = JSON.parse(res.body);
+        const isAgree = body.isAgree === 'false' ? false : true;
+        if (!isAgree) {
+          dispatch(commentCreateAction(body));
+        } else {
+          dispatch(commentAgreeAction(body));
+        }
+        return body;
+      },
+    );
+    return subscription;
+  };
+
+  return (
+    <div
+      onClick={() => {
+        if (selectNum !== sentenceId) {
+          if (subscription) {
+            subscription.unsubscribe();
+          }
+          const getSubscription = subscribe(sentenceId);
+          setSubscription(getSubscription);
+        }
+      }}
+    >
+      {!isEditMode ? (
+        <TextContainer
+          isSelected={isSelected}
+          onDoubleClick={() => {
+            if (credentials.member && memberId === credentials.member.id) {
+              editorModeToggleHandler();
+            }
+          }}
+          onClick={() => {
+            selectDocumentHandler();
+            onHandleClickSentence(data.sentenceId);
+          }}
+        >
+          {modifiedContent}
+        </TextContainer>
+      ) : (
+        <Editabletext
+          editorModeToggleHandler={editorModeToggleHandler}
+          setNewValue={setNewValue}
+          content={modifiedContent}
+          testRequest={testRequest}
+          sentenceId={data.sentenceId}
+        />
+      )}
+    </div>
+  );
+}
+
+const TextContainer = styled.div`
+  position: relative;
+  cursor: pointer;
+  word-break: keep-all;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'S-CoreDream-5Medium';
+  margin: 0px 12px 12px 0px;
+  border-radius: 10px;
+  &:hover {
+    background-color: #feffbc;
+  }
+  padding: 2px 4px;
+  border: ${({ isSelected }) =>
+    isSelected ? '2px solid #f1abab' : '2px solid transparent'};
+  /* border: 2px solid #677eff */
+`;

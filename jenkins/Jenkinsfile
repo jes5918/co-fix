@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    try {
+                        mattermostSend (
+                            color: "#43e0ae", 
+                            message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        ) 
+                        sh 'docker-compose build'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result != "FAILURE") {
+                            mattermostSend (
+                                color: "#cbe043", 
+                                message: "Build SUCCESS... Don't push yet ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script{
+                    try {
+                        mattermostSend (
+                            color: "#2A42EE", 
+                            message: "Deploy STARTED.. Don't push yet ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        ) 
+                        sh 'docker-compose up -d'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result != "FAILURE") {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Deploy DONE: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Deploy FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
