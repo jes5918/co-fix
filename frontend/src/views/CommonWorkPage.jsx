@@ -126,7 +126,8 @@ export default function CommonWorkPage() {
           const getNickname = body.members[body.members.length - 1].nickname;
           const getMembers = body.members;
 
-          console.log('body :', body);
+          console.log('getMembers :', getMembers);
+          console.log('members :', members);
           if (getMembers.length === members.length) {
             console.log('길이 같음.');
             getMembers.forEach((member, idx) => {
