@@ -103,11 +103,11 @@ export default function CommonWorkPage() {
 
   const notifyError = debounce(
     (nickname) => toast.error(`${nickname}님이 퇴장했습니다.`),
-    100,
+    200,
   );
   const notifySuccess = debounce(
     (nickname) => toast.success(`${nickname}님이 입장했습니다.`),
-    100,
+    200,
   );
 
   const connectSocket = () => {
@@ -126,6 +126,7 @@ export default function CommonWorkPage() {
           const getNickname = body.members[body.members.length - 1].nickname;
           const getMembers = body.members;
 
+          console.log(body);
           if (getMembers.length === members.length) {
             // 입장
             getMembers.forEach((member, idx) => {
