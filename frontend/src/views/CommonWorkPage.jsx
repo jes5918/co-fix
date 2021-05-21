@@ -103,11 +103,11 @@ export default function CommonWorkPage() {
 
   const notifyError = debounce(
     (nickname) => toast.error(`${nickname}님이 퇴장했습니다.`),
-    500,
+    100,
   );
   const notifySuccess = debounce(
     (nickname) => toast.success(`${nickname}님이 입장했습니다.`),
-    500,
+    100,
   );
 
   const connectSocket = () => {
@@ -126,23 +126,26 @@ export default function CommonWorkPage() {
           const getNickname = body.members[body.members.length - 1].nickname;
           const getMembers = body.members;
 
-          // if (getMembers.length === members.length) {
-          //   // 입장
-          //   getMembers.forEach((member, idx) => {
-          //     if (member.online === true && members[idx].online === false) {
-          //       notifySuccess(member.nickname);
-          //     }
-          //   });
-          //   // 퇴장(n, n-1)
-          //   getMembers.forEach((member, idx) => {
-          //     if (member.online === false && members[idx].online === true) {
-          //       notifyError(member.nickname);
-          //     }
-          //   });
-          // } else {
-          //   notifySuccess(getNickname);
-          // }
-
+          if (getMembers.length === members.length) {
+            // 입장
+            getMembers.forEach((member, idx) => {
+              if (member.online === true && members[idx].online === false) {
+                notifySuccess(member.nickname);
+              }
+            });
+            // 퇴장
+            getMembers.forEach((member, idx) => {
+              if (member.online === false && members[idx].online === true) {
+                notifyError(member.nickname);
+              }
+            });
+          }
+          if (
+            getMembers.length !== members.length &&
+            getMembers[getMembers.length - 1].online
+          ) {
+            notifySuccess(getNickname);
+          }
           if (body.status === 'CLOSED') {
             stompClient.disconnect(() => {}, {});
             setIsRoomClosed((prev) => !prev);
