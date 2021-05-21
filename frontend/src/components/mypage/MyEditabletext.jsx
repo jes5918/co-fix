@@ -14,7 +14,8 @@ export default function MyEditabletext({
 
   const onHandleDebounce = debounce((e) => {
     setNewValue(e);
-  }, 200);
+    setIsChanged((prev) => !prev);
+  }, 150);
 
   const changeh1Value = (e) => {
     onHandleDebounce(e.target.value);
@@ -31,7 +32,6 @@ export default function MyEditabletext({
       defaultValue={content}
       onChange={changeh1Value}
       autoFocus={true}
-      onBlur={() => setIsChanged((prev) => !prev)}
       onDoubleClick={editorModeToggleHandler}
       onBlur={editorModeToggleHandler}
     />
