@@ -136,6 +136,9 @@ export default function CommonWorkPage() {
             });
             // 퇴장
             getMembers.forEach((member, idx) => {
+              console.log('TEST');
+              console.log(member);
+              console.log(member.online, members[idx].online);
               if (member.online === false && members[idx].online === true) {
                 notifyError(member.nickname);
               }
