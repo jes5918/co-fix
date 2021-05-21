@@ -67,7 +67,7 @@ export default function MyPage({ match }) {
   const [modifiedContent, setModifiedContent] = useState([]);
   const [commentInfo, setCommentInfo] = useState([]);
   const [onFocusedSentence, setOnFocusedSentence] = useState();
-
+  const [isChanged, setIsChanged] = useState(false);
   // 중간 divderbar
   const [splitPosX, setSplitPosX] = useState(() => {
     const SavedSplitX = localStorage.getItem('myPageSplitPosX');
@@ -128,7 +128,7 @@ export default function MyPage({ match }) {
         console.error(`err`, err);
       },
     );
-  }, []);
+  }, [isChanged]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -173,6 +173,7 @@ export default function MyPage({ match }) {
               <>
                 <Scrollbars style={{ width: '100%', height: '100%' }}>
                   <MyDocumentContainer
+                    setIsChanged={setIsChanged}
                     sentences={sentences}
                     roomId={roomId}
                     documentId={documentId}

@@ -15,6 +15,7 @@ export default function MyEditableTextWrapper({
   roomId,
   documentId,
   onHandleClickSentence,
+  setIsChanged,
 }) {
   const { modifiedContent, sentenceId } = sentence;
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ export default function MyEditableTextWrapper({
         </TextContainer>
       ) : (
         <MyEditabletext
+          setIsChanged={setIsChanged}
           editorModeToggleHandler={editorModeToggleHandler}
           setNewValue={setNewValue}
           content={modifiedContent}
