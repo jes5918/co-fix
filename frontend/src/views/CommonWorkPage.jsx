@@ -123,7 +123,10 @@ export default function CommonWorkPage() {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
-          const getNickname = body.members[body.members.length - 1].nickname;
+          const getNickname =
+            body.members.length > 0
+              ? body.members[body.members.length - 1].nickname
+              : 'anonymous';
           const getMembers = body.members;
 
           // if (getMembers.length === members.length) {

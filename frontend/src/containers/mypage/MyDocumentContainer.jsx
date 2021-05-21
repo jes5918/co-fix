@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import MyEditableTextWrapper from '../../components/mypage/MyEditableTextWrapper';
 
 export default function MyDocumentContainer({
+  setIsChanged,
   sentences,
   roomId,
   documentId,
@@ -21,6 +22,7 @@ export default function MyDocumentContainer({
             <MyEditableTextWrapper
               key={idx}
               isSelected={isSelected}
+              setIsChanged={setIsChanged}
               sentence={sentence}
               roomId={roomId}
               documentId={documentId}
