@@ -51,7 +51,8 @@ const localStorage = window.localStorage;
 export default function CommonWorkPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { roomId, documentId, memberId, roomTitle, pinNumber } = useRoomInfo();
+  const { roomId, documentId, memberId, roomTitle, pinNumber, members } =
+    useRoomInfo();
   const user = useLoginUser();
   const [stompClientTest, setStompClientTest] = useState();
   const [isToggle, setIsToggle] = useState(false);
@@ -124,20 +125,19 @@ export default function CommonWorkPage() {
           const modifiedSentence = body.sentence; // 들어오는거 확인
           const getNickname = body.members[body.members.length - 1].nickname;
           const getMembers = body.members;
-          const { members } = useRoomInfo();
 
-          if (getMembers.length === members.length) {
-            getMembers.forEach((member, idx) => {
-              // 입장
-              if (member.online === true && members[idx].online === false) {
-                notifySuccess(member.nickname);
-              }
-              // 퇴장
-              if (member.online === false && members[idx].online === true) {
-                notifyError(member.nickname);
-              }
-            });
-          }
+          // if (getMembers.length === members.length) {
+          //   getMembers.forEach((member, idx) => {
+          //     // 입장
+          //     if (member.online === true && members[idx].online === false) {
+          //       notifySuccess(member.nickname);
+          //     }
+          //     // 퇴장
+          //     if (member.online === false && members[idx].online === true) {
+          //       notifyError(member.nickname);
+          //     }
+          //   });
+          // }
 
           if (
             getMembers.length !== members.length &&
