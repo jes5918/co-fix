@@ -8,14 +8,12 @@ export default function MyEditabletext({
   content,
   setNewValue,
   editorModeToggleHandler,
-  setIsChanged,
 }) {
   const textRef = useRef();
 
   const onHandleDebounce = debounce((e) => {
     setNewValue(e);
-    setIsChanged((prev) => !prev);
-  }, 150);
+  }, 300);
 
   const changeh1Value = (e) => {
     onHandleDebounce(e.target.value);

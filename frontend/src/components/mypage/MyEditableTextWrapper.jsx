@@ -49,7 +49,9 @@ export default function MyEditableTextWrapper({
       {
         modifiedContent: newValue,
       },
-      () => {},
+      (res) => {
+        setIsChanged((prev) => !prev);
+      },
       (error) => {
         console.error(error);
       },
@@ -68,7 +70,6 @@ export default function MyEditableTextWrapper({
         </TextContainer>
       ) : (
         <MyEditabletext
-          setIsChanged={setIsChanged}
           editorModeToggleHandler={editorModeToggleHandler}
           setNewValue={setNewValue}
           content={modifiedContent}
