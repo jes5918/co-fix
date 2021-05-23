@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 // API_KEY 받아오고
 const API_BASE_URL = 'https://k4b104.p.ssafy.io/api/';
 

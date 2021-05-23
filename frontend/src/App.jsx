@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, withRouter, useHistory } from 'react-router-dom';
+
+// hooks
 import useLoginUser from './hook/useLoginUser';
-import styled from 'styled-components';
-import AnimatedCursor from 'react-animated-cursor';
 
 // pages
 import Home from './views/Home';
@@ -16,9 +16,9 @@ import OpenviduTest from './views/OpenviduTest';
 // container
 import NavBar from './containers/NavBar';
 
-// components
-import { PrivateRoute } from './utils/PrivateRoute';
-import { NickNameRoute } from './utils/NickNameRoute';
+// utils - HOC router
+import { PrivateRoute } from './utils/privateRoute';
+import { NickNameRoute } from './utils/nickNameRoute';
 
 function App() {
   const user = useLoginUser();
@@ -51,14 +51,6 @@ function App() {
           isNoLogo={isNoLogo}
         />
       )}
-      {/* <AnimatedCursor
-        innerSize={20}
-        outerSize={20}
-        color="220, 110, 90"
-        outerAlpha={0.1}
-        innerScale={0.8}
-        outerScale={4}
-      /> */}
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/join" component={Join} />
