@@ -11,7 +11,6 @@ import MyPageList from './views/MyPageList';
 import Create from './views/Create';
 import Join from './views/Join';
 import CommonWorkPage from './views/CommonWorkPage';
-import OpenviduTest from './views/OpenviduTest';
 
 // container
 import NavBar from './containers/NavBar';
@@ -58,7 +57,6 @@ function App() {
         <PrivateRoute path="/history" component={MyPageList} />
         <PrivateRoute path="/mypage/:roomid/:documentid" component={MyPage} />
         <NickNameRoute path="/co-fix/:id" component={CommonWorkPage} />
-        <Route path="/openvidutest" component={OpenviduTest} />
       </Switch>
     </>
   );
