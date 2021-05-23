@@ -4,6 +4,11 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./frontend
+      args:
+        REACT_APP_GOOGLE_APP_CLIENT_ID: ${REACT_APP_GOOGLE_APP_CLIENT_ID}
+        REACT_APP_GITHUB_APP_CLIENT_ID: ${REACT_APP_GITHUB_APP_CLIENT_ID}
+        REACT_APP_OPENVIDU_SERVER_URL: ${REACT_APP_OPENVIDU_SERVER_URL}
+        REACT_APP_OPENVIDU_SERVER_SECRET: ${REACT_APP_OPENVIDU_SERVER_SECRET}
     container_name: free_frontend
     volumes:
       - /app/node_modules
