@@ -12,6 +12,7 @@ import com.ssafy.devfolio.member.MemberRepository;
 import com.ssafy.devfolio.member.domain.Member;
 import com.ssafy.devfolio.member.dto.SocketMemberInfo;
 import com.ssafy.devfolio.sentence.Sentence;
+import com.ssafy.devfolio.utils.Utility;
 import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
@@ -26,6 +27,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.ssafy.devfolio.utils.FunctionExceptionWrapper.wrapper;
+import static com.ssafy.devfolio.utils.Utility.splitDocument;
 
 @Service
 @RequiredArgsConstructor
@@ -151,41 +153,6 @@ public class CommentRoomService {
         }
 
         return documentId;
-    }
-
-    private List<String> splitDocument(String content) {
-        List<String> sentences = new ArrayList<>();
-
-        StringBuilder sentence = new StringBuilder();
-        boolean punctuation = false; // 현재 구두점(.)찍힌 상태인지 아닌지 (....같은 부분 체크 위함)
-
-        for (int i = 0; i < content.length(); i++) {
-            char current = content.charAt(i);
-
-            if (current == '?' || current == '!') {
-                sentence.append(current);
-                sentences.add(sentence.toString().trim());
-                sentence = new StringBuilder();
-            } else if (current == '.') {
-                // .인 경우 ...을 체크하기 위해 더 탐색
-                sentence.append(current);
-                punctuation = true;
-            } else if (punctuation) {
-                // . ? ! 이 아닌 경우 구두점이 찍혀있던 상태인 경우 (., ... 등) 문장 추가
-                sentences.add(sentence.toString().trim());
-                sentence = new StringBuilder();
-                sentence.append(current);
-                punctuation = false;
-            } else {
-                sentence.append(current);
-            }
-        }
-        String lastSentence = sentence.toString().trim();
-        if (lastSentence.length() > 0) {
-            sentences.add(lastSentence);
-        }
-
-        return sentences;
     }
 
     public CommentRoom fixRoomTitle(String commentRoomId, String roomTitle, Long memberId) throws JsonProcessingException {
