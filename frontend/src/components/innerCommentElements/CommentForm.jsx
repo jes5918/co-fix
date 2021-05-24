@@ -57,7 +57,7 @@ function CommentForm({
   return (
     <S.CommentForm>
       <S.FormLabelBox>
-        <S.FormLabel>Comment</S.FormLabel>
+        <S.FormLabel>문장에 대한 의견을 남겨주세요.</S.FormLabel>
       </S.FormLabelBox>
       <S.FormInputBox>
         <S.FormInput

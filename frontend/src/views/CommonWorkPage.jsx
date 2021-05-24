@@ -296,10 +296,14 @@ export default function CommonWorkPage() {
           <S.RightSide>
             <Scrollbars
               ref={scrollRef}
-              style={{
-                width: '100%',
-                height: '80%',
-              }}
+              style={
+                onFocusedSentence
+                  ? {
+                      width: '100%',
+                      height: '80%',
+                    }
+                  : { width: '100%', height: '100%' }
+              }
             >
               <CommentContainer
                 sentenceId={onFocusedSentence}
@@ -307,13 +311,15 @@ export default function CommonWorkPage() {
                 onHandleScrollToBottom={onHandleScrollToBottom}
               />
             </Scrollbars>
-            <S.CommentFormWrapper>
-              <CommentForm
-                sentenceId={onFocusedSentence}
-                onHandleClickSentence={onHandleClickSentence}
-                onHandleScrollToBottom={onHandleScrollToBottom}
-              />
-            </S.CommentFormWrapper>
+            {onFocusedSentence ? (
+              <S.CommentFormWrapper>
+                <CommentForm
+                  sentenceId={onFocusedSentence}
+                  onHandleClickSentence={onHandleClickSentence}
+                  onHandleScrollToBottom={onHandleScrollToBottom}
+                />
+              </S.CommentFormWrapper>
+            ) : null}
           </S.RightSide>
         </S.UsableSpace>
         {/* <Participant /> */}
@@ -350,6 +356,19 @@ const S = {
     background: linear-gradient(to bottom, #ffffeb, #ffcbee);
     padding: 0;
     padding-bottom: 30px;
+    animation-duration: 1s;
+    animation-name: fadeInUp;
+    @keyframes fadeInUp {
+      from {
+        transform: translate3d(0, 50px, 0);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+    }
   `,
   HeaderSpace: styled.div`
     width: 100%;

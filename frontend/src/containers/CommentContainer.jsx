@@ -7,6 +7,7 @@ import { closeRoom } from '../api/co-fix';
 import CommentWrapper from '../components/innerCommentElements/CommentWrapper';
 
 import useCommentData from '../hook/useComment.js';
+import NoCommentImage from '../assets/NoComment.png';
 
 const S = {
   CommentContainer: styled.div`
@@ -30,7 +31,7 @@ const S = {
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
   `,
   Image: styled.img.attrs({
-    src: 'https://img.icons8.com/fluent/96/000000/no-comments.png',
+    src: NoCommentImage,
   })`
     width: 100px;
     height: 100px;

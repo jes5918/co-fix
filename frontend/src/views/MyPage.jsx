@@ -110,14 +110,18 @@ export default function MyPage({ match }) {
         let tempModify = '';
         res.data.data.forEach((d) => {
           if (d.originalContent !== d.modifiedContent) {
-            tempOrigin += `<mark>${d.originalContent}</mark>`;
+            tempOrigin += `<mark>${d.originalContent
+              .replace(' ', '')
+              .trim()}</mark>`;
             tempOrigin += '\n';
-            tempModify += `<mark2>${d.modifiedContent}</mark2>`;
+            tempModify += `<mark2>${d.modifiedContent
+              .replace(' ', '')
+              .trim()}</mark2>`;
             tempModify += '\n';
           } else {
-            tempOrigin += d.originalContent;
+            tempOrigin += d.originalContent.replace(' ', '').trim();
             tempOrigin += '\n';
-            tempModify += d.modifiedContent;
+            tempModify += d.modifiedContent.replace(' ', '').trim();
             tempModify += '\n';
           }
         });
@@ -288,6 +292,19 @@ const MyPageContainer = styled.div`
   font-size: 18px;
   /* box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3); */
   border-radius: 20px;
+  animation-duration: 1s;
+  animation-name: fadeInUp;
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 50px, 0);
+      opacity: 0;
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
 `;
 
 // 제목
