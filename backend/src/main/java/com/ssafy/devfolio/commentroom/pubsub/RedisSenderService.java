@@ -6,6 +6,7 @@ import com.ssafy.devfolio.comment.Comment;
 import com.ssafy.devfolio.comment.dto.SentenceSub;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.dto.CommentRoomSub;
+import com.ssafy.devfolio.member.dto.JoinMember;
 import com.ssafy.devfolio.sentence.Sentence;
 import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,23 @@ public class RedisSenderService {
                 .memberLimit(room.getMemberLimit())
                 .status(room.getStatus())
                 .members(room.getMembers())
+                .lastModifiedDate(room.getLastModifiedDate())
+                .build();
+
+        ChannelTopic channel = channels.get(room.getRoomId());
+
+        redisTemplate.convertAndSend(channel.getTopic(), objectMapper.writeValueAsString(commentRoomSub));
+    }
+
+    // 인원 변동 발생시
+    public void sendRoomUpdateService(CommentRoom room, JoinMember updatedMember) throws JsonProcessingException {
+        CommentRoomSub commentRoomSub = CommentRoomSub.builder()
+                .roomId(room.getRoomId())
+                .roomTitle(room.getRoomTitle())
+                .memberLimit(room.getMemberLimit())
+                .status(room.getStatus())
+                .members(room.getMembers())
+                .updatedMember(updatedMember)
                 .lastModifiedDate(room.getLastModifiedDate())
                 .build();
 

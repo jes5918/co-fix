@@ -26,6 +26,7 @@ public class CommentRoomSub {
 
     private RoomStatus status;
     private List<JoinMember> members;
+    private JoinMember updatedMember;
 
     private LocalDateTime lastModifiedDate;
 

@@ -258,14 +258,15 @@ public class CommentRoomService {
 
     public void exitCommentRoom(SocketMemberInfo currentSession) throws JsonProcessingException {
         CommentRoom commentRoom = getCommentRoomById(currentSession.getCommentRoomId());
+        String nickname = currentSession.getNickname();
 
-        commentRoom.exitCommentRoom(currentSession.getNickname());
+        commentRoom.exitCommentRoom(nickname);
 
         // 수정된 첨삭방 정보 저장
         valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoom.getRoomId(), objectMapper.writeValueAsString(commentRoom));
 
         // 변경 내용 publish
-        redisSenderService.sendRoomUpdateService(commentRoom);
+        redisSenderService.sendRoomUpdateService(commentRoom, commentRoom.getMember(nickname));
     }
 
     public void reenterCommentRoom(SocketMemberInfo currentSession) throws JsonProcessingException {
@@ -280,12 +281,13 @@ public class CommentRoomService {
             throw new BaseException(ErrorCode.COMMENT_ROOM_CLOSED_EXCEPTION);
         }
 
-        commentRoom.enterCommentRoom(currentSession.getNickname());
+        String nickname = currentSession.getNickname();
+        commentRoom.enterCommentRoom(nickname);
 
         // 첨삭방 정보 저장
         valueOperations.setIfPresent(COMMENT_ROOM_PREFIX + commentRoom.getRoomId(), objectMapper.writeValueAsString(commentRoom));
 
         // 변경 내용 publish
-        redisSenderService.sendRoomUpdateService(commentRoom);
+        redisSenderService.sendRoomUpdateService(commentRoom, commentRoom.getMember(nickname));
     }
 }

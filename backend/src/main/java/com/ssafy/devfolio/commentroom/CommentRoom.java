@@ -123,4 +123,10 @@ public class CommentRoom implements Serializable {
                 .filter(member -> nickname.equals(member.getNickname())).findFirst()
                 .ifPresent(JoinMember::exit);
     }
+
+    public JoinMember getMember(String nickname) {
+        return this.members.stream()
+                .filter(member -> nickname.equals(member.getNickname())).findFirst()
+                .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
+    }
 }
