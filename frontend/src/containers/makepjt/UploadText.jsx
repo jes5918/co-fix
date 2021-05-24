@@ -167,22 +167,21 @@ const Bottom = styled.div`
   position: relative;
   width: 90%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 `;
 const CalCulate = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 5%;
-  padding: 10px 50px;
+  width: 200px;
+  padding: 10px 20px;
   box-shadow: 3px 6px 3px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   border-radius: 15px;
 `;
 
 const CalBlock = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 `;
