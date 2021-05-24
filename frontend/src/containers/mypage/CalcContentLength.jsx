@@ -30,7 +30,13 @@ function CalcContentLength({
 
   useEffect(() => {
     if (sentences) {
-      setContentLength(sentences.length);
+      setContentLength(
+        sentences
+          .replaceAll('<mark2>', '')
+          .replaceAll('</mark2>', '')
+          .replaceAll('<mark>', '')
+          .replaceAll('</mark>', '').length,
+      );
     }
   }, [sentences]);
 
