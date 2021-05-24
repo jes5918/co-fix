@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 //redux
-import { useSelector, useDispatch } from 'react-redux';
-import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
-import { documentGetAction } from '../modules/actions/documentActions';
+import { useDispatch } from 'react-redux';
+import { saveRoomInfo } from '../modules/actions/roomActions';
 import { logoutUserAction } from '../modules/actions/userActions';
 
 // container
@@ -18,8 +17,7 @@ import { FaAngleLeft } from 'react-icons/fa';
 import { useHistory } from 'react-router';
 
 //api
-import { createRoom, getRoomInfo, closeRoom } from '../api/co-fix';
-import { getDocuments } from '../api/documents';
+import { createRoom } from '../api/co-fix';
 
 //hooks
 import useLoginUser from '../hook/useLoginUser';

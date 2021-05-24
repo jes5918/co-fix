@@ -1,11 +1,5 @@
-import React, { useState, useEffect, useSpring } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
-// redux
-import { useDispatch } from 'react-redux';
-
-// library
-import { motion, useMotionValue } from 'framer-motion';
 
 // logo
 import Logo from '../assets/logo.png';
@@ -19,31 +13,22 @@ import Modal from '../containers/Modal';
 // components
 import GithubAuth from '../components/login/GithubAuth';
 import GoogleAuth from '../components/login/GoogleAuth';
-import CheckBox from '../components/common/CheckBox';
 
 import Footer from '../containers/home/Footer';
 import Section_1 from '../containers/home/Section_1';
 import Section_2 from '../containers/home/Section_2';
 import Section_3 from '../containers/home/Section_3';
 import Section_4 from '../containers/home/Section_4';
-import Section_5 from '../containers/home/Section_5';
-import Section_6 from '../containers/home/Section_6';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
   const [flag, setFlag] = useState(false);
-  const user = useLoginUser();
 
   const ModalToggleHandler = () => {
     if (isModalOpen) {
       setFlag(false);
     }
     setIsModalOpen(!isModalOpen);
-  };
-
-  const AutoLoginToggleHandler = () => {
-    setIsAutoLoginChecked(!isAutoLoginChecked);
   };
 
   return (
@@ -58,8 +43,6 @@ export default function Home() {
         <Section_2 className="test" />
         <Section_3 className="test" />
         <Section_4 className="test" />
-        {/* <Section_5 className="test" /> */}
-        {/* <Section_6 className="test" /> */}
         <Footer
           ModalToggleHandler={ModalToggleHandler}
           setFlag={setFlag}
@@ -86,12 +69,6 @@ export default function Home() {
               flag={flag}
             />
           </SocialLoginWrapper>
-          {/* <CheckBox
-            onChange={AutoLoginToggleHandler}
-            checked={isAutoLoginChecked}
-          >
-            로그인 상태 유지할래요.
-          </CheckBox> */}
           <BottomLine />
           <FooterText>
             간편 로그인으로 <span>Co-Fix</span>와 함께하세요.

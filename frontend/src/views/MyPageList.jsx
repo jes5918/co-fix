@@ -23,11 +23,11 @@ import Modal from '../containers/Modal';
 import AlertModal from '../components/modal/AlertModal';
 
 export default function MyPageList() {
-  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const RoomInfos = useMyPageList();
   const user = useLoginUser();
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isCloseModalOpen, setIsCloseModalOpen] = useState(false);
   const [propsRoomInfo, setPropsRoomInfo] = useState('');
 

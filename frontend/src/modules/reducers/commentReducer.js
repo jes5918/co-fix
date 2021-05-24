@@ -34,15 +34,3 @@ export default function (state = initialState, action) {
       return state;
   }
 }
-
-const data = {
-  commentId: 'e1c20e31-8c55-4b92-90ee-967c0567213f',
-  nickname: '임시 닉네임',
-  content: '진우 정신 안차린다\n',
-  agree: {
-    count: 0,
-    members: [],
-  },
-  createdDate: '2021-05-15T21:14:43.137947',
-  lastModifiedDate: '2021-05-15T21:14:43.137947',
-};

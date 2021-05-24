@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FaAngleLeft } from 'react-icons/fa';
 
 // api and redux
-import { saveRoomInfo, resetRoomInfo } from '../modules/actions/roomActions';
+import { saveRoomInfo } from '../modules/actions/roomActions';
 import { commentResetAction } from '../modules/actions/commentActions';
-import {
-  createRoom,
-  getRoomInfo,
-  enterRoom,
-  closeRoom,
-  modifyRoom,
-} from '../api/co-fix';
+import { getRoomInfo, enterRoom } from '../api/co-fix';
 
 // container
-import Privacy from '../containers/join/Privacy';
 import PinCode from '../containers/join/PinCode';
 import NickName from '../containers/join/NickName';
 
