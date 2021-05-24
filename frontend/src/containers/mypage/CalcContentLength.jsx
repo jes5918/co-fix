@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProgressBar from '@ramonak/react-progress-bar';
-import { Steering2 } from '@styled-icons/remix-fill';
 
 function CalcContentLength({
   datas,
@@ -22,7 +21,10 @@ function CalcContentLength({
     if (datas) {
       let contentLengthTemp = 0;
       datas.forEach((data) => {
-        contentLengthTemp += data.modifiedContent.length;
+        contentLengthTemp += data.modifiedContent
+          .replaceAll('\n', '')
+          .replaceAll('  ', ' ')
+          .trim().length;
       });
       setContentLength(contentLengthTemp);
     }
@@ -35,7 +37,9 @@ function CalcContentLength({
           .replaceAll('<mark2>', '')
           .replaceAll('</mark2>', '')
           .replaceAll('<mark>', '')
-          .replaceAll('</mark>', '').length,
+          .replaceAll('</mark>', '')
+          .replaceAll('  ', ' ')
+          .replaceAll('\n', ' ').length,
       );
     }
   }, [sentences]);
