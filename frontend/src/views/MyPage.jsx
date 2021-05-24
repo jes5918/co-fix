@@ -146,6 +146,16 @@ export default function MyPage({ match }) {
     history.push('/history');
   };
 
+  // const exportHandler = () => {
+  //   const input = document.getElementById('divToPrint');
+  //   html2canvas(input).then((canvas) => {
+  //     const imgData = canvas.toDataURL('image/png');
+  //     const pdf = new jsPDF();
+  //     pdf.addImage(imgData, 'JPEG', 0, 0);
+  //     // pdf.output('dataurlnewwindow');
+  //     pdf.save('download.pdf');
+  //   });
+  // };
   return (
     <BackGround>
       <Prev onClick={gotoBack} />
@@ -166,11 +176,12 @@ export default function MyPage({ match }) {
             </>
           ) : null}
         </TabList>
-        <MyPageContainer>
+        <MyPageContainer id="htmlExport">
           <MyPageHeader>
             <MyPageHeaderInner>
               <MyPageTitle>제목 : {documentData.title}</MyPageTitle>
             </MyPageHeaderInner>
+            {/* <MypageExport onClick={exportHandler}>E</MypageExport> */}
           </MyPageHeader>
           <TabPanel>
             <ScreenSlideDivider setSplitPosX={setSplitPosX}>
@@ -331,6 +342,21 @@ const MyPageTitle = styled.div`
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+`;
+
+const MypageExport = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  &:hover {
+    background: linear-gradient(to bottom, #fef9d7, #d299c2);
+  }
 `;
 
 // 왼쪽에 뒤로가기 버튼

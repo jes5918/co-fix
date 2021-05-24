@@ -19,13 +19,11 @@ const GlobalStyles = createGlobalStyle`
         background-color: #e796966a;
         width: fit-content;
         color: black;
-        border-radius:10px;
     }
     mark2 {
         background-color: #e5ff003b;
         width: fit-content;
         color: black;
-        border-radius: 10px;
     }
     a{
         text-decoration:none;
