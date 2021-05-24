@@ -58,16 +58,18 @@ const CustomTab = ({ children }) => (
 CustomTab.tabsRole = 'Tab';
 
 export default function MyPage({ match }) {
+  // common
   const history = useHistory();
+  const dispatch = useDispatch();
   const roomId = match.params.roomid;
   const documentId = match.params.documentid;
+
   const [tabIndex, setTabIndex] = useState(0);
-  const [documentInfo, setDocumentInfo] = useState([]);
   const [originalContent, setOriginalContent] = useState([]);
   const [modifiedContent, setModifiedContent] = useState([]);
-  const [commentInfo, setCommentInfo] = useState([]);
   const [onFocusedSentence, setOnFocusedSentence] = useState();
   const [isChanged, setIsChanged] = useState(false);
+
   // 중간 divderbar
   const [splitPosX, setSplitPosX] = useState(() => {
     const SavedSplitX = localStorage.getItem('myPageSplitPosX');
@@ -75,8 +77,8 @@ export default function MyPage({ match }) {
   });
   const [windowWidthSize, setWindowWidthSize] = useState(window.innerWidth);
   const isHalfScreen = windowWidthSize > screen.width / 1.85;
-  const isMobileScreen = windowWidthSize > screen.width / 3;
-  const dispatch = useDispatch();
+
+  // document data from redux
   const documentData = useSelector((state) => {
     return state.document;
   });
@@ -91,7 +93,6 @@ export default function MyPage({ match }) {
       sentenceId,
       (res) => {
         dispatch(commentSetAction(res.data.data));
-        setCommentInfo(res.data.data);
       },
       (err) => {
         console.error(`err`, err);
@@ -105,7 +106,6 @@ export default function MyPage({ match }) {
       documentId,
       (res) => {
         dispatch(documentGetAction(res.data.data));
-        setDocumentInfo(res.data.data);
         let tempOrigin = '';
         let tempModify = '';
         res.data.data.forEach((d) => {
@@ -316,6 +316,7 @@ const MyPageTitle = styled.div`
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
 `;
 
+// 왼쪽에 뒤로가기 버튼
 const Prev = styled(FaAngleLeft)`
   font-size: 55px;
   color: #5f5f5f;

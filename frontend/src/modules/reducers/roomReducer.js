@@ -21,18 +21,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_ROOM_INFO:
-      return {
-        roomId: action.payload.roomId,
-        memberId: action.payload.memberId,
-        roomTitle: action.payload.roomTitle,
-        memberLimit: action.payload.memberLimit,
-        members: action.payload.members,
-        documentId: action.payload.documentId,
-        pinNumber: action.payload.pinNumber,
-        status: action.payload.status,
-        createdDate: action.payload.createdDate,
-        lastModifiedDate: action.payload.lastModifiedDate,
-      };
+      return { ...action.payload };
     case RESET_ROOM_INFO:
       return initialState;
     case UPDATE_ROOM_INFO:

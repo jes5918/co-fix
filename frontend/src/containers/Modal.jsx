@@ -2,6 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsX } from 'react-icons/bs';
 
+/******
+  children => 모달 창 내부에 들어갈 내용 children으로 props
+  ModalToggleHandler => 모달을 키고 끄는 함수 props
+  isModalOpen => 모달이 켜진 상태인지 확인하는 boolean
+  height => 모달 창 내부의 높이
+  width => 모달 창 내부의 폭
+ * *******/
 export default function Modal({
   children,
   ModalToggleHandler,

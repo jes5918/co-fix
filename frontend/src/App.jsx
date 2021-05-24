@@ -20,11 +20,18 @@ import { PrivateRoute } from './utils/privateRoute';
 import { NickNameRoute } from './utils/nickNameRoute';
 
 function App() {
-  const user = useLoginUser();
   const history = useHistory();
-  const [isCoFixRoom, setIsCoFixRoom] = useState(false);
+  const user = useLoginUser();
   const [isNoLogo, setIsNoLogo] = useState(false);
+  const [isCoFixRoom, setIsCoFixRoom] = useState(false);
 
+  // 로그인 상태 확인 redux && localStorage 중첩확인용
+  const isLoggedIn =
+    user.authenticated && JSON.parse(localStorage.getItem('user'))
+      ? true
+      : false;
+
+  // route의 위치에 따라서 navbar에 logo, items의 유무를 결정하가 위한 hook
   useEffect(() => {
     setIsCoFixRoom(
       history.location.pathname.startsWith('/co-fix/') ? true : false,
@@ -41,11 +48,7 @@ function App() {
     <>
       {!isCoFixRoom && (
         <NavBar
-          isLoggedIn={
-            user.authenticated && JSON.parse(localStorage.getItem('user'))
-              ? true
-              : false
-          }
+          isLoggedIn={isLoggedIn}
           user={user && user.credentials.member}
           isNoLogo={isNoLogo}
         />

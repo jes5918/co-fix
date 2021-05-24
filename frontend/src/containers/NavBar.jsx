@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import { GiHamburgerMenu } from 'react-icons/gi';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -10,10 +9,8 @@ import { logoutUserAction } from '../modules/actions/userActions';
 
 // components
 import BasicButton from '../components/common/BasicButton';
-import useLoginUser from '../hook/useLoginUser';
 import GithubAuth from '../components/login/GithubAuth';
 import GoogleAuth from '../components/login/GoogleAuth';
-import CheckBox from '../components/common/CheckBox';
 
 // logo
 import Logo from '../assets/logo.png';
@@ -25,17 +22,11 @@ export default function NavBar({ isLoggedIn, user, isNoLogo }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAutoLoginChecked, setIsAutoLoginChecked] = useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
 
   // 모달 토글 핸들러(로그인)
   const ModalToggleHandler = () => {
     setIsModalOpen(!isModalOpen);
-  };
-
-  // 자동 로그인 토글 핸들러
-  const AutoLoginToggleHandler = () => {
-    setIsAutoLoginChecked(!isAutoLoginChecked);
   };
 
   // 햄버거 메뉴 토글 핸들러
@@ -110,12 +101,6 @@ export default function NavBar({ isLoggedIn, user, isNoLogo }) {
             <GoogleAuth ModalToggleHandler={ModalToggleHandler} />
             <GithubAuth ModalToggleHandler={ModalToggleHandler} />
           </SocialLoginWrapper>
-          {/* <CheckBox
-            onChange={AutoLoginToggleHandler}
-            checked={isAutoLoginChecked}
-          >
-            로그인 상태 유지할래요.
-          </CheckBox> */}
           <BottomLine />
           <FooterText>
             간편 로그인으로 <span>Co-Fix</span>와 함께하세요.

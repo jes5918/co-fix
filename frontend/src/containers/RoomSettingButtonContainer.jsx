@@ -45,11 +45,9 @@ export default function RoomSettingButtonContainer({
   const [isRoomInfoModalOpen, setIsRoomInfoModalOpen] = useState(false);
   const [isFullScreen, setIstFullScreen] = useState(false);
 
-  const ModifyRoomSettingModalToggleHandler = () => {
-    setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
-  };
-
+  // 방설정 submit handler
   const ModifyRoomSettingHandler = () => {
+    // 원래 숫자보다 줄이지 못하게 만드는 부분
     const originNum = Number(RoomInfo.memberLimit);
     if (originNum > numParticipant) {
       ParticipantNumModalToggleHandler();
@@ -74,22 +72,7 @@ export default function RoomSettingButtonContainer({
     }
   };
 
-  const AlertModalToggleHandler = () => {
-    setIsAlertModalOpen(!isAlertModalOpen);
-  };
-
-  const ParticipantOutToggleHandler = () => {
-    setIsParticipantModalOpen(!isParticipantModalOpen);
-  };
-
-  const ParticipantNumModalToggleHandler = () => {
-    setIsPartNumModalOpen(!isPartNumModalOpen);
-  };
-
-  const RoomInfoModalToggleHandler = () => {
-    setIsRoomInfoModalOpen(!isRoomInfoModalOpen);
-  };
-
+  // 방 나가는 함수(방장)
   const CloseRoomHandler = () => {
     closeRoom(
       RoomInfo.roomId,
@@ -105,12 +88,13 @@ export default function RoomSettingButtonContainer({
     );
   };
 
+  // 방 나가는 함수(pincode 입장)
   const OutRoomHandler = () => {
     stompClientTest.disconnect(() => {}, {});
     history.push('/');
   };
 
-  // full Screen
+  // full Screen toggle 함수
   const FullScreenToggleHandler = () => {
     const element = document.getElementById('root');
     if (!document.fullscreenElement) {
@@ -124,6 +108,26 @@ export default function RoomSettingButtonContainer({
       setIstFullScreen(false);
       document.exitFullscreen();
     }
+  };
+
+  const ModifyRoomSettingModalToggleHandler = () => {
+    setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
+  };
+
+  const AlertModalToggleHandler = () => {
+    setIsAlertModalOpen(!isAlertModalOpen);
+  };
+
+  const ParticipantOutToggleHandler = () => {
+    setIsParticipantModalOpen(!isParticipantModalOpen);
+  };
+
+  const ParticipantNumModalToggleHandler = () => {
+    setIsPartNumModalOpen(!isPartNumModalOpen);
+  };
+
+  const RoomInfoModalToggleHandler = () => {
+    setIsRoomInfoModalOpen(!isRoomInfoModalOpen);
   };
 
   return (
@@ -181,20 +185,7 @@ export default function RoomSettingButtonContainer({
           </>
         )}
       </B.container>
-      <Modal
-        width="fit-content"
-        height="fit-content"
-        isModalOpen={isModifyRoomSettingModalOpen}
-        ModalToggleHandler={ModifyRoomSettingModalToggleHandler}
-      >
-        <ModifyRoomSettingModal
-          PropsComfirmHandler={ModifyRoomSettingHandler}
-          setTitle={setTitle}
-          setNumParticipant={setNumParticipant}
-          title={title}
-          numParticipant={numParticipant}
-        />
-      </Modal>
+      {/*  모달 관련 content*/}
       <Modal
         width="500px"
         height="320px"
@@ -230,6 +221,22 @@ export default function RoomSettingButtonContainer({
           PropsComfirmHandler={ParticipantNumModalToggleHandler}
         />
       </Modal>
+      {/* 방 설정 변경하는 modal */}
+      <Modal
+        width="fit-content"
+        height="fit-content"
+        isModalOpen={isModifyRoomSettingModalOpen}
+        ModalToggleHandler={ModifyRoomSettingModalToggleHandler}
+      >
+        <ModifyRoomSettingModal
+          PropsComfirmHandler={ModifyRoomSettingHandler}
+          setTitle={setTitle}
+          setNumParticipant={setNumParticipant}
+          title={title}
+          numParticipant={numParticipant}
+        />
+      </Modal>
+      {/* 인원수 정보 보여주는 modal */}
       <Modal
         width="500px"
         height="320px"
@@ -252,7 +259,7 @@ export default function RoomSettingButtonContainer({
           </B.RoomInfomationUsers>
         </B.RoomInfomationWrapper>
       </Modal>
-    </>
+    </q>
   );
 }
 const B = {
