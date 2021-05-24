@@ -259,7 +259,7 @@ export default function RoomSettingButtonContainer({
           </B.RoomInfomationUsers>
         </B.RoomInfomationWrapper>
       </Modal>
-    </q>
+    </>
   );
 }
 const B = {
