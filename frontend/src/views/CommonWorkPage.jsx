@@ -221,6 +221,7 @@ export default function CommonWorkPage() {
   };
 
   const gotoBack = () => {
+    stompClientTest.disconnect();
     history.push('/');
   };
 
