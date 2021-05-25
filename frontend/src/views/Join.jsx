@@ -95,7 +95,6 @@ export default function Join() {
           history.push(`/co-fix/${data.roomId}`);
         },
         (err) => {
-          console.error(err.response.data);
           if (err.response.data.message === '현재 방이 가득 참') {
             AlertModalToggleHandler('참여 가능 인원이 다 찼습니다.');
           }

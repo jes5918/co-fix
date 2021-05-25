@@ -52,9 +52,7 @@ export default function MyEditableTextWrapper({
       (res) => {
         setIsChanged((prev) => !prev);
       },
-      (error) => {
-        console.error(error);
-      },
+      () => {},
     );
   };
 

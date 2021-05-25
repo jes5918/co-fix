@@ -65,9 +65,7 @@ export default function RoomSettingButtonContainer({
           dispatch(updateRoomInfo(data));
           setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
         },
-        (err) => {
-          console.error(`이미 닫힌 방인지 확인`, err);
-        },
+        () => {},
       );
     }
   };
@@ -82,9 +80,7 @@ export default function RoomSettingButtonContainer({
         stompClientTest.disconnect(() => {}, {});
         history.push('/');
       },
-      (err) => {
-        console.error(`이미 닫힌 방인지 확인`, err);
-      },
+      () => {},
     );
   };
 

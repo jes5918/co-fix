@@ -94,9 +94,7 @@ export default function MyPage({ match }) {
       (res) => {
         dispatch(commentSetAction(res.data.data));
       },
-      (err) => {
-        console.error(`err`, err);
-      },
+      () => {},
     );
   };
 
@@ -128,9 +126,7 @@ export default function MyPage({ match }) {
         setOriginalContent(tempOrigin);
         setModifiedContent(tempModify);
       },
-      (err) => {
-        console.error(`err`, err);
-      },
+      () => {},
     );
   }, [isChanged]);
 
