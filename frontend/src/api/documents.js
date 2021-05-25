@@ -1,10 +1,10 @@
 import { AuthorizationInstance, createInstance } from './index.js';
 
-const instance = AuthorizationInstance();
-const basInstance = createInstance();
+const authInstance = AuthorizationInstance();
+const instance = createInstance();
 
 function getDocuments(roomId, documentId, success, fail) {
-  basInstance
+  instance
     .get(`commentRooms/${roomId}/documents/${documentId}`)
     .then(success)
     .catch(fail);
@@ -18,7 +18,7 @@ function modifyDocuments(
   success,
   fail,
 ) {
-  instance
+  authInstance
     .put(
       `commentRooms/${commentRoomId}/documents/${documentId}/sentences/${sentenceId}`,
       editInfo,
