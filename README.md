@@ -63,7 +63,10 @@
 
 ![cofix_system_architecture-3](README.assets/cofix_system_architecture-3.png)
 
-####
+#### 🙌 데이터 구조 및 API 명세
+
+📄 [데이터 구조](https://www.notion.so/27dce9f30e9344e2974f5278d3614265)
+📄 [API 명세](https://www.notion.so/API-9988a1a948734b9c9a1dd25b8713b9c0)
 
 #### 🙌포트번호
 
