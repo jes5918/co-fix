@@ -114,9 +114,7 @@ function CommentWrapper({ userId, comment, sentenceId }) {
       commentId,
       userNickName,
       () => {},
-      (error) => {
-        console.error(error);
-      },
+      () => {},
     );
   };
   return (

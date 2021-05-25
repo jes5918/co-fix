@@ -47,9 +47,7 @@ export default function TemplateBody({
         );
         history.push(`/co-fix/${RoomInfo.roomId}`);
       },
-      (err) => {
-        console.error(err.response.data);
-      },
+      () => {},
     );
   };
 

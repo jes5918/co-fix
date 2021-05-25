@@ -43,9 +43,7 @@ export default function MyPageList() {
         dispatch(updateMyPageList(propsRoomInfo));
         onCloseRoomHandler();
       },
-      (err) => {
-        console.error(`이미 닫힌 방인지 확인`, err);
-      },
+      () => {},
     );
   };
   const gotoBack = () => {
@@ -57,9 +55,7 @@ export default function MyPageList() {
       (res) => {
         dispatch(setMyPageList(res.data.data));
       },
-      (err) => {
-        console.error(`err`, err);
-      },
+      () => {},
     );
   }, []);
 

@@ -109,7 +109,7 @@ export default function MaxParticipant({ onHandleNext, value, onHandleValue }) {
           height={70}
           step="1"
           type="number"
-          min="1"
+          min="2"
           max="10"
           value={value}
           onValueHandler={onHandleValue}

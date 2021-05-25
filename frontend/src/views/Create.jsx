@@ -32,7 +32,7 @@ export default function Create() {
   const user = useLoginUser();
   const [current, setCurrent] = useState(0);
   const [title, setTitle] = useState('');
-  const [maxcnt, setMaxcnt] = useState(1);
+  const [maxcnt, setMaxcnt] = useState(2);
   const [text, setText] = useState('');
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -62,9 +62,7 @@ export default function Create() {
             localStorage.setItem('nickName', user.credentials.member.name);
             history.push(`/co-fix/${res.data.data.roomId}`);
           },
-          (err) => {
-            console.error('err', err);
-          },
+          () => {},
         );
       } else {
         AlertModalToggleHandler(

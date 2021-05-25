@@ -79,9 +79,7 @@ export default function CommonWorkPage() {
       (res) => {
         dispatch(commentSetAction(res.data.data));
       },
-      (error) => {
-        console.error(error);
-      },
+      () => {},
     );
   };
 
@@ -95,9 +93,7 @@ export default function CommonWorkPage() {
         modifiedContent: modifiedContent,
       },
       () => {},
-      (error) => {
-        console.error(error);
-      },
+      () => {},
     );
   };
 
@@ -198,9 +194,7 @@ export default function CommonWorkPage() {
         (response) => {
           dispatch(documentGetAction(response.data.data));
         },
-        (error) => {
-          console.error(`error`, error);
-        },
+        () => {},
       );
       connectSocket();
     } else {

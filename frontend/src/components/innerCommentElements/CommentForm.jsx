@@ -34,9 +34,7 @@ function CommentForm({
           onHandleScrollToBottom();
         }, 1);
       },
-      (error) => {
-        console.error(error);
-      },
+      () => {},
     );
   };
 
