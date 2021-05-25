@@ -101,12 +101,18 @@ export default function CommonWorkPage() {
     );
   };
 
-  const notifyError = useCallback((nickname) =>
-    toast.error(`${nickname}님이 퇴장했습니다.`),
-  );
-  const notifySuccess = useCallback((nickname) =>
-    toast.success(`${nickname}님이 입장했습니다.`),
-  );
+  const notifyError = useCallback((nickname) => {
+    const id = toast.error(`${nickname}님이 퇴장했습니다.`);
+    setTimeout(() => {
+      toast.dismiss(id);
+    }, 1000);
+  });
+  const notifySuccess = useCallback((nickname) => {
+    const id = toast.success(`${nickname}님이 입장했습니다.`);
+    setTimeout(() => {
+      toast.dismiss(id);
+    }, 1000);
+  });
   // const notifyError = useCallback(
   //   debounce((nickname) => toast.error(`${nickname}님이 퇴장했습니다.`), 200),
   //   [],
