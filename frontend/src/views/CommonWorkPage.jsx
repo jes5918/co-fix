@@ -130,6 +130,7 @@ export default function CommonWorkPage({ isCoFixRoom }) {
       (frame) => {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
+          console.log('%%%%%%%%%%%%%%%%', body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
           const updatedMember = body.updatedMember;
 
