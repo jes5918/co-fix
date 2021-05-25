@@ -17,6 +17,8 @@ import java.util.List;
 @Builder
 public class CommentRoomSub {
 
+    private UpdatedType updatedType;
+
     private String roomId;
     private String roomTitle;
 
