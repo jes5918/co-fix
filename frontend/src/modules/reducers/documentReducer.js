@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
     }
     case UPDATE_COMMENT_EXIST: {
       const updateIndex = state.data.findIndex(
-        (sentence) => sentence.sentenceId === action.sentence,
+        (sentence) => sentence.sentenceId === action.sentenceId,
       );
       const newData = [...state.data];
       newData[updateIndex] = { ...state.data[updateIndex], hasComment: true };
