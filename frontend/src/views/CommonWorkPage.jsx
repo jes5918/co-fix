@@ -48,7 +48,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const localStorage = window.localStorage;
 
-export default function CommonWorkPage() {
+export default function CommonWorkPage({ isCoFixRoom }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { roomId, documentId, memberId, roomTitle, pinNumber, members } =
@@ -201,10 +201,9 @@ export default function CommonWorkPage() {
       history.push('/');
       alert('잘못된 접근입니다.');
     }
-
     return () => {
       localStorage.removeItem('nickName');
-      stompClientTest.disconnect();
+      stompClientTest && stompClientTest.disconnect();
     };
   }, []);
 
@@ -224,6 +223,12 @@ export default function CommonWorkPage() {
     stompClientTest.disconnect();
     history.push('/');
   };
+
+  useEffect(() => {
+    return () => {
+      isCoFixRoom && stompClientTest.disconnect();
+    };
+  }, [isCoFixRoom]);
 
   return (
     <>
