@@ -134,10 +134,12 @@ export default function CommonWorkPage({ isCoFixRoom }) {
           const updatedMember = body.updatedMember;
 
           // -- 입장, 퇴장 로직
-          if (updatedMember.online) {
-            notifySuccess(updatedMember.nickname);
-          } else {
-            notifyError(updatedMember.nickname);
+          if (updatedMember) {
+            if (updatedMember.online) {
+              notifySuccess(updatedMember.nickname);
+            } else {
+              notifyError(updatedMember.nickname);
+            }
           }
 
           // -- 방 닫힘, 멤버 업데이트 로직

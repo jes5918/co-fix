@@ -99,6 +99,7 @@ function CommentWrapper({ userId, comment, sentenceId }) {
   const userNickName = window.localStorage.getItem('nickName');
   // 방에 있는 멤버 중 코멘트 쓴 멤버랑 같으면 인덱스 반환 -> 인덱스에 맞는 색깔로 추출.
   const backgroundIndex =
+    members &&
     members.length > 0 &&
     members.findIndex((member) => member.nickname === nickname);
 
