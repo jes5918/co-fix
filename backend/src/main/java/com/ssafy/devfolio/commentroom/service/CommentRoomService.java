@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.RoomStatus;
 import com.ssafy.devfolio.commentroom.dto.CreateCommentRoomRequest;
-import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
+import com.ssafy.devfolio.pubsub.pubsub.RedisSenderService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
 import com.ssafy.devfolio.member.MemberRepository;

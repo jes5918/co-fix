@@ -2,8 +2,8 @@ package com.ssafy.devfolio.comment;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.devfolio.comment.dto.CommentRequest;
-import com.ssafy.devfolio.commentroom.pubsub.RedisListenerService;
-import com.ssafy.devfolio.commentroom.pubsub.RedisSenderService;
+import com.ssafy.devfolio.pubsub.pubsub.RedisListenerService;
+import com.ssafy.devfolio.pubsub.pubsub.RedisSenderService;
 import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;

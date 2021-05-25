@@ -1,7 +1,7 @@
-package com.ssafy.devfolio.commentroom.pubsub;
+package com.ssafy.devfolio.pubsub.pubsub;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.devfolio.comment.dto.SentenceSub;
+import com.ssafy.devfolio.commentroom.dto.CommentRoomSub;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class RedisSentenceSubscriber implements MessageListener {
+public class RedisRoomSubscriber implements MessageListener {
 
     private final RedisTemplate redisTemplate;
     private final ObjectMapper objectMapper;
@@ -23,8 +23,8 @@ public class RedisSentenceSubscriber implements MessageListener {
     public void onMessage(Message message, byte[] pattern) {
         try {
             String body = (String) redisTemplate.getStringSerializer().deserialize(message.getBody());
-            SentenceSub sentenceSub = objectMapper.readValue(body, SentenceSub.class);
-            messageTemplate.convertAndSend("/sentence/" + sentenceSub.getSentenceId(), sentenceSub);
+            CommentRoomSub commentRoomSub = objectMapper.readValue(body, CommentRoomSub.class);
+            messageTemplate.convertAndSend("/room/" + commentRoomSub.getRoomId(), commentRoomSub);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
