@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdContentPaste } from 'react-icons/md';
@@ -101,13 +101,13 @@ export default function CommonWorkPage() {
     );
   };
 
-  const notifyError = debounce(
-    (nickname) => toast.error(`${nickname}님이 퇴장했습니다.`),
-    200,
+  const notifyError = useCallback(
+    debounce((nickname) => toast.error(`${nickname}님이 퇴장했습니다.`), 200),
+    [],
   );
-  const notifySuccess = debounce(
-    (nickname) => toast.success(`${nickname}님이 입장했습니다.`),
-    200,
+  const notifySuccess = useCallback(
+    debounce((nickname) => toast.success(`${nickname}님이 입장했습니다.`), 200),
+    [],
   );
 
   const connectSocket = () => {
@@ -123,32 +123,16 @@ export default function CommonWorkPage() {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
-          const getNickname =
-            body.members.length > 0
-              ? body.members[body.members.length - 1].nickname
-              : 'anonymous';
-          const getMembers = body.members;
+          const updatedMember = body.updatedMember;
 
-          // if (getMembers.length === members.length) {
-          //   getMembers.forEach((member, idx) => {
-          //     // 입장
-          //     if (member.online === true && members[idx].online === false) {
-          //       notifySuccess(member.nickname);
-          //     }
-          //     // 퇴장
-          //     if (member.online === false && members[idx].online === true) {
-          //       notifyError(member.nickname);
-          //     }
-          //   });
-          // }
-
-          if (
-            getMembers.length !== members.length &&
-            getMembers[getMembers.length - 1].online
-          ) {
-            notifySuccess(getNickname);
+          // -- 입장, 퇴장 로직
+          if (updatedMember.online) {
+            notifySuccess(updatedMember.nickname);
+          } else {
+            notifyError(updatedMember.nickname);
           }
 
+          // -- 방 닫힘, 멤버 업데이트 로직
           if (body.status === 'CLOSED') {
             stompClient.disconnect(() => {}, {});
             setIsRoomClosed((prev) => !prev);
@@ -447,6 +431,7 @@ const S = {
     overflow: hidden;
     background-color: white;
     padding: 20px;
+    padding-right: 0;
     height: 100%;
     margin-right: 2%;
   `,

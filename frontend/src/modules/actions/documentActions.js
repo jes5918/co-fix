@@ -2,6 +2,7 @@ import {
   SET_DOCUMENT,
   MODIFY_DOCUMENT_TEXT,
   SELECT_DOCUMENT_TEXT,
+  UPDATE_COMMENT_EXIST,
 } from '../types';
 
 // 문장 초기에 받는 함수
@@ -25,5 +26,12 @@ export const documentSelectAction = (Num) => (dispatch) => {
   dispatch({
     type: SELECT_DOCUMENT_TEXT,
     payload: Num,
+  });
+};
+
+export const updateCommentExist = (sentenceId) => (dispatch) => {
+  dispatch({
+    type: UPDATE_COMMENT_EXIST,
+    sentenceId: sentenceId,
   });
 };
