@@ -6,9 +6,9 @@
 
 ⭐ **Front-end** :  <img src="https://img.shields.io/badge/React-17.0.2-61DAFB?style=flat-square&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-4.1.0-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/Font Awesome-339AF0?style=flat-square&logo=Font Awesome&logoColor=white"/>
 
-⭐ **Back-end** : <img src="https://img.shields.io/badge/Java-11-007396?style=flat-square&logo=Java&logoColor=white"/><img src="https://img.shields.io/badge/Spring-2.4.4-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Gradle-6.8.3-green?style=flat-square&logo=Gradle&logoColor=white">  <img src="https://img.shields.io/badge/MySQL-8.0.21-4479A1?style=flat-square&logo=MySQL&logoColor=white"/><img src="https://img.shields.io/badge/Swagger-2.9.2-85EA2D?style=flat-square&logo=Swagger&logoColor=black"/> [![Elastic Stack version](https://img.shields.io/badge/Elastic%20Stack-7.12.1-00bfb3?style=flat-squre&logo=elastic-stack)](https://www.elastic.co/blog/category/releases)
+⭐ **Back-end** : <img src="https://img.shields.io/badge/Java-11-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Spring-2.4.4-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Gradle-6.8.3-green?style=flat-square&logo=Gradle&logoColor=white"> <img src="https://img.shields.io/badge/MySQL-8.0.21-4479A1?style=flat-square&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/Swagger-2.9.2-85EA2D?style=flat-square&logo=Swagger&logoColor=black"/> <img src = "https://img.shields.io/badge/Elastic%20Stack-7.12.1-00bfb3?style=flat-square&logo=elastic-stack">
 
-⭐ **CI / CD** : <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/GitLab-FCA121?style=flat-square&logo=GitLab&logoColor=black"/><img src="https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=Jenkins&logoColor=black"/> <img src="https://img.shields.io/badge/NGINX-269539?style=flat-square&logo=NGINX&logoColor=black"/><img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=Jira&logoColor=white"/>
+⭐ **CI / CD** : <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/GitLab-FCA121?style=flat-square&logo=GitLab&logoColor=black"/> <img src="https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=Jenkins&logoColor=black"/> <img src="https://img.shields.io/badge/NGINX-269539?style=flat-square&logo=NGINX&logoColor=black"/> <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=Jira&logoColor=white"/>
 
 #### 🧩 주요 기능
 
@@ -305,7 +305,7 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
     │     ├─ application.yml    : 설정 파일
     │     └─ ...
     └─ test                     : 테스트 폴더
-
+  
   ```
 
 #### 🧩 Wireframe
