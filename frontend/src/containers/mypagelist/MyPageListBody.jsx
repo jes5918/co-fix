@@ -39,7 +39,7 @@ export default function TemplateBody({
       RoomInfo.pinNumber,
       user.credentials.member && user.credentials.member.name,
       (res) => {
-        dispatch(saveRoomInfo(RoomInfo));
+        dispatch(saveRoomInfo(res.data.data));
         dispatch(commentResetAction());
         localStorage.setItem(
           'nickName',
