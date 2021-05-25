@@ -1,4 +1,4 @@
-package com.ssafy.devfolio.pubsub.pubsub;
+package com.ssafy.devfolio.pubsub;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.listener.ChannelTopic;

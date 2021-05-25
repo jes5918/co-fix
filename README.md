@@ -289,8 +289,8 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
     │  │       ├─ member        : 멤버 관련
     │  │       │    ├─  MemberController.java
     │  │       │    └─  ...
+    │  │       ├─ pubsub   : Redis pub/sub 관련
     │  │       ├─ commentroom   : 첨삭방 관련
-    │  │       │    └─ pubsub   : Redis pub/sub 관련
     │  │       ├─ sentence      : 문장 관련
     │  │       ├─ comment       : 문장에 대한 의견 관련
     │  │       ├─ aspect        : 로깅 AOP 관련

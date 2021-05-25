@@ -1,4 +1,4 @@
-package com.ssafy.devfolio.pubsub.pubsub;
+package com.ssafy.devfolio.pubsub;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,7 +1,7 @@
 package com.ssafy.devfolio.sentence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ssafy.devfolio.pubsub.pubsub.RedisSenderService;
+import com.ssafy.devfolio.pubsub.RedisSenderService;
 import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;

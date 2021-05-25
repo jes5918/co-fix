@@ -1,4 +1,4 @@
-package com.ssafy.devfolio.pubsub.pubsub;
+package com.ssafy.devfolio.pubsub;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.devfolio.commentroom.dto.CommentRoomSub;
