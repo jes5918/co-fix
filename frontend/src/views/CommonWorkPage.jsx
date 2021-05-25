@@ -210,7 +210,7 @@ export default function CommonWorkPage() {
 
     return () => {
       localStorage.removeItem('nickName');
-      // stompClientTest.disconnect();
+      stompClientTest.disconnect();
     };
   }, []);
 
