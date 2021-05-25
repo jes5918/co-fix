@@ -8,6 +8,7 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { FaAngleLeft } from 'react-icons/fa';
+import { MdContentPaste } from 'react-icons/md';
 
 // apis
 import { getDocuments } from '../api/documents';
@@ -24,6 +25,8 @@ import MyCommentContainer from '../containers/mypage/MyCommentContainer';
 import MypageLeft from '../containers/mypage/MyPageLeft';
 
 // components
+import Modal from '../containers/Modal';
+import AlertModal from '../components/modal/AlertModal';
 import CalcContentLength from '../containers/mypage/CalcContentLength';
 
 // 커스터마이징 탭
@@ -65,10 +68,12 @@ export default function MyPage({ match }) {
   const documentId = match.params.documentid;
 
   const [tabIndex, setTabIndex] = useState(0);
-  const [originalContent, setOriginalContent] = useState([]);
-  const [modifiedContent, setModifiedContent] = useState([]);
+  const [originalContent, setOriginalContent] = useState('');
+  const [modifiedContent, setModifiedContent] = useState('');
   const [onFocusedSentence, setOnFocusedSentence] = useState();
   const [isChanged, setIsChanged] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   // 중간 divderbar
   const [splitPosX, setSplitPosX] = useState(() => {
@@ -142,18 +147,38 @@ export default function MyPage({ match }) {
     history.push('/history');
   };
 
-  // const exportHandler = () => {
-  //   const input = document.getElementById('divToPrint');
-  //   html2canvas(input).then((canvas) => {
-  //     const imgData = canvas.toDataURL('image/png');
-  //     const pdf = new jsPDF();
-  //     pdf.addImage(imgData, 'JPEG', 0, 0);
-  //     // pdf.output('dataurlnewwindow');
-  //     pdf.save('download.pdf');
-  //   });
-  // };
+  const pasteHandler = (content) => {
+    const pasteItem = content
+      .replaceAll('<mark>', '')
+      .replaceAll('</mark>', '')
+      .replaceAll('<mark2>', '')
+      .replaceAll('</mark2>', '');
+    navigator.clipboard.writeText(pasteItem).then(() => {
+      AlertModalToggleHandler(
+        content === originalContent
+          ? '원본데이터가 클립보드에 복사 되었습니다.'
+          : '수정데이터가 클립보드에 복사 되었습니다.',
+      );
+    });
+  };
+
+  const AlertModalToggleHandler = (message) => {
+    setAlertMessage(message);
+    setIsAlertModalOpen(!isAlertModalOpen);
+  };
   return (
     <BackGround>
+      <Modal
+        width="fit-content"
+        height="320px"
+        isModalOpen={isAlertModalOpen}
+        ModalToggleHandler={() => AlertModalToggleHandler('')}
+      >
+        <AlertModal
+          PropsText={alertMessage}
+          PropsComfirmHandler={() => AlertModalToggleHandler('')}
+        />
+      </Modal>
       <Prev onClick={gotoBack} />
       <StyledTabs
         selectedIndex={tabIndex}
@@ -172,12 +197,25 @@ export default function MyPage({ match }) {
             </>
           ) : null}
         </TabList>
-        <MyPageContainer id="htmlExport">
+        <MyPageContainer>
           <MyPageHeader>
-            <MyPageHeaderInner>
-              <MyPageTitle>제목 : {documentData.title}</MyPageTitle>
-            </MyPageHeaderInner>
-            {/* <MypageExport onClick={exportHandler}>E</MypageExport> */}
+            {tabIndex === 1 ? (
+              <>
+                <MypageExport onClick={() => pasteHandler(originalContent)}>
+                  <PasteIcon />
+                </MypageExport>
+                <MyPageHeaderInner>
+                  <MyPageTitle>제목 : {documentData.title}</MyPageTitle>
+                </MyPageHeaderInner>
+                <MypageExport onClick={() => pasteHandler(modifiedContent)}>
+                  <PasteIcon />
+                </MypageExport>
+              </>
+            ) : (
+              <MyPageHeaderInner>
+                <MyPageTitle>제목 : {documentData.title}</MyPageTitle>
+              </MyPageHeaderInner>
+            )}
           </MyPageHeader>
           <TabPanel>
             <ScreenSlideDivider setSplitPosX={setSplitPosX}>
@@ -344,7 +382,8 @@ const MypageExport = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -364,4 +403,9 @@ const Prev = styled(FaAngleLeft)`
   left: 1%;
   cursor: pointer;
   z-index: 2;
+`;
+
+const PasteIcon = styled(MdContentPaste)`
+  width: 24px;
+  height: 24px;
 `;

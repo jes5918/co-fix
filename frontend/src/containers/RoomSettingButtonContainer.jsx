@@ -234,8 +234,8 @@ export default function RoomSettingButtonContainer({
       </Modal>
       {/* 인원수 정보 보여주는 modal */}
       <Modal
-        width="500px"
-        height="320px"
+        width="fit-content"
+        height="fit-content"
         isModalOpen={isRoomInfoModalOpen}
         ModalToggleHandler={RoomInfoModalToggleHandler}
       >
