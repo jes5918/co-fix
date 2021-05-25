@@ -6,6 +6,7 @@ import com.ssafy.devfolio.comment.Comment;
 import com.ssafy.devfolio.comment.dto.SentenceSub;
 import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.dto.CommentRoomSub;
+import com.ssafy.devfolio.commentroom.dto.UpdatedType;
 import com.ssafy.devfolio.member.dto.JoinMember;
 import com.ssafy.devfolio.sentence.Sentence;
 import com.ssafy.devfolio.utils.property.RedisKeyPrefixProperties;
@@ -44,6 +45,7 @@ public class RedisSenderService {
                 .memberLimit(room.getMemberLimit())
                 .status(room.getStatus())
                 .members(room.getMembers())
+                .updatedType(UpdatedType.ROOM)
                 .lastModifiedDate(room.getLastModifiedDate())
                 .build();
 
@@ -61,6 +63,7 @@ public class RedisSenderService {
                 .status(room.getStatus())
                 .members(room.getMembers())
                 .updatedMember(updatedMember)
+                .updatedType(UpdatedType.ROOM)
                 .lastModifiedDate(room.getLastModifiedDate())
                 .build();
 
@@ -75,6 +78,7 @@ public class RedisSenderService {
         CommentRoomSub commentRoomSub = CommentRoomSub.builder()
                 .roomId(roomId)
                 .sentence(sentence)
+                .updatedType(UpdatedType.SENTENCE)
                 .lastModifiedDate(commentRoom.getLastModifiedDate())
                 .build();
 
