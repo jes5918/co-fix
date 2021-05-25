@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-function NickNameRoute({ component: Component, roles, ...rest }) {
+function NickNameRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
@@ -13,7 +13,7 @@ function NickNameRoute({ component: Component, roles, ...rest }) {
             />
           );
         }
-        return <Component {...props} />;
+        return <Component {...props} {...rest} />;
       }}
     />
   );

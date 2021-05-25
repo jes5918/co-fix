@@ -59,7 +59,11 @@ function App() {
         <PrivateRoute path="/create" component={Create} />
         <PrivateRoute path="/history" component={MyPageList} />
         <PrivateRoute path="/mypage/:roomid/:documentid" component={MyPage} />
-        <NickNameRoute path="/co-fix/:id" component={CommonWorkPage} />
+        <NickNameRoute
+          path="/co-fix/:id"
+          component={CommonWorkPage}
+          isCoFixRoom={isCoFixRoom}
+        />
       </Switch>
     </>
   );
