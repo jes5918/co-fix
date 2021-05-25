@@ -2,8 +2,6 @@
 
 > 실시간 온라인 공동 첨삭 플랫폼
 
-
-
 #### 🔨Built With
 
 ⭐ **Front-end** : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/Font Awesome-339AF0?style=flat-square&logo=Font Awesome&logoColor=white"/>
@@ -11,8 +9,6 @@
 ⭐ **Back-end** : <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/><img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=Redis&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/><img src="https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=black"/>
 
 ⭐ **CI / CD** : <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/GitLab-FCA121?style=flat-square&logo=GitLab&logoColor=black"/><img src="https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=Jenkins&logoColor=black"/> <img src="https://img.shields.io/badge/NGINX-269539?style=flat-square&logo=NGINX&logoColor=black"/><img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=Jira&logoColor=white"/>
-
-
 
 #### 🧩 주요 기능
 
@@ -27,7 +23,7 @@
 - 문장에 대한 평가 기능 ( Fix 고쳐야할 부분 )
 - 문장 직접 수정 기능
 - Pin-Code 복사 기능
-- 음성 및 화상 통화기능 
+- 음성 및 화상 통화기능
 - 복사 (ctrl + c 및 html ) 방지
 
 **Create Co-Fix**
@@ -56,20 +52,18 @@
 
 #### 👨‍👩‍👧‍👧 팀원 소개
 
-|     Name     |                            명도균                            |                            김민혁                            |                            류건희                            |                            유진우                            |                            전의수                            |
-| :----------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|     Name     |                                                                      명도균                                                                      |                                                                     김민혁                                                                      |                                                                     류건희                                                                      |                                                                      유진우                                                                      |                                                                     전의수                                                                      |
+| :----------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: |
 | **Profile**  | <img src = "https://user-images.githubusercontent.com/40309812/114838106-556f7d00-9e0f-11eb-9134-893efdff87e8.png" width="110px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838159-615b3f00-9e0f-11eb-94c0-2823fa3dca4e.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/70404643/112585083-7d854500-8e3c-11eb-8ed0-45f16d12b940.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838108-56081380-9e0f-11eb-8863-e77a78c6a442.png" width="110px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838115-57394080-9e0f-11eb-9497-4b590dcb4710.jpg" width="90px" height="120px"> |
-|   **R&R**    |                           **팀장**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |
-|   **Git**    |             [Github](https://github.com/mingddo)             |           [Github](https://github.com/glenn93516)            |             [Github](https://github.com/RGunny)              |           [Github](https://github.com/phoenix9373)           |             [Github](https://github.com/jes5918)             |
-| **Position** |                              FE                              |                              BE                              |                              BE                              |                              FE                              |                              FE                              |
+|   **R&R**    |                                                                     **팀장**                                                                     |                                                                    **팀원**                                                                     |                                                                    **팀원**                                                                     |                                                                     **팀원**                                                                     |                                                                    **팀원**                                                                     |
+|   **Git**    |                                                       [Github](https://github.com/mingddo)                                                       |                                                     [Github](https://github.com/glenn93516)                                                     |                                                       [Github](https://github.com/RGunny)                                                       |                                                     [Github](https://github.com/phoenix9373)                                                     |                                                      [Github](https://github.com/jes5918)                                                       |
+| **Position** |                                                                        FE                                                                        |                                                                       BE                                                                        |                                                                       BE                                                                        |                                                                        FE                                                                        |                                                                       FE                                                                        |
 
 #### 🙌 시스템 아키텍쳐
 
 ![cofix_system_architecture-3](README.assets/cofix_system_architecture-3.png)
 
-
-
-#### 
+####
 
 #### 🙌포트번호
 
@@ -104,8 +98,6 @@
 5601: kibana
 ```
 
-
-
 `https://k4b1041.p.ssafy.io`도메인 - OpenVidu backend server (실시간 화상)
 
 ```bash
@@ -116,15 +108,13 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 4443 : OpenVidu Server
 ```
 
-
-
 #### 🎴일정관리
 
 **1주차 4. 12 ~ 4.16**
 
 - common
   - 아이디어 회의 및 도출
-  - WireFrame 
+  - WireFrame
   - 기술스택 논의
 
 **2주차 4. 19 ~ 4.23**
@@ -133,8 +123,8 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
   - components 제작
   - 소셜로그인 완성 및 백엔드 통신
   - Redux 셋팅
-  
 - Backend
+
   - 소셜로그인 완성 (월요일)
   - 에러 코드 정하기(월요일)
   - `@ControllerAdvice` 적용
@@ -155,29 +145,30 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 
 - Frontend
   - 기획
-  
 - Backend
   - 해시태그 등 기타 기능 (1)
   - 포트폴리오, 템플릿
-- common	
+- common
 
 **4주차 5.3 ~ 5.7**
 
 - Frontend
+
   - 컴포넌트 제작
 
 - Backend
+
   - ERD
 
 - common
 
   - 1차 코드작성 완료
 
-
 **5주차 5.10 ~ 5.14**
 
 - Frontend
-  - 기본 페이지 Frame 
+
+  - 기본 페이지 Frame
   - api 기본 통신 세팅
 
 - Backend
@@ -192,8 +183,6 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 - common
   - UCC제작
   - 최종 PPT제작 및 발표 준비
-
-  
 
 #### 🌳 Convention
 
@@ -213,8 +202,6 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 
     ![image-20210420213923328](README.assets/image-20210420213923328.png)
 
-    
-
   - Git rebase 전략을 사용하여 Git Graph의 단순화 작업을 통해 사후 관리 용이하도록 함.
 
   - Origin Branch에 Push 하기 전에 `git --rebase upstream develop`을 통해 내가 작업한 커밋을 upstream repo의 최신 커밋에 rebase하여 `git push origin [feature branch]` 하고, 원격 repo 에서 Pull Request를 날려 최종적으로 Upstream Develop에 코드리뷰 후 Merge함.
@@ -224,8 +211,6 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
   - 위와 같은 GIt 전략을 사용한 결과물
 
   ![image-20210420215114763](README.assets/image-20210420215114763.png)
-
-
 
 - Branch
 
@@ -268,8 +253,6 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
 #     본문에 여러줄의 메시지를 작성할 땐 "-"로
 ```
 
-
-
 **FE**
 
 - 💻 **code**
@@ -300,20 +283,26 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
     ├─ main
     │  ├─ java
     │  │   └─ com.ssafy.devfolio
-    │  │       ├─ Member        : 멤버 관련
+    │  │       ├─ member        : 멤버 관련
     │  │       │    ├─  MemberController.java
     │  │       │    └─  ...
-    │  │       ├─ config        : 설정 파일 (swagger, security, ...)
+    │  │       ├─ commentroom   : 첨삭방 관련
+    │  │       │    └─ pubsub   : Redis pub/sub 관련
+    │  │       ├─ sentence      : 문장 관련
+    │  │       ├─ comment       : 문장에 대한 의견 관련
+    │  │       ├─ aspect        : 로깅 AOP 관련
+    │  │       ├─ config        : 설정 파일 (swagger, security, redis, ...)
     │  │       │    ├─  security
     │  │       │    └─  ...
     │  │       ├─ exception     : 예외 처리 관련
-    │  │       ├─ utils         : 유틸 폴더 (Jwt, S3, ...)
+    │  │       ├─ response      : API 응답 관련
+    │  │       ├─ utils         : 유틸 폴더 (Jwt, ...)
     │  │       └─ DevfolioApplication.java
     │  └─ resources
     │     ├─ application.yml    : 설정 파일
     │     └─ ...
     └─ test                     : 테스트 폴더
-  
+
   ```
 
 #### 🧩 Wireframe
@@ -339,4 +328,3 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
 ![웹 1920 – 15](README.assets/웹 1920 – 15.png)
 
 ![웹 1920 – 10](README.assets/웹 1920 – 10.png)
-
