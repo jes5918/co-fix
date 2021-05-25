@@ -101,14 +101,20 @@ export default function CommonWorkPage() {
     );
   };
 
-  const notifyError = useCallback(
-    debounce((nickname) => toast.error(`${nickname}님이 퇴장했습니다.`), 200),
-    [],
+  const notifyError = useCallback((nickname) =>
+    toast.error(`${nickname}님이 퇴장했습니다.`),
   );
-  const notifySuccess = useCallback(
-    debounce((nickname) => toast.success(`${nickname}님이 입장했습니다.`), 200),
-    [],
+  const notifySuccess = useCallback((nickname) =>
+    toast.success(`${nickname}님이 입장했습니다.`),
   );
+  // const notifyError = useCallback(
+  //   debounce((nickname) => toast.error(`${nickname}님이 퇴장했습니다.`), 200),
+  //   [],
+  // );
+  // const notifySuccess = useCallback(
+  //   debounce((nickname) => toast.success(`${nickname}님이 입장했습니다.`), 200),
+  //   [],
+  // );
 
   const connectSocket = () => {
     const socket = new SockJS('https://k4b104.p.ssafy.io/api/wss');
