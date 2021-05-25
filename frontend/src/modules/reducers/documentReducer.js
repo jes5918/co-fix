@@ -3,6 +3,7 @@ import {
   MODIFY_DOCUMENT_TEXT,
   SELECT_DOCUMENT_TEXT,
   SET_DOCUMENT_TITLE,
+  UPDATE_COMMENT_EXIST,
 } from '../types';
 
 const initialState = {
@@ -33,6 +34,14 @@ export default function (state = initialState, action) {
     }
     case SELECT_DOCUMENT_TEXT: {
       return { ...state, selectNum: action.payload };
+    }
+    case UPDATE_COMMENT_EXIST: {
+      const updateIndex = state.data.findIndex(
+        (sentence) => sentence.sentenceId === action.sentence,
+      );
+      const newData = [...state.data];
+      newData[updateIndex] = { ...state.data[updateIndex], hasComment: true };
+      return { ...state, data: newData };
     }
     default:
       return state;

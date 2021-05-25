@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import {
   documentModifyAction,
   documentSelectAction,
+  updateCommentExist,
 } from '../../modules/actions/documentActions';
 import {
   commentCreateAction,
@@ -20,6 +21,9 @@ import useDocument from '../../hook/useDocument';
 // library
 import { debounce } from 'lodash';
 
+// image
+import commentImage from '../../assets/comment.png';
+
 export default function EditableTextWrapper({
   data,
   testRequest,
@@ -29,10 +33,10 @@ export default function EditableTextWrapper({
   setSubscription,
   isSelected,
 }) {
-  const { modifiedContent, sentenceId } = data;
+  const { modifiedContent, sentenceId, hasComment } = data;
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
-  const { roomId, documentId, memberId } = useRoomInfo();
+  const { memberId } = useRoomInfo();
   const { credentials } = useLoginUser();
   const { selectNum } = useDocument();
 
@@ -51,7 +55,16 @@ export default function EditableTextWrapper({
       modifiedContent: newValue,
     };
     ModifyActionHandler(updateData);
-    // backend 로 수정하는거 보내야 하는 자리 (츄츄가)
+  };
+
+  const onHandleClick = () => {
+    if (selectNum !== sentenceId) {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+      const getSubscription = subscribe(sentenceId);
+      setSubscription(getSubscription);
+    }
   };
 
   const onHandleDebounce = debounce((modifiedSentence) => {
@@ -70,6 +83,7 @@ export default function EditableTextWrapper({
         const isAgree = body.isAgree === 'false' ? false : true;
         if (!isAgree) {
           dispatch(commentCreateAction(body));
+          dispatch(updateCommentExist(body.sentenceId));
         } else {
           dispatch(commentAgreeAction(body));
         }
@@ -80,19 +94,12 @@ export default function EditableTextWrapper({
   };
 
   return (
-    <div
-      onClick={() => {
-        if (selectNum !== sentenceId) {
-          if (subscription) {
-            subscription.unsubscribe();
-          }
-          const getSubscription = subscribe(sentenceId);
-          setSubscription(getSubscription);
-        }
-      }}
-    >
+    <S.SentenceWrapper onClick={() => onHandleClick()}>
+      <S.ShowIsCommentInfo>
+        {hasComment && <S.CommentImage />}
+      </S.ShowIsCommentInfo>
       {!isEditMode ? (
-        <TextContainer
+        <S.TextContainer
           isSelected={isSelected}
           onDoubleClick={() => {
             if (credentials.member && memberId === credentials.member.id) {
@@ -105,7 +112,7 @@ export default function EditableTextWrapper({
           }}
         >
           {modifiedContent}
-        </TextContainer>
+        </S.TextContainer>
       ) : (
         <Editabletext
           editorModeToggleHandler={editorModeToggleHandler}
@@ -115,24 +122,58 @@ export default function EditableTextWrapper({
           sentenceId={data.sentenceId}
         />
       )}
-    </div>
+    </S.SentenceWrapper>
   );
 }
 
-const TextContainer = styled.div`
-  position: relative;
-  cursor: pointer;
-  word-break: keep-all;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: 'S-CoreDream-5Medium';
-  margin: 0px 12px 12px 0px;
-  border-radius: 10px;
-  &:hover {
-    background-color: #feffbc;
-  }
-  padding: 2px 4px;
-  border: ${({ isSelected }) =>
-    isSelected ? '2px solid #f1abab' : '2px solid transparent'};
-  /* border: 2px solid #677eff */
-`;
+const S = {
+  SentenceWrapper: styled.div`
+    position: relative;
+    margin-right: 10px;
+  `,
+  ShowIsCommentInfo: styled.div`
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    transform: translate(0, -50%);
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+  CommentImage: styled.img.attrs({
+    src: `${commentImage}`,
+  })`
+    width: 20px;
+    height: 20px;
+  `,
+  CommentCount: styled.div`
+    position: absolute;
+    color: white;
+    font-size: 0.8rem;
+  `,
+  TextContainer: styled.div`
+    position: relative;
+    cursor: pointer;
+    word-break: keep-all;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'S-CoreDream-5Medium';
+    margin: 0px 24px 12px 0px;
+    border-radius: 10px;
+    &:hover {
+      background-color: #feffbc;
+    }
+    padding: 2px 4px;
+    border: ${({ isSelected }) =>
+      isSelected ? '2px solid #f1abab' : '2px solid transparent'};
+  `,
+  AgreeMembers: styled.span`
+    font-family: 'S-CoreDream-6Bold';
+    color: white;
+    font-size: 16px;
+  `,
+};
