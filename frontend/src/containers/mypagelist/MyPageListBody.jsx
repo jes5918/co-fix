@@ -16,6 +16,7 @@ import AlertModal from '../../components/modal/AlertModal';
 import { saveRoomInfo } from '../../modules/actions/roomActions';
 import { commentResetAction } from '../../modules/actions/commentActions';
 import useLoginUser from '../../hook/useLoginUser';
+import { enterRoom } from '../../api/co-fix';
 
 export default function TemplateBody({
   RoomInfos,
@@ -34,13 +35,22 @@ export default function TemplateBody({
 
   // 라이브 방 가는 핸들러
   const onGotoLiveHandler = (RoomInfo) => {
-    dispatch(saveRoomInfo(RoomInfo));
-    dispatch(commentResetAction());
-    localStorage.setItem(
-      'nickName',
+    enterRoom(
+      RoomInfo.pinNumber,
       user.credentials.member && user.credentials.member.name,
+      (res) => {
+        dispatch(saveRoomInfo(RoomInfo));
+        dispatch(commentResetAction());
+        localStorage.setItem(
+          'nickName',
+          user.credentials.member && user.credentials.member.name,
+        );
+        history.push(`/co-fix/${RoomInfo.roomId}`);
+      },
+      (err) => {
+        console.error(err.response.data);
+      },
     );
-    history.push(`/co-fix/${RoomInfo.roomId}`);
   };
 
   return (
