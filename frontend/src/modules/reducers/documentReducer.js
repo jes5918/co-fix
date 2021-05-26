@@ -36,11 +36,15 @@ export default function (state = initialState, action) {
       return { ...state, selectNum: action.payload };
     }
     case UPDATE_COMMENT_EXIST: {
+      const { sentenceId, hasComment } = action.payload;
       const updateIndex = state.data.findIndex(
-        (sentence) => sentence.sentenceId === action.sentenceId,
+        (sentence) => sentence.sentenceId === sentenceId,
       );
       const newData = [...state.data];
-      newData[updateIndex] = { ...state.data[updateIndex], hasComment: true };
+      newData[updateIndex] = {
+        ...state.data[updateIndex],
+        hasComment: hasComment,
+      };
       return { ...state, data: newData };
     }
     default:
