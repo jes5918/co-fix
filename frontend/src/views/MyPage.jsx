@@ -113,18 +113,14 @@ export default function MyPage({ match }) {
         let tempModify = '';
         res.data.data.forEach((d) => {
           if (d.originalContent !== d.modifiedContent) {
-            tempOrigin += `<mark>${d.originalContent
-              .replace(' ', '')
-              .trim()}</mark>`;
+            tempOrigin += `<mark>${d.originalContent}</mark>`;
             tempOrigin += '\n';
-            tempModify += `<mark2>${d.modifiedContent
-              .replace(' ', '')
-              .trim()}</mark2>`;
+            tempModify += `<mark2>${d.modifiedContent}</mark2>`;
             tempModify += '\n';
           } else {
-            tempOrigin += d.originalContent.replace(' ', '').trim();
+            tempOrigin += d.originalContent;
             tempOrigin += '\n';
-            tempModify += d.modifiedContent.replace(' ', '').trim();
+            tempModify += d.modifiedContent;
             tempModify += '\n';
           }
         });

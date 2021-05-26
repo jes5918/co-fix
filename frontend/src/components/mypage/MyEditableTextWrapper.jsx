@@ -8,6 +8,8 @@ import { modifyDocuments } from '../../api/documents';
 import styled from 'styled-components';
 import MyEditabletext from './MyEditabletext';
 import { debounce } from 'lodash';
+// image
+import commentImage from '../../assets/comment.png';
 
 export default function MyEditableTextWrapper({
   sentence,
@@ -17,7 +19,7 @@ export default function MyEditableTextWrapper({
   onHandleClickSentence,
   setIsChanged,
 }) {
-  const { modifiedContent, sentenceId } = sentence;
+  const { modifiedContent, sentenceId, hasComment } = sentence;
   const dispatch = useDispatch();
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -57,7 +59,10 @@ export default function MyEditableTextWrapper({
   };
 
   return (
-    <>
+    <S.SentenceWrapper>
+      <S.ShowIsCommentInfo>
+        {hasComment && <S.CommentImage />}
+      </S.ShowIsCommentInfo>
       {!isEditMode ? (
         <TextContainer
           isSelected={isSelected}
@@ -73,7 +78,7 @@ export default function MyEditableTextWrapper({
           content={modifiedContent}
         />
       )}
-    </>
+    </S.SentenceWrapper>
   );
 }
 
@@ -91,3 +96,29 @@ const TextContainer = styled.div`
   border: ${({ isSelected }) =>
     isSelected ? '2px solid #f1abab' : '2px solid transparent'};
 `;
+
+const S = {
+  SentenceWrapper: styled.div`
+    position: relative;
+    margin-right: 10px;
+  `,
+  ShowIsCommentInfo: styled.div`
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    transform: translate(0, -50%);
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+  CommentImage: styled.img.attrs({
+    src: `${commentImage}`,
+  })`
+    width: 20px;
+    height: 20px;
+  `,
+};
