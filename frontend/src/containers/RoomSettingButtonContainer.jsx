@@ -105,6 +105,7 @@ export default function RoomSettingButtonContainer({ stompClientTest }) {
   };
 
   const ModifyRoomSettingModalToggleHandler = () => {
+    setNumParticipant(memberLimit);
     setIsModifyRoomSettingModalOpen(!isModifyRoomSettingModalOpen);
   };
 
@@ -117,7 +118,6 @@ export default function RoomSettingButtonContainer({ stompClientTest }) {
   };
 
   const ParticipantNumModalToggleHandler = () => {
-    setNumParticipant(memberLimit);
     setIsPartNumModalOpen(!isPartNumModalOpen);
   };
 
