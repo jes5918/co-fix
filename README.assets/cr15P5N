@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html xml:lang="ko" lang="ko" dir="ltr" class="device-nonmobile no-js" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate" />
+<meta name="description" content="ImgBB 호스팅 이미지 xum27v">
+<meta name="robots" content="noindex, nofollow" />
+<title>xum27v — ImgBB</title>
+<link rel="stylesheet" href="//simgbb.com/3515/ibb.css">
+<script>document.documentElement.className+=" js";var devices=["phone","phablet","tablet","laptop","desktop","largescreen"],window_to_device=function(){for(var e=[480,768,992,1200,1880,2180],t=[],n="",d=document.documentElement.clientWidth||document.getElementsByTagName("body")[0].clientWidth||window.innerWidth,c=0;c<devices.length;++c)d>=e[c]&&t.push(devices[c]);for(0==t.length&&t.push(devices[0]),n=t[t.length-1],c=0;c<devices.length;++c)document.documentElement.className=document.documentElement.className.replace(devices[c],""),c==devices.length-1&&(document.documentElement.className+=" "+n),document.documentElement.className=document.documentElement.className.replace(/\s+/g," ");if("laptop"==n||"desktop"==n){var o=document.getElementById("pop-box-mask");null!==o&&o.parentNode.removeChild(o)}};window_to_device(),window.onresize=window_to_device;function jQueryLoaded(){!function(n,d){n.each(readyQ,function(d,e){n(e)}),n.each(bindReadyQ,function(e,i){n(d).bind("ready",i)})}(jQuery,document)}!function(n,d,e){function i(d,e){"ready"==d?n.bindReadyQ.push(e):n.readyQ.push(d)}n.readyQ=[],n.bindReadyQ=[];var u={ready:i,bind:i};n.$=n.jQuery=function(n){return n===d||void 0===n?u:void i(n)}}(window,document);</script>
+<link rel="shortcut icon" href="//simgbb.com/images/favicon.png">
+<link rel="icon" type="image/png" href="//simgbb.com/images/favicon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="//simgbb.com/images/favicon.png" sizes="180x180">
+<meta property="og:type" content="video.other" />
+<meta property="og:url" content="https://i.ibb.co/BCtDmDg/xum27v.webp" />
+<meta property="og:title" content="xum27v" />
+<meta property="og:site_name" content="ImgBB" />
+<meta property="og:description" content="ImgBB 호스팅 이미지 xum27v" />
+<meta property="og:image" content="https://i.ibb.co/BCtDmDg/xum27v.webp" />
+<meta property="og:image:width" content="800" />
+<meta property="og:image:height" content="390" />
+<meta name="twitter:card" content="photo">
+<meta name="twitter:description" content="ImgBB 호스팅 이미지 xum27v">
+<meta name="twitter:title" content="xum27v">
+<meta name="twitter:site" content="@imgbb_com">
+<link rel="alternate" type="application/json+oembed" href="https://ibb.co/cr15P5N/oembed.json" title="xum27v — ImgBB">
+<link rel="alternate" type="application/xml+oembed" href="https://ibb.co/cr15P5N/oembed.xml" title="xum27v — ImgBB">
+<link rel="image_src" href="https://i.ibb.co/BCtDmDg/xum27v.webp">
+</head>
+<body id="image" class=" no-margin-top">
+<header id="top-bar" class="top-bar white">
+<div class="content-width">
+<div id="logo" class="top-bar-logo"><a href="https://imgbb.com"><img class="replace-svg" src="//simgbb.com/images/logo.png" alt="ImgBB"></a></div>
+<ul class="top-bar-left float-left">
+<li data-action="top-bar-menu-full" data-nav="mobile-menu" class="top-btn-el phone-show hidden">
+<span class="top-btn-text"><span class="icon icon-menu3"></span></span>
+</li>
+<li data-nav="about" class="phone-hide pop-btn pop-btn-delayed">
+<span class="top-btn-text"><span class="icon icon-info tablet-hide laptop-hide desktop-hide"></span><span class="text phone-hide phablet-hide">정보</span><span class="arrow-down"></span></span>
+<div class="pop-box arrow-box arrow-box-top anchor-left">
+<div class="pop-box-inner pop-box-menu">
+<ul><li><a href="https://imgbb.com/plugin">플러그인</a></li><li><a href="https://api.imgbb.com/">API</a></li><li><a href="https://imgbb.com/tos">Terms of service</a></li><li><a href="https://imgbb.com/privacy">Privacy</a></li><li><a href="https://imgbb.com/contact">Contact</a></li></ul>
+</div>
+</div>
+</li>
+</ul>
+<ul class="top-bar-right float-right keep-visible">
+<li class="top-btn-el"><a href="https://imgbb.com/upload"><span class="top-btn-text"><span class="icon icon-cloud-upload"></span><span class="btn-text phone-hide phablet-hide">업로드</span></span></a></li>
+<li id="top-bar-signin" data-nav="signin" class="top-btn-el">
+<a href="https://imgbb.com/login" class="top-btn-text"><span class="icon icon-login tablet-hide laptop-hide desktop-hide"></span><span class="text phone-hide phablet-hide">로그인</span></a>
+</li>
+</ul>
+</div>
+</header><div class="top-bar-placeholder"></div>
+<div id="image-viewer" class="image-viewer full-viewer margin-bottom-10">
+<div id="image-viewer-container" class="image-viewer-main image-viewer-container"><img src="https://i.ibb.co/hmy5k5K/xum27v.webp" alt="xum27v" width="800" height="390" data-load="full"></div>
+</div>
+<script>var divLoading=document.createElement("div");divLoading.id="image-viewer-loading";divLoading.className="soft-hidden";document.getElementById("image-viewer").appendChild(divLoading)
+document.getElementById("top-bar").className+=' transparent';image_viewer_full_fix=function(){var viewer=document.getElementById("image-viewer"),viewer_container=document.getElementById("image-viewer-container"),top=document.getElementById("top-bar"),imgSource={width:800,height:390},img={width:imgSource.width,height:imgSource.height},ratio=imgSource.width/imgSource.height;var canvas={height:window.innerHeight-(typeof top!=="undefined"?top.clientHeight:0),width:viewer.clientWidth};var viewer_banner_top=0,viewer_banner_foot=0;var viewer_banner_height=90;if(viewer_banner_top){canvas.height-=viewer_banner_height+20;}
+if(viewer_banner_foot){canvas.height-=viewer_banner_height+20;}
+var hasClass=function(element,cls){return(" "+element.className+" ").indexOf(" "+cls+" ")>-1;}
+if(hasClass(document.documentElement,"phone")||hasClass(document.documentElement,"phablet")){}
+if(img.width>canvas.width){img.width=canvas.width;}
+img.height=(img.width/ratio);if(img.height>canvas.height&&(img.height/img.width)<3){img.height=canvas.height;}
+if(img.height==canvas.height){img.width=(img.height*ratio);}
+if(imgSource.width!==img.width){if(img.width>canvas.width){img.width=canvas.width;img.height=(img.width/ratio);}else if((img.height/img.width)>3){img=imgSource;if(img.width>canvas.width){img.width=canvas.width*0.8;}
+img.height=(img.width/ratio);}}
+if(imgSource.width>img.width||img.width<=canvas.width){if(img.width==canvas.width||imgSource.width==img.width){viewer_container.className=viewer_container.className.replace(/\s+cursor-zoom-(in|out)\s+/," ");}else{if(!hasClass(viewer_container,"jscursor-zoom-in")){viewer_container.className+=" jscursor-zoom-in";}else{viewer_container.className=viewer_container.className.replace(/\s+jscursor-zoom-in\s+/," ");if(!hasClass(viewer_container,"cursor-zoom-in")){viewer_container.className+=" cursor-zoom-in";}}}
+viewer_container.className=viewer_container.className.trim().replace(/ +/g,' ');}
+img={width:img.width+"px",height:img.height+"px",display:"block"}
+if(viewer_container.style.width!==img.width){for(var k in img){viewer_container.style[k]=img[k];}}}
+image_viewer_full_fix();document.addEventListener('DOMContentLoaded',function(event){CHV.obj.image_viewer.image={width:800,height:390,ratio:2.051282,url:"https://i.ibb.co/BCtDmDg/xum27v.webp",medium:{url:"https://i.ibb.co/hmy5k5K/xum27v.webp"},url_viewer:"https://ibb.co/cr15P5N"};CHV.obj.image_viewer.album={id_encoded:""};image_viewer_full_fix();CHV.fn.image_viewer_full_fix=window["image_viewer_full_fix"];});</script><div class="content-width">
+<div class="header header-content margin-bottom-10">
+<div class="header-content-left">
+<div class="header-content-breadcrum">
+<div class="breadcrum-item"><div class="user-image default-user-image"><span class="icon icon-user"></span></div><span class="breadcrum-text float-left"><span class="user-link">손님</span></span></div>
+<div class="breadcrum-item">
+<span class="breadcrum-text"><span class="icon icon-eye-blocked margin-right-5 soft-hidden" data-content="privacy-private" title="이 게시물은 비공개 게시물입니다" rel="tooltip"></span></span>
+</div>
+<div class="breadcrum-item"><a class="link link--edit" data-modal="edit"><span class="icon icon-edit"></span> <span>편집</span></a></div>
+<div class="breadcrum-item"><a class="link link--delete" data-confirm="이 이미지를 삭제하시겠습니까? 이 작업은 원래대로 되돌릴 수 없습니다." data-submit-fn="CHV.fn.submit_resource_delete" data-ajax-deferred="CHV.fn.complete_resource_delete" data-ajax-url="https://ibb.co/json"><span class="icon icon-remove"></span> <span>삭제</span></a></div>
+</div>
+</div>
+<div class="header-content-right">
+<a href="https://i.ibb.co/BCtDmDg/xum27v.webp" download="xum27v.webp" class="btn btn-download default" rel="tooltip" title="800 x 390 - WEBP 522.1 KB"><span class="btn-icon icon-download"></span></a>
+<a href="https://imgbb.com/login" class="btn-like" data-liked="0"><span class="btn btn-unliked blue outline"><span class="btn-icon icon-heart4"></span><span class="btn-text phone-hide">좋아요</span></span></a>
+<a class="btn red" data-modal="simple" data-target="modal-share"><span class="btn-icon icon-sh"></span><span class="btn-text phone-hide">공유하기</span></a>
+</div>
+</div>
+<h1 class="viewer-title" data-text="image-title">xum27v</h1>
+<div class="header"><div class="phone-show hidden tab-menu current" data-action="tab-menu"><span data-content="current-tab-label">정보</span><span class="icon icon-menu4 margin-left-5"></span></div>
+<ul class="content-tabs phone-hide">
+<li class=" current"><a id="tab-about-link" data-tab="tab-about" href="">정보</a></li><li class=" "><a id="tab-codes-link" data-tab="tab-codes" href="">퍼가기</a></li></ul>
+<div class="header-content-right"><div class="number-figures float-left">0 <span>조회</span></div></div></div>
+<div id="tabbed-content-group">
+<div id="tab-about" class="tabbed-content visible">
+<div class="c9 phablet-c1 fluid-column grid-columns">
+<div class="panel-description default-margin-bottom">
+<p class="description-text margin-bottom-5" data-text="image-description"></p>
+<p class="description-meta margin-bottom-5">
+<span title="2021-05-26 05:05:46">19 초 전</span>에 업로드됨</p>
+</div>
+</div>
+<div class="panel-networks"><h4 class="title c4 grid-columns">이미지 공유</h4><ul><li><a data-href="http://www.facebook.com/share.php?u=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-fa" rel="tooltip" data-tiptip="top" title=" Facebook "><span class="btn-icon icon-fa"></span></a></li>
+<li><a data-href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fibb.co%2Fcr15P5N&url=https%3A%2F%2Fibb.co%2Fcr15P5N&text=xum27v&via=imgbb_com" class="popup-link btn-32 btn-social btn-tt" rel="tooltip" data-tiptip="top" title=" Twitter "><span class="btn-icon icon-tt"></span></a></li>
+<li class="hidden phone-show"><a data-href="whatsapp://send?text=xum27v - ImgBB에서 보기: https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-whatsapp" rel="tooltip" data-tiptip="top" title=" WhatsApp "><span class="btn-icon icon-whatsapp"></span></a></li>
+<li><a data-href="http://reddit.com/submit?url=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-re" rel="tooltip" data-tiptip="top" title=" reddit "><span class="btn-icon icon-re"></span></a></li>
+<li><a data-href="http://vk.com/share.php?url=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-vv" rel="tooltip" data-tiptip="top" title=" VK "><span class="btn-icon icon-vv"></span></a></li>
+<li><a data-href="http://www.blogger.com/blog-this.g?n=xum27v&source=&b=%3Ca%20href%3D%22https%3A%2F%2Fibb.co%2Fcr15P5N%22%20title%3D%22xum27v%22%3E%3Cimg%20src%3D%22https%3A%2F%2Fi.ibb.co%2FBCtDmDg%2Fxum27v.webp%22%20%2F%3E%3C%2Fa%3E" class="popup-link btn-32 btn-social btn-blogger" rel="tooltip" data-tiptip="top" title=" Blogger "><span class="btn-icon icon-blogger"></span></a></li>
+<li><a data-href="http://www.tumblr.com/share/photo?source=https%3A%2F%2Fi.ibb.co%2FBCtDmDg%2Fxum27v.webp&caption=xum27v&clickthru=https%3A%2F%2Fibb.co%2Fcr15P5N&title=xum27v" class="popup-link btn-32 btn-social btn-tu" rel="tooltip" data-tiptip="top" title=" Tumblr. "><span class="btn-icon icon-tu"></span></a></li>
+<li><a data-href="http://www.pinterest.com/pin/create/bookmarklet/?media=https%3A%2F%2Fi.ibb.co%2FBCtDmDg%2Fxum27v.webp&url=https%3A%2F%2Fibb.co%2Fcr15P5N&is_video=false&description=description&title=xum27v" class="popup-link btn-32 btn-social btn-pi" rel="tooltip" data-tiptip="top" title=" Pinterest "><span class="btn-icon icon-pi"></span></a></li>
+<li><a data-href="http://www.stumbleupon.com/submit?url=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-st" rel="tooltip" data-tiptip="top" title=" StumbleUpon "><span class="btn-icon icon-st"></span></a></li>
+<li><a data-href="mailto:?subject=xum27v&body=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-mail" rel="tooltip" data-tiptip="top" title=" Email "><span class="btn-icon icon-mail"></span></a></li></ul></div>
+<div class="c15 phablet-c1 fluid-column grid-columns margin-left-10 phablet-margin-left-0">
+</div>
+</div>
+<div id="tab-codes" class="tabbed-content">
+<div class="growl static text-align-center margin-bottom-30 clear-both soft-hidden" data-content="privacy-private"></div>
+<div class="panel-share c16 phablet-c1 grid-columns margin-right-10">
+<div class="panel-share-item">
+<h4 class="pre-title">다이렉트 링크</h4>
+<div class="panel-share-input-label copy-hover-display">
+<h4 class="title c5 grid-columns">이미지 링크</h4>
+<div class="c10 phablet-c1 grid-columns"><input id="embed-code-1" type="text" class="text-input" value="https://ibb.co/cr15P5N" data-focus="select-all"><button class="input-action" data-action="copy" data-action-target="#embed-code-1">copy</button></div>
+</div>
+</div>
+<div class="panel-share-item">
+<h4 class="pre-title">원본 이미지 (링크)</h4>
+<div class="panel-share-input-label copy-hover-display">
+<h4 class="title c5 grid-columns">HTML</h4>
+<div class="c10 phablet-c1 grid-columns"><input id="embed-code-2" type="text" class="text-input" value="&lt;a href=&quot;https://ibb.co/cr15P5N&quot;&gt;&lt;img src=&quot;https://i.ibb.co/hmy5k5K/xum27v.webp&quot; alt=&quot;xum27v&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;" data-focus="select-all"><button class="input-action" data-action="copy" data-action-target="#embed-code-2">copy</button></div>
+</div>
+<div class="panel-share-input-label copy-hover-display">
+<h4 class="title c5 grid-columns">BBCode</h4>
+<div class="c10 phablet-c1 grid-columns"><input id="embed-code-3" type="text" class="text-input" value="[url=https://ibb.co/cr15P5N][img]https://i.ibb.co/hmy5k5K/xum27v.webp[/img][/url]" data-focus="select-all"><button class="input-action" data-action="copy" data-action-target="#embed-code-3">copy</button></div>
+</div>
+</div>
+<div class="panel-share-item">
+<h4 class="pre-title">미리보기 이미지 (링크)</h4>
+<div class="panel-share-input-label copy-hover-display">
+<h4 class="title c5 grid-columns">HTML</h4>
+<div class="c10 phablet-c1 grid-columns"><input id="embed-code-4" type="text" class="text-input" value="&lt;a href=&quot;https://ibb.co/cr15P5N&quot;&gt;&lt;img src=&quot;https://i.ibb.co/cr15P5N/xum27v.webp&quot; alt=&quot;xum27v&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;" data-focus="select-all"><button class="input-action" data-action="copy" data-action-target="#embed-code-4">copy</button></div>
+</div>
+<div class="panel-share-input-label copy-hover-display">
+<h4 class="title c5 grid-columns">BBCode</h4>
+<div class="c10 phablet-c1 grid-columns"><input id="embed-code-5" type="text" class="text-input" value="[url=https://ibb.co/cr15P5N][img]https://i.ibb.co/cr15P5N/xum27v.webp[/img][/url]" data-focus="select-all"><button class="input-action" data-action="copy" data-action-target="#embed-code-5">copy</button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div data-modal="form-modal" class="hidden" data-submit-fn="CHV.fn.submit_image_edit" data-before-fn="CHV.fn.before_image_edit" data-ajax-deferred="CHV.fn.complete_image_edit" data-ajax-url="https://ibb.co/json"><span class="modal-box-title">편집</span><div class="modal-form">
+<div class="input-label">
+	<label for="form-image-title">제목 <span class="optional">선택사항</span></label>
+	<input type="text" id="form-image-title" name="form-image-title" class="text-input" value="xum27v" placeholder="제목 없는 이미지" maxlength="100">
+</div>
+<div class="input-label">
+    <label for="form-image-description">설명 <span class="optional">선택사항</span></label>
+    <textarea id="form-image-description" name="form-image-description" class="text-input no-resize" placeholder="이 이미지에 대해 알려주세요"></textarea>
+</div></div></div>
+<div id="modal-share" class="hidden">
+<span class="modal-box-title">공유하기</span>
+<p class="highlight margin-bottom-20 font-size-small text-align-center soft-hidden" data-content="privacy-private"></p>
+<ul class="panel-networks"><li><a data-href="http://www.facebook.com/share.php?u=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-fa" rel="tooltip" data-tiptip="top" title=" Facebook "><span class="btn-icon icon-fa"></span></a></li>
+<li><a data-href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fibb.co%2Fcr15P5N&url=https%3A%2F%2Fibb.co%2Fcr15P5N&text=xum27v&via=imgbb_com" class="popup-link btn-32 btn-social btn-tt" rel="tooltip" data-tiptip="top" title=" Twitter "><span class="btn-icon icon-tt"></span></a></li>
+<li class="hidden phone-show"><a data-href="whatsapp://send?text=xum27v - ImgBB에서 보기: https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-whatsapp" rel="tooltip" data-tiptip="top" title=" WhatsApp "><span class="btn-icon icon-whatsapp"></span></a></li>
+<li><a data-href="http://reddit.com/submit?url=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-re" rel="tooltip" data-tiptip="top" title=" reddit "><span class="btn-icon icon-re"></span></a></li>
+<li><a data-href="http://vk.com/share.php?url=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-vv" rel="tooltip" data-tiptip="top" title=" VK "><span class="btn-icon icon-vv"></span></a></li>
+<li><a data-href="http://www.blogger.com/blog-this.g?n=xum27v&source=&b=%3Ca%20href%3D%22https%3A%2F%2Fibb.co%2Fcr15P5N%22%20title%3D%22xum27v%22%3E%3Cimg%20src%3D%22https%3A%2F%2Fi.ibb.co%2FBCtDmDg%2Fxum27v.webp%22%20%2F%3E%3C%2Fa%3E" class="popup-link btn-32 btn-social btn-blogger" rel="tooltip" data-tiptip="top" title=" Blogger "><span class="btn-icon icon-blogger"></span></a></li>
+<li><a data-href="http://www.tumblr.com/share/photo?source=https%3A%2F%2Fi.ibb.co%2FBCtDmDg%2Fxum27v.webp&caption=xum27v&clickthru=https%3A%2F%2Fibb.co%2Fcr15P5N&title=xum27v" class="popup-link btn-32 btn-social btn-tu" rel="tooltip" data-tiptip="top" title=" Tumblr. "><span class="btn-icon icon-tu"></span></a></li>
+<li><a data-href="http://www.pinterest.com/pin/create/bookmarklet/?media=https%3A%2F%2Fi.ibb.co%2FBCtDmDg%2Fxum27v.webp&url=https%3A%2F%2Fibb.co%2Fcr15P5N&is_video=false&description=description&title=xum27v" class="popup-link btn-32 btn-social btn-pi" rel="tooltip" data-tiptip="top" title=" Pinterest "><span class="btn-icon icon-pi"></span></a></li>
+<li><a data-href="http://www.stumbleupon.com/submit?url=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-st" rel="tooltip" data-tiptip="top" title=" StumbleUpon "><span class="btn-icon icon-st"></span></a></li>
+<li><a data-href="mailto:?subject=xum27v&body=https%3A%2F%2Fibb.co%2Fcr15P5N" class="popup-link btn-32 btn-social btn-mail" rel="tooltip" data-tiptip="top" title=" Email "><span class="btn-icon icon-mail"></span></a></li></ul>
+<div class="c8 phablet-c1">
+<div class="input-label margin-bottom-0"><label for="modal-share-url">링크</label><input type="text" name="modal-share-url" id="modal-share-url" class="text-input" value="https://ibb.co/cr15P5N" data-focus="select-all"></div></div>
+</div>
+<script defer src="//simgbb.com/3515/jquery2.js" onload="jQueryLoaded(this, event)"></script>
+<script defer src="//simgbb.com/3515/ibb.js" id="ibbjs"></script><script>
+document.getElementById("ibbjs").addEventListener("load", function () {
+PF.obj.devices = window.devices;
+PF.fn.window_to_device = window.window_to_device;
+PF.obj.config.base_url="https://ibb.co";
+PF.obj.config.json_api="https://ibb.co/json";
+PF.obj.config.listing.items_per_page="32";
+PF.obj.config.auth_token="c255130375a05f6c62dcfa4ece07ec3527e5349d";
+PF.obj.l10n={"An error occurred. Please try again later.":["\uc624\ub958\uac00 \ubc1c\uc0dd\ud588\uc2b5\ub2c8\ub2e4. \uc7a0\uc2dc \ud6c4\uc5d0 \ub2e4\uc2dc \uc2dc\ub3c4\ud574\uc8fc\uc138\uc694."],"cancel":["\ucde8\uc18c"],"Check the errors in the form to continue.":["\uacc4\uc18d\ud558\ub824\uba74 \uc798\ubabb\ub41c \uc785\ub825 \ub0b4\uc6a9\uc744 \uc218\uc815\ud574\uc8fc\uc138\uc694."],"Clipboard image":["\ud074\ub9bd\ubcf4\ub4dc \uc774\ubbf8\uc9c0"],"Confirm":["\ud655\uc778"],"Confirm action":["\ub0b4\uc6a9 \ud655\uc778"],"continue anyway":["\uc785\ub825\ud3fc\uc5d0\uc11c \ub098\uac00\uae30"],"File too big.":["\ud30c\uc77c\uc774 \ub108\ubb34 \ud07d\ub2c8\ub2e4."],"Go back to form":["\uc785\ub825\ud3fc\uc73c\ub85c \ub418\ub3cc\uc544\uac00\uae30"],"Invalid or unsupported file format.":["\ud30c\uc77c\uc774 \uc798\ubabb\ub418\uc5c8\uac70\ub098 \uc9c0\uc6d0\ud558\uc9c0 \uc54a\ub294 \ud615\uc2dd\uc785\ub2c8\ub2e4."],"loading":["\ubd88\ub7ec\uc624\ub294 \uc911"],"image":["\uc774\ubbf8\uc9c0"],"or":["\ub610\ub294"],"Save changes":["\ubcc0\uacbd \uc0ac\ud56d \uc800\uc7a5"],"Saving":["\uc800\uc7a5\ud558\ub294 \uc911"],"Sending":["\ucc98\ub9ac \uc911"],"Some files couldn't be added":["\uc77c\ubd80 \ud30c\uc77c\uc744 \ucd94\uac00\ud560 \uc218 \uc5c6\uc74c"],"Submit":["\ud655\uc778"]};
+if(typeof CHV=="undefined"){CHV={obj:{},fn:{},str:{}};}
+CHV.obj.embed_tpl={"links":{"label":"\ub9c1\ud06c","options":{"viewer-links":{"label":"\ubdf0\uc5b4 \ub9c1\ud06c","template":"%URL_VIEWER%","size":"viewer"}}},"html-codes":{"label":"HTML \ucf54\ub4dc","options":{"html-embed-medium":{"label":"HTML \uc6d0\ubcf8 \uc774\ubbf8\uc9c0 \ub9c1\ud06c","template":"<a href=\"%URL_VIEWER_PREVIEW%\"><img src=\"%MEDIUM_URL%\" alt=\"%MEDIUM_NAME%\" border=\"0\"><\/a>","size":"medium"},"html-embed-thumbnail":{"label":"HTML \ubbf8\ub9ac\ubcf4\uae30 \uc774\ubbf8\uc9c0 \ub9c1\ud06c","template":"<a href=\"%URL_VIEWER_THUMB%\"><img src=\"%THUMB_URL%\" alt=\"%THUMB_NAME%\" border=\"0\"><\/a>","size":"thumb"}}},"bbcodes":{"label":"BBCode \ucf54\ub4dc","options":{"bbcode-embed-medium":{"label":"BBCode \uc6d0\ubcf8 \uc774\ubbf8\uc9c0 \ub9c1\ud06c","template":"[url=%URL_VIEWER_PREVIEW%][img]%MEDIUM_URL%[\/img][\/url]","size":"medium"},"bbcode-embed-thumbnail":{"label":"BBCode \ubbf8\ub9ac\ubcf4\uae30 \uc774\ubbf8\uc9c0 \ub9c1\ud06c","template":"[url=%URL_VIEWER_THUMB%][img]%THUMB_URL%[\/img][\/url]","size":"thumb"}}}};
+CHV.obj.config={"image":{"max_filesize":32000000,"load_max_filesize":4000000},"upload":{"image_types":["jpg","png","bmp","gif","tif","webp","heic","pdf","jpeg","tiff","heif"]},"listing":{"viewer":true}};CHV.obj.resource={"id":"cr15P5N","type":"image","url":"https:\/\/ibb.co\/cr15P5N","parent_url":""};});
+</script>
+</body>
+</html>
