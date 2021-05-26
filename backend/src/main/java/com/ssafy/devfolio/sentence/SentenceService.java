@@ -6,6 +6,7 @@ import com.ssafy.devfolio.commentroom.CommentRoom;
 import com.ssafy.devfolio.commentroom.service.CommentRoomService;
 import com.ssafy.devfolio.exception.BaseException;
 import com.ssafy.devfolio.exception.ErrorCode;
+import com.ssafy.devfolio.pubsub.RedisSenderService;
 import com.ssafy.devfolio.sentence.dto.FeelingRequest;
 import com.ssafy.devfolio.sentence.dto.FeelingType;
 import com.ssafy.devfolio.sentence.dto.SentenceFixRequest;
@@ -39,6 +40,7 @@ public class SentenceService {
 
     private final ObjectMapper objectMapper;
     private final CommentRoomService commentRoomService;
+    private final RedisSenderService redisSenderService;
 
     @PostConstruct
     public void init() {
@@ -116,10 +118,12 @@ public class SentenceService {
         return sentence;
     }
 
-    public void updateNewComment(String documentId, String sentenceId) throws JsonProcessingException {
+    public void updateNewComment(String commentRoomId, String documentId, String sentenceId) throws JsonProcessingException {
         Sentence sentence = getSentence(documentId, sentenceId);
         sentence.updateNewComment();
 
         hashOperations.put(DOCUMENT_PREFIX + documentId, sentenceId, objectMapper.writeValueAsString(sentence));
+
+        redisSenderService.sendSentenceUpdateService(commentRoomId, sentence); // 문장 댓글 상태 수정해서 소켓으로 전송
     }
 }

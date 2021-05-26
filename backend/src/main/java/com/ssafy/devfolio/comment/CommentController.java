@@ -41,7 +41,7 @@ public class CommentController {
         if (commentRoomService.isClosedRoom(commentRoomId)) {
             throw new BaseException(ErrorCode.COMMENT_ROOM_CLOSED_EXCEPTION);
         }
-        Comment comment = commentService.writeComment(documentId, sentenceId, request);
+        Comment comment = commentService.writeComment(commentRoomId, documentId, sentenceId, request);
 
         redisSenderService.sendCommentUpdateService(sentenceId, comment);
 
