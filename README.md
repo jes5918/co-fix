@@ -111,6 +111,46 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 4443 : OpenVidu Server
 ```
 
+
+
+#### 🎉 Co-Fix with Live Meeting
+
+- create
+
+![create](README.assets/create.webp)
+
+
+
+- pinCode
+
+![pin](README.assets/pin.webp)
+
+
+
+- Co-Fix
+
+![co-fix](README.assets/co-fix.webp)
+
+
+
+- 화상채팅
+
+![openvidu](README.assets/openvidu.webp)
+
+
+
+- History
+
+![ezgif.com-gif-maker](README.assets/ezgif.com-gif-maker-1622002672730.webp)
+
+
+
+- RoomSetting
+
+![setting](README.assets/setting.webp)
+
+
+
 #### 🎴일정관리
 
 **1주차 4. 12 ~ 4.16**
@@ -307,6 +347,12 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
     └─ test                     : 테스트 폴더
   
   ```
+
+
+
+
+
+
 
 #### 🧩 Wireframe
 
