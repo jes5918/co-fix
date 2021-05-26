@@ -39,7 +39,7 @@ function CalcContentLength({
           .replaceAll('<mark>', '')
           .replaceAll('</mark>', '')
           .replaceAll('  ', ' ')
-          .replaceAll('\n', ' ').length,
+          .replaceAll('\n', '').length,
       );
     }
   }, [sentences]);

@@ -22,19 +22,16 @@ import ModifyRoomSettingModal from '../components/modal/ModifyRoomSettingModal';
 import AlertModal from '../components/modal/AlertModal';
 import BasicButton from '../components/common/BasicButton';
 
-export default function RoomSettingButtonContainer({
-  stompClientTest,
-  disconnectSocket,
-}) {
+export default function RoomSettingButtonContainer({ stompClientTest }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const RoomInfo = useRoomInfo();
   const user = useLoginUser();
-  const [title, setTitle] = useState(RoomInfo.roomTitle || '데이터 안들어옴');
+  const RoomInfo = useRoomInfo();
+  const { members, memberLimit, roomTitle } = RoomInfo;
+  const [title, setTitle] = useState(roomTitle || '데이터 안들어옴');
   const [numParticipant, setNumParticipant] = useState(
-    Number(RoomInfo.memberLimit) || 1,
+    Number(memberLimit) || 1,
   );
-  const { members, memberLimit } = RoomInfo;
 
   // 모달창 관련
   const [isModifyRoomSettingModalOpen, setIsModifyRoomSettingModalOpen] =
@@ -48,7 +45,7 @@ export default function RoomSettingButtonContainer({
   // 방설정 submit handler
   const ModifyRoomSettingHandler = () => {
     // 원래 숫자보다 줄이지 못하게 만드는 부분
-    const originNum = Number(RoomInfo.memberLimit);
+    const originNum = Number(memberLimit);
     if (originNum > numParticipant) {
       ParticipantNumModalToggleHandler();
     } else {
@@ -206,17 +203,7 @@ export default function RoomSettingButtonContainer({
           PropsRejectHandler={ParticipantOutToggleHandler}
         />
       </Modal>
-      <Modal
-        width="500px"
-        height="320px"
-        isModalOpen={isPartNumModalOpen}
-        ModalToggleHandler={ParticipantNumModalToggleHandler}
-      >
-        <AlertModal
-          PropsText="원래 인원 수 보다 줄일 수 없어요"
-          PropsComfirmHandler={ParticipantNumModalToggleHandler}
-        />
-      </Modal>
+
       {/* 방 설정 변경하는 modal */}
       <Modal
         width="fit-content"
@@ -233,6 +220,17 @@ export default function RoomSettingButtonContainer({
         />
       </Modal>
       {/* 인원수 정보 보여주는 modal */}
+      <Modal
+        width="500px"
+        height="320px"
+        isModalOpen={isPartNumModalOpen}
+        ModalToggleHandler={ParticipantNumModalToggleHandler}
+      >
+        <AlertModal
+          PropsText="원래 인원 수 보다 줄일 수 없어요"
+          PropsComfirmHandler={ParticipantNumModalToggleHandler}
+        />
+      </Modal>
       <Modal
         width="fit-content"
         height="fit-content"
