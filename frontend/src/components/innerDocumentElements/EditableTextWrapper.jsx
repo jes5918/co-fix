@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import {
   documentModifyAction,
   documentSelectAction,
-  updateCommentExist,
 } from '../../modules/actions/documentActions';
 import {
   commentCreateAction,
@@ -83,7 +82,6 @@ export default function EditableTextWrapper({
         const isAgree = body.isAgree === 'false' ? false : true;
         if (!isAgree) {
           dispatch(commentCreateAction(body));
-          dispatch(updateCommentExist(body.sentenceId));
         } else {
           dispatch(commentAgreeAction(body));
         }

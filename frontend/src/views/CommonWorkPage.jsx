@@ -15,6 +15,7 @@ import { getDocuments } from '../api/documents';
 import {
   documentGetAction,
   documentModifyAction,
+  updateCommentExist,
 } from '../modules/actions/documentActions';
 import { getAllComments, agreeComment } from '../api/comments.js';
 
@@ -130,7 +131,6 @@ export default function CommonWorkPage({ isCoFixRoom }) {
       (frame) => {
         stompClient.subscribe('/room/' + roomId, (res) => {
           const body = JSON.parse(res.body);
-          console.log('%%%%%%%%%%%%%%%%', body);
           const modifiedSentence = body.sentence; // 들어오는거 확인
           const updatedMember = body.updatedMember;
 
@@ -153,8 +153,14 @@ export default function CommonWorkPage({ isCoFixRoom }) {
             }, 2000);
             return;
           } else {
-            ModifyActionHandler(modifiedSentence);
-            dispatch(updateMemberList(body.members));
+            if (body.updatedType === 'SENTENCE') {
+              // 문장 수정
+              ModifyActionHandler(modifiedSentence);
+              dispatch(updateCommentExist(modifiedSentence));
+            } else if (body.updatedType === 'ROOM') {
+              // 멤버 수정
+              dispatch(updateMemberList(body.members));
+            }
             return body;
           }
         });

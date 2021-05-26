@@ -29,9 +29,9 @@ export const documentSelectAction = (Num) => (dispatch) => {
   });
 };
 
-export const updateCommentExist = (sentenceId) => (dispatch) => {
+export const updateCommentExist = (Data) => (dispatch) => {
   dispatch({
     type: UPDATE_COMMENT_EXIST,
-    sentenceId: sentenceId,
+    payload: Data,
   });
 };
