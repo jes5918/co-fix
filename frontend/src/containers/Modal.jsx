@@ -60,6 +60,8 @@ const ModalContent = styled.div`
   justify-content: center;
   font-size: 50px;
   padding: 50px 50px;
+  min-height: 300px;
+  min-width: 500px;
   height: ${({ height }) => (height ? `${height}` : '300px')};
   width: ${({ width }) => (width ? `${width}` : '500px')};
   border-radius: 15px;
