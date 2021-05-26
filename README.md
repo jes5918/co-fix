@@ -117,37 +117,37 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 
 - create
 
-![create](README.assets/create.webp)
+![create](README.assets/xum27v.webp)
 
 
 
 - pinCode
 
-![pin](README.assets/pin.webp)
+![pin](https://files.catbox.moe/cms4j3.webp)
 
 
 
 - Co-Fix
 
-![co-fix](README.assets/co-fix.webp)
+![co-fix](https://files.catbox.moe/mvejh4.webp)
 
 
 
 - 화상채팅
 
-![openvidu](README.assets/openvidu.webp)
+![openvidu](https://files.catbox.moe/i1927e.webp)
 
 
 
 - History
 
-![ezgif.com-gif-maker](README.assets/ezgif.com-gif-maker-1622002672730.webp)
+![ezgif.com-gif-maker](https://files.catbox.moe/7ykhku.webp)
 
 
 
 - RoomSetting
 
-![setting](README.assets/setting.webp)
+![setting](https://files.catbox.moe/tidptn.webp)
 
 
 
