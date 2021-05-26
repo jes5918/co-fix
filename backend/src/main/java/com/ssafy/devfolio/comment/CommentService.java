@@ -39,13 +39,13 @@ public class CommentService {
         DOCUMENT_PREFIX = keyPrefixProperties.getDocument();
     }
 
-    public Comment writeComment(String documentId, String sentenceId, CommentRequest request) throws JsonProcessingException {
+    public Comment writeComment(String commentRoomId, String documentId, String sentenceId, CommentRequest request) throws JsonProcessingException {
         Comment comment = Comment.createComment(request);
         String commentToString = objectMapper.writeValueAsString(comment);
 
         hashOperations.put(SENTENCE_PREFIX + sentenceId, comment.getCommentId(), commentToString);
 
-        sentenceService.updateNewComment(documentId, sentenceId);
+        sentenceService.updateNewComment(commentRoomId, documentId, sentenceId);
 
         return comment;
     }
