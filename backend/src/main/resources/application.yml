@@ -1,0 +1,78 @@
+## Server
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+## Spring
+spring:
+  profiles:
+    active: local
+    include:
+      - oauth
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+
+redirect-url: https://k4b104.p.ssafy.io
+
+## redis prefix
+redis:
+  prefix:
+    comment_room: "room:"
+    document: "document:"
+    member_room: "member-room:"
+    sentence: "sentence:"
+    pin_check: "pin-room:"
+    participant: "participant:"
+
+
+## JWT
+jwt:
+  header: Authorization
+  secret: ssafy-free-devfolio-backend-api-server-secreT1@#
+  token-validity-in-seconds: 3600000
+
+--- # 개발
+# Logging
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/devfolio
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+  redis:
+    port: 6379
+    host: k4b1041.p.ssafy.io
+    password: cofix
+
+--- # 배포 환경
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://devfolio.c0pmibo6dwxp.ap-northeast-2.rds.amazonaws.com:3306/devfolio?serverTimezone=Asia/Seoul&useUniCode=yes&characterEncoding=UTF-8
+    username: root
+    password: devfolio!!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  redis:
+    port: 6379
+    host: k4b104.p.ssafy.io
+    password: cofix
