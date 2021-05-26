@@ -24,7 +24,7 @@ function closeRoom(roomId, success, fail) {
 
 function modifyRoom(roomId, maxCnt, title, success, fail) {
   authInstance
-    .put(`commentRooms/${roomId}?memberLimit=${maxCnt}&roomTitle=%${title}`)
+    .put(`commentRooms/${roomId}?memberLimit=${maxCnt}&roomTitle=${title}`)
     .then(success)
     .catch(fail);
 }
