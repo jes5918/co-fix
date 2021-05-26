@@ -47,6 +47,7 @@ export default function RoomSettingButtonContainer({ stompClientTest }) {
     // 원래 숫자보다 줄이지 못하게 만드는 부분
     const originNum = Number(memberLimit);
     if (originNum > numParticipant) {
+      setNumParticipant(memberLimit);
       ParticipantNumModalToggleHandler();
     } else {
       modifyRoom(
