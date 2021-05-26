@@ -217,6 +217,7 @@ export default function MyPage({ match }) {
               </MyPageHeaderInner>
             )}
           </MyPageHeader>
+          <BackBlock />
           <TabPanel>
             <ScreenSlideDivider setSplitPosX={setSplitPosX}>
               <>
@@ -308,6 +309,9 @@ const TagName = styled.div`
   font-weight: bold;
   font-size: 18px;
   font-family: 'S-CoreDream-6Bold';
+  @media only screen and (max-width: 1300px) {
+    display: none;
+  }
 `;
 
 const StyledTabs = styled(Tabs)`
@@ -359,6 +363,17 @@ const MyPageHeader = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 10px;
+  @media only screen and (max-width: 920px) {
+    display: none;
+  }
+`;
+const BackBlock = styled.div`
+  display: none;
+  @media only screen and (max-width: 920px) {
+    display: flex;
+    width: 50px;
+    height: 60px;
+  }
 `;
 
 const MyPageHeaderInner = styled.div`
@@ -403,6 +418,10 @@ const Prev = styled(FaAngleLeft)`
   left: 1%;
   cursor: pointer;
   z-index: 2;
+  @media only screen and (max-width: 1080px) {
+    top: 1%;
+    font-size: 40px;
+  }
 `;
 
 const PasteIcon = styled(MdContentPaste)`

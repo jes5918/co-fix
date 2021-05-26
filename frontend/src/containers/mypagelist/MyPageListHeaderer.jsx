@@ -6,6 +6,18 @@ const Header = styled.div`
   text-align: center;
   font-size: 32px;
   font-family: 'S-CoreDream-6Bold';
+  @media only screen and (max-width: 1024px) {
+    font-size: 28px;
+    margin-top: 15px;
+  }
+  @media only screen and (max-width: 768px) {
+    font-size: 24px;
+    margin-top: 25px;
+  }
+  @media only screen and (max-width: 480px) {
+    font-size: 20px;
+    margin-top: 35px;
+  }
 `;
 
 function TemplateHeader({ children }) {

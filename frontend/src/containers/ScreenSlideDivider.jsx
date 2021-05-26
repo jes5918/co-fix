@@ -65,7 +65,7 @@ const pane1StyleRow = {
 };
 
 const pane1StyleCol = {
-  padding: '0px 20px 25px 25px',
+  padding: '15px 20px 15px 25px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
@@ -80,7 +80,7 @@ const pane2StyleRow = {
 };
 
 const pane2StyleCol = {
-  padding: '0px 20px 25px 25px',
+  padding: '15px 20px 15px 25px',
   flexDirection: 'column',
   boxShadow: '2px 2px 4px 2px rgba(0, 0, 0, 0.3)',
   borderRadius: '15px',
