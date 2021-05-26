@@ -117,13 +117,13 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 
 - create
 
-![create](README.assets/xum27v.webp)
+![asdaasd](https://i.ibb.co/BCtDmDg/xum27v.webp)
 
 
 
 - pinCode
 
-![pin](https://files.catbox.moe/cms4j3.webp)
+![pincodeImage](https://i.ibb.co/rtGqXYN/pin.webp)
 
 
 
