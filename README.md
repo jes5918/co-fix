@@ -1,6 +1,12 @@
-![logo](README.assets/logo.png)
+![logo](README.assets/logo-1622165395206.png)
 
 > 실시간 온라인 공동 첨삭 플랫폼
+>
+> 🥇 SSAFY 4기 자율프로젝트 수상
+
+## 🎉 [CO-FIX UCC 보러가기](https://www.youtube.com/watch?v=_IL8XzVtuIk&t=68s)
+
+
 
 #### 🔨Built With
 
@@ -9,6 +15,8 @@
 ⭐ **Back-end** : <img src="https://img.shields.io/badge/Java-11-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Spring-2.4.4-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Gradle-6.8.3-green?style=flat-square&logo=Gradle&logoColor=white"> <img src="https://img.shields.io/badge/MySQL-8.0.21-4479A1?style=flat-square&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/Swagger-2.9.2-85EA2D?style=flat-square&logo=Swagger&logoColor=black"/> <img src = "https://img.shields.io/badge/Elastic%20Stack-7.12.1-00bfb3?style=flat-square&logo=elastic-stack">
 
 ⭐ **CI / CD** : <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/GitLab-FCA121?style=flat-square&logo=GitLab&logoColor=black"/> <img src="https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=Jenkins&logoColor=black"/> <img src="https://img.shields.io/badge/NGINX-269539?style=flat-square&logo=NGINX&logoColor=black"/> <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=Jira&logoColor=white"/>
+
+
 
 #### 🧩 주요 기능
 
@@ -52,21 +60,25 @@
 
 #### 👨‍👩‍👧‍👧 팀원 소개
 
-|     Name     |                                                                      명도균                                                                      |                                                                     김민혁                                                                      |                                                                     류건희                                                                      |                                                                      유진우                                                                      |                                                                     전의수                                                                      |
-| :----------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: |
-| **Profile**  | <img src = "https://user-images.githubusercontent.com/40309812/114838106-556f7d00-9e0f-11eb-9134-893efdff87e8.png" width="110px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838159-615b3f00-9e0f-11eb-94c0-2823fa3dca4e.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/70404643/112585083-7d854500-8e3c-11eb-8ed0-45f16d12b940.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838108-56081380-9e0f-11eb-8863-e77a78c6a442.png" width="110px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838115-57394080-9e0f-11eb-9497-4b590dcb4710.jpg" width="90px" height="120px"> |
-|   **R&R**    |                                                                     **팀장**                                                                     |                                                                    **팀원**                                                                     |                                                                    **팀원**                                                                     |                                                                     **팀원**                                                                     |                                                                    **팀원**                                                                     |
-|   **Git**    |                                                       [Github](https://github.com/mingddo)                                                       |                                                     [Github](https://github.com/glenn93516)                                                     |                                                       [Github](https://github.com/RGunny)                                                       |                                                     [Github](https://github.com/phoenix9373)                                                     |                                                      [Github](https://github.com/jes5918)                                                       |
-| **Position** |                                                                        FE                                                                        |                                                                       BE                                                                        |                                                                       BE                                                                        |                                                                        FE                                                                        |                                                                       FE                                                                        |
+|     Name     |                            명도균                            |                            김민혁                            |                            류건희                            |                            유진우                            |                            전의수                            |
+| :----------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| **Profile**  | <img src = "https://user-images.githubusercontent.com/40309812/114838106-556f7d00-9e0f-11eb-9134-893efdff87e8.png" width="120px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838159-615b3f00-9e0f-11eb-94c0-2823fa3dca4e.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/70404643/112585083-7d854500-8e3c-11eb-8ed0-45f16d12b940.jpg" width="90px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838108-56081380-9e0f-11eb-8863-e77a78c6a442.png" width="110px" height="120px"> | <img src = "https://user-images.githubusercontent.com/40309812/114838115-57394080-9e0f-11eb-9497-4b590dcb4710.jpg" width="90px" height="120px"> |
+|   **R&R**    |                           **팀장**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |                           **팀원**                           |
+|   **Git**    |             [Github](https://github.com/mingddo)             |           [Github](https://github.com/glenn93516)            |             [Github](https://github.com/RGunny)              |           [Github](https://github.com/phoenix9373)           |             [Github](https://github.com/jes5918)             |
+| **Position** |                              FE                              |                              BE                              |                              BE                              |                              FE                              |                              FE                              |
 
-#### 🙌 시스템 아키텍쳐
 
-![cofix_system_architecture-3](README.assets/cofix_system_architecture-3.png)
 
-#### 🙌 데이터 구조 및 API 명세
+#### 👀 시스템 아키텍쳐
+
+![image-20210528094924029](README.assets/image-20210528094924029.png)
+
+#### 🎶 데이터 구조 및 API 명세
 
 📄 [데이터 구조](https://www.notion.so/27dce9f30e9344e2974f5278d3614265)
 📄 [API 명세](https://www.notion.so/API-9988a1a948734b9c9a1dd25b8713b9c0)
+
+
 
 #### 🙌포트번호
 
@@ -243,17 +255,17 @@ docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-serv
 
   - 분산형 워크 플로우 그래프
 
-    ![image-20210420213923328](README.assets/image-20210420213923328.png)
+    ![image-20210420213923328](README.assets/image-20210420213923328-1622165395206.png)
 
   - Git rebase 전략을 사용하여 Git Graph의 단순화 작업을 통해 사후 관리 용이하도록 함.
 
   - Origin Branch에 Push 하기 전에 `git --rebase upstream develop`을 통해 내가 작업한 커밋을 upstream repo의 최신 커밋에 rebase하여 `git push origin [feature branch]` 하고, 원격 repo 에서 Pull Request를 날려 최종적으로 Upstream Develop에 코드리뷰 후 Merge함.
 
-    ![image-20210420214440913](README.assets/image-20210420214440913.png)
+    ![image-20210420214440913](README.assets/image-20210420214440913-1622165395206.png)
 
   - 위와 같은 GIt 전략을 사용한 결과물
 
-  ![image-20210420215114763](README.assets/image-20210420215114763.png)
+  ![image-20210420215114763](README.assets/image-20210420215114763-1622165395207.png)
 
 - Branch
 
@@ -358,22 +370,22 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
 
 - Home
 
-  ![웹 1920 – 11](README.assets/웹 1920 – 11.png)
+![웹 1920 – 11](README.assets/웹 1920 – 11-1622165395207.png)
 
-![웹 1920 – 12](README.assets/웹 1920 – 12.png)
+![웹 1920 – 12](README.assets/웹 1920 – 12-1622165395207.png)
 
-![웹 1920 – 14](README.assets/웹 1920 – 14-1620616547490.png)
+![웹 1920 – 14](README.assets/웹 1920 – 14-1620616547490-1622165395207.png)
 
 - Co-Fix 만들기
 
-![웹 1920 – 5](README.assets/웹 1920 – 5.png)
+![웹 1920 – 5](README.assets/웹 1920 – 5-1622165395207.png)
 
-![웹 1920 – 8](README.assets/웹 1920 – 8.png)
+![웹 1920 – 8](README.assets/웹 1920 – 8-1622165395207.png)
 
-![웹 1920 – 9](README.assets/웹 1920 – 9.png)
+![웹 1920 – 9](README.assets/웹 1920 – 9-1622165395207.png)
 
 - Co-Fix 참여하기
 
-![웹 1920 – 15](README.assets/웹 1920 – 15.png)
+![웹 1920 – 15](README.assets/웹 1920 – 15-1622165395207.png)
 
 ![웹 1920 – 10](README.assets/웹 1920 – 10.png)
