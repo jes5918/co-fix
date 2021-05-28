@@ -372,22 +372,22 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
 
 - Home
 
-![웹 1920 – 11](README.assets/웹 1920 – 11.png)
+![웹 1920 – 11](README.assets/1920–11.png)
 
-![웹 1920 – 12](README.assets/웹 1920 – 12.png)
+![웹 1920 – 12](README.assets/1920–12.png)
 
-![웹 1920 – 14](README.assets/웹 1920 – 14-1620616547490.png)
+![웹 1920 – 14](README.assets/1920–14.png)
 
 - Co-Fix 만들기
 
-![웹 1920 – 5](README.assets/웹 1920 – 5.png)
+![웹 1920 – 5](README.assets/1920–5.png)
 
-![웹 1920 – 8](README.assets/웹 1920 – 8.png)
+![웹 1920 – 8](README.assets/1920–8.png)
 
-![웹 1920 – 9](README.assets/웹 1920 – 9.png)
+![웹 1920 – 9](README.assets/1920–9.png)
 
 - Co-Fix 참여하기
 
-![웹 1920 – 15](README.assets/웹 1920 – 15.png)
+![웹 1920 – 15](README.assets/1920–15.png)
 
-![웹 1920 – 10](README.assets/웹 1920 – 10.png)
+![웹 1920 – 10](README.assets/1920–10.png)
