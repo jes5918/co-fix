@@ -2,9 +2,11 @@
 
 > 실시간 온라인 공동 첨삭 플랫폼
 >
-> 🥇 SSAFY 4기 자율프로젝트 수상
+> 🥇 SSAFY 4기 자율프로젝트 2등
+>
+> 
 
-## 🎉 [CO-FIX UCC 보러가기](https://www.youtube.com/watch?v=_IL8XzVtuIk&t=68s)
+## 🎉 [CO-FIX UCC 보러가기](https://www.youtube.com/watch?v=_IL8XzVtuIk&t=68s) 🎉 
 
 
 
@@ -370,22 +372,22 @@ master -> develop -> feat/(FE/BE)-(branch name)-(status)
 
 - Home
 
-![웹 1920 – 11](README.assets/웹 1920 – 11-1622165395207.png)
+![웹 1920 – 11](README.assets/웹 1920 – 11.png)
 
-![웹 1920 – 12](README.assets/웹 1920 – 12-1622165395207.png)
+![웹 1920 – 12](README.assets/웹 1920 – 12.png)
 
-![웹 1920 – 14](README.assets/웹 1920 – 14-1620616547490-1622165395207.png)
+![웹 1920 – 14](README.assets/웹 1920 – 14-1620616547490.png)
 
 - Co-Fix 만들기
 
-![웹 1920 – 5](README.assets/웹 1920 – 5-1622165395207.png)
+![웹 1920 – 5](README.assets/웹 1920 – 5.png)
 
-![웹 1920 – 8](README.assets/웹 1920 – 8-1622165395207.png)
+![웹 1920 – 8](README.assets/웹 1920 – 8.png)
 
-![웹 1920 – 9](README.assets/웹 1920 – 9-1622165395207.png)
+![웹 1920 – 9](README.assets/웹 1920 – 9.png)
 
 - Co-Fix 참여하기
 
-![웹 1920 – 15](README.assets/웹 1920 – 15-1622165395207.png)
+![웹 1920 – 15](README.assets/웹 1920 – 15.png)
 
 ![웹 1920 – 10](README.assets/웹 1920 – 10.png)
